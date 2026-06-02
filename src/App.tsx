@@ -86,9 +86,6 @@ export default function App() {
   // In-app alert messaging state
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
-  // Interstitial overlay simulation when switching calculators (AdSense prompt)
-  const [isAdLoadingOverlay, setIsAdLoadingOverlay] = useState(false);
-
   // Local storage history state
   const [history, setHistory] = useState<HistoryEntry[]>([]);
 
@@ -110,8 +107,13 @@ export default function App() {
       const hash = window.location.hash.replace('#', '');
       if (hash) {
         const matched = CALCULATORS_CATALOG.find(c => c.id === hash);
-        if (matched && matched.id !== activeCalculator) {
-          setActiveCalculator(matched.id as CalculatorId);
+        if (matched) {
+          setActiveCalculator(prev => {
+            if (prev !== matched.id) {
+              return matched.id as CalculatorId;
+            }
+            return prev;
+          });
         }
       }
     };
@@ -121,7 +123,7 @@ export default function App() {
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [activeCalculator]);
+  }, []);
 
   // Dynamic Page Title & SEO Meta Updates on calculator change
   useEffect(() => {
@@ -222,7 +224,7 @@ export default function App() {
     }, 3800);
   };
 
-  // Switch Calculator with Simulated Interstitial Ad
+  // Switch Calculator instantly
   const selectCalculator = (id: CalculatorId) => {
     setSearchQuery('');
     setMenuOpen(false);
@@ -230,15 +232,10 @@ export default function App() {
     // Increment Ad stats (loading ads is a visual monetisation feature)
     setAdImpressions(prev => prev + 2);
 
-    // Simulate Interstitial Ad Loading Overlay
-    setIsAdLoadingOverlay(true);
-    setTimeout(() => {
-      setActiveCalculator(id);
-      setIsAdLoadingOverlay(false);
-      
-      const targetName = CALCULATORS_CATALOG.find(c => c.id === id)?.name || '';
-      triggerToast(`✨ Página rasteável alterada! Novos anúncios contextuais carregados para: ${targetName}`);
-    }, 800);
+    setActiveCalculator(id);
+    
+    const targetName = CALCULATORS_CATALOG.find(c => c.id === id)?.name || '';
+    triggerToast(`✨ Página rastreável alterada! Novos anúncios contextuais carregados para: ${targetName}`);
   };
 
   // Simulated click on ads
@@ -1325,52 +1322,6 @@ export default function App() {
           >
             <Sparkles className="w-4.5 h-4.5 text-yellow-400 animate-spin" />
             <span>{toastMsg}</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Global simulated ad loading interstitial modal overlay */}
-      <AnimatePresence>
-        {isAdLoadingOverlay && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[100] flex flex-col items-center justify-center p-4"
-          >
-            <motion.div 
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white max-w-sm w-full rounded-2xl p-6 border border-gray-150 shadow-2xl flex flex-col items-center text-center gap-4"
-            >
-              <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-700 animate-pulse font-mono font-bold text-sm">
-                $
-              </div>
-              <div>
-                <span className="text-[10px] font-extrabold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  Carregando Anúncio Inteligente
-                </span>
-                <h3 className="text-sm font-bold text-slate-850 mt-2 font-display">
-                  Sincronizando Publicidade Google AdSense
-                </h3>
-                <p className="text-xs text-gray-400 font-sans mt-1 leading-relaxed">
-                  Banners rápidos financiam o desenvolvimento gratuito desta plataforma para você.
-                </p>
-              </div>
-
-              {/* Tiny visual mockup inside interstitial */}
-              <div className="w-full bg-slate-50 border border-dashed border-gray-200/80 rounded-xl p-3 text-left">
-                <span className="text-[7.5px] font-bold text-gray-400 font-sans tracking-wide uppercase">AdSense Premium Partner</span>
-                <p className="text-xs font-bold text-slate-800 mt-0.5">🚀 Servidores Hospedados Via Cloud Run</p>
-                <p className="text-[10px] text-gray-405 leading-snug">Desenvolvimento ágil com containers seguros.</p>
-              </div>
-
-              <div className="flex items-center gap-2 text-xs font-mono text-gray-400 animate-pulse mt-1">
-                <div className="w-3.5 h-3.5 border-2 border-slate-300 border-t-slate-800 rounded-full animate-spin"></div>
-                <span>Iniciando em 0.8s...</span>
-              </div>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

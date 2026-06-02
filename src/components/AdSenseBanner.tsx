@@ -78,20 +78,13 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
   refreshTrigger = 0
 }) => {
   const [currentAd, setCurrentAd] = useState<AdCampaign>(AD_CAMPAIGNS[0]);
-  const [loading, setLoading] = useState(false);
 
   // Filter ads for the current active category (or fall back to random if 'todos')
   useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      const activeCategory = category === 'todos' ? 'financas' : category;
-      const filtered = AD_CAMPAIGNS.filter(ad => ad.category === activeCategory);
-      const randomIndex = Math.floor(Math.random() * filtered.length);
-      setCurrentAd(filtered[randomIndex] || AD_CAMPAIGNS[0]);
-      setLoading(false);
-    }, 400);
-
-    return () => clearTimeout(timer);
+    const activeCategory = category === 'todos' ? 'financas' : category;
+    const filtered = AD_CAMPAIGNS.filter(ad => ad.category === activeCategory);
+    const randomIndex = Math.floor(Math.random() * filtered.length);
+    setCurrentAd(filtered[randomIndex] || AD_CAMPAIGNS[0]);
   }, [category, refreshTrigger]);
 
   const handleAdClick = (e: React.MouseEvent) => {
@@ -108,21 +101,6 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
     : layout === 'vertical'
     ? 'w-full md:w-[280px] h-auto flex flex-col border border-dashed border-gray-200 rounded-xl bg-gray-50/50 p-4 sticky top-6 overflow-hidden relative'
     : 'w-full aspect-square flex flex-col border border-dashed border-gray-200 rounded-xl bg-gray-50/50 p-4 overflow-hidden relative';
-
-  if (loading) {
-    return (
-      <div className={`${bannerStyle} justify-center items-center h-24 bg-gray-50/80 transition-colors duration-200`}>
-        <div className="absolute top-1.5 left-2 flex items-center gap-1.5">
-          <span className="text-[9px] font-semibold text-gray-400 tracking-wider font-sans">ADS BY GOOGLE</span>
-          <Info className="w-2.5 h-2.5 text-gray-300" />
-        </div>
-        <div className="flex flex-col items-center gap-1.5">
-          <div className="w-5 h-5 border-2 border-slate-300 border-t-slate-600 rounded-full animate-spin"></div>
-          <span className="text-xs font-mono text-gray-400">Carregando anúncio otimizado...</span>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={bannerStyle}>
