@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap corporativo dinâmico indexável para SPA
+Sitemap: https://centraldecalculadoras.com.br/sitemap.xml

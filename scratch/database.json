@@ -1,0 +1,163 @@
+{
+  "calculators": [
+    {
+      "id": "calculadora-de-rescisao-clt",
+      "name": "Calculadora de Rescisão de Contrato CLT",
+      "slug": "calculadora-de-rescisao-clt",
+      "parameters": [
+        "Salário Bruto (R$)",
+        "Dias Trabalhados no Mês",
+        "Meses de Trabalho",
+        "Férias Vencidas (Sim/Não)",
+        "Aviso Prévio (Indenizado/Trabalhado/Dispensado/Descontado)"
+      ],
+      "outputs": [
+        "Saldo de Salário",
+        "Aviso Prévio Indenizado (se aplicável)",
+        "Décimo Terceiro Proporcional",
+        "Férias Proporcionais + 1/3",
+        "Férias Vencidas + 1/3 (se houver)",
+        "Total de Proventos",
+        "Total de Descontos",
+        "Valor Líquido da Rescisão",
+        "FGTS Acumulado Estimado",
+        "Multa de 40% do FGTS",
+        "Total Saque de FGTS"
+      ],
+      "faq": [
+        {
+          "question": "Qual a diferença entre Pedido de Demissão e Demissão Sem Justa Causa?",
+          "answer": "Na demissão sem justa causa, o trabalhador é dispensado por iniciativa da empresa, garantindo direito ao saque do FGTS com multa de 40%, seguro-desemprego e aviso prévio pago. No pedido de demissão, a iniciativa parte do próprio colaborador, o qual deixa de receber a multa de 40%, perde o direito ao saque do FGTS ativo daquele vínculo e ao seguro-desemprego."
+        },
+        {
+          "question": "Quais são os principais proventos da rescisão por CLT?",
+          "answer": "Os principais proventos incluem o Saldo de Salário (referente aos dias trabalhados no mês de desligamento), o Aviso Prévio Indenizado (se a empresa dispensar o cumprimento trabalhístico), o Décimo Terceiro salário proporcional aos meses do ano corrente trabalhados, as Férias vencidas e proporcionais somadas do acréscimo constitucional de um terço (1/3)."
+        },
+        {
+          "question": "Como funciona o desconto de aviso prévio no pedido de demissão?",
+          "answer": "Caso o funcionário solicite a rescisão, ele deve trabalhar durante os 30 dias de aviso prévio para que a empresa contrate um substituto. Caso opte por não cumprir este aviso e a empresa não aceitar dispensá-lo, o empregador tem amparo legal para descontar o valor correspondente de um salário mensal nas contas do acerto de rescisão."
+        }
+      ]
+    },
+    {
+      "id": "calculadora-de-decimo-terceiro",
+      "name": "Calculadora de Décimo Terceiro Salário",
+      "slug": "calculadora-de-decimo-terceiro",
+      "parameters": [
+        "Salário Bruto (R$)",
+        "Meses Trabalhados no Ano",
+        "Parcela a Calcular (Primeira / Segunda / Ambas)"
+      ],
+      "outputs": [
+        "Valor Bruto do Décimo Terceiro",
+        "Primeira Parcela (Bruta sem Incidências)",
+        "Segunda Parcela (Líquida deduzida de Tributos)",
+        "Deduções de INSS",
+        "Deduções de IRRF",
+        "Valor Líquido Recebido"
+      ],
+      "faq": [
+        {
+          "question": "Como são calculadas e pagas as parcelas do 13º Salário?",
+          "answer": "A primeira parcela corresponde à metade do salário bruto integral a que o funcionário tem direito pelos meses trabalhados, sendo paga obrigatoriamente entre os dias 1º de fevereiro e 30 de novembro. Ela não possui qualquer desconto. A segunda parcela corresponde à outra metade do salário, devendo ser quitada até 20 de dezembro de cada ano, nela incidindo de forma integral os descontos fiscais de INSS e de Imposto de Renda (IRRF) sobre o valor total do benefício."
+        },
+        {
+          "question": "Como funciona a proporcionalidade para quem trabalhou menos de um ano civil?",
+          "answer": "Cada mês em que o colaborador prestou serviços por pelo menos 15 dias confere o direito a 1/12 (um doze avos) do salário contratual bruto. Portanto, o cálculo proporcional consiste em dividir o salário por 12 e multiplicar pelos meses correspondentes de direito conquistados."
+        }
+      ]
+    },
+    {
+      "id": "calculadora-de-ferias-clt",
+      "name": "Calculadora de Férias Proporcionais e Vendidas",
+      "slug": "calculadora-de-ferias-clt",
+      "parameters": [
+        "Salário Bruto (R$)",
+        "Meses Adquiridos de Trabalho",
+        "Desejo de Vender 1/3 das Férias (Abono Pecuniário)"
+      ],
+      "outputs": [
+        "Dias Gerais de Férias de Direito",
+        "Dias a Gozar de Descanso",
+        "Dias Vendidos de Abono Pecuniário",
+        "Valor Bruto das Férias de Gozo",
+        "Terço Constitucional de Gozo",
+        "Valor do Abono Pecuniário (Férias Vendidas)",
+        "Terço de Abono Pecuniário",
+        "Total Bruto das Férias",
+        "Desconto Previdenciário (INSS)",
+        "Desconto Fiscal do Imposto de Renda (IRRF)",
+        "Valor Líquido de Férias a Receber"
+      ],
+      "faq": [
+        {
+          "question": "O que é o Abono Pecuniário de férias?",
+          "answer": "É o direito garantido ao empregado de converter 1/3 (um terço) do seu período regulamentar de férias anual em dinheiro. Significa receber os dias trabalhados em dobro (o pagamento normal mais a indenização da venda) por esses 10 dias abdicados de repouso."
+        },
+        {
+          "question": "Como incidem os impostos previdenciários e de renda no abono pecuniário?",
+          "answer": "O abono pecuniário (as férias vendidas de 10 dias) e o seu respectivo terço (1/3) constitucional são considerados verbas estritamente indenizatórias. Portanto, sobre esse montante não há incidência nem desconto de INSS nem de Imposto de Renda Retido na Fonte (IRRF), assegurando o recebimento totalmente líquido deste montante."
+        }
+      ]
+    },
+    {
+      "id": "calculadora-de-horas-extras",
+      "name": "Calculadora de Horas Extras com Adicional (50% e 100%)",
+      "slug": "calculadora-de-horas-extras",
+      "parameters": [
+        "Salário Bruto (R$)",
+        "Carga Horária Mensal (Divisor contratual)",
+        "Quantidade de Horas Extras com 50%",
+        "Quantidade de Horas Extras com 100%"
+      ],
+      "outputs": [
+        "Valor da Hora Regular de Trabalho",
+        "Valor da Hora Extra com acúmulo de 50%",
+        "Valor da Hora Extra com acúmulo de 100%",
+        "Subtotal Acumulado em Horas Extras 50%",
+        "Subtotal Acumulado em Horas Extras 100%",
+        "Total de Adicionais de Horas Extras Brutos",
+        "Salário Acumulado Mensal com acréscimo das Extras"
+      ],
+      "faq": [
+        {
+          "question": "Quando é aplicado o adicional de 50% vs o adicional de 100% de horas extras?",
+          "answer": "O adicional de 50% é pago na prestação de horas extras regulares de segunda a sábado. O adicional de 100% (salário hora pago em dobro) é devido quando as horas extraordinárias são apuradas em domingos ou feriados não compensados administrativamente."
+        },
+        {
+          "question": "Como encontrar o divisor correto da carga horária contratual?",
+          "answer": "O divisor representa quantas horas o funcionário trabalha por mês. Quem possui uma escala de trabalho regular de 44 horas semanais tem como divisor oficial pela CLT o de 220 horas. Quem atua sob a escala de 40 horas semanais utiliza o divisor de 200, seguidamente para jornadas de 36 horas (divisor de 180)."
+        }
+      ]
+    },
+    {
+      "id": "simulador-de-aposentadoria-inss",
+      "name": "Simulador de Tempo de Contribuição Previdenciária Rules",
+      "slug": "simulador-de-aposentadoria-inss",
+      "parameters": [
+        "Gênero Biológico do Segurado (Masculino/Feminino)",
+        "Idade Atual do Trabalhador",
+        "Anos de Contribuição Ativos já declarados"
+      ],
+      "outputs": [
+        "Requisitos de Idade Mínima da Transição",
+        "Requisitos de Pontuação de Transição Alvo",
+        "Status de Elegibilidade por Idade",
+        "Status de Elegibilidade por Pontos",
+        "Soma Acumulada da Pontuação atual (Idade + Contribuição)",
+        "Anos faltantes para Idade Mínima",
+        "Anos de contribuição adicionais mandatórios"
+      ],
+      "faq": [
+        {
+          "question": "Como funciona a regra geral de transição de pontos do INSS?",
+          "answer": "A Regra de Pontos consiste em somar a idade do cidadão segurado com o tempo total de contribuição registrado no INSS. É obrigatório atingir um piso mínimo de contribuição de 35 anos para homens e 30 anos para as mulheres. Cumprido este tempo mínimo, soma-se a idade e a contribuição para atingir a pontuação do ano correspondente (em 2026, 93 pontos para mulheres e 103 pontos para os homens)."
+        },
+        {
+          "question": "Qual é a carência mínima para a aposentadoria comum por idade?",
+          "answer": "Mesmo atingindo a idade mínima regulamentar fixada em 65 anos para o sexo masculino e de 62 anos para o sexo feminino, é obrigatório comprovar uma carência mínima de 15 anos de contribuições ativas para pleitear o benefício ordinário do INSS."
+        }
+      ]
+    }
+  ]
+}

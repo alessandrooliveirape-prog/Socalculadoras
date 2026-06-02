@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Página Principal / Central Geral -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Juros Compostos -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#juros-compostos</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- Simulador CLT vs PJ -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#clt-pj</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- Margem de Lucro -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#margem-lucro</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Calculadora de Rescisão CLT -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#calculadora-de-rescisao-clt</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Calculadora de Décimo Terceiro -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#calculadora-de-decimo-terceiro</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.86</priority>
+  </url>
+
+  <!-- Calculadora de Férias CLT -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#calculadora-de-ferias-clt</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.86</priority>
+  </url>
+
+  <!-- Calculadora de Horas Extras -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#calculadora-de-horas-extras</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- Simulador de Aposentadoria INSS -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#simulador-de-aposentadoria-inss</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Índice de Massa Corporal (IMC) -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#imc</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Calculadora de Escalas de Pontos / Regrante 3 -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#regra-3</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Contador de Letras e Palavras -->
+  <url>
+    <loc>https://centraldecalculadoras.com.br/#contador-texto</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+</urlset>
