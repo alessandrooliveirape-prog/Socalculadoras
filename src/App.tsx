@@ -61,6 +61,32 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showPublisherDashboard, setShowPublisherDashboard] = useState(false);
 
+  // Checks and states for owner/admin mode (to hide/reveal simulated AdSense control panel)
+  const [isAdmin, setIsAdmin] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('adsense_admin') === 'true' || window.location.search.includes('admin=true');
+    } catch {
+      return false;
+    }
+  });
+  const [logoClicks, setLogoClicks] = useState(0);
+
+  useEffect(() => {
+    try {
+      const searchParams = new URL(window.location.href).searchParams;
+      if (searchParams.get('admin') === 'true' || window.location.hash.includes('admin=true')) {
+        setIsAdmin(true);
+        localStorage.setItem('adsense_admin', 'true');
+      } else if (searchParams.get('admin') === 'false') {
+        setIsAdmin(false);
+        localStorage.removeItem('adsense_admin');
+        setShowPublisherDashboard(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   // States for dynamic calculators input/output synchronization
   const [dynamicCalcInputs, setDynamicCalcInputs] = useState<Record<string, any>>({});
   const [dynamicCalcOutputs, setDynamicCalcOutputs] = useState<Record<string, any>>({});
@@ -224,6 +250,33 @@ export default function App() {
     }, 3800);
   };
 
+  // Logo secret administrative unlock (Clicking 5 times toggles Admin Dashboard visibility)
+  const handleLogoClick = () => {
+    setLogoClicks(prev => {
+      const next = prev + 1;
+      if (next >= 5) {
+        setIsAdmin(curr => {
+          const updated = !curr;
+          try {
+            if (updated) {
+              localStorage.setItem('adsense_admin', 'true');
+              triggerToast('✨ Modo Admin Ativado! O Painel AdSense de Simulação foi desbloqueado no topo.');
+            } else {
+              localStorage.removeItem('adsense_admin');
+              setShowPublisherDashboard(false);
+              triggerToast('✨ Modo Admin Desativado! Painel Ocultado.');
+            }
+          } catch (e) {}
+          return updated;
+        });
+        return 0;
+      }
+      return next;
+    });
+    // Still reset to compost interest calculator on normal brand click
+    selectCalculator('juros-compostos');
+  };
+
   // Switch Calculator instantly
   const selectCalculator = (id: CalculatorId) => {
     setSearchQuery('');
@@ -233,9 +286,6 @@ export default function App() {
     setAdImpressions(prev => prev + 2);
 
     setActiveCalculator(id);
-    
-    const targetName = CALCULATORS_CATALOG.find(c => c.id === id)?.name || '';
-    triggerToast(`✨ Página rastreável alterada! Novos anúncios contextuais carregados para: ${targetName}`);
   };
 
   // Simulated click on ads
@@ -1326,26 +1376,28 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Top Utility Promotional Ribbon / Custom Header */}
-      <div className="bg-slate-900 text-white font-medium text-xs py-2 px-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-2 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <span className="bg-amber-400 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-sm select-none uppercase tracking-widest leading-none">VIP</span>
-          <span className="text-gray-300">Site 100% Gratuito para Usuários com simulador avançado AdSense.</span>
+      {/* Top Utility Promotional Ribbon / Custom Header - Only displayed for Admin/Owner */}
+      {isAdmin && (
+        <div className="bg-slate-900 text-white font-medium text-xs py-2 px-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-2 border-b border-slate-800">
+          <div className="flex items-center gap-2">
+            <span className="bg-amber-400 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-sm select-none uppercase tracking-widest leading-none">VIP ADM</span>
+            <span className="text-gray-300">Site 100% Gratuito para Usuários com simulador avançado AdSense.</span>
+          </div>
+          <div className="flex items-center gap-4">
+            {/* AdSense Publisher toggle button */}
+            <button
+              onClick={() => {
+                setShowPublisherDashboard(!showPublisherDashboard);
+                triggerToast(showPublisherDashboard ? 'Voltando para visão limpa de usuário' : 'Painel de Lucros AdSense Aberto!');
+              }}
+              className="text-[11px] font-bold text-amber-300 hover:text-amber-200 flex items-center gap-1.5 cursor-pointer bg-slate-800/80 py-1 px-2.5 rounded border border-slate-750 hover:bg-slate-800 transition-all active:scale-95 text-xs font-mono font-bold"
+            >
+              <Coins className="w-3.5 h-3.5" />
+              <span>{showPublisherDashboard ? 'Ocultar Painel AdSense' : 'Ver Lucros AdSense (Modo Admin)'}</span>
+            </button>
+          </div>
         </div>
-        <div className="flex items-center gap-4">
-          {/* AdSense Publisher toggle button */}
-          <button
-            onClick={() => {
-              setShowPublisherDashboard(!showPublisherDashboard);
-              triggerToast(showPublisherDashboard ? 'Voltando para visão limpar de usuário' : 'Painel de Lucros AdSense Aberto!');
-            }}
-            className="text-[11px] font-bold text-amber-300 hover:text-amber-200 flex items-center gap-1.5 cursor-pointer bg-slate-800/80 py-1 px-2.5 rounded border border-slate-750 hover:bg-slate-800 transition-all active:scale-95 text-xs font-mono font-bold"
-          >
-            <Coins className="w-3.5 h-3.5" />
-            <span>{showPublisherDashboard ? 'Ocultar Painel AdSense' : 'Ver Lucros AdSense (Modo Admin)'}</span>
-          </button>
-        </div>
-      </div>
+      )}
 
       {/* Main Header navigation and Search box */}
       <header className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 z-40 transition-shadow">
@@ -1358,8 +1410,9 @@ export default function App() {
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             <div 
-              onClick={() => selectCalculator('juros-compostos')} 
-              className="flex items-center gap-2 cursor-pointer select-none"
+              onClick={handleLogoClick} 
+              className="flex items-center gap-2 cursor-pointer select-none animate-once"
+              title="Clique 5 vezes aqui para ativar/desativar as métricas de simulação do AdSense"
             >
               <div className="h-9 w-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-100">
                 <Calculator className="w-5 h-5" />
@@ -1441,8 +1494,8 @@ export default function App() {
       {/* Main content grid view */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
         
-        {/* AdSense Publisher Live Simulation Metrics Bar (If Active) */}
-        {showPublisherDashboard && (
+        {/* AdSense Publisher Live Simulation Metrics Bar (If Active & Admin Mode) */}
+        {showPublisherDashboard && isAdmin && (
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
