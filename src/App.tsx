@@ -42,6 +42,10 @@ import { AposentadoriaINSSCalc } from './components/AposentadoriaINSSCalc';
 import { GenericDynamicCalc } from './components/GenericDynamicCalc';
 import { FooterAndLegals } from './components/FooterAndLegals';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
+import { buildHistorySummary } from './utils/historyManager';
+import { handleExportCSV } from './utils/exportCSV';
+import { handleExportPDF } from './utils/exportPDF';
+
 
 export default function App() {
   const [activeCalculator, setActiveCalculator] = useState<CalculatorId>('juros-compostos');
@@ -361,54 +365,32 @@ export default function App() {
     setDynamicCalcOutputs(outputs);
   }, []);
 
+
+  const getStatePayload = (): CalcStatePayload => ({
+    activeCalculator,
+    activeCalcDef: CALCULATORS_CATALOG.find(c => c.id === activeCalculator),
+    compoundInterestResults,
+    cltVsPjResults,
+    profitMarginResults,
+    healthResults,
+    timeSheetResults,
+    rule3Results,
+    rescisaoCLTResults,
+    decimoTerceiroResults,
+    feriasCLTResults,
+    horasExtrasResults,
+    aposentadoriaINSSResults,
+    dynamicCalcInputs,
+    dynamicCalcOutputs
+  });
+
   // Save current operation to historical log
   const handleSaveToHistory = () => {
-    let summaryText = '';
-    let inputsObj: any = {};
-    let outputsObj: any = {};
-
-    const activeCalcDef = CALCULATORS_CATALOG.find(c => c.id === activeCalculator);
-    if (!activeCalcDef) return;
-
-    if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
-      summaryText = `Valor Final: R$ ${compoundInterestResults.finalAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}. Lucro acumulado em juros de R$ ${compoundInterestResults.totalInterest.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
-      inputsObj = { finalAmount: compoundInterestResults.finalAmount };
-    } else if (activeCalculator === 'clt-pj' && cltVsPjResults) {
-      summaryText = `Melhor opção: ${cltVsPjResults.isPjBetter ? 'PJ' : 'CLT'}. Diferença mensal de R$ ${cltVsPjResults.difference.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
-    } else if (activeCalculator === 'margem-lucro' && profitMarginResults) {
-      summaryText = `Lucro Líquido: R$ ${profitMarginResults.netProfit.toFixed(2)} com margem líquida de ${profitMarginResults.netMargin.toFixed(1)}%.`;
-    } else if (activeCalculator === 'imc' && healthResults) {
-      summaryText = `IMC: ${healthResults.bmi.toFixed(1)} (${healthResults.bmiClass}). Gasto calórico sugerido: ${Math.round(healthResults.targetCalories)} kcal.`;
-    } else if (activeCalculator === 'registro-horas' && timeSheetResults) {
-      summaryText = `Faturamento de R$ ${timeSheetResults.totalAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} para um acúmulo de ${timeSheetResults.totalHours.toFixed(2)}h de trabalho.`;
-    } else if (activeCalculator === 'regra-tres' && rule3Results) {
-      summaryText = `Resultado X: ${rule3Results.ruleOf3Result}.`;
-    } else if (activeCalculator === 'contador-texto' && rule3Results) {
-      summaryText = `Conteúdo com ${rule3Results.textLength} caracteres e ${rule3Results.textWords} palavras.`;
-    } else if (activeCalculator === 'calculadora-de-rescisao-clt' && rescisaoCLTResults) {
-      summaryText = `Rescisão estimada em R$ ${rescisaoCLTResults.netAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} (${rescisaoCLTResults.reasonLabel}).`;
-    } else if (activeCalculator === 'calculadora-de-decimo-terceiro' && decimoTerceiroResults) {
-      summaryText = `13º salário líquido de R$ ${decimoTerceiroResults.netValue.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} (${decimoTerceiroResults.parcelLabel}).`;
-    } else if (activeCalculator === 'calculadora-de-ferias-clt' && feriasCLTResults) {
-      summaryText = `Férias líquidas de R$ ${feriasCLTResults.netVacationAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} para ${feriasCLTResults.vacationDays} dias úteis.`;
-    } else if (activeCalculator === 'calculadora-de-horas-extras' && horasExtrasResults) {
-      summaryText = `Adicional bruto de horas extras de R$ ${horasExtrasResults.totalExtraAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
-    } else if (activeCalculator === 'simulador-de-aposentadoria-inss' && aposentadoriaINSSResults) {
-      summaryText = aposentadoriaINSSResults.canRetireAtAll 
-        ? 'Trabalhador elegível para se aposentar sob as regras de transição!'
-        : `Faltam ${aposentadoriaINSSResults.yearsToMinAge} anos de idade para atingir o requisito mínimo previdenciário.`;
-    } else if (activeCalcDef?.isDynamic && dynamicCalcOutputs) {
-      const primaryOut = activeCalcDef.outputs?.find(out => out.isPrimary) || activeCalcDef.outputs?.[0];
-      const val = dynamicCalcOutputs[primaryOut?.id || ''];
-      const displayVal = typeof val === 'number' 
-        ? `${primaryOut?.prefix || ''}${val.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}${primaryOut?.suffix || ''}`
-        : val || '0,00';
-      summaryText = `Cálculo de ${activeCalcDef.name}: ${primaryOut?.label || 'Resultado'} em ${displayVal}.`;
-      inputsObj = dynamicCalcInputs;
-      outputsObj = dynamicCalcOutputs;
-    }
-
-    if (!summaryText) {
+    const payload = getStatePayload();
+    if (!payload.activeCalcDef) return;
+    
+    const res = buildHistorySummary(payload);
+    if (!res.summaryText) {
       triggerToast('Nenhum resultado de cálculo ativo pronto ou alterado para salvar.');
       return;
     }
@@ -416,21 +398,19 @@ export default function App() {
     const logEntry: HistoryEntry = {
       id: Date.now().toString(),
       calculatorId: activeCalculator,
-      calculatorName: activeCalcDef.name,
+      calculatorName: payload.activeCalcDef.name,
       timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
-      inputs: inputsObj,
-      outputs: outputsObj,
-      summary: summaryText
+      inputs: res.inputsObj,
+      outputs: res.outputsObj,
+      summary: res.summaryText
     };
 
     const newHistory = [logEntry, ...history].slice(0, 10);
     setHistory(newHistory);
     localStorage.setItem('calc_history', JSON.stringify(newHistory));
     
-    // Simulate interactive ad increment (every operation prints/loads and refreshes ad)
     setAdImpressions(prev => prev + 1);
     setAdRefreshTrigger(prev => prev + 1);
-
     triggerToast('✅ Operação gravada com sucesso no histórico local da sessão!');
   };
 
@@ -462,762 +442,17 @@ export default function App() {
 
   // Export Results back as a clean structured Spreadsheet (Excel CSV file format)
   const exportToCSV = () => {
-    let csvContent = '\uFEFF'; // UTF-8 BOM indicator for perfect Excel formatting in Portuguese
-    let filename = 'relatorio-central.csv';
-
-    const activeCalcDef = CALCULATORS_CATALOG.find(c => c.id === activeCalculator);
-    const title = activeCalcDef ? activeCalcDef.name : 'Simulacao';
-    
-    csvContent += `Só Calculadoras & Ferramentas;Relatorio Emitido em;${new Date().toLocaleDateString('pt-BR')}\n`;
-    csvContent += `Ferramenta Selecionada;${title};Status da Sessao;Ativo\n\n`;
-
-    if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
-      filename = 'juros-compostos-calculadora.csv';
-      csvContent += `RESULTADO DA SIMULAÇÃO FINANCEIRA DE JUROS COMPOSTOS\n`;
-      csvContent += `Montante Final Estimado;R$ ${compoundInterestResults.finalAmount.toFixed(2)}\n`;
-      csvContent += `Total Investido em Capital;R$ ${compoundInterestResults.totalInvested.toFixed(2)}\n`;
-      csvContent += `Total Rendido em Juros;R$ ${compoundInterestResults.totalInterest.toFixed(2)}\n\n`;
-      
-      // Schedule Table
-      csvContent += `Periodo;Total Investido;Juros do Mes;Juros Acumulados;Saldo Final\n`;
-      compoundInterestResults.data.forEach((row: any) => {
-        csvContent += `${row.month === 0 ? 'Inicio' : 'Mes ' + row.month};${row.totalInvested};${row.interestEarned};${row.totalInterest};${row.balance}\n`;
-      });
-    } 
-    else if (activeCalculator === 'clt-pj' && cltVsPjResults) {
-      filename = 'comparativo-clt-pj.csv';
-      csvContent += `RESULTADO COMPARATIVO DE CONTRATO DO TRABALHO\n`;
-      csvContent += `Opcao Financeiramente Recomendada;${cltVsPjResults.isPjBetter ? 'Pessoa Juridica (PJ)' : 'Trabalhador CLT'}\n`;
-      csvContent += `Diferenca Liquida Mensal;R$ ${cltVsPjResults.difference.toFixed(2)}\n`;
-      csvContent += `Valor de Projecao CLT Real Integrado;R$ ${cltVsPjResults.cltNet?.toFixed(2) || 'Consultar'}\n`;
-      csvContent += `Valor de Projecao PJ Real Liquido;R$ ${cltVsPjResults.pjNet?.toFixed(2) || 'Consultar'}\n\n`;
-      csvContent += `Resumo informativo adicional;"${cltVsPjResults.comparisonString}"\n`;
-    } 
-    else if (activeCalculator === 'margem-lucro' && profitMarginResults) {
-      filename = 'markup-lucratividade-margens.csv';
-      csvContent += `RESULTADO TRIBUTÁRIO DE PRECIFIÇÃO & MARKUP\n`;
-      csvContent += `Margem Liquida do Canal;${profitMarginResults.netMargin.toFixed(2)}%\n`;
-      csvContent += `Margem Bruta Praticada;${profitMarginResults.grossMargin.toFixed(2)}%\n`;
-      csvContent += `Markup de Multiplicacao Aplicado;${(profitMarginResults.markup / 100 + 1).toFixed(2)}x\n`;
-      csvContent += `Lucro Liquido Unitario Livre;R$ ${profitMarginResults.netProfit.toFixed(2)}\n`;
-      csvContent += `Lucro de Custos Brutos;R$ ${profitMarginResults.grossProfit.toFixed(2)}\n\n`;
-      csvContent += `Classificacao Comercial;"${profitMarginResults.comment}"\n`;
-    } 
-    else if (activeCalculator === 'imc' && healthResults) {
-      filename = 'saude-metabolismo-imc.csv';
-      csvContent += `RESULTADO DE DIAGNÓSTICO FÍSICO E NUTRIÇÃO\n`;
-      csvContent += `Indice de Massa Corporal (IMC);${healthResults.bmi.toFixed(2)}\n`;
-      csvContent += `Classificacao de Risco;${healthResults.bmiClass}\n`;
-      csvContent += `Meta de Macronutrientes Nutricionais;${healthResults.targetCalories.toFixed(0)} kcal\n`;
-      csvContent += `Consumo de Agua Diaria Recomendado;${(healthResults.waterNeeds / 1000).toFixed(2)} litros\n`;
-    } 
-    else if (activeCalculator === 'registro-horas' && timeSheetResults) {
-      filename = 'folha-de-horas-trabalhadas.csv';
-      csvContent += `FOLHA DE HORAS PRESTADAS E FATURAMENTO FREELANCE\n`;
-      csvContent += `Prestador;Usuario Central;Valor Cobrado por Hora;R$ ${timeSheetResults.hourlyRate}/h\n`;
-      csvContent += `Acumulo de Horas Liquidas de Producao;${timeSheetResults.totalHours.toFixed(2)}h\n`;
-      csvContent += `Total Geral Faturado Reclamo;R$ ${timeSheetResults.totalAmount.toFixed(2)}\n\n`;
-      
-      // Records list
-      csvContent += `Id;Data;Hora Inicio;Hora Fim;Intervalo Pause (min);Descriçao\n`;
-      timeSheetResults.records.forEach((row: any) => {
-        csvContent += `${row.id};${row.date};${row.start};${row.end};${row.pause};"${row.description}"\n`;
-      });
-    } 
-    else if (activeCalculator === 'calculadora-de-rescisao-clt' && rescisaoCLTResults) {
-      filename = 'rescisao-clt-detalhado.csv';
-      csvContent += `CÁLCULO RESCISÓRIO CLT DETALHADO\n`;
-      csvContent += `Motivo da Rescisao;${rescisaoCLTResults.reasonLabel}\n`;
-      csvContent += `Meses Trabalhados;${rescisaoCLTResults.monthsOfWork}\n`;
-      csvContent += `Valor Liquido a Receber em Conta;R$ ${rescisaoCLTResults.netAmount.toFixed(2)}\n`;
-      csvContent += `Saldo de Salario;R$ ${rescisaoCLTResults.salaryBalance.toFixed(2)}\n`;
-      csvContent += `Aviso Previo Indenizado;R$ ${rescisaoCLTResults.noticeAmount.toFixed(2)}\n`;
-      csvContent += `13o Proporcional;R$ ${rescisaoCLTResults.proportionateThirteenth.toFixed(2)}\n`;
-      csvContent += `Ferias Proporcionais;R$ ${rescisaoCLTResults.proportionateVacation.toFixed(2)}\n`;
-      csvContent += `Terco de Ferias Proporcionais;R$ ${rescisaoCLTResults.proportionateVacationOneThird.toFixed(2)}\n`;
-      csvContent += `Total de Proventos;R$ ${rescisaoCLTResults.totalEarnings.toFixed(2)}\n`;
-      csvContent += `Total de Descontos;R$ ${rescisaoCLTResults.totalDeductions.toFixed(2)}\n`;
-    }
-    else if (activeCalculator === 'calculadora-de-decimo-terceiro' && decimoTerceiroResults) {
-      filename = '13o-salario-simulacao.csv';
-      csvContent += `SIMULAÇÃO DE 13º SALÁRIO\n`;
-      csvContent += `Parcela de Referencia;${decimoTerceiroResults.parcelLabel}\n`;
-      csvContent += `Valor Liquido Calculado;R$ ${decimoTerceiroResults.netValue.toFixed(2)}\n`;
-      csvContent += `Valor Bruto Total;R$ ${decimoTerceiroResults.grossThirteenth.toFixed(2)}\n`;
-      csvContent += `Desconto INSS;R$ ${decimoTerceiroResults.inssDeduction.toFixed(2)}\n`;
-      csvContent += `Desconto IRRF;R$ ${decimoTerceiroResults.irrfDeduction.toFixed(2)}\n`;
-    }
-    else if (activeCalculator === 'calculadora-de-ferias-clt' && feriasCLTResults) {
-      filename = 'ferias-clt-prevista.csv';
-      csvContent += `CÁLCULO DE FÉRIAS CLT\n`;
-      csvContent += `Dias a Gozar;${feriasCLTResults.daysToEnjoy}\n`;
-      csvContent += `Dias Vendidos;${feriasCLTResults.daysToSell}\n`;
-      csvContent += `Valor das Ferias;R$ ${feriasCLTResults.vacationValue.toFixed(2)}\n`;
-      csvContent += `Terco Constitucional de Gozo;R$ ${feriasCLTResults.vacationOneThird.toFixed(2)}\n`;
-      if (feriasCLTResults.daysToSell > 0) {
-        csvContent += `Valor do Abono Pecuniario;R$ ${feriasCLTResults.abonoValue.toFixed(2)}\n`;
-        csvContent += `Terco do Abono Pecuniario;R$ ${feriasCLTResults.abonoOneThird.toFixed(2)}\n`;
-      }
-      csvContent += `Desconto INSS;R$ ${feriasCLTResults.inssDeduction.toFixed(2)}\n`;
-      csvContent += `Desconto IRRF;R$ ${feriasCLTResults.irrfDeduction.toFixed(2)}\n`;
-      csvContent += `Valor Liquido a Receber;R$ ${feriasCLTResults.netVacationAmount.toFixed(2)}\n`;
-    }
-    else if (activeCalculator === 'calculadora-de-horas-extras' && horasExtrasResults) {
-      filename = 'horas-extras-calculadas.csv';
-      csvContent += `CÁLCULO DE HORAS EXTRAS TRABALHADAS\n`;
-      csvContent += `Valor da Hora Comum;R$ ${horasExtrasResults.regularHourValue.toFixed(2)}\n`;
-      csvContent += `Valor da Hora Extra 50%;R$ ${horasExtrasResults.extraHour50Value.toFixed(2)}\n`;
-      csvContent += `Valor da Hora Extra 100%;R$ ${horasExtrasResults.extraHour100Value.toFixed(2)}\n`;
-      csvContent += `Subtotal Extras 50%;R$ ${horasExtrasResults.total50Value.toFixed(2)}\n`;
-      csvContent += `Subtotal Extras 100%;R$ ${horasExtrasResults.total100Value.toFixed(2)}\n`;
-      csvContent += `Total de Adicional de Horas Extras;R$ ${horasExtrasResults.totalExtraAmount.toFixed(2)}\n`;
-    }
-    else if (activeCalculator === 'simulador-de-aposentadoria-inss' && aposentadoriaINSSResults) {
-      filename = 'simulador-aposentadoria.csv';
-      csvContent += `SIMULADOR DE APOSENTADORIA INSS\n`;
-      csvContent += `Soma dos Pontos Atuais;${aposentadoriaINSSResults.currentPoints}\n`;
-      csvContent += `Elegivel para Aposentadoria;${aposentadoriaINSSResults.canRetireAtAll ? 'SIM' : 'NAO'}\n`;
-      csvContent += `Elegivel por Idade;${aposentadoriaINSSResults.canRetireByAge ? 'SIM' : 'NAO'}\n`;
-      csvContent += `Elegivel por Pontos;${aposentadoriaINSSResults.canRetireByPoints ? 'SIM' : 'NAO'}\n`;
-      csvContent += `Anos Restantes para Idade Minima;${aposentadoriaINSSResults.yearsToMinAge}\n`;
-      csvContent += `Anos de Contribuicao Restantes para Pontos;${aposentadoriaINSSResults.yearsToContribution}\n`;
-    }
-    else if (activeCalcDef?.isDynamic) {
-      filename = `${activeCalculator}-resultado.csv`;
-      csvContent += `${activeCalcDef.name.toUpperCase()} - RESULTADO COMERCIAL\n\n`;
-      csvContent += `PARAMETROS UTILIZADOS:\n`;
-      activeCalcDef.inputs?.forEach(inp => {
-        const val = dynamicCalcInputs[inp.id] !== undefined ? dynamicCalcInputs[inp.id] : inp.defaultValue;
-        csvContent += `${inp.label};${val}${inp.suffix ? ' ' + inp.suffix : ''}\n`;
-      });
-      csvContent += `\nDEMONSTRATIVO DE RESULTADOS:\n`;
-      activeCalcDef.outputs?.forEach(out => {
-        const val = dynamicCalcOutputs[out.id];
-        const displayVal = typeof val === 'number' ? `R$ ${val.toFixed(2)}` : val || '0,00';
-        csvContent += `${out.label};${displayVal}\n`;
-      });
-    }
-    else {
-      // Default fallback rule/text
-      filename = 'calculadora-resultado-simples.csv';
-      csvContent += `OPERACAO EFETUADA COM SUCESSO\n`;
-      csvContent += `Analise de proporcoes ou equivalencia de texto faturados no painel de controle central.\n`;
-    }
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    if (link.download !== undefined) {
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    // Trigger visual refresh of AdSense unit since they completed an operation!
+    handleExportCSV(getStatePayload());
     setAdImpressions(prev => prev + 1);
     setAdRefreshTrigger(prev => prev + 1);
-
     triggerToast('📥 Planilha Excel / CSV baixada com sucesso!');
   };
 
   // Export Results back as a clean, styled, and ready-to-print official PDF report using standard PDF canvas library
   const exportToPDF = () => {
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4'
-    });
-
-    const activeCalcDef = CALCULATORS_CATALOG.find(c => c.id === activeCalculator);
-    const title = activeCalcDef ? activeCalcDef.name : 'Simulador';
-
-    // 1. Decorative Header styling
-    doc.setFillColor(15, 23, 42); // slate-900 color primary
-    doc.rect(0, 0, 210, 40, 'F');
-
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('Helvetica', 'bold');
-    doc.setFontSize(18);
-    // Convert text output to match Portuguese standard PDF compatibility
-    doc.text('CENTRAL DE CALCULADORAS & PRODUTIVIDADE', 15, 17);
-    
-    doc.setFont('Helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(226, 232, 240);
-    doc.text(`Relatório Oficial de Operações e Parâmetros de Uso`, 15, 23);
-    doc.text(`Data do Emitente: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR')}`, 15, 28);
-
-    // Header Right Label
-    doc.setFillColor(245, 158, 11); // amber secondary color accent block
-    doc.rect(155, 15, 40, 6, 'F');
-    doc.setFont('Helvetica', 'bold');
-    doc.setFontSize(8);
-    doc.setTextColor(15, 23, 42);
-    doc.text('RELATORIO SEGURO', 158, 19);
-
-    // 2. Active tool details
-    doc.setFont('Helvetica', 'bold');
-    doc.setFontSize(14);
-    doc.setTextColor(15, 23, 42);
-    doc.text(`Ferramenta: ${title}`, 15, 52);
-
-    doc.setDrawColor(226, 232, 240);
-    doc.line(15, 55, 195, 55);
-
-    // 3. Render content matching specific active state
-    let yPos = 65;
-
-    if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('RESUMO DO PATRIMÔNIO PROJETADO', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text(`Valor Final Estimado Acumulado:`, 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${compoundInterestResults.finalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text(`Total de Capital Investido Líquido:`, 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${compoundInterestResults.totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text(`Rendimento Real Acumulado em Juros:`, 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(16, 185, 129); // green
-      doc.text(`R$ ${compoundInterestResults.totalInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42); // back to dark
-      yPos += 14;
-
-      // Draw table header
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('EVOLUÇÃO ANUAL SIMULADA', 15, yPos);
-      yPos += 8;
-
-      doc.setFillColor(248, 250, 252);
-      doc.rect(15, yPos, 180, 7, 'F');
-      doc.setFontSize(9);
-      doc.text('Período', 18, yPos + 5);
-      doc.text('Total Investido', 58, yPos + 5);
-      doc.text('Juros Acumulados', 108, yPos + 5);
-      doc.text('Saldo Acumulado', 158, yPos + 5);
-      yPos += 7;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5);
-      // Filter year schedules of month data
-      const years = compoundInterestResults.data.filter((item: any) => item.month === 0 || item.month % 12 === 0 || item.month === compoundInterestResults.data.length - 1);
-      years.slice(0, 15).forEach((row: any) => {
-        doc.line(15, yPos, 195, yPos);
-        const labelText = row.month === 0 ? 'Início' : `Ano ${Math.ceil(row.month / 12)}`;
-        doc.text(labelText, 18, yPos + 4.5);
-        doc.text(`R$ ${row.totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 58, yPos + 4.5);
-        doc.text(`R$ ${row.totalInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 108, yPos + 4.5);
-        doc.text(`R$ ${row.balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 158, yPos + 4.5);
-        yPos += 6;
-      });
-    } 
-    else if (activeCalculator === 'clt-pj' && cltVsPjResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('RECOMENDAÇÃO TRABALHISTA', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Opção ideal para contratação:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(cltVsPjResults.isPjBetter ? 'Pessoa Jurídica (PJ)' : 'Trabalho CLT', 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Diferença líquida mensal apurada:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${cltVsPjResults.difference.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 12;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.text('DETALHAMENTO DOS CONTRATOS COMPILADOS', 15, yPos);
-      yPos += 8;
-
-      doc.setFillColor(248, 250, 252);
-      doc.rect(15, yPos, 85, 25, 'F');
-      doc.rect(110, yPos, 85, 25, 'F');
-
-      // CLT col
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(9.5);
-      doc.text('Cenário CLT Real Equivalente', 18, yPos + 5);
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5);
-      doc.text(`Líquido final total: R$ ${cltVsPjResults.cltNet?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 18, yPos + 12);
-      doc.text('Inclui 13º, férias + 1/3, e FGTS.', 18, yPos + 18);
-
-      // PJ col
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(9.5);
-      doc.text('Cenário PJ Líquido Proposto', 113, yPos + 5);
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5);
-      doc.text(`Líquido final total: R$ ${cltVsPjResults.pjNet?.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 113, yPos + 12);
-      doc.text('Descontando tributação tributos.', 113, yPos + 18);
-      yPos += 30;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.text('Conclusão Comparativa Técnica:', 15, yPos);
-      yPos += 5;
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5);
-      const splitText = doc.splitTextToSize(cltVsPjResults.comparisonString, 180);
-      doc.text(splitText, 15, yPos);
-    } 
-    else if (activeCalculator === 'margem-lucro' && profitMarginResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('ANÁLISE COMERCIAL DE PRECIFICAMENTO', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Margem Líquida Livre do Produto:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${profitMarginResults.netMargin.toFixed(2)}%`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Margem Bruta (Sem encargo indireto):', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${profitMarginResults.grossMargin.toFixed(2)}%`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Markup Multiplicador sugerido:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${(profitMarginResults.markup / 100 + 1).toFixed(2)}x`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Lucro Líquido Real Sobra:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${profitMarginResults.netProfit.toFixed(2)}`, 105, yPos);
-      yPos += 14;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.text('DIAGNÓSTICO E PRESCRIÇÃO COMERCIAL', 15, yPos);
-      yPos += 6;
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(9);
-      const splitText = doc.splitTextToSize(profitMarginResults.comment, 180);
-      doc.text(splitText, 15, yPos);
-    } 
-    else if (activeCalculator === 'registro-horas' && timeSheetResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('RELATÓRIO DE PRESTAÇÃO DE HORAS DE CONSULTORIA', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Total de Horas Trabalhadas:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${timeSheetResults.totalHours.toFixed(2)} horas`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Taxa / Valor cobrado por hora:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${timeSheetResults.hourlyRate},00 / h`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Faturamento Total a Receber:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(16, 185, 129); // green faturado
-      doc.text(`R$ ${timeSheetResults.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42); // back to slate
-      yPos += 14;
-
-      // Hours logs Table
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('EXTRATO DE HISTÓRICO DE DIAS REGISTRADOS', 15, yPos);
-      yPos += 8;
-
-      doc.setFillColor(248, 250, 252);
-      doc.rect(15, yPos, 180, 7, 'F');
-      doc.setFontSize(9);
-      doc.text('Data', 18, yPos + 5);
-      doc.text('Expediente', 48, yPos + 5);
-      doc.text('Pausa', 88, yPos + 5);
-      doc.text('Atividade Realizada', 108, yPos + 5);
-      yPos += 7;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8);
-      timeSheetResults.records.forEach((row: any) => {
-        doc.line(15, yPos, 195, yPos);
-        doc.text(row.date, 18, yPos + 4.5);
-        doc.text(`${row.start} - ${row.end}`, 48, yPos + 4.5);
-        doc.text(`${row.pause}m`, 88, yPos + 4.5);
-        
-        let desc = row.description;
-        if (desc.length > 35) desc = desc.substring(0, 32) + '...';
-        doc.text(desc, 108, yPos + 4.5);
-        yPos += 6.5;
-      });
-    } 
-    else if (activeCalculator === 'imc' && healthResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('RELATÓRIO SAÚDE E COMPOSIÇÃO FÍSICA', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Índice de Massa Corporal (IMC):', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${healthResults.bmi.toFixed(2)} (${healthResults.bmiClass})`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Taxa Metabólica Basal (BMR / TMB):', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${Math.round(healthResults.bmr)} kcal / dia`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Meta Calórica Recomendada Diária:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${Math.round(healthResults.targetCalories)} kcal`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Consumo de Água Sugerido:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${(healthResults.waterNeeds / 1000).toFixed(2)} litros por dia`, 105, yPos);
-      yPos += 14;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.text('PRESCRIÇÕES DIETÉTICAS GERAIS', 15, yPos);
-      yPos += 6;
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(9);
-      doc.text('Este documento apresenta estimativas com base em equações físicas clássicas.', 15, yPos);
-      doc.text('Busque atendimento de nutricionista ou nutrólogo para o planejamento de rotinas esportivas ou dietas clínicas.', 15, yPos + 4.5);
-    } 
-    else if (activeCalculator === 'calculadora-de-rescisao-clt' && rescisaoCLTResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('RESUMO DA RESCISÃO CONTRATUAL CLT', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Motivo do Desligamento:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(rescisaoCLTResults.reasonLabel, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Meses de Trabalho Efetivos:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${rescisaoCLTResults.monthsOfWork} meses`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Líquido Estimado a Receber:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(16, 185, 129); // green
-      doc.text(`R$ ${rescisaoCLTResults.netAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42); // back to slate
-      yPos += 14;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.text('DEMONSTRATIVO DE PROVENTOS E DESCONTOS', 15, yPos);
-      yPos += 8;
-
-      doc.setFillColor(248, 250, 252);
-      doc.rect(15, yPos, 180, 7, 'F');
-      doc.setFontSize(9);
-      doc.text('Verba / Descrição', 18, yPos + 5);
-      doc.text('Tipo', 108, yPos + 5);
-      doc.text('Valor Estimado', 158, yPos + 5);
-      yPos += 7;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5);
-
-      const items = [
-        { desc: 'Saldo de Salário', type: 'Provento', value: rescisaoCLTResults.salaryBalance },
-        { desc: 'Aviso Prévio Indenizado/Trabalhado', type: 'Provento', value: rescisaoCLTResults.noticeAmount },
-        { desc: 'Décimo Terceiro Proporcional', type: 'Provento', value: rescisaoCLTResults.proportionateThirteenth },
-        { desc: 'Férias Proporcionais + 1/3', type: 'Provento', value: rescisaoCLTResults.proportionateVacation + rescisaoCLTResults.proportionateVacationOneThird },
-        { desc: 'Férias Vencidas + 1/3 (se houver)', type: 'Provento', value: rescisaoCLTResults.overdueVacationTotal },
-        { desc: 'Descontos Previdenciários & IRRF', type: 'Desconto', value: rescisaoCLTResults.totalDeductions }
-      ];
-
-      items.forEach((row: any) => {
-        if (row.value > 0 || row.type === 'Desconto') {
-          doc.line(15, yPos, 195, yPos);
-          doc.text(row.desc, 18, yPos + 4.5);
-          doc.text(row.type, 108, yPos + 4.5);
-          doc.text(`R$ ${row.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 158, yPos + 4.5);
-          yPos += 6;
-        }
-      });
-    }
-    else if (activeCalculator === 'calculadora-de-decimo-terceiro' && decimoTerceiroResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('DÉCIMO TERCEIRO SALÁRIO - DEMONSTRATIVO', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Parcela Demonstrada:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(decimoTerceiroResults.parcelLabel === 'Primeira Parcela' ? '1ª Parcela (Sem Descontos)' : '2ª Parcela / Quitação Integral', 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Bruto de Enquadramento:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${decimoTerceiroResults.grossThirteenth.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Desconto de INSS:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(239, 68, 68); // red
-      doc.text(`R$ ${decimoTerceiroResults.inssDeduction.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Desconto de Imposto de Renda (IRRF):', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(239, 68, 68); // red
-      doc.text(`R$ ${decimoTerceiroResults.irrfDeduction.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Líquido Creditado:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(16, 185, 129); // green
-      doc.text(`R$ ${decimoTerceiroResults.netValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42);
-    }
-    else if (activeCalculator === 'calculadora-de-ferias-clt' && feriasCLTResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('DETALHAMENTO DE FÉRIAS CLT E ABONO PECUNIÁRIO', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Dias de Descanso (Gozo):', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${feriasCLTResults.daysToEnjoy} dias`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Dias de Abono Vendidos:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${feriasCLTResults.daysToSell} dias`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Bruto de Férias Acumulado:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${feriasCLTResults.vacationValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      if (feriasCLTResults.daysToSell > 0) {
-        doc.setFont('Helvetica', 'normal');
-        doc.text('Indenização Abono Pecuniário:', 15, yPos);
-        doc.setFont('Helvetica', 'bold');
-        doc.text(`R$ ${feriasCLTResults.abonoValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-        yPos += 6;
-      }
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Deduções Previdenciárias INSS/IRRF:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(239, 68, 68); // red
-      doc.text(`R$ ${(feriasCLTResults.inssDeduction + feriasCLTResults.irrfDeduction).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Líquido Final de Férias a Receber:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(16, 185, 129); // green
-      doc.text(`R$ ${feriasCLTResults.netVacationAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42);
-    }
-    else if (activeCalculator === 'calculadora-de-horas-extras' && horasExtrasResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('QUOTA DE ADICIONAL DE HORAS EXTRAS', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Valor da Hora Comum Calculado:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${horasExtrasResults.regularHourValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Unitário Extra 50%:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${horasExtrasResults.extraHour50Value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Valor Unitário Extra 100%:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${horasExtrasResults.extraHour100Value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Adicional Bruto Total de Extras de Direito:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(16, 185, 129); // green
-      doc.text(`R$ ${horasExtrasResults.totalExtraAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-      doc.setTextColor(15, 23, 42);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Próximo Salário Bruto Acumulado com Extras:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`R$ ${horasExtrasResults.salaryWithExtras.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
-    }
-    else if (activeCalculator === 'simulador-de-aposentadoria-inss' && aposentadoriaINSSResults) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('DIAGNÓSTICO PREVIDENCIÁRIO GERAL (INSS)', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Soma da Pontuação Atual (Idade + Tempo):', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${aposentadoriaINSSResults.currentPoints} pontos`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Meta de Pontos de Transição:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${aposentadoriaINSSResults.pointsTarget} pontos (Regra de Pontos)`, 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Idade de Transição Mínima Legal:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(`${aposentadoriaINSSResults.minAgeTarget} anos (Regra de Idade)`, 105, yPos);
-      yPos += 14;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.text('AVALIAÇÃO DE DIREITO E ELEGIBILIDADE', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Elegível por Critério de Idade Mínima:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(aposentadoriaINSSResults.canRetireByAge ? 'SIM' : 'NÃO', 105, yPos);
-      yPos += 6;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.text('Elegível por Critério de Pontos Acumulados:', 15, yPos);
-      doc.setFont('Helvetica', 'bold');
-      doc.text(aposentadoriaINSSResults.canRetireByPoints ? 'SIM' : 'NÃO', 105, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'bold');
-      doc.setTextColor(aposentadoriaINSSResults.canRetireAtAll ? 16 : 245, aposentadoriaINSSResults.canRetireAtAll ? 185 : 158, aposentadoriaINSSResults.canRetireAtAll ? 129 : 11);
-      doc.text(aposentadoriaINSSResults.canRetireAtAll ? 'EM CONDIÇÃO DE RECLAMAR APOSENTADORIA imediata!' : 'SITUAÇÃO DE SEGURO ATIVO: Continue Contribuindo.', 15, yPos);
-      doc.setTextColor(15, 23, 42);
-    }
-    else if (activeCalcDef?.isDynamic) {
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.text('PARÂMETROS DE ENTRADA CONFIGURADOS', 15, yPos);
-      yPos += 8;
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      activeCalcDef.inputs?.forEach(inp => {
-        const val = dynamicCalcInputs[inp.id] !== undefined ? dynamicCalcInputs[inp.id] : inp.defaultValue;
-        doc.text(`${inp.label}:`, 15, yPos);
-        doc.setFont('Helvetica', 'bold');
-        doc.text(`${val}${inp.suffix ? ' ' + inp.suffix : ''}`, 115, yPos);
-        doc.setFont('Helvetica', 'normal');
-        yPos += 6;
-      });
-
-      yPos += 4;
-      doc.setFont('Helvetica', 'bold');
-      doc.text('DEMONSTRATIVO DE RESULTADOS', 15, yPos);
-      yPos += 8;
-
-      activeCalcDef.outputs?.forEach(out => {
-        const val = dynamicCalcOutputs[out.id];
-        const displayVal = typeof val === 'number' 
-          ? val.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
-          : val || '0,00';
-        doc.setFont('Helvetica', 'normal');
-        doc.text(`${out.label}:`, 15, yPos);
-        doc.setFont('Helvetica', 'bold');
-        doc.text(`${out.prefix || ''}${displayVal}${out.suffix || ''}`, 115, yPos);
-        yPos += 6;
-      });
-
-      yPos += 10;
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.text('RESPONSABILIDADE LEGAL:', 15, yPos);
-      yPos += 5;
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5);
-      const warningsText = doc.splitTextToSize('Todos os valores simulados sao baseados em dados referenciais providos pelo usuario em carater informativo. Nao representam garantias juridicas.', 180);
-      doc.text(warningsText, 15, yPos);
-    }
-    else {
-      // General tools export
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Esta ferramenta não armazena tabelas longas para impressão.', 15, yPos);
-      doc.text('Os resultados e operações rápidas de cálculo encontram-se resumidos no painel de controle.', 15, yPos + 5);
-    }
-
-    // 4. PDF Footer stamp
-    doc.setDrawColor(203, 213, 225);
-    doc.line(15, 275, 195, 275);
-    doc.setFont('Helvetica', 'italic');
-    doc.setFontSize(7.5);
-    doc.setTextColor(148, 163, 184);
-    doc.text('Emitido gratuitamente através da plataforma Só Calculadoras.', 15, 280);
-    doc.text('Site monetizado com Google AdSense para gratuidade eterna do usuário final.', 15, 284);
-    doc.text('Página 1 de 1', 180, 280);
-
-    doc.save(`relatorio-${activeCalculator}.pdf`);
-
-    // Increment simulated AdSense impressions with pdf load
+    handleExportPDF(getStatePayload());
     setAdImpressions(prev => prev + 1);
     setAdRefreshTrigger(prev => prev + 1);
-
     triggerToast('📥 Relatório PDF Gerado e Exportado com Sucesso!');
   };
 
@@ -1877,4 +1112,23 @@ export default function App() {
       />
     </div>
   );
+}
+
+
+export interface CalcStatePayload {
+  activeCalculator: any;
+  activeCalcDef: any;
+  compoundInterestResults: any;
+  cltVsPjResults: any;
+  profitMarginResults: any;
+  healthResults: any;
+  timeSheetResults: any;
+  rule3Results: any;
+  rescisaoCLTResults: any;
+  decimoTerceiroResults: any;
+  feriasCLTResults: any;
+  horasExtrasResults: any;
+  aposentadoriaINSSResults: any;
+  dynamicCalcInputs: any;
+  dynamicCalcOutputs: any;
 }
