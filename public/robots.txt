@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap corporativo dinâmico indexável para SPA
-Sitemap: https://socalculadoras.com.br/sitemap.xml
+Sitemap: https://brasilcalculadoras.com.br/sitemap.xml

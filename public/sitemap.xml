@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Página Principal / Central Geral -->
   <url>
-    <loc>https://socalculadoras.com.br/</loc>
+    <loc>https://brasilcalculadoras.com.br/</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -10,7 +10,7 @@
   
   <!-- Juros Compostos -->
   <url>
-    <loc>https://socalculadoras.com.br/#juros-compostos</loc>
+    <loc>https://brasilcalculadoras.com.br/#juros-compostos</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -18,7 +18,7 @@
 
   <!-- Simulador CLT vs PJ -->
   <url>
-    <loc>https://socalculadoras.com.br/#clt-pj</loc>
+    <loc>https://brasilcalculadoras.com.br/#clt-pj</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
@@ -26,7 +26,7 @@
 
   <!-- Margem de Lucro -->
   <url>
-    <loc>https://socalculadoras.com.br/#margem-lucro</loc>
+    <loc>https://brasilcalculadoras.com.br/#margem-lucro</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
@@ -34,7 +34,7 @@
 
   <!-- Calculadora de Rescisão CLT -->
   <url>
-    <loc>https://socalculadoras.com.br/#calculadora-de-rescisao-clt</loc>
+    <loc>https://brasilcalculadoras.com.br/#calculadora-de-rescisao-clt</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -42,7 +42,7 @@
 
   <!-- Calculadora de Décimo Terceiro -->
   <url>
-    <loc>https://socalculadoras.com.br/#calculadora-de-decimo-terceiro</loc>
+    <loc>https://brasilcalculadoras.com.br/#calculadora-de-decimo-terceiro</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
@@ -50,7 +50,7 @@
 
   <!-- Calculadora de Férias CLT -->
   <url>
-    <loc>https://socalculadoras.com.br/#calculadora-de-ferias-clt</loc>
+    <loc>https://brasilcalculadoras.com.br/#calculadora-de-ferias-clt</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
@@ -58,7 +58,7 @@
 
   <!-- Calculadora de Horas Extras -->
   <url>
-    <loc>https://socalculadoras.com.br/#calculadora-de-horas-extras</loc>
+    <loc>https://brasilcalculadoras.com.br/#calculadora-de-horas-extras</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.88</priority>
@@ -66,7 +66,7 @@
 
   <!-- Simulador de Aposentadoria INSS -->
   <url>
-    <loc>https://socalculadoras.com.br/#simulador-de-aposentadoria-inss</loc>
+    <loc>https://brasilcalculadoras.com.br/#simulador-de-aposentadoria-inss</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -74,7 +74,7 @@
 
   <!-- Índice de Massa Corporal (IMC) -->
   <url>
-    <loc>https://socalculadoras.com.br/#imc</loc>
+    <loc>https://brasilcalculadoras.com.br/#imc</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
@@ -82,7 +82,7 @@
 
   <!-- Calculadora de Escalas de Pontos / Regrante 3 -->
   <url>
-    <loc>https://socalculadoras.com.br/#regra-3</loc>
+    <loc>https://brasilcalculadoras.com.br/#regra-3</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
@@ -90,7 +90,7 @@
 
   <!-- Contador de Letras e Palavras -->
   <url>
-    <loc>https://socalculadoras.com.br/#contador-texto</loc>
+    <loc>https://brasilcalculadoras.com.br/#contador-texto</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>

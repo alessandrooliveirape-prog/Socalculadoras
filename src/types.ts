@@ -28,6 +28,7 @@ export interface DynamicFAQDef {
   answer: string;
 }
 
+// We also extend RAW_DYNAMIC_METADATA type union with our new types in calculatorsCatalog.ts
 export interface CalculatorDef {
   id: CalculatorId;
   name: string;

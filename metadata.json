@@ -1,5 +1,5 @@
 {
-  "name": "Só Calculadoras",
+  "name": "Brasil Calculadoras",
   "description": "A coleção mais completa e veloz de calculadoras online grátis do Brasil. Calculadoras financeiras, trabalhistas, de saúde, logística, campo e utilidades gerais.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

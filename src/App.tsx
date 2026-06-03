@@ -161,7 +161,7 @@ export default function App() {
     if (!activeCalc) return;
 
     // 1. Dynamic document title so search engine robots index of actual tools uniquely
-    document.title = `${activeCalc.name} | Só Calculadoras`;
+    document.title = `${activeCalc.name} | Brasil Calculadoras`;
 
     // 2. Dynamic metadata description update for contextual crawl matching
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -496,7 +496,7 @@ export default function App() {
   const getShareableText = () => {
     if (!activeCalc) return '';
     
-    let text = `*${activeCalc.name}* - Só Calculadoras\n`;
+    let text = `*${activeCalc.name}* - Brasil Calculadoras\n`;
     text += `🔗 ${window.location.origin}/#${activeCalculator}\n\n`;
     text += `*Resultados Simulados:*\n`;
     
@@ -654,7 +654,7 @@ export default function App() {
               </div>
               <div>
                 <h1 className="text-md font-display font-bold text-slate-800 tracking-tight leading-none">
-                  Só Calculadoras
+                  Brasil Calculadoras
                 </h1>
                 <span className="text-[10px] font-semibold text-gray-400 font-mono tracking-wider">FERRAMENTAS DE EXCELÊNCIA</span>
               </div>

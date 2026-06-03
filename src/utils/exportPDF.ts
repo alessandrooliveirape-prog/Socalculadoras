@@ -585,7 +585,7 @@ export const handleExportPDF = (payload: CalcStatePayload) => {
     doc.setFont('Helvetica', 'italic');
     doc.setFontSize(7.5);
     doc.setTextColor(148, 163, 184);
-    doc.text('Emitido gratuitamente através da plataforma Só Calculadoras.', 15, 280);
+    doc.text('Emitido gratuitamente através da plataforma Brasil Calculadoras.', 15, 280);
     doc.text('Site monetizado com Google AdSense para gratuidade eterna do usuário final.', 15, 284);
     doc.text('Página 1 de 1', 180, 280);
 

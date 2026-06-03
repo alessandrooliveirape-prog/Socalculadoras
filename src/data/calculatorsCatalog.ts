@@ -13,7 +13,11 @@ export const CATEGORY_MAP: Record<string, string> = {
   utilitarios: '💡 Utilidades & Casa',
   aposentadoria: '⏳ Aposentadoria & Futuro',
   agronegocio: '🚜 Agronegócio & Campo',
-  logistica: '🚚 Logística & Fretes'
+  logistica: '🚚 Logística & Fretes',
+  construcao: '🧱 Construção & Reformas',
+  eventos: '🥩 Gastronomia & Eventos',
+  energia: '☀️ Energia & Sustentabilidade',
+  educacao: '📚 Educação & ENEM'
 };
 
 // 12 Core Calculators that have pre-built custom views
@@ -124,7 +128,7 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours';
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura';
   inputs: { id: string; label: string; def: any; type: 'number' | 'select'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
@@ -939,7 +943,273 @@ const RAW_DYNAMIC_METADATA: {
       { q: 'Qual o limite de tempo de direção contínua?', a: 'De acordo com a Lei 13.103/15 (Lei do Motorista), o motorista profissional de transporte rodoviário não pode dirigir mais de 5,5 horas ininterruptas.' },
       { q: 'Como devem ser calculados os descansos durante a rodovia?', a: 'Dentro do período máximo de direção ativa diária, há a exigência mínima absoluta de paradas obrigatórias de 30 minutos a cada 4 horas ou no limite de 5h30.' }
     ]
+  },
+  // ==================== CONSTRUCAO (3 items) ====================
+  {
+    id: 'const-tijolos',
+    name: 'Calculadora de Tijolos por m²',
+    description: 'Estime a quantidade de tijolos ou blocos e a argamassa necessária para levantar paredes.',
+    category: 'construcao',
+    icon: 'Grid',
+    tags: ['construção', 'obra', 'tijolo', 'bloco', 'parede', 'reforma'],
+    type: 'const_tijolos',
+    inputs: [
+      { id: 'area_parede', label: 'Área da Parede', def: 10, type: 'number', suff: 'm²' },
+      { id: 'tijolos_m2', label: 'Tijolos por m² (Padrão 6 furos = 39)', def: 39, type: 'number', suff: 'un' },
+      { id: 'margem_perda', label: 'Margem de Perda/Quebra', def: 10, type: 'number', suff: '%' }
+    ],
+    outputs: [
+      { id: 'tijolos_total', label: 'Total de Tijolos Recomendado', suff: ' un', isPrimary: true },
+      { id: 'areia_estimada', label: 'Volume de Areia Estimado', suff: ' m³' }
+    ],
+    faq: [
+      { q: 'Por que adicionar margem de quebra?', a: 'Em obras, o transporte e o corte de blocos sempre geram perdas. Adicionar de 10% a 15% evita que falte material.' }
+    ]
+  },
+  {
+    id: 'const-tinta',
+    name: 'Calculadora de Tinta Predial',
+    description: 'Descubra quantos litros e latas de tinta são necessários para pintar seus ambientes.',
+    category: 'construcao',
+    icon: 'Brush',
+    tags: ['tinta', 'pintura', 'parede', 'obra', 'reforma', 'decoração'],
+    type: 'const_tinta',
+    inputs: [
+      { id: 'area_pintura', label: 'Área Total a ser Pintada', def: 50, type: 'number', suff: 'm²' },
+      { id: 'rendimento_lata', label: 'Rendimento da Tinta', def: 10, type: 'number', suff: 'm²/L' },
+      { id: 'demaos', label: 'Quantidade de Demãos', def: 2, type: 'number', suff: 'vezes' }
+    ],
+    outputs: [
+      { id: 'litros_tinta', label: 'Total de Tinta Necessária', suff: ' Litros', isPrimary: true },
+      { id: 'latas_grandes', label: 'Equivalente a Latas de 18L', suff: ' latas' }
+    ],
+    faq: [
+      { q: 'Qual o rendimento médio das tintas?', a: 'Tintas acrílicas premium costumam render de 10 a 14 m² por litro por demão, dependendo da porosidade da parede.' }
+    ]
+  },
+  {
+    id: 'const-piso',
+    name: 'Calculadora de Pisos e Porcelanato',
+    description: 'Encontre a área exata com rodapés e a margem de recortes para comprar o piso ideal.',
+    category: 'construcao',
+    icon: 'Layers',
+    tags: ['piso', 'porcelanato', 'revestimento', 'azulejo', 'obra', 'chão'],
+    type: 'const_piso',
+    inputs: [
+      { id: 'area_chao', label: 'Área do Chão', def: 20, type: 'number', suff: 'm²' },
+      { id: 'tamanho_rodape', label: 'Altura do Rodapé', def: 10, type: 'number', suff: 'cm' },
+      { id: 'perimetro', label: 'Perímetro do Ambiente', def: 18, type: 'number', suff: 'm' },
+      { id: 'margem', label: 'Margem para Recortes', def: 15, type: 'number', suff: '%' }
+    ],
+    outputs: [
+      { id: 'piso_total', label: 'Quantidade de Piso a Comprar', suff: ' m²', isPrimary: true },
+      { id: 'argamassa', label: 'Argamassa Recomendada (ACIII)', suff: ' kg' }
+    ],
+    faq: [
+      { q: 'Quanto adicionar de margem de recorte?', a: 'Para paginações retas (ortogonais) adicione 10%. Para instalação em diagonal, adicione 15% a 20% para cobrir as perdas angulares.' }
+    ]
+  },
+
+  // ==================== EVENTOS (3 items) ====================
+  {
+    id: 'evento-churrasco',
+    name: 'Calculadora de Churrasco',
+    description: 'Evite desperdícios calculando a quantidade exata de carnes e bebidas para convidados.',
+    category: 'eventos',
+    icon: 'Flame',
+    tags: ['churrasco', 'festa', 'carne', 'bebida', 'cerveja', 'comida'],
+    type: 'evento_churrasco',
+    inputs: [
+      { id: 'adultos', label: 'Número de Adultos', def: 10, type: 'number', suff: 'pessoas' },
+      { id: 'criancas', label: 'Número de Crianças', def: 3, type: 'number', suff: 'pessoas' },
+      { id: 'duracao', label: 'Duração do Evento', def: 4, type: 'number', suff: 'horas' }
+    ],
+    outputs: [
+      { id: 'carne_total', label: 'Carne Recomendada (Sem Osso)', suff: ' kg', isPrimary: true },
+      { id: 'cerveja_total', label: 'Quantidade de Cerveja', suff: ' Litros' },
+      { id: 'refri_total', label: 'Refrigerante / Água', suff: ' Litros' }
+    ],
+    faq: [
+      { q: 'Qual a porção média por pessoa?', a: 'Normalmente calcula-se 400g a 500g de carne por adulto para eventos de 4 horas. O consumo de líquidos fica na média de 1,5L a 2L.' }
+    ]
+  },
+  {
+    id: 'evento-receita',
+    name: 'Ficha Técnica de Receitas (Custo)',
+    description: 'Precifique doces e salgados somando os custos proporcionais dos ingredientes.',
+    category: 'eventos',
+    icon: 'CheckCircle',
+    tags: ['receita', 'doce', 'salgado', 'custo', 'ficha técnica', 'bolo'],
+    type: 'evento_receita',
+    inputs: [
+      { id: 'custo_ingredientes', label: 'Soma dos Custos Fracionados', def: 35.50, type: 'number', pref: 'R$' },
+      { id: 'rendimento', label: 'Rendimento (Porções/Unidades)', def: 12, type: 'number', suff: 'un' },
+      { id: 'margem_lucro', label: 'Margem de Lucro Desejada', def: 150, type: 'number', suff: '%' }
+    ],
+    outputs: [
+      { id: 'custo_unitario', label: 'Custo de Produção por Unidade', pref: 'R$', isPrimary: true },
+      { id: 'preco_venda', label: 'Preço Sugerido de Venda', pref: 'R$' }
+    ],
+    faq: [
+      { q: 'Como aplicar a margem de lucro?', a: 'No ramo de alimentação, é comum aplicar de 100% a 200% de margem sobre os ingredientes para cobrir gás, energia e a mão de obra artesanal.' }
+    ]
+  },
+  {
+    id: 'evento-bebida',
+    name: 'Cálculo de Bebidas para Festas',
+    description: 'Acerte em cheio no estoque do seu bar de casamento, aniversário ou confraternização.',
+    category: 'eventos',
+    icon: 'CheckCircle',
+    tags: ['bebidas', 'festa', 'casamento', 'cerveja', 'drink', 'bar'],
+    type: 'evento_bebida',
+    inputs: [
+      { id: 'convidados', label: 'Total de Convidados (Adultos)', def: 50, type: 'number', suff: 'pessoas' },
+      { id: 'tipo_festa', label: 'Duração da Festa', def: 6, type: 'number', suff: 'horas' },
+      { id: 'perfil_consumo', label: 'Perfil de Consumo (1=Leve, 2=Alto)', def: 1.5, type: 'number', suff: 'x' }
+    ],
+    outputs: [
+      { id: 'cerveja_latas', label: 'Cerveja (Latas 350ml)', suff: ' latas', isPrimary: true },
+      { id: 'destilados', label: 'Destilados (Garrafas 1L)', suff: ' garrafas' },
+      { id: 'gelo', label: 'Gelo em Cubos/Tubo', suff: ' kg' }
+    ],
+    faq: [
+      { q: 'Quantas latas por pessoa?', a: 'Para uma festa média de 5 a 6 horas, estima-se de 5 a 7 latas de cerveja por adulto que consome álcool.' }
+    ]
+  },
+
+  // ==================== ENERGIA (3 items) ====================
+  {
+    id: 'energia-consumo',
+    name: 'Custo de Energia Elétrica (Reais)',
+    description: 'Transforme os Watts dos seus eletrodomésticos no valor em R$ que eles consomem na conta mensal.',
+    category: 'energia',
+    icon: 'CheckCircle',
+    tags: ['energia', 'conta', 'luz', 'kwh', 'eletricidade', 'watts'],
+    type: 'energia_consumo',
+    inputs: [
+      { id: 'potencia', label: 'Potência do Aparelho', def: 5500, type: 'number', suff: 'W' },
+      { id: 'horas_dia', label: 'Horas de Uso por Dia', def: 1, type: 'number', suff: 'h/dia' },
+      { id: 'dias_mes', label: 'Dias de Uso no Mês', def: 30, type: 'number', suff: 'dias' },
+      { id: 'tarifa_kwh', label: 'Tarifa por kWh', def: 0.95, type: 'number', pref: 'R$' }
+    ],
+    outputs: [
+      { id: 'custo_mensal', label: 'Impacto na Conta de Luz', pref: 'R$', isPrimary: true },
+      { id: 'consumo_kwh', label: 'Consumo de Energia', suff: ' kWh' }
+    ],
+    faq: [
+      { q: 'Onde encontro a potência do aparelho?', a: 'Geralmente está em uma etiqueta atrás ou embaixo do aparelho informando a potência máxima em Watts (W).' }
+    ]
+  },
+  {
+    id: 'energia-solar',
+    name: 'Dimensionamento de Energia Solar',
+    description: 'Descubra quantos painéis fotovoltaicos você precisa para zerar sua conta de energia.',
+    category: 'energia',
+    icon: 'Sun',
+    tags: ['solar', 'painel', 'fotovoltaico', 'energia', 'sustentabilidade'],
+    type: 'energia_solar',
+    inputs: [
+      { id: 'consumo_medio', label: 'Consumo Médio Mensal', def: 400, type: 'number', suff: 'kWh' },
+      { id: 'irradiacao', label: 'Irradiação Solar Local (HSP)', def: 5.0, type: 'number', suff: 'horas/dia' },
+      { id: 'potencia_painel', label: 'Potência do Painel', def: 550, type: 'number', suff: 'W' }
+    ],
+    outputs: [
+      { id: 'qtd_paineis', label: 'Quantidade Sugerida de Painéis', suff: ' placas', isPrimary: true },
+      { id: 'potencia_sistema', label: 'Tamanho do Sistema (kWp)', suff: ' kWp' }
+    ],
+    faq: [
+      { q: 'O que é HSP?', a: 'Hora de Sol Pleno. É uma média diária da radiação útil que sua região recebe para gerar energia, geralmente de 4 a 6 horas no Brasil.' }
+    ]
+  },
+  {
+    id: 'energia-carbono',
+    name: 'Pegada de Carbono (Veículos)',
+    description: 'Meça quantas árvores você precisa plantar para compensar as emissões anuais do seu carro.',
+    category: 'energia',
+    icon: 'CheckCircle',
+    tags: ['carbono', 'co2', 'sustentável', 'carro', 'meio ambiente', 'árvores'],
+    type: 'energia_carbono',
+    inputs: [
+      { id: 'km_mensal', label: 'Distância Percorrida por Mês', def: 1200, type: 'number', suff: 'km' },
+      { id: 'consumo_medio', label: 'Consumo do Veículo', def: 10, type: 'number', suff: 'km/L' },
+      { id: 'fator_emissao', label: 'Fator de Emissão Gasolina', def: 2.28, type: 'number', suff: 'kg CO2/L' }
+    ],
+    outputs: [
+      { id: 'arvores', label: 'Árvores Necessárias para Compensação', suff: ' árvores', isPrimary: true },
+      { id: 'co2_anual', label: 'Emissão Anual de CO2', suff: ' kg' }
+    ],
+    faq: [
+      { q: 'Quantas árvores compensam 1 tonelada de CO2?', a: 'Em média, são necessárias 7 árvores crescendo por 20 anos para absorver 1 tonelada de Dióxido de Carbono.' }
+    ]
+  },
+
+  // ==================== EDUCACAO (3 items) ====================
+  {
+    id: 'edu-sisu',
+    name: 'Simulador de Nota SISU com Pesos',
+    description: 'Calcule sua média exata no ENEM de acordo com os pesos da universidade desejada.',
+    category: 'educacao',
+    icon: 'BookOpen',
+    tags: ['enem', 'sisu', 'vestibular', 'faculdade', 'pesos', 'nota'],
+    type: 'edu_sisu',
+    inputs: [
+      { id: 'red', label: 'Redação (Nota)', def: 880, type: 'number' },
+      { id: 'red_peso', label: 'Peso Redação', def: 3, type: 'number' },
+      { id: 'mat', label: 'Matemática (Nota)', def: 750, type: 'number' },
+      { id: 'mat_peso', label: 'Peso Matemática', def: 4, type: 'number' },
+      { id: 'nat', label: 'Ciências da Natureza (Nota)', def: 680, type: 'number' },
+      { id: 'nat_peso', label: 'Peso Natureza', def: 2, type: 'number' }
+    ],
+    outputs: [
+      { id: 'media_sisu', label: 'Média Final Ponderada (SISU)', isPrimary: true }
+    ],
+    faq: [
+      { q: 'Por que universidades usam pesos?', a: 'Para dar preferência a alunos que vão melhor nas matérias relativas ao curso (ex: Engenharias valorizam Matemática).' }
+    ]
+  },
+  {
+    id: 'edu-ponderada',
+    name: 'Média Semestral Universitária',
+    description: 'Simule quanto você precisa tirar na prova final para alcançar a aprovação da disciplina.',
+    category: 'educacao',
+    icon: 'BookOpen',
+    tags: ['média', 'faculdade', 'universidade', 'prova', 'notas'],
+    type: 'edu_ponderada',
+    inputs: [
+      { id: 'n1', label: 'Nota da AV1 (1ª Prova)', def: 5.5, type: 'number' },
+      { id: 'peso1', label: 'Peso da AV1', def: 4, type: 'number' },
+      { id: 'media_alvo', label: 'Média para Aprovação (Alvo)', def: 7.0, type: 'number' },
+      { id: 'peso2', label: 'Peso da AV2 (Próxima)', def: 6, type: 'number' }
+    ],
+    outputs: [
+      { id: 'nota_necessaria', label: 'Nota Exigida na Próxima Prova', isPrimary: true }
+    ],
+    faq: [
+      { q: 'E se a nota necessária for maior que 10?', a: 'Neste caso, não é mais possível ser aprovado por média direta e o aluno precisará recorrer à avaliação de final (AV3 ou Recuperação).' }
+    ]
+  },
+  {
+    id: 'edu-leitura',
+    name: 'Tempo de Leitura de Textos',
+    description: 'Estime o tempo de leitura para apostilas, TCCs e provas extensas como o ENEM.',
+    category: 'educacao',
+    icon: 'Book',
+    tags: ['leitura', 'páginas', 'velocidade', 'estudo', 'enem'],
+    type: 'edu_leitura',
+    inputs: [
+      { id: 'paginas', label: 'Quantidade de Páginas ou Questões', def: 45, type: 'number' },
+      { id: 'palavras_pag', label: 'Palavras por Página (Méd. 300)', def: 300, type: 'number' },
+      { id: 'velocidade', label: 'Palavras por Minuto (WPM, Méd. 200)', def: 200, type: 'number' }
+    ],
+    outputs: [
+      { id: 'tempo_min', label: 'Tempo Estimado em Minutos', suff: ' min', isPrimary: true },
+      { id: 'tempo_horas', label: 'Tempo Estimado em Horas', suff: ' h' }
+    ],
+    faq: [
+      { q: 'Qual a velocidade média de um leitor?', a: 'Estudantes e adultos comuns leem entre 200 a 250 palavras por minuto (WPM). Leitores dinâmicos passam das 400 WPM.' }
+    ]
   }
+
 ];
 
 // PROGRAMMATIC GENERATOR OF RESTING 60 DYNAMIC CALCULATORS to complete exactly 100
@@ -1247,6 +1517,120 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         results['tempo_descanso_min'] = requiresBreak;
         results['horas_extras'] = parseFloat(overtime.toFixed(1));
         results['risco_fatiga'] = totalDuty > 12 ? 100 : totalDuty > 8 ? 50 : 10;
+      }
+
+
+      else if (raw.type === 'const_tijolos') {
+        const area = parseFloat(valInputs['area_parede'] || 0);
+        const dens = parseFloat(valInputs['tijolos_m2'] || 39);
+        const margem = parseFloat(valInputs['margem_perda'] || 0) / 100;
+        const total = area * dens * (1 + margem);
+        results['tijolos_total'] = Math.ceil(total);
+        results['areia_estimada'] = parseFloat((total * 0.0015).toFixed(2));
+      }
+      else if (raw.type === 'const_tinta') {
+        const area = parseFloat(valInputs['area_pintura'] || 0);
+        const rend = parseFloat(valInputs['rendimento_lata'] || 1);
+        const demaos = parseFloat(valInputs['demaos'] || 1);
+        const litros = (area * demaos) / rend;
+        results['litros_tinta'] = parseFloat(litros.toFixed(1));
+        results['latas_grandes'] = parseFloat((litros / 18).toFixed(1));
+      }
+      else if (raw.type === 'const_piso') {
+        const chao = parseFloat(valInputs['area_chao'] || 0);
+        const rodape = parseFloat(valInputs['tamanho_rodape'] || 0) / 100;
+        const perimetro = parseFloat(valInputs['perimetro'] || 0);
+        const margem = parseFloat(valInputs['margem'] || 0) / 100;
+        const areaTotal = chao + (rodape * perimetro);
+        const piso = areaTotal * (1 + margem);
+        results['piso_total'] = parseFloat(piso.toFixed(2));
+        results['argamassa'] = parseFloat((piso * 4.5).toFixed(1));
+      }
+      else if (raw.type === 'evento_churrasco') {
+        const ad = parseFloat(valInputs['adultos'] || 0);
+        const cr = parseFloat(valInputs['criancas'] || 0);
+        const dur = parseFloat(valInputs['duracao'] || 4);
+        const eqPessoas = ad + (cr * 0.5);
+        const carne_kg = eqPessoas * (0.4 * (dur / 4));
+        const cerveja_l = ad * (1.5 * (dur / 4));
+        const refri_l = eqPessoas * (1.0 * (dur / 4));
+        results['carne_total'] = parseFloat(carne_kg.toFixed(1));
+        results['cerveja_total'] = parseFloat(cerveja_l.toFixed(1));
+        results['refri_total'] = parseFloat(refri_l.toFixed(1));
+      }
+      else if (raw.type === 'evento_receita') {
+        const custo = parseFloat(valInputs['custo_ingredientes'] || 0);
+        const rend = parseFloat(valInputs['rendimento'] || 1);
+        const margem = parseFloat(valInputs['margem_lucro'] || 0) / 100;
+        const unit = custo / (rend || 1);
+        results['custo_unitario'] = parseFloat(unit.toFixed(2));
+        results['preco_venda'] = parseFloat((unit * (1 + margem)).toFixed(2));
+      }
+      else if (raw.type === 'evento_bebida') {
+        const conv = parseFloat(valInputs['convidados'] || 0);
+        const hrs = parseFloat(valInputs['tipo_festa'] || 1);
+        const perfil = parseFloat(valInputs['perfil_consumo'] || 1);
+        const latas = conv * hrs * perfil;
+        const dest = conv * 0.1 * (hrs / 4);
+        results['cerveja_latas'] = Math.ceil(latas);
+        results['destilados'] = Math.ceil(dest);
+        results['gelo'] = Math.ceil(conv * 0.5);
+      }
+      else if (raw.type === 'energia_consumo') {
+        const pot = parseFloat(valInputs['potencia'] || 0);
+        const horas = parseFloat(valInputs['horas_dia'] || 0);
+        const dias = parseFloat(valInputs['dias_mes'] || 0);
+        const tarifa = parseFloat(valInputs['tarifa_kwh'] || 0);
+        const kwh = (pot * horas * dias) / 1000;
+        results['consumo_kwh'] = parseFloat(kwh.toFixed(1));
+        results['custo_mensal'] = parseFloat((kwh * tarifa).toFixed(2));
+      }
+      else if (raw.type === 'energia_solar') {
+        const consumo = parseFloat(valInputs['consumo_medio'] || 0);
+        const hsp = parseFloat(valInputs['irradiacao'] || 5);
+        const pot = parseFloat(valInputs['potencia_painel'] || 500);
+        const geracaoDiaria = consumo / 30;
+        const kwpNeeded = geracaoDiaria / (hsp * 0.80);
+        const paineis = Math.ceil((kwpNeeded * 1000) / pot);
+        results['qtd_paineis'] = paineis;
+        results['potencia_sistema'] = parseFloat(kwpNeeded.toFixed(2));
+      }
+      else if (raw.type === 'energia_carbono') {
+        const km = parseFloat(valInputs['km_mensal'] || 0);
+        const cons = parseFloat(valInputs['consumo_medio'] || 10);
+        const fator = parseFloat(valInputs['fator_emissao'] || 2.28);
+        const litros_ano = (km / (cons || 1)) * 12;
+        const emissao_ano = litros_ano * fator;
+        const arvores = emissao_ano / 15;
+        results['co2_anual'] = parseFloat(emissao_ano.toFixed(1));
+        results['arvores'] = Math.ceil(arvores);
+      }
+      else if (raw.type === 'edu_sisu') {
+        const red = parseFloat(valInputs['red'] || 0);
+        const pred = parseFloat(valInputs['red_peso'] || 1);
+        const mat = parseFloat(valInputs['mat'] || 0);
+        const pmat = parseFloat(valInputs['mat_peso'] || 1);
+        const nat = parseFloat(valInputs['nat'] || 0);
+        const pnat = parseFloat(valInputs['nat_peso'] || 1);
+        const somaPesos = pred + pmat + pnat;
+        const nota = (red * pred + mat * pmat + nat * pnat) / (somaPesos || 1);
+        results['media_sisu'] = parseFloat(nota.toFixed(2));
+      }
+      else if (raw.type === 'edu_ponderada') {
+        const n1 = parseFloat(valInputs['n1'] || 0);
+        const p1 = parseFloat(valInputs['peso1'] || 1);
+        const media = parseFloat(valInputs['media_alvo'] || 7);
+        const p2 = parseFloat(valInputs['peso2'] || 1);
+        const n2 = (media * (p1 + p2) - n1 * p1) / (p2 || 1);
+        results['nota_necessaria'] = parseFloat(n2.toFixed(2));
+      }
+      else if (raw.type === 'edu_leitura') {
+        const pags = parseFloat(valInputs['paginas'] || 0);
+        const pal_pag = parseFloat(valInputs['palavras_pag'] || 300);
+        const wpm = parseFloat(valInputs['velocidade'] || 200);
+        const minutos = (pags * pal_pag) / (wpm || 1);
+        results['tempo_min'] = parseFloat(minutos.toFixed(1));
+        results['tempo_horas'] = parseFloat((minutos / 60).toFixed(2));
       }
 
       return results;

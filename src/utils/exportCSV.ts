@@ -7,7 +7,7 @@ export const handleExportCSV = (payload: CalcStatePayload) => {
 
     const title = activeCalcDef ? activeCalcDef.name : 'Simulacao';
     
-    csvContent += `Só Calculadoras & Ferramentas;Relatorio Emitido em;${new Date().toLocaleDateString('pt-BR')}\n`;
+    csvContent += `Brasil Calculadoras & Ferramentas;Relatorio Emitido em;${new Date().toLocaleDateString('pt-BR')}\n`;
     csvContent += `Ferramenta Selecionada;${title};Status da Sessao;Ativo\n\n`;
 
     if (activeCalculator === 'juros-compostos' && compoundInterestResults) {

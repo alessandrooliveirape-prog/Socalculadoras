@@ -37,14 +37,14 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               <div className="h-8 w-8 rounded-lg bg-blue-500 text-white flex items-center justify-center font-bold">
                 S
               </div>
-              <h3 className="text-md font-display font-extrabold text-white">Só Calculadoras</h3>
+              <h3 className="text-md font-display font-extrabold text-white">Brasil Calculadoras</h3>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
               Plataforma profissional de ferramentas matemáticas, simulações trabalhistas, diagnósticos de saúde, logística e agronegócio do Brasil. Projetamos utilitários 100% gratuitos, rápidos e práticos para ajudar você a poupar tempo e tomar as melhores decisões no dia a dia.
             </p>
             <div className="flex items-center gap-1.5 mt-2 bg-slate-850 bg-slate-800 p-2.5 rounded-xl border border-slate-700/50 w-fit">
               <Mail className="w-3.5 h-3.5 text-blue-400" />
-              <span className="text-[10.5px] font-mono text-slate-300 select-all">contato@socalculadoras.com.br</span>
+              <span className="text-[10.5px] font-mono text-slate-300 select-all">contato@brasilcalculadoras.com.br</span>
             </div>
           </div>
 
@@ -104,7 +104,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
         {/* Outer bottom copyright credits */}
         <div className="max-w-7xl mx-auto px-4 md:px-6 border-t border-slate-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center select-none">
           <p className="text-[10.5px] text-slate-500 font-mono">
-            &copy; 2026 Só Calculadoras. Todos os direitos reservados. CNPJ 41.524.305/0001-90.
+            &copy; 2026 Brasil Calculadoras. Todos os direitos reservados. CNPJ 41.524.305/0001-90.
           </p>
           <div className="flex gap-4 text-[10.5px]">
             <span className="text-slate-500 font-mono">ID do Editor: pub-8160658026927094</span>
@@ -163,7 +163,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             </div>
             <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
               <span className="text-[10px] font-mono text-gray-400 block mb-2">Última atualização: 01 de Junho de 2026</span>
-              <p>Esta Política de Privacidade descreve como a <strong>Só Calculadoras</strong> coleta, processa e protege os dados dos utilizadores no site.</p>
+              <p>Esta Política de Privacidade descreve como a <strong>Brasil Calculadoras</strong> coleta, processa e protege os dados dos utilizadores no site.</p>
               
               <h4 className="text-xs font-bold text-slate-800">1. Coleta Automatizada e Cookies</h4>
               <p>O portal coleta de forma automatizada logs técnicos como endereços de IP, tipo de navegador, páginas de referência e tempo de permanência voluntária com o único intuito de aprimoramento da infraestrutura técnica e de segurança da informação.</p>
@@ -176,7 +176,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               <p>Nós respeitamos integralmente as diretrizes da Lei Geral de Proteção de Dados (LGPD) brasileira. Não vendemos, alugamos ou comercializamos dados cadastrais ou registros de navegação a empresas terceiras sob nenhuma circunstância.</p>
 
               <h4 className="text-xs font-bold text-slate-800">4. Contato do Encarregado de Dados</h4>
-              <p>Para dúvidas legais ou requisições de exclusão de históricos, escreva para o e-mail: <code>lgpd@socalculadoras.com.br</code></p>
+              <p>Para dúvidas legais ou requisições de exclusão de históricos, escreva para o e-mail: <code>lgpd@brasilcalculadoras.com.br</code></p>
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             </div>
             <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
               <span className="text-[10px] font-mono text-gray-400 block mb-2">Vigência: Junho de 2026</span>
-              <p>Ao navegar pelo portal da <strong>Só Calculadoras</strong>, você concorda expressamente com os seguintes regulamentos de utilização:</p>
+              <p>Ao navegar pelo portal da <strong>Brasil Calculadoras</strong>, você concorda expressamente com os seguintes regulamentos de utilização:</p>
               
               <h4 className="text-xs font-bold text-slate-800">1. Natureza do Serviço Informativo</h4>
               <p>As ferramentas computacionais são disponibilizadas inteiramente gratuitas, sob o regime de 'como estão'. Suas equações numéricas simulam relações financeiras, trabalhistas, nutricionais e matemáticas puras e não constituem garantias jurídicas de acerto formal.</p>
@@ -222,7 +222,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
               <div className="flex items-center gap-2">
                 <Info className="w-5 h-5 text-blue-600" />
-                <h3 className="text-sm font-bold text-slate-800">Sobre o Só Calculadoras</h3>
+                <h3 className="text-sm font-bold text-slate-800">Sobre o Brasil Calculadoras</h3>
               </div>
               <button 
                 onClick={() => setShowAbout(false)}
@@ -233,7 +233,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             </div>
             <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
               <h4 className="text-xs font-bold text-slate-850 text-slate-800">Nossa Missão</h4>
-              <p>Buscamos desmistificar a matemática financeira e burocracias laborais do cotidiano brasileiro. Muitas vezes ficamos perdidos em equações complexas de rescisões CLT, metas de calorias, juros de de financiamento ou cálculo para o agronegócio e logística. O Só Calculadoras consolida dezenas dessas necessidades em uma interface única, leve e veloz.</p>
+              <p>Buscamos desmistificar a matemática financeira e burocracias laborais do cotidiano brasileiro. Muitas vezes ficamos perdidos em equações complexas de rescisões CLT, metas de calorias, juros de de financiamento ou cálculo para o agronegócio e logística. O Brasil Calculadoras consolida dezenas dessas necessidades em uma interface única, leve e veloz.</p>
               
               <h4 className="text-xs font-bold text-slate-800">Gratuidade e Monetização</h4>
               <p>Manter servidores de alta performance, atualizações diárias de indexadores e segurança da informação custa caro. Por essa razão, nós veiculamos banners inteligentes do Google AdSense. A publicidade viabiliza que todo o acervo continue livre de assinaturas ou cadastros obrigatórios, respeitando sua privacidade e adblocks normais.</p>
