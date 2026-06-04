@@ -9,7 +9,7 @@ interface RescisaoCLTCalcProps {
 export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate }) => {
   const [salary, setSalary] = useState<number>(3500);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [reason, setReason] = useState<'demissao_sem_justa' | 'pedido_demissao'>('demissao_sem_justa');
+  const [reason, setReason] = useState<'demissao_sem_justa' | 'pedido_demissao' | 'acordo_mutuo' | 'justa_causa'>('demissao_sem_justa');
   const [daysWorked, setDaysWorked] = useState<number>(15);
   const [monthsWorked, setMonthsWorked] = useState<number>(18);
   const [hasVestedVacation, setHasVestedVacation] = useState<boolean>(false);
@@ -55,20 +55,38 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
       } else {
         noticeAmount = 0;
       }
+    } else if (reason === 'acordo_mutuo') {
+      if (noticePeriod === 'indenizado') {
+        // Aviso indenizado pago pela metade (50%)
+        const years = Math.floor(monthsWorked / 12);
+        const noticeDays = Math.min(30 + (years * 3), 90);
+        noticeAmount = parseFloat(((salaryDecimal * noticeDays) / 2).toFixed(2));
+      } else {
+        noticeAmount = 0;
+      }
+    } else if (reason === 'justa_causa') {
+      noticeAmount = 0;
     }
 
     // 3. 13º Salário proporcional
-    const fractionMonthsThirteenth = (monthsWorked % 12) === 0 && monthsWorked > 0 ? 12 : (monthsWorked % 12);
-    // Se trabalhou mais de 14 dias no último mês, conta como mês cheio para 13º e férias proporcional.
-    const tenthMonths = fractionMonthsThirteenth;
-    const proportionateThirteenth = parseFloat(((salary / 12) * tenthMonths).toFixed(2));
+    let proportionateThirteenth = 0;
+    if (reason !== 'justa_causa') {
+      const fractionMonthsThirteenth = (monthsWorked % 12) === 0 && monthsWorked > 0 ? 12 : (monthsWorked % 12);
+      // Se trabalhou mais de 14 dias no último mês, conta como mês cheio para 13º e férias proporcional.
+      const tenthMonths = fractionMonthsThirteenth;
+      proportionateThirteenth = parseFloat(((salary / 12) * tenthMonths).toFixed(2));
+    }
 
     // 4. Férias Proporcionais
     // Férias são baseadas no período aquisitivo de 12 meses. Cada ano de trabalho gera férias. 
     // Os meses restantes (proporcionais) geram férias proporcionais.
-    const remainingMonthsVacation = monthsWorked % 12;
-    const proportionateVacation = parseFloat(((salary / 12) * remainingMonthsVacation).toFixed(2));
-    const proportionateVacationOneThird = parseFloat((proportionateVacation / 3).toFixed(2));
+    let proportionateVacation = 0;
+    let proportionateVacationOneThird = 0;
+    if (reason !== 'justa_causa') {
+      const remainingMonthsVacation = monthsWorked % 12;
+      proportionateVacation = parseFloat(((salary / 12) * remainingMonthsVacation).toFixed(2));
+      proportionateVacationOneThird = parseFloat((proportionateVacation / 3).toFixed(2));
+    }
 
     // 5. Férias Vencidas
     const vestedVacation = hasVestedVacation ? parseFloat(salary.toFixed(2)) : 0;
@@ -80,6 +98,8 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
     let fgtsFine = 0;
     if (reason === 'demissao_sem_justa') {
       fgtsFine = parseFloat((fgtsBalance * 0.40).toFixed(2));
+    } else if (reason === 'acordo_mutuo') {
+      fgtsFine = parseFloat((fgtsBalance * 0.20).toFixed(2));
     }
 
     // 7. Descontos aproximados sobre saldo de salário e 13º (INSS e IRRF)
@@ -114,7 +134,13 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
     ).toFixed(2));
 
     const netAmount = parseFloat((totalEarnings - totalDeductions).toFixed(2));
-    const fgtsTotalToWithdraw = reason === 'demissao_sem_justa' ? parseFloat((fgtsBalance + fgtsFine).toFixed(2)) : 0;
+    
+    let fgtsTotalToWithdraw = 0;
+    if (reason === 'demissao_sem_justa') {
+      fgtsTotalToWithdraw = parseFloat((fgtsBalance + fgtsFine).toFixed(2));
+    } else if (reason === 'acordo_mutuo') {
+      fgtsTotalToWithdraw = parseFloat(((fgtsBalance * 0.80) + fgtsFine).toFixed(2));
+    }
 
     const calcResults = {
       salaryBalance,
@@ -137,7 +163,9 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
       ...calcResults,
       monthsOfWork: monthsWorked,
       salary: salary,
-      reasonLabel: reason === 'demissao_sem_justa' ? 'Demissão sem Justa Causa' : 'Pedido de Demissão'
+      reasonLabel: reason === 'demissao_sem_justa' ? 'Demissão sem Justa Causa' : 
+                   reason === 'pedido_demissao' ? 'Pedido de Demissão' : 
+                   reason === 'acordo_mutuo' ? 'Acordo Mútuo' : 'Demissão por Justa Causa'
     });
   };
 
@@ -181,7 +209,7 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
                     : 'bg-gray-50 border-gray-200 text-slate-600 hover:bg-gray-100'
                 }`}
               >
-                Demissão sem Justa Causa
+                Sem Justa Causa
               </button>
               <button
                 onClick={() => setReason('pedido_demissao')}
@@ -192,6 +220,26 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
                 }`}
               >
                 Pedido de Demissão
+              </button>
+              <button
+                onClick={() => setReason('acordo_mutuo')}
+                className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+                  reason === 'acordo_mutuo'
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
+                    : 'bg-gray-50 border-gray-200 text-slate-600 hover:bg-gray-100'
+                }`}
+              >
+                Acordo Mútuo
+              </button>
+              <button
+                onClick={() => setReason('justa_causa')}
+                className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+                  reason === 'justa_causa'
+                    ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
+                    : 'bg-gray-50 border-gray-200 text-slate-600 hover:bg-gray-100'
+                }`}
+              >
+                Justa Causa
               </button>
             </div>
           </div>
@@ -349,18 +397,18 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
               </>
             )}
 
-            {reason === 'demissao_sem_justa' && (
+            {(reason === 'demissao_sem_justa' || reason === 'acordo_mutuo') && (
               <div className="mt-2 pt-2 border-t border-dashed border-slate-100 flex flex-col gap-2 bg-blue-50/50 p-3 rounded-lg">
                 <div className="flex justify-between text-xs text-blue-800 font-bold">
                   <span>FGTS Acumulado Estimado</span>
                   <span>R$ {results.fgtsBalance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex justify-between text-xs text-blue-850 text-blue-900 font-bold">
-                  <span>Multa de 40% do FGTS</span>
+                  <span>Multa de {reason === 'acordo_mutuo' ? '20%' : '40%'} do FGTS</span>
                   <span>R$ {results.fgtsFine.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex justify-between text-sm text-blue-950 font-extrabold border-t border-blue-200/50 pt-2">
-                  <span>Total Saque de FGTS</span>
+                  <span>Total Saque de FGTS {reason === 'acordo_mutuo' && '(80% + Multa)'}</span>
                   <span>R$ {results.fgtsTotalToWithdraw.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                 </div>
               </div>

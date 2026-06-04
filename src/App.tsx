@@ -239,7 +239,7 @@ export default function App() {
       document.head.appendChild(canonicalLink);
     }
     const isHome = window.location.pathname === '/' || window.location.pathname === '';
-    canonicalLink.setAttribute('href', isHome ? 'https://www.brasilcalculadoras.com.br/' : \`https://www.brasilcalculadoras.com.br/\${activeCalculator}\`);
+    canonicalLink.setAttribute('href', isHome ? 'https://www.brasilcalculadoras.com.br/' : `https://www.brasilcalculadoras.com.br/${activeCalculator}`);
 
     // 5. Force increment of ad refreshing trigger so ALL ads on page reload
     setAdRefreshTrigger(prev => prev + 1);
