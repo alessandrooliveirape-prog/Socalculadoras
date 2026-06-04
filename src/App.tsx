@@ -231,7 +231,15 @@ export default function App() {
       console.warn('JSON-LD schema generation failed:', e);
     }
 
-    // 4. Removed hash sync, wouter handles path sync automatically
+    // 4. Dynamic Canonical URL to prevent duplicate content indexing
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    const isHome = window.location.pathname === '/' || window.location.pathname === '';
+    canonicalLink.setAttribute('href', isHome ? 'https://www.brasilcalculadoras.com.br/' : \`https://www.brasilcalculadoras.com.br/\${activeCalculator}\`);
 
     // 5. Force increment of ad refreshing trigger so ALL ads on page reload
     setAdRefreshTrigger(prev => prev + 1);
