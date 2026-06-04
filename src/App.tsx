@@ -23,6 +23,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLocation } from 'wouter';
 
 // Custom imports
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
@@ -48,6 +49,7 @@ import { handleExportPDF } from './utils/exportPDF';
 
 
 export default function App() {
+  const [location, setLocation] = useLocation();
   const [activeCalculator, setActiveCalculator] = useState<CalculatorId>('juros-compostos');
   const [activeCategory, setActiveCategory] = useState<CalculatorCategory>('todos');
 
@@ -131,29 +133,33 @@ export default function App() {
     }
   }, []);
 
-  // Hash-based sub-page router for search engines / direct links
+  // Route-based sub-page router for search engines / direct links
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash) {
-        const matched = CALCULATORS_CATALOG.find(c => c.id === hash);
-        if (matched) {
-          setActiveCalculator(prev => {
-            if (prev !== matched.id) {
-              return matched.id as CalculatorId;
-            }
-            return prev;
-          });
-        }
+    // Parse legacy hash on initial landing to redirect to proper route
+    if (window.location.hash) {
+      const hashRoute = window.location.hash.replace('#', '');
+      if (hashRoute && CALCULATORS_CATALOG.find(c => c.id === hashRoute)) {
+        window.location.hash = '';
+        setLocation('/' + hashRoute, { replace: true });
+        return;
       }
-    };
+    }
 
-    // Parse hash on initial landing
-    handleHashChange();
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+    const path = location.replace(/^\//, '');
+    if (path) {
+      const matched = CALCULATORS_CATALOG.find(c => c.id === path);
+      if (matched) {
+        setActiveCalculator(prev => {
+          if (prev !== matched.id) {
+            return matched.id as CalculatorId;
+          }
+          return prev;
+        });
+      }
+    } else {
+      setActiveCalculator('juros-compostos');
+    }
+  }, [location, setLocation]);
 
   // Dynamic Page Title & SEO Meta Updates on calculator change
   useEffect(() => {
@@ -225,10 +231,7 @@ export default function App() {
       console.warn('JSON-LD schema generation failed:', e);
     }
 
-    // 4. Keep browser address URL synced to allow bookmarking / robot indexing via sitemaps
-    if (window.location.hash !== `#${activeCalculator}`) {
-      window.location.hash = activeCalculator;
-    }
+    // 4. Removed hash sync, wouter handles path sync automatically
 
     // 5. Force increment of ad refreshing trigger so ALL ads on page reload
     setAdRefreshTrigger(prev => prev + 1);
@@ -238,7 +241,7 @@ export default function App() {
       try {
         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({
           'event': 'virtualPageView',
-          'pagePath': `/#${activeCalculator}`,
+          'pagePath': `/${activeCalculator}`,
           'pageTitle': activeCalc.name
         });
       } catch (e) {
@@ -289,7 +292,7 @@ export default function App() {
     // Increment Ad stats (loading ads is a visual monetisation feature)
     setAdImpressions(prev => prev + 2);
 
-    setActiveCalculator(id);
+    setLocation('/' + id);
   };
 
   // Simulated click on ads
@@ -497,7 +500,7 @@ export default function App() {
     if (!activeCalc) return '';
     
     let text = `*${activeCalc.name}* - Brasil Calculadoras\n`;
-    text += `🔗 ${window.location.origin}/#${activeCalculator}\n\n`;
+    text += `🔗 ${window.location.origin}/${activeCalculator}\n\n`;
     text += `*Resultados Simulados:*\n`;
     
     if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
@@ -547,7 +550,7 @@ export default function App() {
       text += `• Cálculo realizado com sucesso.\n`;
     }
     
-    text += `\nCalcule o seu gratuitamente em: ${window.location.origin}/#${activeCalculator}`;
+    text += `\nCalcule o seu gratuitamente em: ${window.location.origin}/${activeCalculator}`;
     return text;
   };
 
