@@ -777,7 +777,7 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Side Drawer menu - Categories selector list */}
-          <aside className={`lg:col-span-3 flex-col gap-5 ${menuOpen ? 'flex fixed inset-y-0 left-0 bg-white w-72 p-6 z-50 border-r shadow-2xl' : 'hidden lg:flex'}`}>
+          <aside className={`lg:col-span-3 flex-col gap-5 ${menuOpen ? 'flex fixed inset-y-0 left-0 bg-white w-72 p-6 z-50 border-r shadow-2xl overflow-y-auto' : 'hidden lg:flex'}`}>
             
             {/* Draw heading for mobile */}
             <div className="flex lg:hidden items-center justify-between border-b pb-3 mb-1">
