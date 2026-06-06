@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocation } from 'wouter';
+import { Analytics } from '@vercel/analytics/react';
 
 // Custom imports
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
@@ -1609,6 +1610,7 @@ export default function App() {
         onCalculatorClick={selectCalculator} 
         categories={CATEGORY_MAP} 
       />
+      <Analytics />
     </div>
   );
 }
