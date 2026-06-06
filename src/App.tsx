@@ -46,12 +46,72 @@ import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
 import { handleExportPDF } from './utils/exportPDF';
+import { 
+  getSeoContentForCalculator, 
+  getCategoryHubContent, 
+  CATEGORY_SLUG_MAP, 
+  CATEGORY_KEY_TO_SLUG, 
+  CATEGORY_MAP_RAW 
+} from './utils/seoContentGenerator';
+import { logSeoInteraction } from './utils/seoMonitor';
 
+
+const Breadcrumbs: React.FC<{ catKey?: string; calcName?: string; catSlug?: string }> = ({ catKey, calcName, catSlug }) => {
+  if (!catKey) return null;
+  const catLabel = CATEGORY_MAP_RAW[catKey] || catKey;
+  return (
+    <nav className="flex items-center gap-1.5 text-[11px] font-sans text-slate-400 font-semibold mb-4 bg-white/70 border border-slate-200/50 p-2.5 px-4 rounded-xl shadow-xs w-fit select-none">
+      <span className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => window.location.assign('/')}>Início</span>
+      <span className="text-slate-300">/</span>
+      {calcName ? (
+        <>
+          <span className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => window.location.assign('/' + catSlug)}>{catLabel}</span>
+          <span className="text-slate-300">/</span>
+          <span className="text-slate-700">{calcName}</span>
+        </>
+      ) : (
+        <span className="text-slate-700">{catLabel}</span>
+      )}
+    </nav>
+  );
+};
+
+const getComplementaryCalculators = (id: string, category: string) => {
+  const map: Record<string, string[]> = {
+    'calculo-fgts-acumulado': ['calculadora-de-rescisao-clt', 'calculadora-de-ferias-clt', 'calculadora-de-decimo-terceiro'],
+    'juros-compostos': ['rendimento-poupanca', 'conversor-inflacao-ipca', 'roi-investimento-comum'],
+    'clt-pj': ['calculadora-de-rescisao-clt', 'simulador-inss-salario', 'calculo-fgts-acumulado'],
+    'calculadora-de-rescisao-clt': ['calculadora-de-decimo-terceiro', 'calculadora-de-ferias-clt', 'calculo-fgts-acumulado'],
+    'calculadora-de-decimo-terceiro': ['calculadora-de-ferias-clt', 'calculadora-de-horas-extras', 'calculadora-de-rescisao-clt'],
+    'calculadora-de-ferias-clt': ['calculadora-de-decimo-terceiro', 'calculadora-de-horas-extras', 'calculadora-de-rescisao-clt'],
+    'simulador-de-aposentadoria-inss': ['simulador-inss-salario', 'simulador-irrf-salario', 'juros-compostos']
+  };
+
+  const matchedIds = map[id] || [];
+  if (matchedIds.length > 0) {
+    return CALCULATORS_CATALOG.filter(c => matchedIds.includes(c.id));
+  }
+
+  return CALCULATORS_CATALOG.filter(c => c.id !== id && c.category !== category).slice(0, 3);
+};
+
+const POPULAR_GLOBAL_IDS = [
+  'calculo-fgts-acumulado',
+  'juros-compostos',
+  'clt-pj',
+  'calculadora-de-rescisao-clt',
+  'calculadora-de-decimo-terceiro',
+  'simulador-de-aposentadoria-inss'
+];
+const getPopularCalculators = (currentId: string) => {
+  return CALCULATORS_CATALOG.filter(c => c.id !== currentId && POPULAR_GLOBAL_IDS.includes(c.id)).slice(0, 3);
+};
 
 export default function App() {
   const [location, setLocation] = useLocation();
   const [activeCalculator, setActiveCalculator] = useState<CalculatorId>('juros-compostos');
   const [activeCategory, setActiveCategory] = useState<CalculatorCategory>('todos');
+  const [activeCategoryHub, setActiveCategoryHub] = useState<string | null>(null);
 
   const categoryCounts = React.useMemo(() => {
     const counts: Record<string, number> = {
@@ -147,68 +207,59 @@ export default function App() {
 
     const path = location.replace(/^\//, '');
     if (path) {
-      const matched = CALCULATORS_CATALOG.find(c => c.id === path);
-      if (matched) {
-        setActiveCalculator(prev => {
-          if (prev !== matched.id) {
-            return matched.id as CalculatorId;
-          }
-          return prev;
-        });
+      if (CATEGORY_SLUG_MAP[path]) {
+        const cat = CATEGORY_SLUG_MAP[path];
+        setActiveCategoryHub(cat);
+        setActiveCategory(cat);
+      } else {
+        const matched = CALCULATORS_CATALOG.find(c => c.id === path);
+        if (matched) {
+          setActiveCategoryHub(null);
+          setActiveCalculator(prev => {
+            if (prev !== matched.id) {
+              return matched.id as CalculatorId;
+            }
+            return prev;
+          });
+          setActiveCategory(matched.category);
+        }
       }
     } else {
+      setActiveCategoryHub(null);
       setActiveCalculator('juros-compostos');
+      setActiveCategory('todos');
     }
   }, [location, setLocation]);
 
-  // Dynamic Page Title & SEO Meta Updates on calculator change
-  useEffect(() => {
-    const activeCalc = CALCULATORS_CATALOG.find(c => c.id === activeCalculator);
-    if (!activeCalc) return;
-
-    // 1. Dynamic document title so search engine robots index of actual tools uniquely
-    document.title = `${activeCalc.name} | Brasil Calculadoras`;
-
-    // 2. Dynamic metadata description update for contextual crawl matching
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      document.head.appendChild(metaDesc);
+  const updateMetaTag = (attributeType: 'name' | 'property', attributeValue: string, contentValue: string) => {
+    let tag = document.querySelector(`meta[${attributeType}="${attributeValue}"]`);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute(attributeType, attributeValue);
+      document.head.appendChild(tag);
     }
-    metaDesc.setAttribute('content', activeCalc.description);
+    tag.setAttribute('content', contentValue);
+  };
 
-    // 3. Dynamic JSON-LD structured schema markup injection for googlebot crawl matching
+  const injectCalculatorSchema = (calc: any, seoData: any, canonicalUrl: string) => {
     try {
-      let schemaScript = document.getElementById('jsonld-seo') as HTMLScriptElement;
-      if (!schemaScript) {
-        schemaScript = document.createElement('script');
-        schemaScript.id = 'jsonld-seo';
-        schemaScript.type = 'application/ld+json';
-        document.head.appendChild(schemaScript);
+      let script = document.getElementById('jsonld-seo') as HTMLScriptElement;
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'jsonld-seo';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
       }
 
-      const normalizedFaq = activeCalc.faq?.map(f => ({
-        question: f.question || (f as any).q || '',
-        answer: f.answer || (f as any).a || ''
-      })).filter(f => f.question && f.answer) || [];
-
-      const faqItems = normalizedFaq.map(f => ({
-        "@type": "Question",
-        "name": f.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": f.answer
-        }
-      }));
-
-      const softwareApplicationSchema = {
+      const softwareSchema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": activeCalc.name,
+        "@id": `${canonicalUrl}#software`,
+        "name": calc.name,
         "operatingSystem": "All",
         "applicationCategory": "EducationalApplication",
-        "description": activeCalc.description,
+        "description": seoData.description,
+        "url": canonicalUrl,
         "offers": {
           "@type": "Offer",
           "price": "0.00",
@@ -216,47 +267,195 @@ export default function App() {
         }
       };
 
-      const faqPageSchema = faqItems.length > 0 ? {
+      const faqItems = seoData.faq.map((item: any) => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }));
+      const faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faq`,
         "mainEntity": faqItems
-      } : null;
+      };
 
-      const combinedSchema = faqPageSchema 
-        ? [softwareApplicationSchema, faqPageSchema]
-        : [softwareApplicationSchema];
+      const catLabel = CATEGORY_MAP_RAW[calc.category] || calc.category;
+      const catSlug = CATEGORY_KEY_TO_SLUG[calc.category] || '';
+      const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://brasilcalculadoras.com.br/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": catLabel,
+            "item": `https://brasilcalculadoras.com.br/${catSlug}`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": calc.name,
+            "item": canonicalUrl
+          }
+        ]
+      };
 
-      schemaScript.textContent = JSON.stringify(combinedSchema);
+      script.textContent = JSON.stringify([softwareSchema, faqSchema, breadcrumbSchema]);
     } catch (e) {
-      console.warn('JSON-LD schema generation failed:', e);
+      console.warn('Failed to inject calculator schema:', e);
+    }
+  };
+
+  const injectCategorySchema = (catKey: string, hubData: any, canonicalUrl: string) => {
+    try {
+      let script = document.getElementById('jsonld-seo') as HTMLScriptElement;
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'jsonld-seo';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+
+      const collectionSchema = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": `${canonicalUrl}#collection`,
+        "name": hubData.title,
+        "description": hubData.description,
+        "url": canonicalUrl
+      };
+
+      const faqItems = hubData.faq.map((item: any) => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }));
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faq`,
+        "mainEntity": faqItems
+      };
+
+      const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://brasilcalculadoras.com.br/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": CATEGORY_MAP_RAW[catKey] || catKey,
+            "item": canonicalUrl
+          }
+        ]
+      };
+
+      script.textContent = JSON.stringify([collectionSchema, faqSchema, breadcrumbSchema]);
+    } catch (e) {
+      console.warn('Failed to inject category schema:', e);
+    }
+  };
+
+  // Dynamic Page Title & SEO Meta Updates on calculator or category change
+  useEffect(() => {
+    if (activeCategoryHub) {
+      const hubData = getCategoryHubContent(activeCategoryHub);
+      const canonicalUrl = `https://www.brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
+      
+      document.title = hubData.title;
+
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', hubData.description);
+
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonicalUrl);
+
+      updateMetaTag('property', 'og:title', hubData.title);
+      updateMetaTag('property', 'og:description', hubData.description);
+      updateMetaTag('property', 'og:url', canonicalUrl);
+      updateMetaTag('property', 'og:type', 'website');
+
+      updateMetaTag('name', 'twitter:card', 'summary_large_image');
+      updateMetaTag('name', 'twitter:title', hubData.title);
+      updateMetaTag('name', 'twitter:description', hubData.description);
+
+      injectCategorySchema(activeCategoryHub, hubData, canonicalUrl);
+      logSeoInteraction('/' + CATEGORY_KEY_TO_SLUG[activeCategoryHub], 'view');
+
+      setAdRefreshTrigger(prev => prev + 1);
+      return;
     }
 
-    // 4. Dynamic Canonical URL to prevent duplicate content indexing
+    const activeCalc = CALCULATORS_CATALOG.find(c => c.id === activeCalculator);
+    if (!activeCalc) return;
+
+    const seoData = getSeoContentForCalculator(activeCalc);
+    const canonicalUrl = window.location.pathname === '/' || window.location.pathname === ''
+      ? 'https://www.brasilcalculadoras.com.br/'
+      : `https://www.brasilcalculadoras.com.br/${activeCalculator}`;
+
+    document.title = seoData.title;
+
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', seoData.description);
+
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    const isHome = window.location.pathname === '/' || window.location.pathname === '';
-    canonicalLink.setAttribute('href', isHome ? 'https://www.brasilcalculadoras.com.br/' : `https://www.brasilcalculadoras.com.br/${activeCalculator}`);
+    canonicalLink.setAttribute('href', canonicalUrl);
 
-    // 5. Force increment of ad refreshing trigger so ALL ads on page reload
+    updateMetaTag('property', 'og:title', seoData.title);
+    updateMetaTag('property', 'og:description', seoData.description);
+    updateMetaTag('property', 'og:url', canonicalUrl);
+    updateMetaTag('property', 'og:type', 'website');
+
+    updateMetaTag('name', 'twitter:card', 'summary_large_image');
+    updateMetaTag('name', 'twitter:title', seoData.title);
+    updateMetaTag('name', 'twitter:description', seoData.description);
+
+    injectCalculatorSchema(activeCalc, seoData, canonicalUrl);
+    logSeoInteraction('/' + activeCalculator, 'view');
+
     setAdRefreshTrigger(prev => prev + 1);
-
-    // 6. Simulate web vitals and virtual hit for AdSense spiders
-    if (typeof (window as any).adsbygoogle !== 'undefined') {
-      try {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({
-          'event': 'virtualPageView',
-          'pagePath': `/${activeCalculator}`,
-          'pageTitle': activeCalc.name
-        });
-      } catch (e) {
-        // Safe bypass in dev sandbox
-      }
-    }
-  }, [activeCalculator]);
+  }, [activeCalculator, activeCategoryHub]);
 
   const triggerToast = (msg: string) => {
     setToastMsg(msg);
@@ -794,15 +993,20 @@ export default function App() {
             <div className="flex flex-col gap-1 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2 select-none">Filtrar Segmentos</span>
               <button
-                onClick={() => setActiveCategory('todos')}
+                onClick={() => {
+                  setActiveCategory('todos');
+                  setActiveCategoryHub(null);
+                  setLocation('/');
+                  setMenuOpen(false);
+                }}
                 className={`w-full text-left py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-between transition-all cursor-pointer ${
-                  activeCategory === 'todos' 
+                  activeCategory === 'todos' && !activeCategoryHub
                     ? 'bg-blue-50 text-blue-700 font-medium shadow-xs' 
                     : 'text-slate-600 hover:bg-slate-50'
                 }`}
               >
                 <span>🚀 Todas as Ferramentas</span>
-                <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${activeCategory === 'todos' ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>{categoryCounts.todos}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${activeCategory === 'todos' && !activeCategoryHub ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>{categoryCounts.todos}</span>
               </button>
 
               {Object.entries(CATEGORY_MAP).map(([key, label]) => {
@@ -810,7 +1014,15 @@ export default function App() {
                 return (
                   <button
                     key={key}
-                    onClick={() => setActiveCategory(key)}
+                    onClick={() => {
+                      const slug = CATEGORY_KEY_TO_SLUG[key];
+                      if (slug) {
+                        setLocation('/' + slug);
+                      } else {
+                        setActiveCategory(key);
+                      }
+                      setMenuOpen(false);
+                    }}
                     className={`w-full text-left py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-between transition-all cursor-pointer ${
                       isSelected 
                         ? 'bg-blue-50 text-blue-700 font-medium shadow-xs' 
@@ -868,175 +1080,85 @@ export default function App() {
           </aside>
 
           {/* Active Calculator Workstation Space */}
+          {/* Active Calculator Workstation Space */}
           <section className="lg:col-span-9 flex flex-col gap-6">
-            
-            {/* Header Title with instant Export Actions */}
-            <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sticky top-18 z-25">
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[9px] uppercase font-bold text-slate-405 text-slate-400 font-mono tracking-wider">
-                    ESTADO ATIVO DA CENTRAL
-                  </span>
-                  <span className="text-[8px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded select-none">ATIVO</span>
-                </div>
-                <h2 className="text-lg font-display font-bold text-slate-800 mt-1">
-                  {CALCULATORS_CATALOG.find(c => c.id === activeCalculator)?.name}
-                </h2>
-              </div>
+            {activeCategoryHub ? (
+              // Category Hub View
+              <div className="flex flex-col gap-6 animate-fadeIn">
+                {/* Breadcrumbs for Category Hub */}
+                <Breadcrumbs catKey={activeCategoryHub} />
 
-              {/* Action operations export links */}
-              <div className="flex flex-wrap gap-2 pt-1 sm:pt-0">
-                {/* Save calculation */}
-                <button
-                  onClick={handleSaveToHistory}
-                  className="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
-                  title="Salva na lista local para reuso"
-                >
-                  <History className="w-3.5 h-3.5" />
-                  <span>Salvar Operação</span>
-                </button>
-
-                {/* Export excel link */}
-                <button
-                  onClick={exportToCSV}
-                  className="px-3.5 py-2 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100/80 border border-blue-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs shrink-0"
-                  title="Gera um arquivo de planilha .csv pronto para Excel"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Planilha Excel</span>
-                </button>
-
-                {/* Export pdf link */}
-                <button
-                  onClick={exportToPDF}
-                  className="px-3.5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm shrink-0"
-                  title="Imprime um documento A4 certificado em PDF"
-                >
-                  <FileDown className="w-3.5 h-3.5" />
-                  <span>Gerar PDF</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Primary content component view portal */}
-            <div className="transition-all duration-300">
-              {activeCalculator === 'juros-compostos' && (
-                <CompoundInterestCalc onCalculate={handleCompoundInterestCalc} />
-              )}
-              {activeCalculator === 'clt-pj' && (
-                <CltVsPjCalc onCalculate={handleCltVsPjCalc} />
-              )}
-              {activeCalculator === 'margem-lucro' && (
-                <ProfitMarginCalc onCalculate={handleProfitMarginCalc} />
-              )}
-              {activeCalculator === 'imc' && (
-                <IbcCaloricoTracker onCalculate={handleIbcCaloricoTracker} />
-              )}
-              {activeCalculator === 'registro-horas' && (
-                <TimeSheetHoursCalc onCalculate={handleTimeSheetHoursCalc} />
-              )}
-              {activeCalculator === 'regra-tres' && (
-                <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
-              )}
-              {activeCalculator === 'contador-texto' && (
-                <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
-              )}
-              {activeCalculator === 'calculadora-de-rescisao-clt' && (
-                <RescisaoCLTCalc onCalculate={handleRescisaoCLTCalc} />
-              )}
-              {activeCalculator === 'calculadora-de-decimo-terceiro' && (
-                <DecimoTerceiroCalc onCalculate={handleDecimoTerceiroCalc} />
-              )}
-              {activeCalculator === 'calculadora-de-ferias-clt' && (
-                <FeriasCLTCalc onCalculate={handleFeriasCLTCalc} />
-              )}
-              {activeCalculator === 'calculadora-de-horas-extras' && (
-                <HorasExtrasCalc onCalculate={handleHorasExtrasCalc} />
-              )}
-              {activeCalculator === 'simulador-de-aposentadoria-inss' && (
-                <AposentadoriaINSSCalc onCalculate={handleAposentadoriaINSSCalc} />
-              )}
-              {CALCULATORS_CATALOG.find(c => c.id === activeCalculator)?.isDynamic && (
-                <GenericDynamicCalc 
-                  calculator={CALCULATORS_CATALOG.find(c => c.id === activeCalculator)!}
-                  onCalculate={handleDynamicCalc}
-                />
-              )}
-            </div>
-
-            {/* SEO and Sharing Retention Enhancers */}
-            <div className="flex flex-col gap-6 mt-6">
-              
-              {/* Box 1: Sharing & Viral referrals (If results are generated) */}
-              {hasActiveResult && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white border border-blue-150 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-                      <Share2 className="w-5 h-5 animate-pulse" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-bold text-slate-800">Gostou do Resultado?</h3>
-                      <p className="text-[11px] text-slate-500 mt-0.5 font-sans leading-tight">
-                        Copie os resultados formatados no padrão de relatório ou envie diretamente no WhatsApp de clientes e parceiros!
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0 justify-end">
-                    <button
-                      onClick={handleCopyResults}
-                      className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
-                      title="Copiar texto formatado pronto"
-                    >
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copiar Resultados</span>
-                    </button>
-                    <button
-                      onClick={handleShareWhatsApp}
-                      className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm"
-                      title="Enviar pelo WhatsApp corporativo ou pessoal"
-                    >
-                      <span className="text-sm font-bold leading-none">💬</span>
-                      <span>Enviar no WhatsApp</span>
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Box 2: SEO Exhaustive Technical Guide & Accordion FAQ */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-5">
-                <div className="border-b border-slate-100 pb-3">
-                  <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
-                    Guia de Uso & Informações Técnicas
-                  </span>
-                  <p className="text-[11.5px] text-slate-600 mt-2.5 leading-relaxed font-normal">
-                    {getSeoText()}
-                  </p>
-                </div>
-
-                {/* FAQ Accordion for static calculators (avoids duplicate render in dynamic layout) */}
-                {!activeCalc?.isDynamic && activeFaq.length > 0 && (
-                  <div className="flex flex-col gap-3">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider select-none">
-                      Perguntas Frequentes do Canal (F.A.Q.)
+                {/* Hub Header Card */}
+                <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 -z-10 blur-xl opacity-50" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">
+                      {activeCategoryHub === 'financas' ? '📊' : activeCategoryHub === 'saude' ? '🍎' : activeCategoryHub === 'profissoes' ? '⚖️' : activeCategoryHub === 'matematica' ? '🧮' : '⚙️'}
                     </span>
-                    <div className="flex flex-col gap-2">
-                      {activeFaq.map((q, idx) => {
-                        const isOpen = activeAppFaqIdx === idx;
+                    <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                      Categoria Principal
+                    </span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-display font-black text-slate-800 tracking-tight">
+                    {getCategoryHubContent(activeCategoryHub).title}
+                  </h2>
+                  <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
+                    {getCategoryHubContent(activeCategoryHub).introduction}
+                  </p>
+                  <div className="border-t border-slate-100 pt-4 mt-2">
+                    <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Por que planejar nesta categoria?</h3>
+                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                      {getCategoryHubContent(activeCategoryHub).importance}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tools Grid */}
+                <div className="flex flex-col gap-4">
+                  <h3 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 px-1">
+                    <span className="h-5 w-1 bg-blue-600 rounded-full" />
+                    Simuladores de {CATEGORY_MAP_RAW[activeCategoryHub] || activeCategoryHub}
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {CALCULATORS_CATALOG.filter(c => c.category === activeCategoryHub).map(c => (
+                      <div
+                        key={c.id}
+                        onClick={() => selectCalculator(c.id)}
+                        className="group bg-white border border-slate-200 hover:border-blue-200 hover:bg-blue-50/10 p-5 rounded-2xl cursor-pointer transition-all hover:shadow-md flex flex-col justify-between min-h-[140px]"
+                      >
+                        <div>
+                          <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">{c.name}</h4>
+                          <p className="text-[10px] text-slate-500 mt-2 line-clamp-3 leading-relaxed font-normal">{c.description}</p>
+                        </div>
+                        <span className="text-[9px] font-mono font-bold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-4">
+                          Abrir Calculadora <ExternalLink className="w-2.5 h-2.5" />
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Category FAQs */}
+                {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (
+                  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                    <h3 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 border-b border-slate-100 pb-3">
+                      <HelpCircle className="w-4.5 h-4.5 text-blue-500" />
+                      Perguntas Frequentes da Categoria
+                    </h3>
+                    <div className="flex flex-col gap-3">
+                      {getCategoryHubContent(activeCategoryHub).faq.map((q, idx) => {
+                        const faqKey = `cat-${activeCategoryHub}-faq-${idx}`;
+                        const isOpen = activeAppFaqIdx === idx + 100;
                         return (
-                          <div 
-                            key={idx} 
+                          <div
+                            key={faqKey}
                             className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3 transition-all"
                           >
                             <button
-                              onClick={() => setActiveAppFaqIdx(isOpen ? null : idx)}
+                              onClick={() => setActiveAppFaqIdx(isOpen ? null : idx + 100)}
                               className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
                             >
-                              <span className="text-xs font-semibold text-slate-700">{q.question}</span>
+                              <span className="text-xs font-semibold text-slate-700">{q.q}</span>
                               <motion.div
                                 animate={{ rotate: isOpen ? 180 : 0 }}
                                 transition={{ duration: 0.15 }}
@@ -1055,7 +1177,7 @@ export default function App() {
                                   className="overflow-hidden"
                                 >
                                   <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
-                                    {q.answer}
+                                    {q.a}
                                   </p>
                                 </motion.div>
                               )}
@@ -1066,34 +1188,400 @@ export default function App() {
                     </div>
                   </div>
                 )}
-              </div>
 
-              {/* Box 3: Related Navigation to maintain organic traffic browsing flow */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                  <div className="h-6 w-1 bg-blue-600 rounded-full" />
-                  <h3 className="text-sm font-bold text-slate-800 font-display">Calculadoras Recomendadas</h3>
+                {/* Other Categories list navigation */}
+                <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                  <h3 className="text-sm font-bold text-slate-800 font-display">Navegar por Outros Segmentos</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(CATEGORY_MAP).filter(([key]) => key !== activeCategoryHub).map(([key, label]) => {
+                      const slug = CATEGORY_KEY_TO_SLUG[key];
+                      return (
+                        <button
+                          key={key}
+                          onClick={() => {
+                            if (slug) {
+                              setLocation('/' + slug);
+                            } else {
+                              setActiveCategoryHub(key);
+                            }
+                          }}
+                          className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {relatedCalculators.map(c => (
-                    <div 
-                      key={c.id} 
-                      onClick={() => selectCalculator(c.id as any)}
-                      className="group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
-                    >
-                      <div>
-                        <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">{c.name}</h4>
-                        <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
-                      </div>
-                      <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
-                        Calcular Agora <ExternalLink className="w-2.5 h-2.5" />
+              </div>
+            ) : (
+              // Normal Calculator view
+              <>
+                {/* Breadcrumbs at the top of content area */}
+                {activeCalc && (
+                  <Breadcrumbs
+                    catKey={activeCalc.category}
+                    calcName={activeCalc.name}
+                    catSlug={CATEGORY_KEY_TO_SLUG[activeCalc.category]}
+                  />
+                )}
+                
+                {/* Header Title with instant Export Actions */}
+                <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sticky top-18 z-25">
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[9px] uppercase font-bold text-slate-400 font-mono tracking-wider">
+                        ESTADO ATIVO DA CENTRAL
                       </span>
+                      <span className="text-[8px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded select-none">ATIVO</span>
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <h2 className="text-lg font-display font-bold text-slate-800 mt-1">
+                      {activeCalc?.name}
+                    </h2>
+                  </div>
 
-            </div>
+                  {/* Action operations export links */}
+                  <div className="flex flex-wrap gap-2 pt-1 sm:pt-0">
+                    <button
+                      onClick={handleSaveToHistory}
+                      className="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                      title="Salva na lista local para reuso"
+                    >
+                      <History className="w-3.5 h-3.5" />
+                      <span>Salvar Operação</span>
+                    </button>
+
+                    <button
+                      onClick={exportToCSV}
+                      className="px-3.5 py-2 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100/80 border border-blue-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs shrink-0"
+                      title="Gera um arquivo de planilha .csv pronto para Excel"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Planilha Excel</span>
+                    </button>
+
+                    <button
+                      onClick={exportToPDF}
+                      className="px-3.5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm shrink-0"
+                      title="Imprime um documento A4 certificado em PDF"
+                    >
+                      <FileDown className="w-3.5 h-3.5" />
+                      <span>Gerar PDF</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Primary content component view portal */}
+                <div className="transition-all duration-300">
+                  {activeCalculator === 'juros-compostos' && (
+                    <CompoundInterestCalc onCalculate={handleCompoundInterestCalc} />
+                  )}
+                  {activeCalculator === 'clt-pj' && (
+                    <CltVsPjCalc onCalculate={handleCltVsPjCalc} />
+                  )}
+                  {activeCalculator === 'margem-lucro' && (
+                    <ProfitMarginCalc onCalculate={handleProfitMarginCalc} />
+                  )}
+                  {activeCalculator === 'imc' && (
+                    <IbcCaloricoTracker onCalculate={handleIbcCaloricoTracker} />
+                  )}
+                  {activeCalculator === 'registro-horas' && (
+                    <TimeSheetHoursCalc onCalculate={handleTimeSheetHoursCalc} />
+                  )}
+                  {activeCalculator === 'regra-tres' && (
+                    <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
+                  )}
+                  {activeCalculator === 'contador-texto' && (
+                    <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
+                  )}
+                  {activeCalculator === 'calculadora-de-rescisao-clt' && (
+                    <RescisaoCLTCalc onCalculate={handleRescisaoCLTCalc} />
+                  )}
+                  {activeCalculator === 'calculadora-de-decimo-terceiro' && (
+                    <DecimoTerceiroCalc onCalculate={handleDecimoTerceiroCalc} />
+                  )}
+                  {activeCalculator === 'calculadora-de-ferias-clt' && (
+                    <FeriasCLTCalc onCalculate={handleFeriasCLTCalc} />
+                  )}
+                  {activeCalculator === 'calculadora-de-horas-extras' && (
+                    <HorasExtrasCalc onCalculate={handleHorasExtrasCalc} />
+                  )}
+                  {activeCalculator === 'simulador-de-aposentadoria-inss' && (
+                    <AposentadoriaINSSCalc onCalculate={handleAposentadoriaINSSCalc} />
+                  )}
+                  {activeCalc?.isDynamic && (
+                    <GenericDynamicCalc 
+                      calculator={activeCalc}
+                      onCalculate={handleDynamicCalc}
+                    />
+                  )}
+                </div>
+
+                {/* SEO and Sharing Retention Enhancers */}
+                <div className="flex flex-col gap-6 mt-6">
+                  
+                  {/* Box 1: Sharing & Viral referrals (If results are generated) */}
+                  {hasActiveResult && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white border border-blue-150 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+                          <Share2 className="w-5 h-5 animate-pulse" />
+                        </div>
+                        <div>
+                          <h3 className="text-xs font-bold text-slate-800">Gostou do Resultado?</h3>
+                          <p className="text-[11px] text-slate-500 mt-0.5 font-sans leading-tight">
+                            Copie os resultados formatados no padrão de relatório ou envie diretamente no WhatsApp de clientes e parceiros!
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0 justify-end">
+                        <button
+                          onClick={handleCopyResults}
+                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                          title="Copiar text formatado pronto"
+                        >
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Copiar Resultados</span>
+                        </button>
+                        <button
+                          onClick={handleShareWhatsApp}
+                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm"
+                          title="Enviar pelo WhatsApp corporativo ou pessoal"
+                        >
+                          <span className="text-sm font-bold leading-none">💬</span>
+                          <span>Enviar no WhatsApp</span>
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Box 2: SEO Exhaustive Technical Guide & Accordion FAQ */}
+                  {activeCalc && (
+                    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                      
+                      {/* Detailed semantic sections */}
+                      <div className="flex flex-col gap-5">
+                        <div>
+                          <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                            O que é e para que serve
+                          </span>
+                          <h3 className="text-xs font-bold text-slate-800 mt-2.5 mb-1.5">Entenda o Conceito</h3>
+                          <p className="text-[11.5px] text-slate-600 leading-relaxed font-normal">
+                            {getSeoContentForCalculator(activeCalc).whatIs}
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                          <div>
+                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
+                              Como Calcular na Prática
+                            </span>
+                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
+                              {getSeoContentForCalculator(activeCalc).howItWorks}
+                            </p>
+                          </div>
+                          <div>
+                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
+                              Exemplo de Aplicação
+                            </span>
+                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
+                              {getSeoContentForCalculator(activeCalc).practicalExample}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                          <div>
+                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
+                              Quando Utilizar esta Ferramenta
+                            </span>
+                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
+                              {getSeoContentForCalculator(activeCalc).whenToUse}
+                            </p>
+                          </div>
+                          <div>
+                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
+                              Dicas e Recomendações
+                            </span>
+                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
+                              {getSeoContentForCalculator(activeCalc).importantTips}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* EEAT Block: Fontes Oficiais e Data de Revisão */}
+                      {getSeoContentForCalculator(activeCalc).sources.length > 0 && (
+                        <div className="border-t border-slate-150 pt-4 mt-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-slate-50/50 p-4 rounded-xl border border-slate-200/50">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-bold text-slate-400 font-mono uppercase">Revisado Cientificamente por Fontes Governamentais</span>
+                          </div>
+                          <div className="flex flex-wrap gap-3">
+                            {getSeoContentForCalculator(activeCalc).sources.map((src, sIdx) => (
+                              <a
+                                key={sIdx}
+                                href={src.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] text-blue-600 hover:text-blue-800 font-bold inline-flex items-center gap-1 transition-colors hover:underline"
+                              >
+                                {src.name} <ExternalLink className="w-2.5 h-2.5" />
+                              </a>
+                            ))}
+                            <span className="text-[10px] text-slate-400 flex items-center gap-1 font-mono">
+                              ⏱️ Atualizado em: {getSeoContentForCalculator(activeCalc).lastUpdated}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* FAQ Accordion for calculators */}
+                      {getSeoContentForCalculator(activeCalc).faq.length > 0 && (
+                        <div className="flex flex-col gap-3 border-t border-slate-100 pt-5">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider select-none">
+                            Perguntas Frequentes do Canal (F.A.Q.)
+                          </span>
+                          <div className="flex flex-col gap-2">
+                            {getSeoContentForCalculator(activeCalc).faq.map((q, idx) => {
+                              const isOpen = activeAppFaqIdx === idx;
+                              return (
+                                <div 
+                                  key={idx} 
+                                  className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3 transition-all"
+                                >
+                                  <button
+                                    onClick={() => setActiveAppFaqIdx(isOpen ? null : idx)}
+                                    className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
+                                  >
+                                    <span className="text-xs font-semibold text-slate-700">{q.q}</span>
+                                    <motion.div
+                                      animate={{ rotate: isOpen ? 180 : 0 }}
+                                      transition={{ duration: 0.15 }}
+                                      className="text-blue-500 shrink-0 ml-2"
+                                    >
+                                      <ChevronDown className="w-4 h-4" />
+                                    </motion.div>
+                                  </button>
+                                  <AnimatePresence initial={false}>
+                                    {isOpen && (
+                                      <motion.div
+                                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                                        animate={{ height: "auto", opacity: 1, marginTop: 8 }}
+                                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                                        transition={{ duration: 0.15 }}
+                                        className="overflow-hidden"
+                                      >
+                                        <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
+                                          {q.a}
+                                        </p>
+                                      </motion.div>
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Box 3: Advanced Internal Linking grids (3 categories: Related, Complementary, Popular) */}
+                  {activeCalc && (
+                    <div className="flex flex-col gap-6">
+                      
+                      {/* Grid 1: Calculadoras da mesma Categoria */}
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+                          <div className="h-4 w-1 bg-blue-600 rounded-full" />
+                          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
+                            Calculadoras da mesma Categoria ({CATEGORY_MAP_RAW[activeCalc.category] || activeCalc.category})
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                          {relatedCalculators.map(c => (
+                            <div 
+                              key={c.id} 
+                              onClick={() => selectCalculator(c.id as any)}
+                              className="group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                            >
+                              <div>
+                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">{c.name}</h4>
+                                <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                              </div>
+                              <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                Calcular Agora <ExternalLink className="w-2.5 h-2.5" />
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Grid 2: Você também pode precisar (Ferramentas Complementares) */}
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+                          <div className="h-4 w-1 bg-amber-500 rounded-full" />
+                          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
+                            Você também pode precisar (Ferramentas Complementares)
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                          {getComplementaryCalculators(activeCalculator, activeCalc.category).map(c => (
+                            <div 
+                              key={c.id} 
+                              onClick={() => selectCalculator(c.id as any)}
+                              className="group border border-slate-150 hover:border-amber-200 hover:bg-amber-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                            >
+                              <div>
+                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-amber-600 transition-colors line-clamp-1">{c.name}</h4>
+                                <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                              </div>
+                              <span className="text-[9px] font-mono font-semibold text-amber-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                Acessar Ferramenta <ExternalLink className="w-2.5 h-2.5" />
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Grid 3: Mais Utilizadas (Popular Global Links) */}
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+                          <div className="h-4 w-1 bg-emerald-500 rounded-full" />
+                          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
+                            Mais Utilizadas da Central (Mais Acessadas)
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                          {getPopularCalculators(activeCalculator).map(c => (
+                            <div 
+                              key={c.id} 
+                              onClick={() => selectCalculator(c.id as any)}
+                              className="group border border-slate-150 hover:border-emerald-200 hover:bg-emerald-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                            >
+                              <div>
+                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition-colors line-clamp-1">{c.name}</h4>
+                                <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                              </div>
+                              <span className="text-[9px] font-mono font-semibold text-emerald-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                Simular Agora <ExternalLink className="w-2.5 h-2.5" />
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  )}
+
+                </div>
+              </>
+            )}
 
             {/* AdSense Secondary banner footer container */}
             <div className="w-full mt-4">

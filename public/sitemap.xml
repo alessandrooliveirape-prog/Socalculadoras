@@ -3,911 +3,1072 @@
   <!-- Página Principal / Central Geral -->
   <url>
     <loc>https://brasilcalculadoras.com.br/</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
+  <!-- Categoria: Finanças & Negócios -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/financas-negocios</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Saúde & Dietas -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/saude-dietas</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Trabalhista & Profissões -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/trabalhista-profissoes</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Matemática & Escola -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/matematica-escola</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Imobiliário & Aluguel -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/imobiliario-aluguel</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Veículos & Combustível -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/veiculos-combustivel</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Estatística & Métricas -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/estatistica-metricas</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Jurídico & Impostos -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/juridico-impostos</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Utilidades & Casa -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/utilidades-casa</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Aposentadoria & Futuro -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/aposentadoria-futuro</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Agronegócio & Campo -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/agronegocio-campo</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Logística & Fretes -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/logistica-fretes</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Construção & Reformas -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/construcao-reformas</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Gastronomia & Eventos -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/gastronomia-eventos</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Energia & Sustentabilidade -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/energia-sustentabilidade</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Categoria: Educação & ENEM -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/educacao-enem</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <!-- Calculadora de FGTS -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/calculo-fgts-acumulado</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <!-- Adicional Noturno -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/adicional-noturno</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <!-- Adicional de Insalubridade -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/adicional-insalubridade</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <!-- Adicional de Periculosidade -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/adicional-periculosidade</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <!-- Seguro-Desemprego -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/estimativa-seguro-desemprego</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <!-- Desconto de Vale-Transporte -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/desconto-vale-transporte</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <!-- Desconto de Falta Injustificada -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/falta-injustificada</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
   <!-- Juros Compostos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/juros-compostos</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Comparador CLT vs PJ -->
   <url>
     <loc>https://brasilcalculadoras.com.br/clt-pj</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Margem de Lucro & Markup -->
   <url>
     <loc>https://brasilcalculadoras.com.br/margem-lucro</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Metabolismo e IMC Tracker -->
   <url>
     <loc>https://brasilcalculadoras.com.br/imc</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Calculadora de Horas (Timesheet) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/registro-horas</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Regra de Três Rápida -->
   <url>
     <loc>https://brasilcalculadoras.com.br/regra-tres</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Análise de Texto & Word Counter -->
   <url>
     <loc>https://brasilcalculadoras.com.br/contador-texto</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Rescisão CLT -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calculadora-de-rescisao-clt</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de 13º Salário -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calculadora-de-decimo-terceiro</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Férias Proporcionais & Vendidas -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calculadora-de-ferias-clt</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Horas Extras com Adicional -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calculadora-de-horas-extras</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Simulador INSS / Aposentadoria -->
   <url>
     <loc>https://brasilcalculadoras.com.br/simulador-de-aposentadoria-inss</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Desconto Progressivo de INSS -->
   <url>
     <loc>https://brasilcalculadoras.com.br/simulador-inss-salario</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Desconto IRRF Mensal -->
   <url>
     <loc>https://brasilcalculadoras.com.br/simulador-irrf-salario</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Rendimento de Poupança -->
   <url>
     <loc>https://brasilcalculadoras.com.br/rendimento-poupanca</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Calculadora IPCA Acumulado -->
   <url>
     <loc>https://brasilcalculadoras.com.br/conversor-inflacao-ipca</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Giro de Caixa Corporativo -->
   <url>
     <loc>https://brasilcalculadoras.com.br/custo-capital-giro</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Retorno de Investimento (ROI) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/roi-investimento-comum</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Simulador IRPJ Lucro Presumido -->
   <url>
     <loc>https://brasilcalculadoras.com.br/faturamento-lucro-presumido</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Ponto de Equilíbrio (Break even) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/ponto-de-equilibrio-venda</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Consumo Diário de Água -->
   <url>
     <loc>https://brasilcalculadoras.com.br/consumo-agua-ideal</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Percentual de Gordura Estimado -->
   <url>
     <loc>https://brasilcalculadoras.com.br/percentual-gordura-corp</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Frequência Cardíaca de Esporte -->
   <url>
     <loc>https://brasilcalculadoras.com.br/frequencia-cardiaca-alvo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Metabolismo Basal Ativo (TMB) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calculo-calorias-metabolismo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Ciclos de Sono Ideal -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calculadora-sono-ideal</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Gasto Calórico por Atividade -->
   <url>
     <loc>https://brasilcalculadoras.com.br/calorias-atividades-fisicas</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Proporção Corporal Recomendada -->
   <url>
     <loc>https://brasilcalculadoras.com.br/peso-ideal-corp-raciol</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Divisão de Macros (Dietas) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/distribuição-macronutrientes</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Análise de Pressão Vascular -->
   <url>
     <loc>https://brasilcalculadoras.com.br/pressao-arterial-check</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Honorários de Advocatícios -->
   <url>
     <loc>https://brasilcalculadoras.com.br/honorarios-advogado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Plantão Médico e Clínico -->
   <url>
     <loc>https://brasilcalculadoras.com.br/plantao-medico</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Comissão de Corretor -->
   <url>
     <loc>https://brasilcalculadoras.com.br/comissao-corretor</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Diária de Designer & Dev -->
   <url>
     <loc>https://brasilcalculadoras.com.br/diaria-freelancer</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Estimativa de Frete de Carga -->
   <url>
     <loc>https://brasilcalculadoras.com.br/frete-autonomo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Markup de Artesanato -->
   <url>
     <loc>https://brasilcalculadoras.com.br/markup-artesanato</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Hora Aula Professor -->
   <url>
     <loc>https://brasilcalculadoras.com.br/salario-professor</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Comissão de Vendedor Comercial -->
   <url>
     <loc>https://brasilcalculadoras.com.br/comissao-vendedor</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Orçamento de Tradutor Freelancer -->
   <url>
     <loc>https://brasilcalculadoras.com.br/traducao-texto</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Orçamento de Fotógrafo -->
   <url>
     <loc>https://brasilcalculadoras.com.br/fotografo-evento</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Produtividade de Grãos (Milho/Soja) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agro-produtividade-graos</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Viabilidade de Lote de Gado de Corte -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agro-lote-gado-corte</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Conversor de Medidas de Terra -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agro-conversor-medidas-terra</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Necessidade de Calagem (Solo) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agro-calagem-solo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Dimensionamento de Ração e Silo -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agro-racao-animal</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Densidade de Semeadura e Plantio -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agro-semeadura-densidade</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Frete e Margem de Lucro -->
   <url>
     <loc>https://brasilcalculadoras.com.br/log-calculo-frete</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Custo de Km Rodado de Veículo Pesado -->
   <url>
     <loc>https://brasilcalculadoras.com.br/log-custo-km-rodado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Cubagem e Peso Taxável -->
   <url>
     <loc>https://brasilcalculadoras.com.br/log-cubagem-carga</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Diária de Espera e Descarga (Lei 11.442) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/log-lei-estadia</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Jornada e Descansos (Lei do Motorista) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/log-jornada-motorista</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Calculadora de Tijolos por m² -->
   <url>
     <loc>https://brasilcalculadoras.com.br/const-tijolos</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Calculadora de Tinta Predial -->
   <url>
     <loc>https://brasilcalculadoras.com.br/const-tinta</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Calculadora de Pisos e Porcelanato -->
   <url>
     <loc>https://brasilcalculadoras.com.br/const-piso</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Calculadora de Churrasco -->
   <url>
     <loc>https://brasilcalculadoras.com.br/evento-churrasco</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Ficha Técnica de Receitas (Custo) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/evento-receita</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Bebidas para Festas -->
   <url>
     <loc>https://brasilcalculadoras.com.br/evento-bebida</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Custo de Energia Elétrica (Reais) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/energia-consumo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Dimensionamento de Energia Solar -->
   <url>
     <loc>https://brasilcalculadoras.com.br/energia-solar</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Pegada de Carbono (Veículos) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/energia-carbono</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Simulador de Nota SISU com Pesos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/edu-sisu</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Média Semestral Universitária -->
   <url>
     <loc>https://brasilcalculadoras.com.br/edu-ponderada</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Tempo de Leitura de Textos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/edu-leitura</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Porcentagem Rápida -->
   <url>
     <loc>https://brasilcalculadoras.com.br/porcentagem-simples</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Média Ponderada Escolar -->
   <url>
     <loc>https://brasilcalculadoras.com.br/media-ponderada</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Teorema de Pitágoras -->
   <url>
     <loc>https://brasilcalculadoras.com.br/pitagoras-triangulo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Área & Perímetro de Formas -->
   <url>
     <loc>https://brasilcalculadoras.com.br/area-circulo-retangulo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Potências e Raiz Quadrada -->
   <url>
     <loc>https://brasilcalculadoras.com.br/potencia-raiz</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Fatorial -->
   <url>
     <loc>https://brasilcalculadoras.com.br/fatorial-num</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Regra de Sociedade Comercial -->
   <url>
     <loc>https://brasilcalculadoras.com.br/regra-de-sociedade</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Equação do 2º Grau (Bhaskara) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/equacao-segundo-grau</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Financiamento Price vs SAC -->
   <url>
     <loc>https://brasilcalculadoras.com.br/financiamento-price-sac</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Reajuste Anual de Contrato -->
   <url>
     <loc>https://brasilcalculadoras.com.br/reajuste-aluguel</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Custos de ITBI e Registro -->
   <url>
     <loc>https://brasilcalculadoras.com.br/custos-itbi</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Retorno de Ativos (Cap Rate) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/cap-rate</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Simulador de Amortização Extra -->
   <url>
     <loc>https://brasilcalculadoras.com.br/amortizacao-extra</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Alugar ou Comprar Imóvel -->
   <url>
     <loc>https://brasilcalculadoras.com.br/alugar-vs-comprar</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Custo Efetivo Total (CET) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/custo-efetivo-total</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Comparador de Valor de m² -->
   <url>
     <loc>https://brasilcalculadoras.com.br/valor-metro-quadrado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Rateio de Reforma Predial -->
   <url>
     <loc>https://brasilcalculadoras.com.br/rateio-condominio</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Rateio IPTU Proporcional -->
   <url>
     <loc>https://brasilcalculadoras.com.br/iptu-proporcional</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Álcool ou Gasolina Praticidade -->
   <url>
     <loc>https://brasilcalculadoras.com.br/alcool-gasolina</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Consumo de Combustível Viagem -->
   <url>
     <loc>https://brasilcalculadoras.com.br/consumo-combustivel</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- IPVA Estimado de Veículo -->
   <url>
     <loc>https://brasilcalculadoras.com.br/ipva-estimado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Curva de Depreciação (Fipe) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/depreciacao-fipe</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Reembolso por Km Rodado -->
   <url>
     <loc>https://brasilcalculadoras.com.br/custo-km-rodado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Simulador Parcelas Auto -->
   <url>
     <loc>https://brasilcalculadoras.com.br/financiamento-veiculo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Avaliação Custos de Seguro -->
   <url>
     <loc>https://brasilcalculadoras.com.br/seguro-perfil</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Tempo Estimado de Trajeto -->
   <url>
     <loc>https://brasilcalculadoras.com.br/tempo-viagem</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Rateio Paritário de Viagem -->
   <url>
     <loc>https://brasilcalculadoras.com.br/rateio-pedagio</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Orçamento de Revisão Anual -->
   <url>
     <loc>https://brasilcalculadoras.com.br/manutencao-carro</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Desvio Padrão e Variância -->
   <url>
     <loc>https://brasilcalculadoras.com.br/desvio-padrao</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Margem de Erro de Pesquisas -->
   <url>
     <loc>https://brasilcalculadoras.com.br/margem-erro</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Arranjos e Combinações -->
   <url>
     <loc>https://brasilcalculadoras.com.br/analise-combinatoria</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Probabilidade de Ocorrências -->
   <url>
     <loc>https://brasilcalculadoras.com.br/probabilidade-evento</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Métrica de Churn (SaaS/Loja) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/churn-rate</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Taxa Crescimento MoM -->
   <url>
     <loc>https://brasilcalculadoras.com.br/crescimento-mensal</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Funil de Conversão e Leads -->
   <url>
     <loc>https://brasilcalculadoras.com.br/conversao-funil</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Média, Mediana & Moda -->
   <url>
     <loc>https://brasilcalculadoras.com.br/mediana-moda</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Intervalo de Confiança -->
   <url>
     <loc>https://brasilcalculadoras.com.br/intervalo-confianca</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- CAC vs LTV Eficiência -->
   <url>
     <loc>https://brasilcalculadoras.com.br/conversao-cac</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Mora e Multas de Contratos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/mora-judicial</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Correção Monetária de Valores -->
   <url>
     <loc>https://brasilcalculadoras.com.br/correcao-monetaria</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Custas Judiciais Estimadas -->
   <url>
     <loc>https://brasilcalculadoras.com.br/custas-processuais</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Pensão Alimentícia Projeções -->
   <url>
     <loc>https://brasilcalculadoras.com.br/pensao-alimenticia</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- IR s/ Ganho de Capital -->
   <url>
     <loc>https://brasilcalculadoras.com.br/ganho-capital</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Divisão de Bens de Divórcio -->
   <url>
     <loc>https://brasilcalculadoras.com.br/divisao-bens</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Inventário e Herança Partilha -->
   <url>
     <loc>https://brasilcalculadoras.com.br/inventario-partilha</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Simples Nacional Simulador -->
   <url>
     <loc>https://brasilcalculadoras.com.br/tabela-simples</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Custos de ISS s/ Serviços -->
   <url>
     <loc>https://brasilcalculadoras.com.br/aliquota-iss</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- IR s/ Aplicações Financeiras -->
   <url>
     <loc>https://brasilcalculadoras.com.br/irrf-investimentos</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Conversor de Câmbio Moedas -->
   <url>
     <loc>https://brasilcalculadoras.com.br/conversor-moedas</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Divisor de Conta do Bar -->
   <url>
     <loc>https://brasilcalculadoras.com.br/conta-bar</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Consumo Elétrico por Kwh -->
   <url>
     <loc>https://brasilcalculadoras.com.br/energia-eletrica</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Ar Condicionado ideal (BTUs) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/ar-condicionado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Cálculo de Latas de Tinta -->
   <url>
     <loc>https://brasilcalculadoras.com.br/quantidade-tinta</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Consumo do Banho de Chuveiro -->
   <url>
     <loc>https://brasilcalculadoras.com.br/agua-chuveiro</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Churrasco Evento Ingredientes -->
   <url>
     <loc>https://brasilcalculadoras.com.br/churrasco-festa</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Prazo Freezer Descongelamento -->
   <url>
     <loc>https://brasilcalculadoras.com.br/alimentos-congelados</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Quantidade Pisos & Azulejos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/espacador-azulejo</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Protetor Carrinho Supermercado -->
   <url>
     <loc>https://brasilcalculadoras.com.br/lista-supermercado</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Previdência Privada Acúmulo -->
   <url>
     <loc>https://brasilcalculadoras.com.br/previdenca-privada</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Capital de Viver de Renda -->
   <url>
     <loc>https://brasilcalculadoras.com.br/viver-de-renda</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Reserva Emergência Custos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/reserva-emergencia</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Provisão Desgaste Equipamentos -->
   <url>
     <loc>https://brasilcalculadoras.com.br/depreciacao-maquinas</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Corrosor de Poupanças Futura -->
   <url>
     <loc>https://brasilcalculadoras.com.br/inflacao-futura</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Fundo Garantido Corrigido (FGTS) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/fgts-corrigido</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Planejador Estilo de Vida (Retired) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/custo-aposentadoria</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Taxa Segura de Retirada (SWR) -->
   <url>
     <loc>https://brasilcalculadoras.com.br/renda-eterna</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <!-- Milestone de Liberdade Financeira -->
   <url>
     <loc>https://brasilcalculadoras.com.br/aposentadoria-preco-liberdade</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
