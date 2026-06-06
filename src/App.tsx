@@ -926,7 +926,7 @@ export default function App() {
                       <p className="text-[11px] text-gray-405 truncate max-w-sm sm:max-w-xl">{c.description}</p>
                     </div>
                     <span className="text-[9px] bg-slate-100 font-mono font-bold text-slate-600 px-2 py-0.5 rounded uppercase">
-                      {c.category === 'financas' ? 'Negócios' : c.category === 'saude' ? 'Saúde' : 'Produtividade'}
+                      {CATEGORY_MAP_RAW[c.category] || c.category}
                     </span>
                   </div>
                 ))
@@ -1031,9 +1031,9 @@ export default function App() {
                   >
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="shrink-0 text-xs">
-                        {key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'produtividade' ? '⚙️' : key === 'matematica' ? '🧮' : key === 'imobiliaria' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '🛠️' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : '⏱️'}
+                        {key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : '⏱️'}
                       </span>
-                      <span className="truncate">{label}</span>
+                      <span className="truncate">{CATEGORY_MAP_RAW[key] || label}</span>
                     </div>
                     <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold shrink-0 ${isSelected ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>
                       {categoryCounts[key] || 0}

@@ -22,6 +22,117 @@ export const CATEGORY_MAP: Record<string, string> = {
 
 // 12 Core Calculators that have pre-built custom views
 const CORE_CALCULATORS: CalculatorDef[] = [
+  {
+    id: 'juros-compostos',
+    name: 'Juros Compostos',
+    description: 'Calcule a evolução capital de investimentos com depósitos recorrentes e simulação em gráficos de crescimento.',
+    category: 'financas',
+    icon: 'DollarSign',
+    tags: ['investimento', 'dinheiro', 'poupança', 'aposentadoria', 'selic', 'tesouro']
+  },
+  {
+    id: 'clt-pj',
+    name: 'Comparador CLT vs PJ',
+    description: 'Compare remunerações líquidas de carteira assinada versus prestador de serviços incluindo tributação de notas fiscais.',
+    category: 'financas',
+    icon: 'ShieldCheck',
+    tags: ['salário', 'emprego', 'imposto', 'simples nacional', 'relação trabalhista']
+  },
+  {
+    id: 'margem-lucro',
+    name: 'Margem de Lucro & Markup',
+    description: 'Encontre preços ideais de venda de mercadorias considerando custos, despesas acessórias e metas de rentabilidade livre.',
+    category: 'financas',
+    icon: 'TrendingUp',
+    tags: ['venda', 'loja', 'e-commerce', 'produto', 'comércio', 'precificação']
+  },
+  {
+    id: 'imc',
+    name: 'Metabolismo e IMC Tracker',
+    description: 'Descubra seu Índice de Massa Corporal (IMC), taxa metabólica ideal BMR e necessidades calóricas totais.',
+    category: 'saude',
+    icon: 'HeartPulse',
+    tags: ['peso', 'saúde', 'dieta', 'academia', 'emagrecimento', 'massa magra']
+  },
+  {
+    id: 'registro-horas',
+    name: 'Calculadora de Horas (Timesheet)',
+    description: 'Organize turnos e horas de trabalho, gerencie intervalos e calcule o faturamento líquida com taxas de freelancer.',
+    category: 'profissoes',
+    icon: 'Clock',
+    tags: ['trabalho', 'freelance', 'horas', 'cronômetro', 'faturamento', 'invoice']
+  },
+  {
+    id: 'regra-tres',
+    name: 'Regra de Três Rápida',
+    description: 'Resolva proporções matemáticas simples de forma direta ou inversa entre grandezas distinctas instantaneamente.',
+    category: 'matematica',
+    icon: 'Sliders',
+    tags: ['matemática', 'escola', 'porcentagem', 'divisão', 'fórmula']
+  },
+  {
+    id: 'contador-texto',
+    name: 'Análise de Texto & Word Counter',
+    description: 'Analise e formate caixa alta/baixa, conte caracteres totais, parágrafos, palavras e estime tempos de leitura rápida.',
+    category: 'matematica',
+    icon: 'Type',
+    tags: ['texto', 'escrita', 'redação', 'blog', 'seo', 'leitura']
+  },
+  {
+    id: 'calculadora-de-rescisao-clt',
+    name: 'Cálculo de Rescisão CLT',
+    description: 'Simulação completa de acertos rescisórios para demissões sem justa causa ou pedidos de demissão CLT.',
+    category: 'profissoes',
+    icon: 'FileText',
+    tags: ['clt', 'rescisão', 'demissão', 'trabalho', 'acerto', 'pedido']
+  },
+  {
+    id: 'calculadora-de-decimo-terceiro',
+    name: 'Cálculo de 13º Salário',
+    description: 'Estime o valor bruto e líquido da primeira, segunda ou de ambas as parcelas do décimo terceiro salário.',
+    category: 'profissoes',
+    icon: 'Briefcase',
+    tags: ['décimo terceiro', '13o', 'salário', 'bônus', 'décimo', 'clt']
+  },
+  {
+    id: 'calculadora-de-ferias-clt',
+    name: 'Férias Proporcionais & Vendidas',
+    description: 'Calcule o valor das fáceis normais ou proporcionais, terço constitucional e adicione o abono pecuniário por venda.',
+    category: 'profissoes',
+    icon: 'Calendar',
+    tags: ['férias', 'clt', 'abono', 'vender férias', 'pecuniário']
+  },
+  {
+    id: 'calculadora-de-horas-extras',
+    name: 'Horas Extras com Adicional',
+    description: 'Calcule o valor de horas extras com adicional de 50% e 100% sobre o seu salário bruto de referência.',
+    category: 'profissoes',
+    icon: 'Clock',
+    tags: ['horas extras', 'salário', 'adicional', 'clt', 'trabalho']
+  },
+  {
+    id: 'simulador-de-aposentadoria-inss',
+    name: 'Simulador INSS / Aposentadoria',
+    description: 'Acompanhe seu tempo de contribuição previdenciária e projete estimativas nas regras gerais de transição.',
+    category: 'aposentadoria',
+    icon: 'ShieldCheck',
+    tags: ['inss', 'aposentadoria', 'previdência', 'simulação', 'tempo', 'contribuição']
+  }
+];
+
+// Structural catalog definitions for all 88 dynamic calculators (Programmatically generated)
+const RAW_DYNAMIC_METADATA: {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  icon: string;
+  tags: string[];
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta';
+  inputs: { id: string; label: string; def: any; type: 'number' | 'select'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
+  outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
+  faq: { q: string; a: string }[];
+}[] = [
   // ==================== TRABALHISTAS NOVAS ====================
   {
     id: 'calculo-fgts-acumulado',
@@ -167,119 +278,6 @@ const CORE_CALCULATORS: CalculatorDef[] = [
       { q: 'A falta desconta o DSR?', a: 'Se o funcionário não cumprir integralmente a jornada da semana, ele perde a remuneração do Descanso Semanal Remunerado (DSR) daquela semana correspondente.' }
     ]
   },
-
-  {
-    id: 'juros-compostos',
-    name: 'Juros Compostos',
-    description: 'Calcule a evolução capital de investimentos com depósitos recorrentes e simulação em gráficos de crescimento.',
-    category: 'financas',
-    icon: 'DollarSign',
-    tags: ['investimento', 'dinheiro', 'poupança', 'aposentadoria', 'selic', 'tesouro']
-  },
-  {
-    id: 'clt-pj',
-    name: 'Comparador CLT vs PJ',
-    description: 'Compare remunerações líquidas de carteira assinada versus prestador de serviços incluindo tributação de notas fiscais.',
-    category: 'financas',
-    icon: 'ShieldCheck',
-    tags: ['salário', 'emprego', 'imposto', 'simples nacional', 'relação trabalhista']
-  },
-  {
-    id: 'margem-lucro',
-    name: 'Margem de Lucro & Markup',
-    description: 'Encontre preços ideais de venda de mercadorias considerando custos, despesas acessórias e metas de rentabilidade livre.',
-    category: 'financas',
-    icon: 'TrendingUp',
-    tags: ['venda', 'loja', 'e-commerce', 'produto', 'comércio', 'precificação']
-  },
-  {
-    id: 'imc',
-    name: 'Metabolismo e IMC Tracker',
-    description: 'Descubra seu Índice de Massa Corporal (IMC), taxa metabólica ideal BMR e necessidades calóricas totais.',
-    category: 'saude',
-    icon: 'HeartPulse',
-    tags: ['peso', 'saúde', 'dieta', 'academia', 'emagrecimento', 'massa magra']
-  },
-  {
-    id: 'registro-horas',
-    name: 'Calculadora de Horas (Timesheet)',
-    description: 'Organize turnos e horas de trabalho, gerencie intervalos e calcule o faturamento líquida com taxas de freelancer.',
-    category: 'produtividade',
-    icon: 'Clock',
-    tags: ['trabalho', 'freelance', 'horas', 'cronômetro', 'faturamento', 'invoice']
-  },
-  {
-    id: 'regra-tres',
-    name: 'Regra de Três Rápida',
-    description: 'Resolva proporções matemáticas simples de forma direta ou inversa entre grandezas distintas instantaneamente.',
-    category: 'matematica',
-    icon: 'Sliders',
-    tags: ['matemática', 'escola', 'porcentagem', 'divisão', 'fórmula']
-  },
-  {
-    id: 'contador-texto',
-    name: 'Análise de Texto & Word Counter',
-    description: 'Analise e formate caixa alta/baixa, conte caracteres totais, parágrafos, palavras e estime tempos de leitura rápida.',
-    category: 'matematica',
-    icon: 'Type',
-    tags: ['texto', 'escrita', 'redação', 'blog', 'seo', 'leitura']
-  },
-  {
-    id: 'calculadora-de-rescisao-clt',
-    name: 'Cálculo de Rescisão CLT',
-    description: 'Simulação completa de acertos rescisórios para demissões sem justa causa ou pedidos de demissão CLT.',
-    category: 'financas',
-    icon: 'FileText',
-    tags: ['clt', 'rescisão', 'demissão', 'trabalho', 'acerto', 'pedido']
-  },
-  {
-    id: 'calculadora-de-decimo-terceiro',
-    name: 'Cálculo de 13º Salário',
-    description: 'Estime o valor bruto e líquido da primeira, segunda ou de ambas as parcelas do décimo terceiro salário.',
-    category: 'financas',
-    icon: 'Briefcase',
-    tags: ['décimo terceiro', '13o', 'salário', 'bônus', 'décimo', 'clt']
-  },
-  {
-    id: 'calculadora-de-ferias-clt',
-    name: 'Férias Proporcionais & Vendidas',
-    description: 'Calcule o valor das fáceis normais ou proporcionais, terço constitucional e adicione o abono pecuniário por venda.',
-    category: 'financas',
-    icon: 'Calendar',
-    tags: ['férias', 'clt', 'abono', 'vender férias', 'pecuniário']
-  },
-  {
-    id: 'calculadora-de-horas-extras',
-    name: 'Horas Extras com Adicional',
-    description: 'Calcule o valor de horas extras com adicional de 50% e 100% sobre o seu salário bruto de referência.',
-    category: 'financas',
-    icon: 'Clock',
-    tags: ['horas extras', 'salário', 'adicional', 'clt', 'trabalho']
-  },
-  {
-    id: 'simulador-de-aposentadoria-inss',
-    name: 'Simulador INSS / Aposentadoria',
-    description: 'Acompanhe seu tempo de contribuição previdenciária e projete estimativas nas regras gerais de transição.',
-    category: 'aposentadoria',
-    icon: 'ShieldCheck',
-    tags: ['inss', 'aposentadoria', 'previdência', 'simulação', 'tempo', 'contribuição']
-  }
-];
-
-// Structural catalog definitions for all 88 dynamic calculators (Programmatically generated)
-const RAW_DYNAMIC_METADATA: {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  icon: string;
-  tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura';
-  inputs: { id: string; label: string; def: any; type: 'number' | 'select'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
-  outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
-  faq: { q: string; a: string }[];
-}[] = [
-  // ==================== FINANCAS (8 additional) ====================
   {
     id: 'simulador-inss-salario',
     name: 'Desconto Progressivo de INSS',
@@ -1817,17 +1815,17 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         const s3 = parseFloat(valInputs['salario3'] || 0);
         const media = (s1 + s2 + s3) / 3;
         
-        // Regras aproximadas base 2024
+        // Regras oficiais atualizadas para 2026
         let parcela = 0;
-        if (media <= 2041.39) {
+        if (media <= 2222.17) {
             parcela = media * 0.8;
-        } else if (media <= 3402.65) {
-            parcela = (media - 2041.39) * 0.5 + 1633.10;
+        } else if (media <= 3703.99) {
+            parcela = (media - 2222.17) * 0.5 + 1777.74;
         } else {
-            parcela = 2313.74;
+            parcela = 2518.65;
         }
         
-        // Parcela não pode ser menor que o salário mínimo vigente (1621 para contexto)
+        // Parcela não pode ser menor que o salário mínimo vigente (R$ 1.621,00)
         if (parcela < 1621) parcela = 1621;
         
         results['media'] = parseFloat(media.toFixed(2));
@@ -2019,83 +2017,6 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
           accum = (accum + v1) * (1 + rate);
         }
         results['resultado_calculado'] = parseFloat(accum.toFixed(2));
-      }
-
-      
-      else if (raw.type === 'trab_fgts') {
-        const salario = parseFloat(valInputs['salario'] || 0);
-        const meses = parseFloat(valInputs['meses'] || 0);
-        const taxa = parseFloat(valInputs['taxa'] || 8) / 100;
-        const dep_mensal = salario * taxa;
-        results['deposito_mensal'] = parseFloat(dep_mensal.toFixed(2));
-        results['total_acumulado'] = parseFloat((dep_mensal * meses).toFixed(2));
-      }
-      else if (raw.type === 'trab_noturno') {
-        const salario = parseFloat(valInputs['salario'] || 0);
-        const hrs_mes = parseFloat(valInputs['horas_mes'] || 220);
-        const hrs_noturnas_relogio = parseFloat(valInputs['horas_noturnas'] || 0);
-        // 1 hora de relogio = 60/52.5 horas noturnas = 1.142857
-        const hrs_noturnas_ficticias = hrs_noturnas_relogio * (60 / 52.5);
-        const valor_hora = salario / (hrs_mes || 1);
-        const adicional = valor_hora * 0.20 * hrs_noturnas_ficticias;
-        results['hora_normal'] = parseFloat(valor_hora.toFixed(2));
-        results['hora_noturna'] = parseFloat((valor_hora * 1.20).toFixed(2));
-        results['adicional'] = parseFloat(adicional.toFixed(2));
-      }
-      else if (raw.type === 'trab_insalubridade') {
-        const salario_minimo = parseFloat(valInputs['salario_minimo'] || 1621);
-        const grau = parseFloat(valInputs['grau'] || 0) / 100;
-        results['adicional'] = parseFloat((salario_minimo * grau).toFixed(2));
-      }
-      else if (raw.type === 'trab_periculosidade') {
-        const salario = parseFloat(valInputs['salario'] || 0);
-        const adicional = salario * 0.30;
-        results['adicional'] = parseFloat(adicional.toFixed(2));
-        results['total'] = parseFloat((salario + adicional).toFixed(2));
-      }
-      else if (raw.type === 'trab_seguro') {
-        const s1 = parseFloat(valInputs['salario1'] || 0);
-        const s2 = parseFloat(valInputs['salario2'] || 0);
-        const s3 = parseFloat(valInputs['salario3'] || 0);
-        const media = (s1 + s2 + s3) / 3;
-        
-        // Regras aproximadas base 2024
-        let parcela = 0;
-        if (media <= 2041.39) {
-            parcela = media * 0.8;
-        } else if (media <= 3402.65) {
-            parcela = (media - 2041.39) * 0.5 + 1633.10;
-        } else {
-            parcela = 2313.74;
-        }
-        
-        // Parcela não pode ser menor que o salário mínimo vigente (1621 para contexto)
-        if (parcela < 1621) parcela = 1621;
-        
-        results['media'] = parseFloat(media.toFixed(2));
-        results['valor_parcela'] = parseFloat(parcela.toFixed(2));
-      }
-      else if (raw.type === 'trab_vt') {
-        const salario = parseFloat(valInputs['salario'] || 0);
-        const custo = parseFloat(valInputs['custo_vt'] || 0);
-        const limite_6 = salario * 0.06;
-        const desconto = Math.min(limite_6, custo);
-        const parte_empresa = Math.max(0, custo - desconto);
-        results['desconto'] = parseFloat(desconto.toFixed(2));
-        results['parte_empresa'] = parseFloat(parte_empresa.toFixed(2));
-      }
-      else if (raw.type === 'trab_falta') {
-        const salario = parseFloat(valInputs['salario'] || 0);
-        const faltas = parseFloat(valInputs['faltas'] || 0);
-        const usa_dsr = parseFloat(valInputs['desconta_dsr'] || 0);
-        
-        const valor_dia = salario / 30;
-        const desc_dias = valor_dia * faltas;
-        const desc_dsr = usa_dsr === 1 ? valor_dia * faltas : 0; // Aproximação: 1 DSR por semana de falta
-        
-        results['desconto_dia'] = parseFloat(desc_dias.toFixed(2));
-        results['desconto_dsr'] = parseFloat(desc_dsr.toFixed(2));
-        results['desconto_total'] = parseFloat((desc_dias + desc_dsr).toFixed(2));
       }
 
       return results;
