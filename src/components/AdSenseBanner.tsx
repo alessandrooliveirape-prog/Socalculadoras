@@ -140,13 +140,18 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
 
           {/* Ad Action CTA */}
           <div className="shrink-0 flex items-center justify-end sm:justify-center">
-            <button
-              onClick={handleAdClick}
+            <a
+              href="https://google.com/adsense"
+              target="_blank"
+              rel="nofollow noopener noreferrer sponsored"
+              onClick={() => {
+                if (onAdClicked) onAdClicked();
+              }}
               className="px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 active:scale-95 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-sm shadow-slate-100"
             >
               <span>{currentAd.cta}</span>
               <ExternalLink className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
         </div>
       ) : (
@@ -173,13 +178,18 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
 
           {/* Ad Action CTA */}
           <div className="mt-4">
-            <button
-              onClick={handleAdClick}
+            <a
+              href="https://google.com/adsense"
+              target="_blank"
+              rel="nofollow noopener noreferrer sponsored"
+              onClick={() => {
+                if (onAdClicked) onAdClicked();
+              }}
               className="w-full py-2.5 px-4 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 active:scale-95 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm shadow-slate-100"
             >
               <span>{currentAd.cta}</span>
               <ExternalLink className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
         </div>
       )}
