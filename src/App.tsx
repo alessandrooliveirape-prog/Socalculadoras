@@ -856,19 +856,22 @@ export default function App() {
             </button>
             <div 
               onClick={handleLogoClick} 
-              className="flex items-center gap-2 cursor-pointer select-none animate-once"
+              className="flex items-center gap-2.5 cursor-pointer select-none group"
               title="Clique 5 vezes aqui para ativar/desativar as métricas de simulação do AdSense"
             >
-              <div className="h-9 w-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-100">
-                <Calculator className="w-5 h-5" />
-              </div>
+              <img 
+                src="/logo.svg" 
+                alt="Brasil Calculadoras" 
+                className="h-9 w-9 rounded-xl shadow-md shadow-blue-100/40 group-hover:scale-105 transition-transform duration-200" 
+              />
               <div>
-                <h1 className="text-md font-display font-bold text-slate-800 tracking-tight leading-none">
+                <h1 className="text-md font-display font-bold text-slate-800 tracking-tight leading-none group-hover:text-blue-600 transition-colors">
                   Brasil Calculadoras
                 </h1>
                 <span className="text-[10px] font-semibold text-gray-400 font-mono tracking-wider">FERRAMENTAS DE EXCELÊNCIA</span>
               </div>
             </div>
+            
           </div>
 
           {/* Core Hub Quick Search Input bar - Desktop */}

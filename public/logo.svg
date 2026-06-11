@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#logo-grad)" />
+  <rect x="30" y="30" width="24" height="24" rx="8" fill="#ffffff" fill-opacity="0.25" />
+  <rect x="66" y="30" width="24" height="24" rx="8" fill="#ffffff" fill-opacity="0.25" />
+  <rect x="30" y="66" width="24" height="24" rx="8" fill="#ffffff" fill-opacity="0.25" />
+  <rect x="60" y="60" width="30" height="30" rx="9" fill="#ffffff" />
+  <path d="M75 69v12M69 75h12" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
+  <circle cx="94" cy="26" r="4.5" fill="#facc15" />
+</svg>
