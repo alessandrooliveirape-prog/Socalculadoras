@@ -2,6 +2,19 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.brasilcalculadoras.com.br"
+        }
+      ],
+      "destination": "https://brasilcalculadoras.com.br/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

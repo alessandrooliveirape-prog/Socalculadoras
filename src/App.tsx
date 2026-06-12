@@ -109,9 +109,33 @@ const getPopularCalculators = (currentId: string) => {
 
 export default function App() {
   const [location, setLocation] = useLocation();
-  const [activeCalculator, setActiveCalculator] = useState<CalculatorId>('juros-compostos');
-  const [activeCategory, setActiveCategory] = useState<CalculatorCategory>('todos');
-  const [activeCategoryHub, setActiveCategoryHub] = useState<string | null>(null);
+  const [activeCalculator, setActiveCalculator] = useState<CalculatorId>(() => {
+    try {
+      const path = window.location.pathname.replace(/^\//, '');
+      const matched = CALCULATORS_CATALOG.find(c => c.id === path);
+      return matched ? matched.id : 'juros-compostos';
+    } catch {
+      return 'juros-compostos';
+    }
+  });
+  const [activeCategory, setActiveCategory] = useState<CalculatorCategory>(() => {
+    try {
+      const path = window.location.pathname.replace(/^\//, '');
+      if (CATEGORY_SLUG_MAP[path]) return CATEGORY_SLUG_MAP[path];
+      const matched = CALCULATORS_CATALOG.find(c => c.id === path);
+      return matched ? matched.category : 'todos';
+    } catch {
+      return 'todos';
+    }
+  });
+  const [activeCategoryHub, setActiveCategoryHub] = useState<string | null>(() => {
+    try {
+      const path = window.location.pathname.replace(/^\//, '');
+      return CATEGORY_SLUG_MAP[path] || null;
+    } catch {
+      return null;
+    }
+  });
 
   const categoryCounts = React.useMemo(() => {
     const counts: Record<string, number> = {
@@ -380,7 +404,7 @@ export default function App() {
   useEffect(() => {
     if (activeCategoryHub) {
       const hubData = getCategoryHubContent(activeCategoryHub);
-      const canonicalUrl = `https://www.brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
+      const canonicalUrl = `https://brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
       
       document.title = hubData.title;
 
@@ -421,8 +445,8 @@ export default function App() {
 
     const seoData = getSeoContentForCalculator(activeCalc);
     const canonicalUrl = window.location.pathname === '/' || window.location.pathname === ''
-      ? 'https://www.brasilcalculadoras.com.br/'
-      : `https://www.brasilcalculadoras.com.br/${activeCalculator}`;
+      ? 'https://brasilcalculadoras.com.br/'
+      : `https://brasilcalculadoras.com.br/${activeCalculator}`;
 
     document.title = seoData.title;
 
@@ -1143,11 +1167,7 @@ export default function App() {
 
                 {/* Category FAQs */}
                 {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (
-                  <div 
-                    className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4"
-                    itemScope
-                    itemType="https://schema.org/FAQPage"
-                  >
+                  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
                     <h3 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 border-b border-slate-100 pb-3">
                       <HelpCircle className="w-4.5 h-4.5 text-blue-500" />
                       Perguntas Frequentes da Categoria
@@ -1160,15 +1180,12 @@ export default function App() {
                           <div
                             key={faqKey}
                             className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3 transition-all"
-                            itemScope
-                            itemProp="mainEntity"
-                            itemType="https://schema.org/Question"
                           >
                             <button
                               onClick={() => setActiveAppFaqIdx(isOpen ? null : idx + 100)}
                               className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
                             >
-                              <span className="text-xs font-semibold text-slate-700" itemProp="name">{q.q}</span>
+                              <span className="text-xs font-semibold text-slate-700">{q.q}</span>
                               <motion.div
                                 animate={{ rotate: isOpen ? 180 : 0 }}
                                 transition={{ duration: 0.15 }}
@@ -1185,11 +1202,8 @@ export default function App() {
                                   exit={{ height: 0, opacity: 0, marginTop: 0 }}
                                   transition={{ duration: 0.15 }}
                                   className="overflow-hidden"
-                                  itemScope
-                                  itemProp="acceptedAnswer"
-                                  itemType="https://schema.org/Answer"
                                 >
-                                  <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed" itemProp="text">
+                                  <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
                                     {q.a}
                                   </p>
                                 </motion.div>
@@ -1455,11 +1469,7 @@ export default function App() {
 
                       {/* FAQ Accordion for calculators */}
                       {getSeoContentForCalculator(activeCalc).faq.length > 0 && (
-                        <div 
-                          className="flex flex-col gap-3 border-t border-slate-100 pt-5"
-                          itemScope
-                          itemType="https://schema.org/FAQPage"
-                        >
+                        <div className="flex flex-col gap-3 border-t border-slate-100 pt-5">
                           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider select-none">
                             Perguntas Frequentes do Canal (F.A.Q.)
                           </span>
@@ -1470,15 +1480,12 @@ export default function App() {
                                 <div 
                                   key={idx} 
                                   className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3 transition-all"
-                                  itemScope
-                                  itemProp="mainEntity"
-                                  itemType="https://schema.org/Question"
                                 >
                                   <button
                                     onClick={() => setActiveAppFaqIdx(isOpen ? null : idx)}
                                     className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
                                   >
-                                    <span className="text-xs font-semibold text-slate-700" itemProp="name">{q.q}</span>
+                                    <span className="text-xs font-semibold text-slate-700">{q.q}</span>
                                     <motion.div
                                       animate={{ rotate: isOpen ? 180 : 0 }}
                                       transition={{ duration: 0.15 }}
@@ -1495,11 +1502,8 @@ export default function App() {
                                         exit={{ height: 0, opacity: 0, marginTop: 0 }}
                                         transition={{ duration: 0.15 }}
                                         className="overflow-hidden"
-                                        itemScope
-                                        itemProp="acceptedAnswer"
-                                        itemType="https://schema.org/Answer"
                                       >
-                                        <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed" itemProp="text">
+                                        <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
                                           {q.a}
                                         </p>
                                       </motion.div>
