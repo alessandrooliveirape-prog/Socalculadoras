@@ -20,7 +20,8 @@ import {
   FileDown,
   Copy,
   ExternalLink,
-  ChevronDown
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocation } from 'wouter';
@@ -1403,6 +1404,95 @@ export default function App() {
                         </button>
                       </div>
                     </motion.div>
+                  )}
+
+                  {/* Homepage Category Hub Portal Directory (Only shown on the root path) */}
+                  {(location === '/' || location === '') && (
+                    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                      <div className="border-b border-slate-100 pb-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                            Central de Simuladores
+                          </span>
+                          <span className="text-[8px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded font-mono select-none">
+                            18 SEGMENTOS
+                          </span>
+                        </div>
+                        <h3 className="text-base font-display font-bold text-slate-800 mt-3 mb-1">
+                          Explore Mais de 160 Calculadoras Gratuitas
+                        </h3>
+                        <p className="text-[11.5px] text-slate-500 leading-relaxed font-normal">
+                          O Brasil Calculadoras é um ecossistema completo de ferramentas matemáticas, financeiras e de utilidade pública. Selecione uma categoria abaixo para navegar por simuladores adicionais dedicados a cada necessidade:
+                        </p>
+                      </div>
+
+                      {/* Premium Grid showing all categories */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {Object.entries(CATEGORY_MAP).map(([key, label]) => {
+                          const slug = CATEGORY_KEY_TO_SLUG[key];
+                          const emoji = key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : '⏱️';
+                          const rawLabel = CATEGORY_MAP_RAW[key] || label;
+                          const count = categoryCounts[key] || 0;
+
+                          // Short description for each category to look rich and premium
+                          const categoryDescriptions: Record<string, string> = {
+                            financas: 'Juros, investimentos, empréstimos, taxas e rentabilidade financeira.',
+                            saude: 'Cálculos nutricionais, IMC, metabolismo e bem-estar corporal.',
+                            profissoes: 'Rescisão CLT, horas extras, 13º salário e tributação profissional.',
+                            matematica: 'Regra de três, frações, estatísticas escolares e equações.',
+                            imobiliario: 'Financiamento, aluguel, amortização SAC/Price e valorização.',
+                            veiculos: 'Consumo de combustível, IPVA, depreciação FIPE e viagens.',
+                            estatistica: 'Médias ponderadas, desvio padrão, probabilidade e combinatória.',
+                            juridico: 'Imposto de renda, taxas de cartório, multas e honorários.',
+                            utilitarios: 'Medições domésticas, conversão de unidades e consumo diário.',
+                            aposentadoria: 'Simulação de INSS, previdência privada e idade mínima.',
+                            agronegocio: 'Cálculos de sementes, fertilizantes, gado e produtividade agrícola.',
+                            logistica: 'Cálculo de frete, cubagem de carga, rotas e pedágios.',
+                            construcao: 'Materiais de construção, tijolos, cimento e área de pintura.',
+                            eventos: 'Quantidade de comida e bebida por pessoa para festas e churrascos.',
+                            energia: 'Dimensionamento solar fotovoltaico, consumo KWh e economia.',
+                            educacao: 'Média do ENEM, nota de corte de vestibulares e histórico escolar.',
+                            quimica_fisica: 'Velocidade, densidade, conversor de temperatura e gases.',
+                            tecnologia: 'Conversor de bases numéricas, tempo de download e aspect ratio.'
+                          };
+
+                          const desc = categoryDescriptions[key] || 'Ferramentas de precisão matemática para o dia a dia.';
+
+                          return (
+                            <div
+                              key={key}
+                              onClick={() => {
+                                if (slug) {
+                                  setLocation('/' + slug);
+                                } else {
+                                  setActiveCategory(key);
+                                }
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                              }}
+                              className="group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                            >
+                              <div>
+                                <div className="flex items-center justify-between mb-1.5">
+                                  <span className="text-lg">{emoji}</span>
+                                  <span className="bg-slate-100 text-slate-500 font-mono text-[9px] font-bold px-1.5 py-0.5 rounded-md group-hover:bg-blue-50 group-hover:text-blue-700 transition-colors">
+                                    {count} {count === 1 ? 'ferramenta' : 'ferramentas'}
+                                  </span>
+                                </div>
+                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                  {rawLabel}
+                                </h4>
+                                <p className="text-[10.2px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
+                                  {desc}
+                                </p>
+                              </div>
+                              <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                Acessar Segmento <ChevronRight className="w-3.5 h-3.5" />
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   )}
 
                   {/* Box 2: SEO Exhaustive Technical Guide & Accordion FAQ */}
