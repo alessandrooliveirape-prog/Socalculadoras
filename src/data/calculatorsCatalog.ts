@@ -17,7 +17,9 @@ export const CATEGORY_MAP: Record<string, string> = {
   construcao: '🧱 Construção & Reformas',
   eventos: '🥩 Gastronomia & Eventos',
   energia: '☀️ Energia & Sustentabilidade',
-  educacao: '📚 Educação & ENEM'
+  educacao: '📚 Educação & ENEM',
+  quimica_fisica: '🧪 Química & Física',
+  tecnologia: '💻 Tecnologia & Computação'
 };
 
 // 12 Core Calculators that have pre-built custom views
@@ -128,7 +130,7 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade';
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base';
   inputs: { id: string; label: string; def: any; type: 'number' | 'select' | 'text'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
@@ -5321,8 +5323,199 @@ const RAW_DYNAMIC_METADATA: {
     faq: [
       { q: 'Qual a velocidade média de um leitor?', a: 'Estudantes e adultos comuns leem entre 200 a 250 palavras por minuto (WPM). Leitores dinâmicos passam das 400 WPM.' }
     ]
+  },
+  {
+    "id": "velocidade-media",
+    "name": "Velocidade Média",
+    "description": "Calcule Velocidade Média, Distância Percorrida ou Tempo com base no Teorema do Movimento Uniforme.",
+    "category": "quimica_fisica",
+    "icon": "Gauge",
+    "tags": ["velocidade", "física", "movimento", "tempo", "distância"],
+    "type": "sci_speed",
+    "inputs": [
+      {
+        "id": "calcular",
+        "label": "O que calcular?",
+        "def": "velocidade",
+        "type": "select",
+        "op": [
+          {"v": "velocidade", "l": "Velocidade Média (V)"},
+          {"v": "distancia", "l": "Distância Percorrida (D)"},
+          {"v": "tempo", "l": "Tempo de Deslocamento (T)"}
+        ]
+      },
+      { "id": "distancia", "label": "Distância (km)", "def": 100, "type": "number" },
+      { "id": "tempo", "label": "Tempo (horas)", "def": 2, "type": "number" },
+      { "id": "velocidade", "label": "Velocidade (km/h)", "def": 50, "type": "number" }
+    ],
+    "outputs": [
+      { "id": "resultado", "label": "Resultado Calculado", "isPrimary": true }
+    ],
+    "faq": [
+      { "q": "Como funciona o cálculo de velocidade média?", "a": "A velocidade média é a divisão da distância pelo tempo (V = D / T). O sistema calcula qualquer uma das três variáveis se você informar as outras duas." }
+    ]
+  },
+  {
+    "id": "conversor-temperatura",
+    "name": "Conversor de Temperatura",
+    "description": "Converta temperaturas instantaneamente entre Celsius, Fahrenheit e Kelvin.",
+    "category": "quimica_fisica",
+    "icon": "Sliders",
+    "tags": ["temperatura", "graus", "celsius", "fahrenheit", "kelvin", "química", "física"],
+    "type": "sci_temp",
+    "inputs": [
+      { "id": "valor", "label": "Temperatura a Converter", "def": 25, "type": "number" },
+      {
+        "id": "de",
+        "label": "Converter De:",
+        "def": "C",
+        "type": "select",
+        "op": [
+          {"v": "C", "l": "Celsius (°C)"},
+          {"v": "F", "l": "Fahrenheit (°F)"},
+          {"v": "K", "l": "Kelvin (K)"}
+        ]
+      },
+      {
+        "id": "para",
+        "label": "Converter Para:",
+        "def": "F",
+        "type": "select",
+        "op": [
+          {"v": "C", "l": "Celsius (°C)"},
+          {"v": "F", "l": "Fahrenheit (°F)"},
+          {"v": "K", "l": "Kelvin (K)"}
+        ]
+      }
+    ],
+    "outputs": [
+      { "id": "resultado", "label": "Temperatura Convertida", "isPrimary": true }
+    ],
+    "faq": [
+      { "q": "Como converter Celsius para Fahrenheit?", "a": "Multiplica-se a temperatura em Celsius por 1,8 e soma-se 32. Exemplo: 25°C * 1,8 + 32 = 77°F." }
+    ]
+  },
+  {
+    "id": "calculadora-densidade",
+    "name": "Calculadora de Densidade",
+    "description": "Calcule a Densidade absoluta, a Massa ou o Volume ocupado por uma matéria física.",
+    "category": "quimica_fisica",
+    "icon": "Activity",
+    "tags": ["densidade", "massa", "volume", "química", "física", "matéria"],
+    "type": "sci_density",
+    "inputs": [
+      {
+        "id": "calcular",
+        "label": "O que calcular?",
+        "def": "densidade",
+        "type": "select",
+        "op": [
+          {"v": "densidade", "l": "Densidade (d)"},
+          {"v": "massa", "l": "Massa (m)"},
+          {"v": "volume", "l": "Volume (V)"}
+        ]
+      },
+      { "id": "massa", "label": "Massa (g)", "def": 200, "type": "number" },
+      { "id": "volume", "label": "Volume (cm³)", "def": 100, "type": "number" },
+      { "id": "densidade", "label": "Densidade (g/cm³)", "def": 2, "type": "number" }
+    ],
+    "outputs": [
+      { "id": "resultado", "label": "Resultado Calculado", "isPrimary": true }
+    ],
+    "faq": [
+      { "q": "Qual a fórmula da densidade?", "a": "A fórmula clássica é Densidade = Massa / Volume (d = m / V). O sistema isola e calcula a variável desejada automaticamente." }
+    ]
+  },
+  {
+    "id": "tempo-download",
+    "name": "Tempo de Download de Arquivo",
+    "description": "Estime o tempo necessário para baixar um arquivo com base no tamanho dele e velocidade de sua internet.",
+    "category": "tecnologia",
+    "icon": "Download",
+    "tags": ["download", "tempo", "internet", "velocidade", "rede", "arquivo", "megabytes", "gigabytes"],
+    "type": "tech_download",
+    "inputs": [
+      { "id": "tamanho_arquivo", "label": "Tamanho do Arquivo", "def": 1000, "type": "number" },
+      {
+        "id": "unidade_tamanho",
+        "label": "Unidade de Medida do Arquivo",
+        "def": "MB",
+        "type": "select",
+        "op": [
+          {"v": "MB", "l": "Megabytes (MB)"},
+          {"v": "GB", "l": "Gigabytes (GB)"}
+        ]
+      },
+      { "id": "velocidade_internet", "label": "Velocidade da Sua Internet", "def": 50, "type": "number" },
+      {
+        "id": "unidade_velocidade",
+        "label": "Unidade da Velocidade",
+        "def": "Mbps",
+        "type": "select",
+        "op": [
+          {"v": "Mbps", "l": "Megabits por Segundo (Mbps)"},
+          {"v": "Kbps", "l": "Kilobits por Segundo (Kbps)"}
+        ]
+      }
+    ],
+    "outputs": [
+      { "id": "tempo_formatado", "label": "Tempo de Download Estimado", "isPrimary": true },
+      { "id": "tempo_segundos", "label": "Tempo Total (segundos)", "suff": " s" }
+    ],
+    "faq": [
+      { "q": "Por que a velocidade contratada não é a velocidade real de download?", "a": "A velocidade de internet é vendida em Megabits por segundo (Mbps), enquanto o tamanho dos arquivos é em Megabytes (MB). 1 Byte equivale a 8 Bits, logo a taxa real de transferência é 8 vezes menor." }
+    ]
+  },
+  {
+    "id": "aspect-ratio",
+    "name": "Proporção de Tela & Aspect Ratio",
+    "description": "Calcule dimensões proporcionais de imagens ou telas digitais e descubra a fração de aspecto ideal.",
+    "category": "tecnologia",
+    "icon": "Monitor",
+    "tags": ["proporção", "tamanho", "aspect ratio", "tela", "imagem", "resolução", "design"],
+    "type": "tech_aspect",
+    "inputs": [
+      { "id": "largura_original", "label": "Largura de Referência (px)", "def": 1920, "type": "number" },
+      { "id": "altura_original", "label": "Altura de Referência (px)", "def": 1080, "type": "number" },
+      { "id": "nova_largura", "label": "Nova Largura Desejada (px)", "def": 1280, "type": "number" }
+    ],
+    "outputs": [
+      { "id": "proporcao", "label": "Aspect Ratio Equivalente", "isPrimary": true },
+      { "id": "nova_altura", "label": "Nova Altura Proporcional", "suff": " px" }
+    ],
+    "faq": [
+      { "q": "O que é aspect ratio?", "a": "É a proporção matemática entre a largura e a altura de uma tela ou imagem. Por exemplo, 1920x1080 é 16:9, que é a proporção widescreen padrão moderna." }
+    ]
+  },
+  {
+    "id": "conversor-bases",
+    "name": "Conversor de Bases Numéricas",
+    "description": "Converta números da base decimal clássica para sistemas binário, hexadecimal e octal.",
+    "category": "tecnologia",
+    "icon": "Sliders",
+    "tags": ["base", "conversor", "binário", "hexadecimal", "octal", "decimal", "computação", "ti"],
+    "type": "tech_base",
+    "inputs": [
+      { "id": "valor", "label": "Número Inteiro (Base Decimal)", "def": 42, "type": "number" },
+      {
+        "id": "base_destino",
+        "label": "Converter Para a Base:",
+        "def": "bin",
+        "type": "select",
+        "op": [
+          {"v": "bin", "l": "Binário (Base 2)"},
+          {"v": "hex", "l": "Hexadecimal (Base 16)"},
+          {"v": "oct", "l": "Octal (Base 8)"}
+        ]
+      }
+    ],
+    "outputs": [
+      { "id": "resultado", "label": "Resultado Convertido", "isPrimary": true }
+    ],
+    "faq": [
+      { "q": "Como funciona o sistema binário?", "a": "O sistema binário utiliza apenas os dígitos 0 e 1, que representam os estados desligado e ligado em circuitos eletrônicos digitais." }
+    ]
   }
-
 ];
 
 // PROGRAMMATIC GENERATOR OF RESTING 60 DYNAMIC CALCULATORS to complete exactly 100
@@ -6584,6 +6777,115 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
 
         results['patrimonio_alvo'] = parseFloat(target.toFixed(2));
         results['anos_restantes'] = parseFloat(Math.max(0, months / 12).toFixed(1));
+      }
+      else if (raw.type === 'sci_speed') {
+        const type = valInputs['calcular'] || 'velocidade';
+        const dist = parseFloat(valInputs['distancia'] || 0);
+        const time = parseFloat(valInputs['tempo'] || 0);
+        const speed = parseFloat(valInputs['velocidade'] || 0);
+
+        if (type === 'velocidade') {
+          results['resultado'] = parseFloat((dist / (time || 1)).toFixed(2));
+        } else if (type === 'distancia') {
+          results['resultado'] = parseFloat((speed * time).toFixed(2));
+        } else if (type === 'tempo') {
+          results['resultado'] = parseFloat((dist / (speed || 1)).toFixed(2));
+        }
+      }
+      else if (raw.type === 'sci_temp') {
+        const val = parseFloat(valInputs['valor'] || 0);
+        const from = valInputs['de'] || 'C';
+        const to = valInputs['para'] || 'F';
+
+        let tempC = val;
+        if (from === 'F') {
+          tempC = (val - 32) / 1.8;
+        } else if (from === 'K') {
+          tempC = val - 273.15;
+        }
+
+        let res = tempC;
+        if (to === 'F') {
+          res = tempC * 1.8 + 32;
+        } else if (to === 'K') {
+          res = tempC + 273.15;
+        }
+
+        results['resultado'] = parseFloat(res.toFixed(2));
+      }
+      else if (raw.type === 'sci_density') {
+        const type = valInputs['calcular'] || 'densidade';
+        const mass = parseFloat(valInputs['massa'] || 0);
+        const vol = parseFloat(valInputs['volume'] || 0);
+        const dens = parseFloat(valInputs['densidade'] || 0);
+
+        if (type === 'densidade') {
+          results['resultado'] = parseFloat((mass / (vol || 1)).toFixed(2));
+        } else if (type === 'massa') {
+          results['resultado'] = parseFloat((dens * vol).toFixed(2));
+        } else if (type === 'volume') {
+          results['resultado'] = parseFloat((mass / (dens || 1)).toFixed(2));
+        }
+      }
+      else if (raw.type === 'tech_download') {
+        const size = parseFloat(valInputs['tamanho_arquivo'] || 0);
+        const sizeUnit = valInputs['unidade_tamanho'] || 'MB';
+        const speed = parseFloat(valInputs['velocidade_internet'] || 0);
+        const speedUnit = valInputs['unidade_velocidade'] || 'Mbps';
+
+        let sizeBits = size * 8;
+        if (sizeUnit === 'GB') {
+          sizeBits = size * 1024 * 1024 * 1024 * 8;
+        } else {
+          sizeBits = size * 1024 * 1024 * 8;
+        }
+
+        let speedBps = speed;
+        if (speedUnit === 'Mbps') {
+          speedBps = speed * 1000 * 1000;
+        } else {
+          speedBps = speed * 1000;
+        }
+
+        const totalSecs = sizeBits / (speedBps || 1);
+        results['tempo_segundos'] = Math.round(totalSecs);
+
+        const hrs = Math.floor(totalSecs / 3600);
+        const mins = Math.floor((totalSecs % 3600) / 60);
+        const secs = Math.round(totalSecs % 60);
+
+        let formatted = '';
+        if (hrs > 0) {
+          formatted = `${hrs}h ${mins}m ${secs}s`;
+        } else if (mins > 0) {
+          formatted = `${mins}m ${secs}s`;
+        } else {
+          formatted = `${secs}s`;
+        }
+        results['tempo_formatado'] = formatted;
+      }
+      else if (raw.type === 'tech_aspect') {
+        const originalW = parseFloat(valInputs['largura_original'] || 1920);
+        const originalH = parseFloat(valInputs['altura_original'] || 1080);
+        const newW = parseFloat(valInputs['nova_largura'] || 1280);
+
+        const gcd = (x: number, y: number): number => (!y ? x : gcd(y, x % y));
+        const div = gcd(originalW, originalH) || 1;
+        
+        results['proporcao'] = `${Math.round(originalW / div)}:${Math.round(originalH / div)}`;
+        results['nova_altura'] = Math.round((newW * originalH) / (originalW || 1));
+      }
+      else if (raw.type === 'tech_base') {
+        const val = Math.floor(parseFloat(valInputs['valor'] || 0));
+        const target = valInputs['base_destino'] || 'bin';
+
+        if (target === 'bin') {
+          results['resultado'] = val.toString(2);
+        } else if (target === 'hex') {
+          results['resultado'] = val.toString(16).toUpperCase();
+        } else if (target === 'oct') {
+          results['resultado'] = val.toString(8);
+        }
       }
 return results;
     };

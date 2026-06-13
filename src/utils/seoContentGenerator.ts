@@ -37,7 +37,9 @@ export const CATEGORY_SLUG_MAP: Record<string, string> = {
   'construcao-reformas': 'construcao',
   'gastronomia-eventos': 'eventos',
   'energia-sustentabilidade': 'energia',
-  'educacao-enem': 'educacao'
+  'educacao-enem': 'educacao',
+  'quimica-fisica-ciencia': 'quimica_fisica',
+  'tecnologia-computacao': 'tecnologia'
 };
 
 export const CATEGORY_KEY_TO_SLUG: Record<string, string> = {
@@ -56,7 +58,9 @@ export const CATEGORY_KEY_TO_SLUG: Record<string, string> = {
   construcao: 'construcao-reformas',
   eventos: 'gastronomia-eventos',
   energia: 'energia-sustentabilidade',
-  educacao: 'educacao-enem'
+  educacao: 'educacao-enem',
+  quimica_fisica: 'quimica-fisica-ciencia',
+  tecnologia: 'tecnologia-computacao'
 };
 
 export const CATEGORY_MAP_RAW: Record<string, string> = {
@@ -75,7 +79,9 @@ export const CATEGORY_MAP_RAW: Record<string, string> = {
   construcao: 'Construção & Reformas',
   eventos: 'Gastronomia & Eventos',
   energia: 'Energia & Sustentabilidade',
-  educacao: 'Educação & ENEM'
+  educacao: 'Educação & ENEM',
+  quimica_fisica: 'Química & Física',
+  tecnologia: 'Tecnologia & Computação'
 };
 
 // Bespoke database for popular calculators (EEAT Content and intent FAQs)
@@ -206,6 +212,28 @@ const CATEGORY_SEO_DATABASE: Record<string, CategoryHubSeoContent> = {
       { q: 'Como funciona o contador de caracteres de texto?', a: 'Ele varre a string inserida e apresenta estatísticas sobre caracteres totais (com e sem espaços), número de palavras, parágrafos e estimativa média de tempo de leitura.' },
       { q: 'As ferramentas estatísticas suportam que tipos de dados?', a: 'Elas processam conjuntos de valores de amostras para obter a média aritmética, mediana, variância nominal e desvios padrão indicativos.' }
     ]
+  },
+  quimica_fisica: {
+    title: 'Calculadoras de Química e Física | Brasil Calculadoras',
+    description: 'Resolva problemas acadêmicos e científicos de física e química. Calcule velocidade média, converta temperaturas e determine a densidade da matéria.',
+    introduction: 'A química e a física formam as bases das ciências naturais e da engenharia. Resolver equações de movimento linear, compreender conversões térmicas de calor ou mensurar a densidade volumétrica de elementos químicos exige fórmulas matemáticas rígidas e precisão de decimais. Nossos simuladores científicos automatizam estas contas para estudantes e profissionais.',
+    importance: 'Cálculos científicos feitos manualmente estão sujeitos a erros de unidades de medida e aproximações de dízimas. O uso de equações pré-programadas com suporte a múltiplos inputs e conversões integradas de escalas térmicas e volumétricas garante estudos analíticos confiáveis em segundos.',
+    faq: [
+      { q: 'Como converter Celsius para Kelvin ou Fahrenheit?', a: 'Para Kelvin, soma-se 273,15 ao valor em Celsius. Para Fahrenheit, multiplica-se por 1,8 e soma-se 32. A calculadora faz estas conversões em tempo real.' },
+      { q: 'O que mede a densidade absoluta?', a: 'A densidade expressa a quantidade de massa de uma matéria presente em um determinado volume (d = m / V). É muito útil para identificar substâncias e prever flutuabilidade.' },
+      { q: 'Como calcular velocidade média de forma reversa?', a: 'Se você tiver a velocidade média e a distância, pode isolar o tempo (T = D / V). A ferramenta resolve qualquer uma das variáveis a partir das outras duas.' }
+    ]
+  },
+  tecnologia: {
+    title: 'Calculadoras de Tecnologia e Computação | Brasil Calculadoras',
+    description: 'Ferramentas de computação, TI e design digital. Estime tempo de download de arquivos, proporção de tela aspect ratio e conversão de bases numéricas.',
+    introduction: 'A infraestrutura de TI, o desenvolvimento de softwares e o design gráfico moderno exigem decisões rápidas sobre compressão de arquivos, taxas de transmissão de dados e redimensionamento de resoluções de telas. Esta central de tecnologia oferece ferramentas precisas para engenheiros, designers e desenvolvedores digitais.',
+    importance: 'Otimizar o tempo de download em servidores ou planejar o aspect ratio perfeito de layouts sem distorções visuais previne retrabalhos técnicos. Nossos utilitários computacionais geram estimativas reais baseadas em lógica binária, taxas de bits e proporções geométricas exatas.',
+    faq: [
+      { q: 'Por que o tempo de download estimado varia?', a: 'Fatores como oscilações de banda, latência de rede, qualidade do servidor que hospeda o arquivo e overhead de pacotes de dados TCP/IP alteram a taxa real de transferência.' },
+      { q: 'Como redimensionar imagens mantendo a proporção (Aspect Ratio)?', a: 'Multiplica-se a nova largura desejada pela altura original e divide-se pela largura original para obter a nova altura proporcional exata sem deformações.' },
+      { q: 'Quais bases são usadas na conversão numérica?', a: 'As bases clássicas são Decimal (base 10, uso diário), Binária (base 2, eletrônica digital), Hexadecimal (base 16, endereçamento de memória e cores web) e Octal (base 8, sistemas unix).' }
+    ]
   }
 };
 
@@ -245,6 +273,38 @@ const generateCategorySeoText = (calc: CalculatorDef): Partial<CalculatorSeoCont
   let faq: { q: string; a: string }[] = [];
 
   switch (category) {
+    case 'quimica_fisica':
+      whatIs = `A ciência exata nos permite compreender e metrificiar o comportamento da matéria e das forças no universo. A ferramenta **${name}** serve como um assistente de cálculo científico e acadêmico para estudantes de ensino médio, vestibulandos, professores ou profissionais técnicos. Com ela, equações complexas de transformações térmicas, cinemática básica e densidade volumétrica são simplificadas. O planejamento de experimentos de laboratório ou a resolução de tarefas de física e química tornam-se muito mais rápidos e menos sujeitos a erros manuais de aproximação ou conversão de escalas.`;
+      howItWorks = `A lógica interna da calculadora processa as grandezas inseridas em *${inputLabels}* de acordo com as constantes físicas universais (como a conversão de escala termométrica ou a relação de massa e volume). Ela realiza a equivalência matemática e apresenta os valores exatos de *${outputLabels}* de forma imediata.`;
+      practicalExample = `Ao preencher os campos com os valores experimentais da sua amostra (por exemplo, a massa em gramas e o volume em centímetros cúbicos), o sistema calcula instantaneamente o resultado final correspondente (como a densidade absoluta em g/cm³), servindo como contraprova analítica direta para seus estudos de laboratório.`;
+      whenToUse = `Use este simulador científico ao resolver exercícios escolares ou de vestibular, preparar relatórios práticos de química e física teórica, ou validar conversões rápidas de escalas de temperatura e deslocamentos lineares.`;
+      importantTips = `Certifique-se de inserir os valores utilizando as unidades de medidas especificadas nas caixas do formulário para evitar distorções de escala métrica nos resultados finais.`;
+      sources = [
+        { name: 'Portal da Física - Só Física', url: 'https://www.sofisica.com.br/' },
+        { name: 'Química Geral e Inorgânica - Só Química', url: 'https://www.soquimica.com.br/' }
+      ];
+      faq = [
+        { q: `Como interpretar o resultado do cálculo de ${name}?`, a: `Os resultados representam valores exatos baseados nas leis clássicas da termodinâmica, cinemática e propriedades da matéria, sob condições ideais de medição.` },
+        { q: 'Posso usar esta ferramenta para fins profissionais?', a: 'Sim, a precisão matemática atende a necessidades acadêmicas e de estimativas rápidas em rotinas de engenharia ou laboratório, embora não substitua laudos oficiais.' }
+      ];
+      break;
+
+    case 'tecnologia':
+      whatIs = `No dinâmico universo digital e da computação, a agilidade na conversão de dados e no dimensionamento técnico previne erros de infraestrutura de TI e problemas de layout em design e desenvolvimento web. A ferramenta **${name}** foi desenhada para programadores, administradores de sistemas, designers gráficos, profissionais de marketing e estudantes de computação. Ela otimiza processos cotidianos de cálculo de taxas de bits de transmissão de rede, ajuste de aspect ratio de telas responsivas e conversão ágil entre bases numéricas binária e hexadecimal.`;
+      howItWorks = `O sistema recebe as grandezas técnicas nos campos de *${inputLabels}* (como largura em pixels ou tamanho em Megabytes) e aplica algoritmos binários e aritméticos de conversão ou proporcionalidade geométrica. O motor de cálculo retorna as saídas precisas estruturadas em *${outputLabels}*.`;
+      practicalExample = `Ao planejar o upload de uma imagem ou vídeo para um site, você pode inserir as dimensões originais de referência e a nova largura pretendida. O algoritmo calcula de imediato a nova altura correspondente no aspect ratio exato (ex: 16:9), impedindo que a imagem seja exibida de forma esticada ou achatada na interface.`;
+      whenToUse = `Utilize este utilitário tecnológico ao configurar resoluções de telas e designs de interface responsiva, estimar o tempo necessário de download para transferência de grandes backups em rede, ou realizar conversões binárias de programação.`;
+      importantTips = `Lembre-se de diferenciar unidades de bits (velocidade) e bytes (armazenamento), já que 1 byte é composto por 8 bits, o que influencia diretamente cálculos de transmissão de dados.`;
+      sources = [
+        { name: 'W3C - Web Design & HTML Standards', url: 'https://www.w3.org/' },
+        { name: 'MDN Web Docs - MDN Mozilla Developer Network', url: 'https://developer.mozilla.org/' }
+      ];
+      faq = [
+        { q: `A ${name} suporta conversões com decimais?`, a: `Os cálculos de aspect ratio e download processam decimais perfeitamente. Já o conversor de bases numéricas opera estritamente com números inteiros positivos conforme as regras de conversão binária e hexadecimal.` },
+        { q: 'Como converter bits para bytes rapidamente?', a: 'Basta dividir o valor em bits por 8 para obter o equivalente em bytes. Exemplo: 80 Megabits por segundo (Mbps) equivalem a 10 Megabytes por segundo (MB/s) de taxa de download máxima.' }
+      ];
+      break;
+
     case 'agronegocio':
       whatIs = `O agronegócio moderno é impulsionado por tecnologia e análises exatas. A ferramenta **${name}** foi especialmente projetada para produtores rurais, agrônomos e gestores agrícolas que buscam maximizar a eficiência no campo. Através dela, é possível realizar diagnósticos rápidos sobre a plantação, solo e rebanho, reduzindo a incerteza climática e mercadológica. Planejar o manejo de insumos agrícolas e calcular variáveis do agronegócio de forma antecipada evita a escassez de recursos na lavoura ou desperdícios com superdosagem de corretivos e fertilizantes, gerando uma colheita mais uniforme e rentável.`;
       howItWorks = `O cálculo correlaciona dados técnicos de entrada como *${inputLabels}* para gerar previsões de rendimento. O motor de cálculo simula a produtividade por hectare ou massa biológica cruzando os fatores limitantes do solo e de nutrientes. A fórmula matemática interna processa as proporções e estima os valores correspondentes a *${outputLabels}*.`;
