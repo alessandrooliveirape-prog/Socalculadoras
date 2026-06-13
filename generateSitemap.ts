@@ -35,8 +35,8 @@ CALCULATORS_CATALOG.forEach((calc) => {
   <url>
     <loc>https://brasilcalculadoras.com.br/${calc.id}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
   </url>`;
 });
 

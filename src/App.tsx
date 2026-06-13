@@ -827,6 +827,12 @@ export default function App() {
     triggerToast('💬 Abrindo compartilhamento de WhatsApp...');
   };
 
+  const handleCopyShortLink = () => {
+    const link = `${window.location.origin}/${activeCalculator}`;
+    navigator.clipboard.writeText(link);
+    triggerToast('🔗 Link direto desta calculadora copiado para a área de transferência!');
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/50 flex flex-col font-sans leading-relaxed text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
       
@@ -986,13 +992,7 @@ export default function App() {
         {/* AdSense Top Header Banner - Displayed on the user interface */}
         <div className="w-full">
           <AdSenseBanner 
-            category={
-              activeCalculator === 'juros-compostos' || activeCalculator === 'clt-pj' || activeCalculator === 'margem-lucro'
-                ? 'financas'
-                : activeCalculator === 'imc'
-                ? 'saude'
-                : 'produtividade'
-            }
+            category={activeCalc?.category || 'financas'}
             layout="horizontal"
             onAdClicked={handleAdClicked}
             refreshTrigger={adRefreshTrigger}
@@ -1104,6 +1104,16 @@ export default function App() {
               onClearHistory={handleClearHistory}
               onSelectEntry={handleSelectHistoryEntry}
             />
+
+            {/* AdSense Vertical Banner in the sidebar (Visible only on Desktop) */}
+            <div className="hidden lg:block w-full mt-2">
+              <AdSenseBanner 
+                category={activeCalc?.category || 'financas'}
+                layout="vertical"
+                onAdClicked={handleAdClicked}
+                refreshTrigger={adRefreshTrigger + 20}
+              />
+            </div>
           </aside>
 
           {/* Active Calculator Workstation Space */}
@@ -1368,6 +1378,14 @@ export default function App() {
 
                       <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0 justify-end">
                         <button
+                          onClick={handleCopyShortLink}
+                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                          title="Copiar link direto para esta calculadora"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          <span>Copiar Link</span>
+                        </button>
+                        <button
                           onClick={handleCopyResults}
                           className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
                           title="Copiar text formatado pronto"
@@ -1613,13 +1631,7 @@ export default function App() {
             {/* AdSense Secondary banner footer container */}
             <div className="w-full mt-4">
               <AdSenseBanner 
-                category={
-                  activeCalculator === 'juros-compostos' || activeCalculator === 'clt-pj' || activeCalculator === 'margem-lucro'
-                    ? 'financas'
-                    : activeCalculator === 'imc'
-                    ? 'saude'
-                    : 'produtividade'
-                }
+                category={activeCalc?.category || 'financas'}
                 layout="horizontal"
                 onAdClicked={handleAdClicked}
                 refreshTrigger={adRefreshTrigger + 10} // different trigger to alternate ads

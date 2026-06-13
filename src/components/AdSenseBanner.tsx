@@ -1,211 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, Info, Award, BarChart3, Coins, Eye, MousePointerClick, TrendingUp } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { CalculatorCategory, AdCampaign } from '../types';
-
-// Let's define some highly realistic, high-value contextual mock ads
-const AD_CAMPAIGNS: AdCampaign[] = [
-  // Finanças
-  {
-    id: 'ad-finance-1',
-    title: 'XP Prime: Invista com Assessoria Premium',
-    description: 'Transforme o resultado do seu patrimônio com assessores dedicados. Abra sua conta grátis.',
-    cta: 'Começar Agora',
-    imageUrl: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    category: 'financas',
-    sponsor: 'XP Investimentos'
-  },
-  {
-    id: 'ad-finance-2',
-    title: 'Contabilidade Simplificada para PJ',
-    description: 'Abra sua empresa com mensalidades de R$ 89/mês. Tudo integrado e sem burocracia.',
-    cta: 'Falar com Consultor',
-    imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    category: 'financas',
-    sponsor: 'Contabilizei'
-  },
-  // Saúde
-  {
-    id: 'ad-health-1',
-    title: 'Whey Protein Isolado 100% Puro',
-    description: 'Máxima absorção para ganho de massa muscular magra. Frete grátis para todo o Brasil neste mês.',
-    cta: 'Garantir Desconto',
-    imageUrl: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    category: 'saude',
-    sponsor: 'Growth Supplements'
-  },
-  {
-    id: 'ad-health-2',
-    title: 'Plano de Saúde Empresarial a partir de R$ 79',
-    description: 'Coparticipação inteligente e cobertura nacional integral. Cote agora para seus funcionários.',
-    cta: 'Fazer Cotação',
-    imageUrl: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    category: 'saude',
-    sponsor: 'Amil Saúde'
-  },
-  // Produtividade
-  {
-    id: 'ad-prod-1',
-    title: 'Monday.com: Organize seus Projetos Rápidos',
-    description: 'Economize tempo gerenciando tarefas da equipe em um dashboard visual incrível.',
-    cta: 'Teste Grátis',
-    imageUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    category: 'produtividade',
-    sponsor: 'Monday PM'
-  },
-  {
-    id: 'ad-prod-2',
-    title: 'Curso de Excel Avançado & Power BI',
-    description: 'Seja o profissional mais requisitado do time com análises visuais e relatórios dinâmicos.',
-    cta: 'Ver Cronograma',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    category: 'produtividade',
-    sponsor: 'Vasco Cursos'
-  }
-];
+import React, { useEffect } from 'react';
+import { Award, BarChart3, Coins, Eye, MousePointerClick, TrendingUp } from 'lucide-react';
+import { CalculatorCategory } from '../types';
 
 interface AdSenseBannerProps {
   category: CalculatorCategory;
   layout?: 'horizontal' | 'vertical' | 'square';
   onAdClicked?: () => void;
-  refreshTrigger?: number; // Whenever this increments, trigger refresh simulation
+  refreshTrigger?: number;
+  adSlot?: string; // Optional Google AdSense Slot ID
+}
+
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
 }
 
 export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
   category,
   layout = 'horizontal',
   onAdClicked,
-  refreshTrigger = 0
+  refreshTrigger = 0,
+  adSlot
 }) => {
-  const [currentAd, setCurrentAd] = useState<AdCampaign>(AD_CAMPAIGNS[0]);
 
-  // Filter ads for the current active category (or fall back to random if 'todos')
   useEffect(() => {
-    const activeCategory = category === 'todos' ? 'financas' : category;
-    const filtered = AD_CAMPAIGNS.filter(ad => ad.category === activeCategory);
-    const randomIndex = Math.floor(Math.random() * filtered.length);
-    setCurrentAd(filtered[randomIndex] || AD_CAMPAIGNS[0]);
-  }, [category, refreshTrigger]);
-
-  const handleAdClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (onAdClicked) {
-      onAdClicked();
+    try {
+      if (typeof window !== 'undefined') {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    } catch (e) {
+      // Ignore adsbygoogle push errors (common with ad blockers)
+      console.warn('AdSense load blocked or failed:', e);
     }
-    // Simulate opening sponsor URL in safe way
-    window.open('https://google.com/adsense', '_blank', 'noopener,noreferrer');
-  };
+  }, [category, refreshTrigger, adSlot]);
 
-  const bannerStyle = layout === 'horizontal' 
-    ? 'w-full min-h-[90px] md:min-h-[100px] flex flex-col md:flex-row items-center border border-dashed border-gray-200 rounded-xl bg-gray-50/50 p-3 md:p-4 overflow-hidden relative'
+  // Styling rules for containers
+  const containerStyle = layout === 'horizontal'
+    ? 'w-full min-h-[90px] md:min-h-[100px] flex flex-col justify-center items-center border border-dashed border-slate-200 rounded-xl bg-slate-50/40 p-2 relative overflow-hidden select-none'
     : layout === 'vertical'
-    ? 'w-full md:w-[280px] h-auto flex flex-col border border-dashed border-gray-200 rounded-xl bg-gray-50/50 p-4 sticky top-6 overflow-hidden relative'
-    : 'w-full aspect-square flex flex-col border border-dashed border-gray-200 rounded-xl bg-gray-50/50 p-4 overflow-hidden relative';
+    ? 'w-full md:w-[240px] lg:w-[280px] h-[600px] flex flex-col justify-center items-center border border-dashed border-slate-200 rounded-xl bg-slate-50/40 p-4 sticky top-6 overflow-hidden select-none'
+    : 'w-full aspect-square flex flex-col justify-center items-center border border-dashed border-slate-200 rounded-xl bg-slate-50/40 p-4 relative overflow-hidden select-none';
 
   return (
-    <div className={bannerStyle}>
-      {/* Brand Header */}
-      <div className="absolute top-1.5 left-2 flex items-center gap-1.5 z-10">
-        <span className="bg-yellow-100 text-yellow-800 text-[8px] font-bold px-1.5 py-0.5 rounded-sm select-none">Ad</span>
-        <span className="text-[9px] font-medium text-gray-400 tracking-wide font-sans uppercase">Google AdSense</span>
-        <span className="text-[9px] font-mono text-gray-300 h-2 w-2 rounded-full bg-green-400 block animate-pulse"></span>
+    <div 
+      className={containerStyle}
+      onClick={() => {
+        if (onAdClicked) onAdClicked();
+      }}
+    >
+      {/* Small Ad Badge Indicator */}
+      <div className="absolute top-1.5 left-2 flex items-center gap-1 z-10">
+        <span className="bg-slate-200 text-slate-500 text-[8px] font-bold px-1 py-0.5 rounded-xs tracking-wider uppercase">Publicidade</span>
       </div>
 
-      {layout === 'horizontal' ? (
-        <div className="flex flex-col sm:flex-row items-stretch gap-4 w-full h-full pt-4 md:pt-0">
-          {/* Ad Image */}
-          <div className="hidden sm:block w-24 md:w-28 shrink-0 relative overflow-hidden rounded-md border border-gray-200/60 bg-gray-100">
-            <img 
-              src={currentAd.imageUrl} 
-              alt={currentAd.sponsor}
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover"
-            />
-          </div>
+      {/* Google AdSense ins tag */}
+      <div className="w-full h-full flex items-center justify-center min-h-[50px]">
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', width: '100%', height: '100%' }}
+          data-ad-client="ca-pub-8160658026927094"
+          data-ad-slot={adSlot || "default-slot"}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </div>
 
-          {/* Ad Text */}
-          <div className="flex-1 flex flex-col justify-center min-w-0 pr-2">
-            <div className="flex items-center gap-2 mb-0.5">
-              <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
-                {currentAd.sponsor}
-              </h4>
-            </div>
-            <p className="text-sm font-semibold text-slate-800 leading-snug truncate sm:whitespace-normal sm:line-clamp-1">
-              {currentAd.title}
-            </p>
-            <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">
-              {currentAd.description}
-            </p>
-          </div>
-
-          {/* Ad Action CTA */}
-          <div className="shrink-0 flex items-center justify-end sm:justify-center">
-            <a
-              href="https://google.com/adsense"
-              target="_blank"
-              rel="nofollow noopener noreferrer sponsored"
-              onClick={() => {
-                if (onAdClicked) onAdClicked();
-              }}
-              className="px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 active:scale-95 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-sm shadow-slate-100"
-            >
-              <span>{currentAd.cta}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </div>
-      ) : (
-        // Vertical or Square Layout
-        <div className="flex flex-col h-full pt-4 justify-between">
-          <div className="flex-1 flex flex-col gap-3">
-            {/* Ad Image */}
-            <div className="relative overflow-hidden rounded-lg border border-gray-200/60 bg-gray-100 w-full aspect-[16/9]">
-              <img 
-                src={currentAd.imageUrl} 
-                alt={currentAd.sponsor}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Ad Text */}
-            <div className="flex flex-col gap-1 pr-2">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{currentAd.sponsor}</span>
-              <p className="text-sm font-bold text-slate-800 leading-snug">{currentAd.title}</p>
-              <p className="text-xs text-gray-500 leading-relaxed">{currentAd.description}</p>
-            </div>
-          </div>
-
-          {/* Ad Action CTA */}
-          <div className="mt-4">
-            <a
-              href="https://google.com/adsense"
-              target="_blank"
-              rel="nofollow noopener noreferrer sponsored"
-              onClick={() => {
-                if (onAdClicked) onAdClicked();
-              }}
-              className="w-full py-2.5 px-4 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 active:scale-95 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm shadow-slate-100"
-            >
-              <span>{currentAd.cta}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </div>
-      )}
+      {/* Fallback label if Google AdSense is not loaded / blocked */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40 bg-slate-50/10">
+        <span className="text-[10px] font-medium text-slate-400 font-sans tracking-wide">
+          {layout === 'horizontal' ? 'Espaço de Publicidade' : 'Espaço Publicitário'}
+        </span>
+      </div>
     </div>
   );
 };
 
 // AdSense Simulation Summary Dashboard Widget for Publishers
-// This gives highly valuable, engaging interactive data explaining the AdSense model
 interface AdSensePublisherDashboardProps {
   stats: {
     impressions: number;
     clicks: number;
-    ctr: number; // in percent
-    rpm: number; // in BRL
-    earnings: number; // in BRL
+    ctr: number;
+    rpm: number;
+    earnings: number;
   };
   onOptimize: () => void;
 }
