@@ -292,21 +292,6 @@ export default function App() {
         }
       };
 
-      const faqItems = seoData.faq.map((item: any) => ({
-        "@type": "Question",
-        "name": item.q,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": item.a
-        }
-      }));
-      const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "@id": `${canonicalUrl}#faq`,
-        "mainEntity": faqItems
-      };
-
       const catLabel = CATEGORY_MAP_RAW[calc.category] || calc.category;
       const catSlug = CATEGORY_KEY_TO_SLUG[calc.category] || '';
       const breadcrumbSchema = {
@@ -335,7 +320,7 @@ export default function App() {
         ]
       };
 
-      script.textContent = JSON.stringify([softwareSchema, faqSchema, breadcrumbSchema]);
+      script.textContent = JSON.stringify([softwareSchema, breadcrumbSchema]);
     } catch (e) {
       console.warn('Failed to inject calculator schema:', e);
     }
@@ -360,21 +345,6 @@ export default function App() {
         "url": canonicalUrl
       };
 
-      const faqItems = hubData.faq.map((item: any) => ({
-        "@type": "Question",
-        "name": item.q,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": item.a
-        }
-      }));
-      const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "@id": `${canonicalUrl}#faq`,
-        "mainEntity": faqItems
-      };
-
       const breadcrumbSchema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -395,7 +365,7 @@ export default function App() {
         ]
       };
 
-      script.textContent = JSON.stringify([collectionSchema, faqSchema, breadcrumbSchema]);
+      script.textContent = JSON.stringify([collectionSchema, breadcrumbSchema]);
     } catch (e) {
       console.warn('Failed to inject category schema:', e);
     }
