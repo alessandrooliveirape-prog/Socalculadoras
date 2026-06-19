@@ -5,7 +5,7 @@ export const buildHistorySummary = (payload: CalcStatePayload) => {
   let inputsObj: any = {};
   let outputsObj: any = {};
   
-  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rule3Results, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs } = payload;
+  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rule3Results, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs, porcentagemSimplesResults, financiamentoVeiculoResults } = payload;
     if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
       summaryText = `Valor Final: R$ ${compoundInterestResults.finalAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}. Lucro acumulado em juros de R$ ${compoundInterestResults.totalInterest.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
       inputsObj = { finalAmount: compoundInterestResults.finalAmount };
@@ -33,6 +33,14 @@ export const buildHistorySummary = (payload: CalcStatePayload) => {
       summaryText = aposentadoriaINSSResults.canRetireAtAll 
         ? 'Trabalhador elegível para se aposentar sob as regras de transição!'
         : `Faltam ${aposentadoriaINSSResults.yearsToMinAge} anos de idade para atingir o requisito mínimo previdenciário.`;
+    } else if (activeCalculator === 'porcentagem-simples' && porcentagemSimplesResults) {
+      summaryText = `Resultado: R$ ${porcentagemSimplesResults.resultado.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} (${porcentagemSimplesResults.operacao === 'calcular' ? 'Calcular' : porcentagemSimplesResults.operacao === 'adicionar' ? 'Somar' : 'Descontar'} ${porcentagemSimplesResults.percentual}% de R$ ${porcentagemSimplesResults.valor.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}).`;
+      inputsObj = { valor: porcentagemSimplesResults.valor, percentual: porcentagemSimplesResults.percentual, operacao: porcentagemSimplesResults.operacao };
+      outputsObj = { resultado: porcentagemSimplesResults.resultado };
+    } else if (activeCalculator === 'financiamento-veiculo' && financiamentoVeiculoResults) {
+      summaryText = `Prestação: R$ ${financiamentoVeiculoResults.valor_parcela.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}/mês em ${financiamentoVeiculoResults.parcelas}x. Total juros: R$ ${financiamentoVeiculoResults.juros_totais.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
+      inputsObj = { valor_veiculo: financiamentoVeiculoResults.valor_veiculo, entrada: financiamentoVeiculoResults.entrada, taxa_mensal: financiamentoVeiculoResults.taxa_mensal, parcelas: financiamentoVeiculoResults.parcelas };
+      outputsObj = { valor_parcela: financiamentoVeiculoResults.valor_parcela, total_pago: financiamentoVeiculoResults.total_pago, juros_totais: financiamentoVeiculoResults.juros_totais };
     } else if (activeCalcDef?.isDynamic && dynamicCalcOutputs) {
       const primaryOut = activeCalcDef.outputs?.find(out => out.isPrimary) || activeCalcDef.outputs?.[0];
       const val = dynamicCalcOutputs[primaryOut?.id || ''];

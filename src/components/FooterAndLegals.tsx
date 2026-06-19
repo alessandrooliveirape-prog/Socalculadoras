@@ -34,9 +34,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           {/* Brand Col */}
           <div className="md:col-span-4 flex flex-col gap-4 select-none">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-blue-500 text-white flex items-center justify-center font-bold">
-                S
-              </div>
+              <img src="/logo.svg" alt="Brasil Calculadoras" className="h-8 w-8 rounded-lg shadow-sm" />
               <h3 className="text-md font-display font-extrabold text-white">Brasil Calculadoras</h3>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">

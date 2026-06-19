@@ -161,6 +161,153 @@ const CORE_SEO_DATABASE: Record<string, Partial<CalculatorSeoContent>> = {
       { q: 'Como funciona a multa de 40% do FGTS?', a: 'Nas demissões sem justa causa, o empregador deve pagar uma multa rescisória de 40% calculada sobre o total de depósitos feitos na conta de FGTS do funcionário ao longo de todo o contrato.' },
       { q: 'O que acontece na rescisão por acordo comum?', a: 'Na rescisão consensual (Art. 484-A da CLT), a multa do FGTS cai para 20%, o aviso prévio indenizado é pago pela metade (50%) e o trabalhador pode movimentar até 80% do saldo do FGTS.' }
     ]
+  },
+  'calculadora-de-decimo-terceiro': {
+    title: 'Calculadora de Décimo Terceiro Salário Online | Brasil Calculadoras',
+    description: 'Calcule o valor bruto e líquido do décimo terceiro salário (1ª e 2ª parcelas), estimando os descontos de INSS e Imposto de Renda (IRRF).',
+    whatIs: 'O décimo terceiro salário, oficialmente conhecido como gratificação natalina, é um direito constitucional garantido a todos os trabalhadores brasileiros sob o regime CLT. Ele consiste no pagamento de um salário extra ao final de cada ano trabalhado (ou proporcional aos meses de serviço). Esta calculadora permite simular o valor exato a receber na primeira parcela (paga sem descontos de tributos entre fevereiro e novembro) e na segunda parcela (paga até 20 de dezembro com as deduções fiscais de INSS e IRRF).',
+    howItWorks: 'O cálculo baseia-se na divisão do salário bruto por 12 e multiplicação pelo número de meses trabalhados no ano (sendo considerado mês completo a fração igual ou superior a 15 dias de serviço). A primeira parcela equivale a exatamente 50% do valor bruto proporcional. A segunda parcela desconta o INSS (tabela progressiva) e o IRRF (tabela progressiva com dedução por dependente) calculados sobre o bruto total, subtraindo o valor já pago na primeira parcela.',
+    practicalExample: 'Para um profissional com salário de R$ 3.000,00 e 12 meses de trabalho: a primeira parcela será de R$ 1.500,00 líquidos. Na segunda parcela, calcula-se o desconto de INSS (~R$ 280,00) e IRRF (~R$ 60,00) sobre o bruto de R$ 3.000,00. O total líquido anual devido é R$ 2.660,00. Deduzindo os R$ 1.500,00 já adiantados, a segunda parcela líquida final a receber será de R$ 1.160,00.',
+    whenToUse: 'Utilize esta calculadora para planejar o recebimento das gratificações natalinas da empresa, projetar suas finanças de fim de ano ou auditar o holerite de pagamento do 13º salário emitido pelo RH.',
+    importantTips: 'Adicionais como horas extras, comissões, periculosidade e adicional noturno entram na média física para compor o salário bruto base do décimo terceiro salário.',
+    sources: [
+      { name: 'Gratificação Natalina - Lei 4.090/62', url: 'http://www.planalto.gov.br/ccivil_03/leis/l4090.htm' },
+      { name: 'Direitos Trabalhistas 13º Salário - TST', url: 'https://www.tst.jus.br/guia-do-trabalhador-13-salario' }
+    ],
+    faq: [
+      { q: 'Até quando a empresa deve pagar a primeira parcela?', a: 'A legislação trabalhista estabelece que o adiantamento da primeira parcela deve ser pago pelo empregador entre 1º de fevereiro e 30 de novembro de cada ano.' },
+      { q: 'Até quando deve ser paga a segunda parcela?', a: 'O pagamento da segunda parcela (com todos os descontos tributários incidentes) deve ser feito pela empresa obrigatoriamente até o dia 20 de dezembro.' },
+      { q: 'Posso pedir o adiantamento do 13º nas férias?', a: 'Sim, o trabalhador pode solicitar o pagamento da primeira parcela por ocasião de suas férias, desde que faça o requerimento por escrito ao empregador durante o mês de janeiro del respectivo ano.' },
+      { q: 'Quem tem direito a receber o décimo terceiro?', a: 'Todos os trabalhadores sob regime CLT, servidores públicos, aposentados e pensionistas do INSS com mais de 15 dias trabalhados na empresa.' }
+    ]
+  },
+  'calculadora-de-ferias-clt': {
+    title: 'Calculadora de Férias CLT Online | Brasil Calculadoras',
+    description: 'Calcule o valor líquido de férias com abono de um terço constitucional, descontos de INSS/IRRF e venda de férias (abono pecuniário).',
+    whatIs: 'O direito a férias anuais remuneradas é assegurado pela Constituição Federal e pela CLT após cada período de 12 meses de trabalho (período aquisitivo). As férias compreendem a remuneração integral acrescida de pelo menos um terço constitucional (1/3). Esta calculadora de férias CLT permite simular os dias de descanso (usualmente 30 dias), calcular a opção de vender uma parte das férias (abono pecuniário de até 10 dias) e deduzir as taxas correspondentes de INSS e Imposto de Renda.',
+    howItWorks: 'O cálculo soma o salário bruto proporcional aos dias de férias gozados e adiciona o valor correspondente a 1/3 do total de férias. Caso haja a venda de férias, soma-se o abono pecuniário (10 dias de salário bruto) mais 1/3 deste abono. Deduzem-se progressivamente as alíquotas de INSS e IRRF incidentes sobre a remuneração de férias (o abono pecuniário e seu 1/3 são isentos de imposto de renda e INSS por lei).',
+    practicalExample: 'Com um salário de R$ 3.000,00 gozando 30 dias de férias simples: o bruto de férias é R$ 3.000,00 + R$ 1.000,00 (1/3 constitucional), totalizando R$ 4.000,00. Descontam-se INSS (~R$ 410,00) e IRRF (~R$ 170,00). O valor líquido a receber pelo trabalhador antes do início do descanso será de cerca de R$ 3.420,00.',
+    whenToUse: 'Use ao planejar o seu período de descanso anual, ao decidir se vale a pena vender 10 dias de férias (abono pecuniário) ou para conferir o holerite de férias emitido pelo empregador.',
+    importantTips: 'O pagamento das férias e do terço constitucional deve ser efetuado pelo empregador até 2 dias úteis antes do início do período de gozo das férias.',
+    sources: [
+      { name: 'Das Férias Anuais - CLT Capítulo IV', url: 'http://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm' },
+      { name: 'Manual de Férias do Trabalhador - TST', url: 'https://www.tst.jus.br/' }
+    ],
+    faq: [
+      { q: 'O que é o abono pecuniário de férias?', a: 'É a conversão de 1/3 do período de férias a que o trabalhador tem direito em valor financeiro, popularmente chamada de "venda de férias" (limite máximo de 10 dias).' },
+      { q: 'Férias vendidas pagam imposto de renda?', a: 'Não, o abono pecuniário (dias vendidos) e o seu respectivo terço constitucional têm caráter indenizatório e são totalmente isentos de desconto de INSS e Imposto de Renda.' },
+      { q: 'O empregador pode decidir quando o trabalhador tira férias?', a: 'Sim, a data de concessão das férias é de decisão exclusiva do empregador, que deve conciliar a escala de descansos com as necessidades operacionais da empresa.' },
+      { q: 'Faltas injustificadas reduzem os dias de férias?', a: 'Sim. Se o trabalhador tiver mais de 5 faltas não justificadas no período aquisitivo, o limite de 30 dias de férias começa a ser reduzido progressivamente pelas regras da CLT.' }
+    ]
+  },
+  'calculadora-de-horas-extras': {
+    title: 'Calculadora de Horas Extras Grátis | Brasil Calculadoras',
+    description: 'Calcule o valor das horas extras trabalhadas com adicionais de 50%, 100% ou percentuais específicos, incluindo reflexo no DSR.',
+    whatIs: 'O trabalho realizado além da jornada ordinária diária estabelecida no contrato de trabalho do profissional deve ser remunerado com acréscimo legal. Conforme a CLT, a hora extra comum deve valer no mínimo 50% mais que a hora normal em dias úteis, e 100% mais em domingos e feriados nacionais. Esta calculadora permite descobrir o valor preciso a ser adicionado à sua folha bruta mensal a partir do salário base e do número de horas excedentes realizadas.',
+    howItWorks: 'Primeiro, divide-se o salário bruto contratual pelo limite de horas mensais (normalmente 220 horas para jornadas de 44h semanais) para obter o valor da hora normal de trabalho. Depois, aplica-se o adicional sobre a hora normal (ex: hora normal * 1,5 para 50%). Multiplica-se o resultado pelo número de horas extras trabalhadas. Finalmente, calcula-se o reflexo obrigatório no Descanso Semanal Remunerado (DSR).',
+    practicalExample: 'Com salário de R$ 2.200,00 (hora normal = R$ 10,00) e 10 horas extras com 50% de adicional: o valor unitário da hora extra é R$ 15,00. O bruto das horas extras é R$ 150,00. Se no mês houverem 25 dias úteis e 5 domingos/feriados, calcula-se o DSR: (R$ 150,00 / 25) * 5 = R$ 30,00 de acréscimo. O total bruto na folha de pagamento será de R$ 180,00.',
+    whenToUse: 'Utilize esta ferramenta ao realizar expedientes extras ou plantões corporativos para conferir se o pagamento em folha está sendo feito corretamente pela empresa.',
+    importantTips: 'O limite diário de horas extras permitido pela CLT é de até 2 horas por dia, mediante acordo individual ou convenção coletiva de trabalho.',
+    sources: [
+      { name: 'Jornada de Trabalho e Horas Extras - CLT Art. 59', url: 'http://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm' },
+      { name: 'Súmula 172 do TST - Horas Extras e DSR', url: 'https://www.tst.jus.br/' }
+    ],
+    faq: [
+      { q: 'Como funciona o cálculo do DSR sobre horas extras?', a: 'O valor total das horas extras do mês é dividido pelos dias úteis (incluindo sábados) e multiplicado pelos domingos e feriados do respectivo mês.' },
+      { q: 'Quem tem direito a receber horas extras?', a: 'Todos os empregados regidos pela CLT que possuem controle de ponto, excluindo-se cargos de gerência (confiança), teletrabalho sem controle e prestadores PJ.' },
+      { q: 'Qual a diferença entre hora extra a 50% e 100%?', a: 'O adicional de 50% é o mínimo exigido por lei para dias úteis (segunda a sábado). O adicional de 100% aplica-se ao trabalho realizado em domingos e feriados nacionais não compensados.' },
+      { q: 'Como o banco de horas afeta a hora extra?', a: 'Se a empresa possuir acordo de Banco de Horas válido, as horas excedentes podem ser compensadas por folgas equivalentes em vez de pagas em dinheiro na folha de pagamento.' }
+    ]
+  },
+  'imc': {
+    title: 'Calculadora de IMC e Taxa Metabólica Basal | Brasil Calculadoras',
+    description: 'Calcule seu Índice de Massa Corporal (IMC) e taxa metabólica basal para planejar sua dieta e bem-estar corporal.',
+    whatIs: 'O Índice de Massa Corporal (IMC) é a métrica padrão internacional adotada pela Organização Mundial da Saúde (OMS) para avaliar o peso corpóreo em relação à altura e diagnosticar graus de subnutrição, peso saudável, sobrepeso ou obesidade. A Taxa Metabólica Basal (TMB), por sua vez, expressa o gasto calórico mínimo que o corpo humano exige para manter suas funções vitais ativas em estado de repouso absoluto. Juntas, estas medidas guiam rotinas de emagrecimento, ganho de massa ou simples reeducação física.',
+    howItWorks: 'O IMC é calculado dividindo o peso (kg) pela altura ao quadrado (m²): IMC = Peso / (Altura * Altura). A Taxa Metabólica Basal utiliza as fórmulas de Harris-Benedict ou Mifflin-St Jeor, cruzando idade, sexo biológico, peso e altura, e multiplicando pelo fator de atividade diária para encontrar a Meta de Calorias Diárias (TDEE).',
+    practicalExample: 'Para um homem de 30 anos, 1,80m de altura e peso de 80kg: o IMC será 80 / (1,80)² = 24,7 (classificado como Peso Saudável/Normal). Sua Taxa Metabólica Basal estimada será de cerca de 1.800 kcal diárias de repouso. Se ele praticar atividade física moderada, sua necessidade diária de calorias para manutenção de peso será de cerca de 2.450 kcal.',
+    whenToUse: 'Use ao iniciar rotinas esportivas, planejar dietas nutricionais com contagem de macronutrientes ou acompanhar flutuações de gordura e peso corpóreo.',
+    importantTips: 'O IMC é um indicador populacional e não distingue massa gorda de massa muscular, devendo atletas de musculação focar na avaliação de percentual de gordura física.',
+    sources: [
+      { name: 'Classificação de IMC - OMS (Organização Mundial da Saúde)', url: 'https://www.who.int/' },
+      { name: 'Necessidades Nutricionais - Ministério da Saúde do Brasil', url: 'https://www.gov.br/saude/pt-br' }
+    ],
+    faq: [
+      { q: 'Quais são as faixas de classificação do IMC?', a: 'Abaixo de 18,5 (Abaixo do peso), 18,5 a 24,9 (Normal/Saudável), 25 a 29,9 (Sobrepeso), 30 a 34,9 (Obesidade Grau 1), 35 a 39,9 (Obesidade Grau 2) e acima de 40 (Obesidade Grau 3).' },
+      { q: 'O que é Taxa Metabólica Basal (TMB)?', a: 'É a quantidade de energia (calorias) que o corpo gasta apenas para respirar, manter órgãos vitais funcionando e circular sangue, sem qualquer movimento físico.' },
+      { q: 'Como a atividade física altera a minha necessidade calórica?', a: 'Multiplica-se a TMB pelo fator de atividade (sedentário = 1.2, moderado = 1.55, intenso = 1.9) para achar o gasto diário total (TDEE).' },
+      { q: 'Qual a quantidade de água recomendada por dia?', a: 'A estimativa médica básica é de 35ml de água para cada quilo corporal (Ex: 80kg de peso necessita de aproximadamente 2,8 litros de água ao dia).' }
+    ]
+  },
+  'regra-tres': {
+    title: 'Calculadora de Regra de Três Rápida | Brasil Calculadoras',
+    description: 'Resolva proporções matemáticas simples e inversas de grandezas diretamente ou inversamente proporcionais em segundos.',
+    whatIs: 'A regra de três simples é um método matemático prático utilizado para encontrar um valor desconhecido em uma relação de proporcionalidade entre quatro valores, dos quais três são conhecidos. Ela é amplamente aplicada na física, química, economia, culinária e em tarefas diárias escolares. A proporcionalidade pode ser direta (quando o aumento de uma grandeza gera o aumento da outra) ou inversa (quando o aumento de uma gera a redução da outra).',
+    howItWorks: 'Mapeiam-se três valores conhecidos (A, B e C) e a incógnita X. Na proporcionalidade direta, a relação é cruzada: X = (C * B) / A. Na proporcionalidade inversa (onde as grandezas crescem de forma oposta), a relação é linear: X = (A * B) / C.',
+    practicalExample: 'Se um carro consome 10 litros de combustível para percorrer 120 km (proporção direta), quantos litros consumirá para percorrer 300 km? Montando a regra de três: 10 L está para 120 km, assim como X L está para 300 km. O cálculo cruzado resulta em: X = (300 * 10) / 120 = 25 litros de combustível.',
+    whenToUse: 'Utilize esta ferramenta ao ajustar porções em receitas de cozinha, converter moedas e escalas de desenhos técnicos, simular consumos de combustível em viagens ou resolver listas escolares.',
+    importantTips: 'Sempre identifique se a relação entre as duas variáveis é direta ou inversa antes de iniciar a multiplicação dos valores.',
+    sources: [
+      { name: 'Portal da Matemática - Só Matemática', url: 'https://www.somatematica.com.br/' },
+      { name: 'Khan Academy - Razões e Proporções', url: 'https://pt.khanacademy.org/' }
+    ],
+    faq: [
+      { q: 'Qual a diferença entre proporção direta e inversa?', a: 'Na proporção direta, se uma variável dobra, a outra também dobra. Na proporção inversa, se uma variável dobra, a outra cai pela metade (ex: velocidade vs tempo).' },
+      { q: 'Como montar uma regra de três simples?', a: 'Alinhe as grandezas de mesma espécie na mesma coluna (ex: quilos embaixo de quilos, reais embaixo de reais), trace as relações e resolva a equação.' },
+      { q: 'Posso usar decimais nas contas?', a: 'Sim, a calculadora suporta qualquer valor decimal positivo ou negativo nos inputs para apurar a resposta matemática com precisão.' }
+    ]
+  },
+  'porcentagem-simples': {
+    title: 'Calculadora de Porcentagem Rápida e Simples | Brasil Calculadoras',
+    description: 'Calcule porcentagem de valores, acréscimos, descontos e variações relativas percentuais com precisão decimal.',
+    whatIs: 'A porcentagem representa uma razão cujo denominador é 100, ou seja, uma fração de uma grandeza comparada a cem partes. Ela está presente em descontos de lojas, taxas de juros de cartões, crescimento populacional e na maior parte dos relatórios comerciais. Esta calculadora ajuda a resolver operações cotidianas como extrair a porcentagem de um número bruto, adicionar um acréscimo percentual ou aplicar um desconto promocional sobre um preço original.',
+    howItWorks: 'A porcentagem simples multiplica o valor pelo percentual dividido por 100: Resultado = Valor * (Percentual / 100). Para acréscimos, soma-se a diferença ao valor base. Para descontos, subtrai-se a diferença.',
+    practicalExample: 'Ao comprar um casaco de R$ 200,00 com desconto promocional de 15%: a diferença descontada é R$ 200,00 * (15/100) = R$ 30,00. O preço líquido final a pagar na loja será de: R$ 200,00 - R$ 30,00 = R$ 170,00.',
+    whenToUse: 'Use ao calcular o desconto de produtos em lojas, calcular a taxa de corretagem ou comissão de vendas, estimar juros de contas atrasadas ou apurar lucros relativos corporativos.',
+    importantTips: 'Para somar um percentual rapidamente de cabeça, multiplique o valor por 1,XX (onde XX é o percentual). Ex: R$ 100 com 15% de aumento é 100 * 1,15 = R$ 115.',
+    sources: [
+      { name: 'Porcentagem - Matemática Básica', url: 'https://matematicabasica.net/' }
+    ],
+    faq: [
+      { q: 'O que significa porcentagem?', a: 'Significa "por cento", ou seja, uma divisão de um número por 100. Representa uma proporção em relação a um todo de 100 partes.' },
+      { q: 'Como calcular porcentagem na calculadora comum?', a: 'Digite o valor base, aperte a tecla de multiplicação (*), digite a porcentagem desejada e pressione a tecla de porcentagem (%) ou divida por 100.' },
+      { q: 'Como funciona o cálculo de variação percentual?', a: 'Mede a diferença entre um valor final e inicial dividida pelo valor inicial e multiplicada por 100, indicando o crescimento ou queda relativa.' }
+    ]
+  },
+  'financiamento-veiculo': {
+    title: 'Simulador de Financiamento de Veículo (CDC) | Brasil Calculadoras',
+    description: 'Simule parcelas de financiamento de carros ou motos na tabela Price (CDC), taxas de juros e tabela de amortização.',
+    whatIs: 'O financiamento de veículos no Brasil é feito majoritariamente pelo Crédito Direto ao Consumidor (CDC), onde o banco empresta o valor necessário para a compra e o automóvel fica alienado como garantia fiduciária até a quitação. Esta calculadora de financiamento de veículo permite simular o valor das prestações mensais fixas de acordo com a taxa de juros do banco, deduzindo a entrada e demonstrando o total de juros acumulado ao final do contrato de parcelamento.',
+    howItWorks: 'A simulação deduz o valor de entrada do preço de tabela do carro para achar o saldo devedor financiado. Em seguida, aplica a fórmula Price de parcelamento com juros compostos: Parcela = Financiado * [i * (1+i)^n] / [(1+i)^n - 1], onde i é a taxa de juros mensal e n é a quantidade de parcelas.',
+    practicalExample: 'Financiando um automóvel de R$ 50.000,00 com entrada de R$ 15.000,00 (financiamento de R$ 35.000,00) in 48 meses a uma taxa de juros de 1,8% ao mês: a prestação mensal fixa calculada é de R$ 1.103,13. Ao final dos 4 anos de contrato, o valor total pago nas parcelas será de R$ 52.950,24, gerando um total de juros nominais pagos ao banco de R$ 17.950,24.',
+    whenToUse: 'Use antes de ir à concessionária comprar um carro ou moto para verificar o impacto dos juros compostos no saldo de parcelamento e avaliar o impacto das parcelas no orçamento mensal.',
+    importantTips: 'Prefira sempre dar uma entrada maior. Reduzir o saldo financiado inicial diminui drasticamente a bola de neve de juros acumulados sobre juros ao final de prazos de longo prazo (como 48 ou 60 meses).',
+    sources: [
+      { name: 'Tabela Fipe - Avaliação de Carros', url: 'https://veiculos.fipe.org.br/' },
+      { name: 'Banco Central do Brasil - Juros de Financiamento', url: 'https://www.bcb.gov.br/' }
+    ],
+    faq: [
+      { q: 'O que é o Custo Efetivo Total (CET)?', a: 'É a taxa real anual que engloba não apenas a taxa de juros nominal do financiamento, mas todos os impostos de IOF, tarifas de cadastro bancário (TAC) e seguros obrigatórios.' },
+      { q: 'Posso amortizar parcelas de trás para frente?', a: 'Sim, a legislação garante o direito de antecipar o pagamento de parcelas futuras com desconto proporcional de todos os juros compostos embutidos na prestação.' },
+      { q: 'O que acontece se eu atrasar a parcela?', a: 'Serão aplicadas taxas adicionais de multa por atraso (geralmente 2%) mais juros de mora diários e, após prazos prolongados, o banco pode iniciar a busca e apreensão do veículo.' }
+    ]
+  },
+  'simulador-de-aposentadoria-inss': {
+    title: 'Simulador de Aposentadoria INSS e Previdência | Brasil Calculadoras',
+    description: 'Simule seu tempo de contribuição previdenciária e projete estimativas de elegibilidade para aposentadoria pelas regras de transição.',
+    whatIs: 'A aposentadoria pelo Regime Geral de Previdência Social (RGPS/INSS) sofreu mudanças significativas com a Reforma da Previdência (EC 103/2019). O direito de se aposentar passou a combinar idade mínima, tempo de contribuição previdenciária e regras de transição de transição de pedágio ou pontos. Este simulador ajuda a calcular o tempo acumulado de contribuição e prever cenários informais de elegibilidade para o benefício previdenciário público.',
+    howItWorks: 'O simulador cruza o gênero do segurado com a idade atual e o tempo de contribuição já acumulado em anos. Avalia o preenchimento dos limites regulamentares para a regra de transição por pontos (idade + contribuição) ou idade mínima progressiva, indicando a elegibilidade estimada para a concessão do benefício previdenciário.',
+    practicalExample: 'Uma mulher com 62 anos de idade e 15 anos de contribuição previdenciária atinge a idade mínima exigida pela regra geral de aposentadoria urbana do INSS. Se o mesmo cálculo for feito para uma trabalhadora com menor tempo de serviço ou idade inferior, o simulador apontará o tempo restante de contribuição em meses para atingir as metas regulamentares.',
+    whenToUse: 'Utilize esta ferramenta de planejamento previdenciário para estimar cenários informais de aposentabilidade e planejar contribuições futuras individuais.',
+    importantTips: 'O simulador é de caráter educativo e simulação. O tempo real de contribuição oficial, períodos especiais e laudos de insalubridade devem ser validados exclusivamente através do sistema oficial "Meu INSS".',
+    sources: [
+      { name: 'Reforma da Previdência - Emenda Constitucional 103', url: 'http://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm' },
+      { name: 'Meu INSS - Serviços da Previdência Social', url: 'https://meu.inss.gov.br/' }
+    ],
+    faq: [
+      { q: 'Qual a idade mínima para se aposentar no INSS hoje?', a: 'Após as regras de transição completas pós-reforma, a idade mínima geral urbana é de 62 anos para mulheres e 65 anos para homens, com o tempo mínimo de contribuição de 15 anos para mulheres e 20 anos para homens.' },
+      { q: 'Como funciona a aposentadoria por pontos?', a: 'A soma da idade do trabalhador com o seu tempo de contribuição deve atingir um valor mínimo progressivo anual estabelecido pelas regras de transição da previdência pública.' },
+      { q: 'Período militar ou rural conta como contribuição?', a: 'Sim, o período de serviço militar obrigatório ou o tempo trabalhado como segurado especial rural podem ser averbados no INSS para aumentar o tempo total de contribuição.' }
+    ]
   }
 };
 
@@ -233,6 +380,42 @@ const CATEGORY_SEO_DATABASE: Record<string, CategoryHubSeoContent> = {
       { q: 'Por que o tempo de download estimado varia?', a: 'Fatores como oscilações de banda, latência de rede, qualidade do servidor que hospeda o arquivo e overhead de pacotes de dados TCP/IP alteram a taxa real de transferência.' },
       { q: 'Como redimensionar imagens mantendo a proporção (Aspect Ratio)?', a: 'Multiplica-se a nova largura desejada pela altura original e divide-se pela largura original para obter a nova altura proporcional exata sem deformações.' },
       { q: 'Quais bases são usadas na conversão numérica?', a: 'As bases clássicas são Decimal (base 10, uso diário), Binária (base 2, eletrônica digital), Hexadecimal (base 16, endereçamento de memória e cores web) e Octal (base 8, sistemas unix).' }
+    ]
+  },
+  veiculos: {
+    title: 'Calculadoras de Veículos, Gastos e Combustível | Brasil Calculadoras',
+    description: 'Simuladores automotivos para motoristas e proprietários. Calcule comparação de álcool vs gasolina, depreciação de preço FIPE, gastos de combustível de viagens e estimativa de IPVA.',
+    introduction: 'Compreender o custo real de posse e operação de veículos é vital para o orçamento pessoal e a gestão de frotas comerciais. Gastos com combustíveis, desvalorização nominal anual, tributos como IPVA e despesas mecânicas costumam ser subestimados por motoristas. Nossas ferramentas automotivas trazem precisão matemática imediata para ajudar você a decidir qual combustível abastecer, projetar despesas de viagens interestaduais e simular taxas de financiamento de contratos CDC de automóveis.',
+    importance: 'Calcular despesas veiculares previne gastos extras e otimiza a escolha de rotas e frotas de transporte. Utilizar estimativas com taxas médias de consumo e a variação da tabela FIPE permite negociar veículos com maior segurança comercial e planejar orçamentos anuais de licenciamento sem surpresas no caixa.',
+    faq: [
+      { q: 'Como funciona a calculadora de álcool ou gasolina?', a: 'Em termos de eficiência energética, o etanol rende em média 70% da gasolina. O algoritmo divide o preço do álcool pelo da gasolina. Se o resultado for menor que 0,70, abastecer com álcool é economicamente vantajoso.' },
+      { q: 'O que é a depreciação da Tabela FIPE?', a: 'É a desvalorização média que os veículos sofrem no mercado nacional ao longo do tempo, usada como referência oficial para contratos de seguros, tributação de IPVA e revenda.' },
+      { q: 'Como estimar o consumo de combustível para uma viagem?', a: 'Multiplique a distância total de ida e volta pelo preço do combustível e divida pelo rendimento médio do veículo (km por litro) sob condições urbanas ou de rodovia.' },
+      { q: 'Quais custos adicionais de viagens rodoviárias devo prever?', a: 'Além do combustível, lembre-se de somar tarifas de pedágios, custos proporcionais de desgaste de pneus e manutenções mecânicas por km rodado.' }
+    ]
+  },
+  imobiliario: {
+    title: 'Calculadoras Imobiliárias, Financiamento e Aluguel | Brasil Calculadoras',
+    description: 'Simuladores completos para compra, locação e investimentos em imóveis. Compare financiamento Price vs SAC, reajuste de aluguel (IGP-M/IPCA), taxa ITBI e Cap Rate.',
+    introduction: 'A aquisição ou locação de imóveis representa uma das maiores movimentações de capital na vida de um indivíduo ou corporação. Escolher entre sistemas de amortização SAC ou Price, calcular o rendimento líquido de aluguéis (Cap Rate) ou estimar impostos municipais de transferência (ITBI) exige cálculos de longo prazo que impactam diretamente o patrimônio de famílias e investidores. Nossos simuladores imobiliários trazem clareza matemática instantânea para subsidiar suas decisões.',
+    importance: 'Realizar simulações imobiliárias completas impede a contratação de juros abusivos e orienta o investidor a maximizar sua taxa de retorno. A amortização planejada e o conhecimento prévio de taxas de cartório e de impostos previnem quebras de contrato de compra e venda e garantem investimentos sustentáveis.',
+    faq: [
+      { q: 'Qual a diferença básica de amortização entre SAC e Price?', a: 'No sistema SAC (Sistema de Amortização Constante), as prestações iniciais são mais altas e decrescem ao longo do contrato, pois a amortização do saldo devedor é constante. Na Tabela Price, as parcelas são fixas do início ao fim, mas amortizam menos capital nas primeiras parcelas.' },
+      { q: 'O que é Cap Rate e como calcular no mercado imobiliário?', a: 'É a taxa de retorno anual de um imóvel alugado. É calculada dividindo o faturamento líquido anual do aluguel pelo valor total de mercado do imóvel.' },
+      { q: 'Qual índice é mais usado para reajuste de aluguéis no Brasil?', a: 'Historicamente, o IGP-M (FGV) é o mais utilizado nos contratos de locação. No entanto, muitos acordos modernos adotam o IPCA (IBGE) por refletir melhor a inflação oficial ao consumidor.' },
+      { q: 'Como calcular o imposto de ITBI na compra do imóvel?', a: 'O ITBI é um tributo municipal que varia entre 2% e 4% do valor venal de referência do imóvel ou do valor de transação declarada, dependendo da cidade onde o bem está localizado.' }
+    ]
+  },
+  aposentadoria: {
+    title: 'Simuladores de Aposentadoria, Previdência e INSS | Brasil Calculadoras',
+    description: 'Planeje seu futuro e independência financeira. Calcule o tempo de contribuição para aposentadoria do INSS, previdência privada, acúmulo de patrimônio e renda passiva de viver de renda.',
+    introduction: 'Garantir um futuro estável e alcançar a independência financeira exige planejamento precoce e entendimento das regras previdenciárias e financeiras nacionais. As sucessivas reformas previdenciárias brasileiras trouxeram regras de transição por pontos e idade mínima progressiva, tornando o cálculo do tempo necessário para se aposentar pelo INSS um desafio. Ao mesmo tempo, estruturar planos de previdência privada ou carteiras de investimentos para viver de renda passiva exige o cálculo de juros reais descontados da inflação.',
+    importance: 'O planejamento de longo prazo previne a dependência financeira no futuro e otimiza as contribuições ao INSS. Simular o patrimônio mínimo necessário para viver de renda permite estabelecer metas anuais claras de aportes e aportes complementares de acordo com o padrão de vida almejado.',
+    faq: [
+      { q: 'Quais são as principais regras de transição da aposentadoria do INSS?', a: 'Incluem a transição por pontuação (soma de idade e tempo de contribuição), a idade mínima progressiva, o pedágio de 50% para contratos perto da data antiga e o pedágio de 100% para novos regimes.' },
+      { q: 'Qual a diferença entre previdência complementar PGBL e VGBL?', a: 'O PGBL permite abater até 12% da renda tributável anual na declaração completa do IR, sendo tributado sobre o total acumulado no resgate. O VGBL não permite deduções, mas o imposto incide exclusivamente sobre o lucro gerado.' },
+      { q: 'O que é a regra dos 4% (ou SWR) para viver de renda passiva?', a: 'É uma métrica financeira que sugere que você pode retirar com segurança 4% do valor total da sua carteira de investimentos no primeiro ano de aposentadoria, reajustado pela inflação nos anos seguintes, sem exaurir o patrimônio por 30 anos.' },
+      { q: 'Qual o teto máximo de pagamento de benefício do INSS?', a: 'É o valor limite estabelecido anualmente pelo governo federal para as aposentadorias do Regime Geral. Contribuições acima deste limite não elevam o valor do benefício final.' }
     ]
   }
 };

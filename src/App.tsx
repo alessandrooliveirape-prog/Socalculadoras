@@ -43,6 +43,9 @@ import { HorasExtrasCalc } from './components/HorasExtrasCalc';
 import { AposentadoriaINSSCalc } from './components/AposentadoriaINSSCalc';
 import { GenericDynamicCalc } from './components/GenericDynamicCalc';
 import { FooterAndLegals } from './components/FooterAndLegals';
+import { HomepageView } from './components/HomepageView';
+import { SimplePercentageCalc } from './components/SimplePercentageCalc';
+import { CarFinanceCalc } from './components/CarFinanceCalc';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
@@ -59,14 +62,15 @@ import { logSeoInteraction } from './utils/seoMonitor';
 
 const Breadcrumbs: React.FC<{ catKey?: string; calcName?: string; catSlug?: string }> = ({ catKey, calcName, catSlug }) => {
   if (!catKey) return null;
+  const [_, setLocation] = useLocation();
   const catLabel = CATEGORY_MAP_RAW[catKey] || catKey;
   return (
     <nav className="flex items-center gap-1.5 text-[11px] font-sans text-slate-400 font-semibold mb-4 bg-white/70 border border-slate-200/50 p-2.5 px-4 rounded-xl shadow-xs w-fit select-none">
-      <span className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => window.location.assign('/')}>Início</span>
+      <span className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setLocation('/')}>Início</span>
       <span className="text-slate-300">/</span>
       {calcName ? (
         <>
-          <span className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => window.location.assign('/' + catSlug)}>{catLabel}</span>
+          <span className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setLocation('/' + catSlug)}>{catLabel}</span>
           <span className="text-slate-300">/</span>
           <span className="text-slate-700">{calcName}</span>
         </>
@@ -194,6 +198,8 @@ export default function App() {
   const [feriasCLTResults, setFeriasCLTResults] = useState<any>(null);
   const [horasExtrasResults, setHorasExtrasResults] = useState<any>(null);
   const [aposentadoriaINSSResults, setAposentadoriaINSSResults] = useState<any>(null);
+  const [porcentagemSimplesResults, setPorcentagemSimplesResults] = useState<any>(null);
+  const [financiamentoVeiculoResults, setFinanciamentoVeiculoResults] = useState<any>(null);
 
   // Simulated ad stats states
   const [adImpressions, setAdImpressions] = useState(24);
@@ -373,6 +379,68 @@ export default function App() {
 
   // Dynamic Page Title & SEO Meta Updates on calculator or category change
   useEffect(() => {
+    const isHome = location === '/' || location === '';
+    if (isHome) {
+      const homeTitle = 'Brasil Calculadoras | Calculadoras Online Gratuitas Finanças, Trabalho e Saúde';
+      const homeDesc = 'Calculadoras online gratuitas para finanças, trabalho, saúde, estudos, veículos e muito mais. Simulações rápidas, sem cadastro e 100% gratuitas.';
+      const canonicalUrl = 'https://brasilcalculadoras.com.br/';
+
+      document.title = homeTitle;
+
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', homeDesc);
+
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonicalUrl);
+
+      updateMetaTag('property', 'og:title', homeTitle);
+      updateMetaTag('property', 'og:description', homeDesc);
+      updateMetaTag('property', 'og:url', canonicalUrl);
+      updateMetaTag('property', 'og:type', 'website');
+
+      updateMetaTag('name', 'twitter:card', 'summary_large_image');
+      updateMetaTag('name', 'twitter:title', homeTitle);
+      updateMetaTag('name', 'twitter:description', homeDesc);
+
+      // Schema injection for Homepage
+      try {
+        let script = document.getElementById('jsonld-seo') as HTMLScriptElement;
+        if (!script) {
+          script = document.createElement('script');
+          script.id = 'jsonld-seo';
+          script.type = 'application/ld+json';
+          document.head.appendChild(script);
+        }
+        const homepageSchema = {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Brasil Calculadoras",
+          "url": "https://brasilcalculadoras.com.br/",
+          "description": homeDesc,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://brasilcalculadoras.com.br/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        };
+        script.textContent = JSON.stringify(homepageSchema);
+      } catch (e) {}
+
+      logSeoInteraction('/', 'view');
+      setAdRefreshTrigger(prev => prev + 1);
+      return;
+    }
+
     if (activeCategoryHub) {
       const hubData = getCategoryHubContent(activeCategoryHub);
       const canonicalUrl = `https://brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
@@ -415,9 +483,7 @@ export default function App() {
     if (!activeCalc) return;
 
     const seoData = getSeoContentForCalculator(activeCalc);
-    const canonicalUrl = window.location.pathname === '/' || window.location.pathname === ''
-      ? 'https://brasilcalculadoras.com.br/'
-      : `https://brasilcalculadoras.com.br/${activeCalculator}`;
+    const canonicalUrl = `https://brasilcalculadoras.com.br/${activeCalculator}`;
 
     document.title = seoData.title;
 
@@ -565,6 +631,14 @@ export default function App() {
     setAposentadoriaINSSResults(results);
   }, []);
 
+  const handlePorcentagemSimplesCalc = React.useCallback((results: any) => {
+    setPorcentagemSimplesResults(results);
+  }, []);
+
+  const handleFinanciamentoVeiculoCalc = React.useCallback((results: any) => {
+    setFinanciamentoVeiculoResults(results);
+  }, []);
+
   const handleDynamicCalc = React.useCallback((inputs: Record<string, any>, outputs: Record<string, any>) => {
     setDynamicCalcInputs(inputs);
     setDynamicCalcOutputs(outputs);
@@ -586,7 +660,9 @@ export default function App() {
     horasExtrasResults,
     aposentadoriaINSSResults,
     dynamicCalcInputs,
-    dynamicCalcOutputs
+    dynamicCalcOutputs,
+    porcentagemSimplesResults,
+    financiamentoVeiculoResults
   });
 
   // Save current operation to historical log
@@ -690,12 +766,15 @@ export default function App() {
     if (activeCalculator === 'calculadora-de-ferias-clt') return !!feriasCLTResults;
     if (activeCalculator === 'calculadora-de-horas-extras') return !!horasExtrasResults;
     if (activeCalculator === 'simulador-de-aposentadoria-inss') return !!aposentadoriaINSSResults;
+    if (activeCalculator === 'porcentagem-simples') return !!porcentagemSimplesResults;
+    if (activeCalculator === 'financiamento-veiculo') return !!financiamentoVeiculoResults;
     if (activeCalc?.isDynamic) return Object.keys(dynamicCalcOutputs).length > 0;
     return false;
   }, [
     activeCalculator, activeCalc, compoundInterestResults, cltVsPjResults, profitMarginResults,
     healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults,
-    horasExtrasResults, aposentadoriaINSSResults, dynamicCalcOutputs
+    horasExtrasResults, aposentadoriaINSSResults, dynamicCalcOutputs, porcentagemSimplesResults,
+    financiamentoVeiculoResults
   ]);
 
   const getShareableText = () => {
@@ -740,6 +819,19 @@ export default function App() {
     } else if (activeCalculator === 'simulador-de-aposentadoria-inss' && aposentadoriaINSSResults) {
       text += `• Elegível para Aposentadoria: ${aposentadoriaINSSResults.canRetireAtAll ? 'SIM' : 'NÃO'}\n`;
       text += `• Idade Mínima Previdenciária: ${aposentadoriaINSSResults.canRetireByAge ? 'Atingida' : 'Pendente'}\n`;
+    } else if (activeCalculator === 'porcentagem-simples' && porcentagemSimplesResults) {
+      text += `• Valor Base: R$ ${porcentagemSimplesResults.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• Operação: ${porcentagemSimplesResults.operacao === 'calcular' ? 'Porcentagem' : porcentagemSimplesResults.operacao === 'adicionar' ? 'Soma' : 'Desconto'}\n`;
+      text += `• Percentual: ${porcentagemSimplesResults.percentual}%\n`;
+      text += `• Resultado Final: R$ ${porcentagemSimplesResults.resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+    } else if (activeCalculator === 'financiamento-veiculo' && financiamentoVeiculoResults) {
+      text += `• Valor do Veículo: R$ ${financiamentoVeiculoResults.valor_veiculo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• Entrada: R$ ${financiamentoVeiculoResults.entrada.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• Taxa de Juros: ${financiamentoVeiculoResults.taxa_mensal}% a.m.\n`;
+      text += `• Parcelas: ${financiamentoVeiculoResults.parcelas}x\n`;
+      text += `• Prestação Mensal: R$ ${financiamentoVeiculoResults.valor_parcela.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• Juros Totais: R$ ${financiamentoVeiculoResults.juros_totais.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• Total Pago: R$ ${financiamentoVeiculoResults.total_pago.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
     } else if (activeCalc?.isDynamic && dynamicCalcOutputs) {
       activeCalc.outputs?.forEach(out => {
         const val = dynamicCalcOutputs[out.id];
@@ -970,8 +1062,22 @@ export default function App() {
           />
         </div>
 
-        {/* Central Core Workstation split layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {location === '/' || location === '' ? (
+          <HomepageView 
+            onSelectCalculator={selectCalculator}
+            onSelectCategory={(catKey) => {
+              const slug = CATEGORY_KEY_TO_SLUG[catKey];
+              if (slug) {
+                setLocation('/' + slug);
+              } else {
+                setActiveCategory(catKey);
+              }
+            }}
+            categoryCounts={categoryCounts}
+          />
+        ) : (
+          /* Central Core Workstation split layout */
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Side Drawer menu - Categories selector list */}
           <aside className={`lg:col-span-3 flex-col gap-5 ${menuOpen ? 'flex fixed inset-y-0 left-0 bg-white w-72 p-6 z-50 border-r shadow-2xl overflow-y-auto' : 'hidden lg:flex'}`}>
@@ -1317,7 +1423,13 @@ export default function App() {
                   {activeCalculator === 'simulador-de-aposentadoria-inss' && (
                     <AposentadoriaINSSCalc onCalculate={handleAposentadoriaINSSCalc} />
                   )}
-                  {activeCalc?.isDynamic && (
+                  {activeCalculator === 'porcentagem-simples' && (
+                    <SimplePercentageCalc onCalculate={handlePorcentagemSimplesCalc} />
+                  )}
+                  {activeCalculator === 'financiamento-veiculo' && (
+                    <CarFinanceCalc onCalculate={handleFinanciamentoVeiculoCalc} />
+                  )}
+                  {activeCalc?.isDynamic && activeCalculator !== 'porcentagem-simples' && activeCalculator !== 'financiamento-veiculo' && (
                     <GenericDynamicCalc 
                       calculator={activeCalc}
                       onCalculate={handleDynamicCalc}
@@ -1700,6 +1812,7 @@ export default function App() {
 
           </section>
         </div>
+        )}
       </main>
 
       {/* Advanced AdSense and LGPD Compliant Footer with Modals */}
@@ -1729,4 +1842,6 @@ export interface CalcStatePayload {
   aposentadoriaINSSResults: any;
   dynamicCalcInputs: any;
   dynamicCalcOutputs: any;
+  porcentagemSimplesResults?: any;
+  financiamentoVeiculoResults?: any;
 }
