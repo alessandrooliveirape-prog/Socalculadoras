@@ -386,6 +386,13 @@
     <changefreq>daily</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- Simulador Move Brasil -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/move-brasil</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
   <!-- Avaliação Custos de Seguro -->
   <url>
     <loc>https://brasilcalculadoras.com.br/seguro-perfil</loc>

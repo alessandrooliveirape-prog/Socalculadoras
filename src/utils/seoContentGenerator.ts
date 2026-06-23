@@ -291,6 +291,25 @@ const CORE_SEO_DATABASE: Record<string, Partial<CalculatorSeoContent>> = {
       { q: 'O que acontece se eu atrasar a parcela?', a: 'Serão aplicadas taxas adicionais de multa por atraso (geralmente 2%) mais juros de mora diários e, após prazos prolongados, o banco pode iniciar a busca e apreensão do veículo.' }
     ]
   },
+  'move-brasil': {
+    title: 'Simulador de Financiamento Move Brasil | Brasil Calculadoras',
+    description: 'Simule parcelas e juros do Programa Move Brasil para taxistas e motoristas de aplicativo com taxas exclusivas de 11,5% e 12,5% ao ano.',
+    whatIs: 'O Programa Move Brasil é uma iniciativa do Governo Federal destinada a facilitar a renovação de frota de motoristas de aplicativo e taxistas em todo o país. O programa viabiliza uma linha de crédito especial, financiada pelo BNDES e operada por instituições financeiras parceiras, com orçamento global de até R$ 30 bilhões. A linha é focada na aquisição de automóveis novos (zero quilômetro) mais eficientes e ecológicos, tais como modelos flex, híbridos ou puramente elétricos, limitados ao valor de mercado de R$ 150.000,00 por veículo.',
+    howItWorks: 'O simulador do Move Brasil calcula o valor das parcelas mensais utilizando as taxas de juros nominais máximas autorizadas pelo Conselho Monetário Nacional (CMN): 11,5% ao ano (equivalente a aproximadamente 0,91% ao mês) para mulheres beneficiárias e até 12,5% ao ano (equivalente a aproximadamente 0,99% ao mês) para homens. O saldo devedor é obtido deduzindo o valor da entrada informada sobre o valor total do automóvel, distribuindo as parcelas fixas pela Tabela Price tradicional.',
+    practicalExample: 'Ao simular a compra de um carro novo de R$ 100.000,00 com uma entrada de R$ 20.000,00 (financiando R$ 80.000,00) em um prazo de 48 meses: se a beneficiária for mulher (taxa de 0,91% a.m.), o valor da parcela mensal estimada é de R$ 2.062,56, com um total pago de R$ 119.002,88 (sendo R$ 19.002,88 de juros). Comparado a um financiamento comum de mercado à taxa de 22% a.a. (~1,67% a.m.), onde a parcela seria de R$ 2.445,63 e o total de juros de R$ 37.390,24, a economia gerada pelo programa federal é de mais de R$ 18.387,36.',
+    whenToUse: 'Esta calculadora deve ser utilizada por motoristas de aplicativos (como Uber, 99) e taxistas credenciados que desejam planejar a troca de seus veículos de trabalho sob as regras vigentes de juros bonificados do BNDES.',
+    importantTips: 'Para participar do Move Brasil, motoristas de aplicativo devem comprovar cadastro ativo na plataforma por no mínimo 12 meses e um histórico de pelo menos 100 corridas no período. O cadastro inicial de elegibilidade deve ser feito no site oficial do Governo Federal antes da análise de crédito nos bancos.',
+    sources: [
+      { name: 'Portal Oficial Move Brasil - Gov.br', url: 'https://www.gov.br/movebrasil' },
+      { name: 'BNDES - Coleção de Financiamento', url: 'https://www.bndes.gov.br/' }
+    ],
+    faq: [
+      { q: 'Quem tem direito ao financiamento do Move Brasil?', a: 'Têm direito taxistas ativos registrados e motoristas de transporte por aplicativo com cadastro ativo há pelo menos 12 meses e mínimo de 100 corridas concluídas nesse período.' },
+      { q: 'Quais são as taxas de juros para mulheres e homens?', a: 'Para apoiar o empreendedorismo feminino, as taxas são de até 11,5% ao ano (0,91% ao mês) para mulheres e de até 12,5% ao ano (0,99% ao mês) para homens.' },
+      { q: 'Como fazer o cadastro no Move Brasil?', a: 'O cadastro de elegibilidade é realizado de forma 100% digital pelo portal gov.br/movebrasil. Após a aprovação do cadastro da categoria, o motorista escolhe o banco parceiro credenciado para a análise de crédito.' },
+      { q: 'Qual o valor máximo do carro a ser financiado?', a: 'O programa financia veículos zero quilômetro com valor de venda de até R$ 150.000,00 que se enquadrem nas regras de sustentabilidade (flex, híbridos ou elétricos).' }
+    ]
+  },
   'simulador-de-aposentadoria-inss': {
     title: 'Simulador de Aposentadoria INSS e Previdência | Brasil Calculadoras',
     description: 'Simule seu tempo de contribuição previdenciária e projete estimativas de elegibilidade para aposentadoria pelas regras de transição.',

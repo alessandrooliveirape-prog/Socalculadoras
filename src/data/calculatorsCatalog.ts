@@ -130,7 +130,7 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base';
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base';
   inputs: { id: string; label: string; def: any; type: 'number' | 'select' | 'text'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
@@ -1535,6 +1535,102 @@ const RAW_DYNAMIC_METADATA: {
     {
       "q": "O que é o financiamento tipo CDC?",
       "a": "No Crédito Direto ao Consumidor (CDC), o comprador pega um empréstimo direto com o banco para pagar o vendedor e o veículo fica alienado ao banco até a quitação da última parcela."
+    }
+  ]
+},
+{
+  "id": "move-brasil",
+  "name": "Simulador Move Brasil",
+  "description": "Simule as parcelas e juros do programa federal de financiamento e renovação de frota para taxistas e motoristas de aplicativo.",
+  "category": "veiculos",
+  "icon": "Car",
+  "tags": [
+    "move brasil",
+    "financiamento",
+    "aplicativo",
+    "taxista",
+    "bndes",
+    "crédito"
+  ],
+  "type": "vei_move_brasil",
+  "inputs": [
+    {
+      "id": "valor_veiculo",
+      "label": "Valor do Veículo (máx. R$ 150.000)",
+      "def": 100000,
+      "type": "number",
+      "pref": "R$"
+    },
+    {
+      "id": "entrada",
+      "label": "Valor de Entrada",
+      "def": 20000,
+      "type": "number",
+      "pref": "R$"
+    },
+    {
+      "id": "genero",
+      "label": "Gênero do Beneficiário",
+      "def": "mulher",
+      "type": "select",
+      "op": [
+        {
+          "v": "mulher",
+          "l": "Mulher (Taxa de 11,5% a.a. / 0,91% a.m.)"
+        },
+        {
+          "v": "homem",
+          "l": "Homem (Taxa de 12,5% a.a. / 0,99% a.m.)"
+        }
+      ]
+    },
+    {
+      "id": "prazo",
+      "label": "Prazo do Financiamento",
+      "def": 48,
+      "type": "number",
+      "suff": "meses"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "valor_parcela",
+      "label": "Prestação Mensal (Tabela Price)",
+      "pref": "R$",
+      "isPrimary": true
+    },
+    {
+      "id": "total_pago",
+      "label": "Valor Total Pago (Financiado + Entrada)",
+      "pref": "R$"
+    },
+    {
+      "id": "juros_totais",
+      "label": "Total de Juros Pagos",
+      "pref": "R$"
+    },
+    {
+      "id": "economia_juros",
+      "label": "Economia Estimada vs Mercado",
+      "pref": "R$"
+    }
+  ],
+  "faq": [
+    {
+      "q": "O que é o programa Move Brasil?",
+      "a": "O Move Brasil é um programa do Governo Federal para incentivar a renovação de frotas de taxistas e motoristas de aplicativo através de linhas de financiamento de até R$ 30 bilhões com juros reduzidos."
+    },
+    {
+      "q": "Quem pode solicitar o financiamento do Move Brasil?",
+      "a": "Taxistas registrados ativos e motoristas de aplicativo cadastrados há pelo menos 12 meses com no mínimo 100 corridas realizadas no período."
+    },
+    {
+      "q": "Quais são as taxas de juros do programa?",
+      "a": "As taxas máximas definidas pelo CMN são de 11,5% ao ano (0,91% ao mês) para mulheres e de 12,5% ao ano (0,99% ao mês) para homens."
+    },
+    {
+      "q": "Quais carros são elegíveis para o Move Brasil?",
+      "a": "Veículos novos (0km) com valor de até R$ 150.000, que atendam a critérios de eficiência energética e sustentabilidade (flex, híbridos ou elétricos)."
     }
   ]
 },
@@ -6245,6 +6341,34 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         results['valor_parcela'] = parseFloat(pmt.toFixed(2));
         results['total_pago'] = parseFloat((total + ent).toFixed(2));
         results['juros_totais'] = parseFloat(Math.max(0, total - financed).toFixed(2));
+      }
+      else if (raw.type === 'vei_move_brasil') {
+        const pv = parseFloat(valInputs['valor_veiculo'] || 0);
+        const ent = parseFloat(valInputs['entrada'] || 0);
+        const gen = valInputs['genero'] || 'mulher';
+        const n = parseFloat(valInputs['prazo'] || 48);
+        const financed = Math.max(0, pv - ent);
+        const rateM = gen === 'mulher' ? 0.91 : 0.99;
+        const i = rateM / 100;
+        let pmt = 0;
+        if (i > 0) {
+          pmt = financed * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
+        } else {
+          pmt = financed / n;
+        }
+        const rateMkt = 1.67 / 100;
+        let pmtMkt = 0;
+        if (rateMkt > 0) {
+          pmtMkt = financed * (rateMkt * Math.pow(1 + rateMkt, n)) / (Math.pow(1 + rateMkt, n) - 1);
+        } else {
+          pmtMkt = financed / n;
+        }
+        const total = pmt * n;
+        const totalMkt = pmtMkt * n;
+        results['valor_parcela'] = parseFloat(pmt.toFixed(2));
+        results['total_pago'] = parseFloat((total + ent).toFixed(2));
+        results['juros_totais'] = parseFloat(Math.max(0, total - financed).toFixed(2));
+        results['economia_juros'] = parseFloat(Math.max(0, totalMkt - total).toFixed(2));
       }
       else if (raw.type === 'vei_insurance') {
         const val = parseFloat(valInputs['valor_veiculo'] || 0);
