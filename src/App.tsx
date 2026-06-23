@@ -633,10 +633,34 @@ export default function App() {
 
   const handlePorcentagemSimplesCalc = React.useCallback((results: any) => {
     setPorcentagemSimplesResults(results);
+    if (results) {
+      setDynamicCalcInputs({
+        valor: results.valor,
+        percentual: results.percentual,
+        operacao: results.operacao
+      });
+      setDynamicCalcOutputs({
+        resultado: results.resultado,
+        diferenca: results.diferenca
+      });
+    }
   }, []);
 
   const handleFinanciamentoVeiculoCalc = React.useCallback((results: any) => {
     setFinanciamentoVeiculoResults(results);
+    if (results) {
+      setDynamicCalcInputs({
+        valor_veiculo: results.valor_veiculo,
+        entrada: results.entrada,
+        taxa_mensal: results.taxa_mensal,
+        parcelas: results.parcelas
+      });
+      setDynamicCalcOutputs({
+        valor_parcela: results.valor_parcela,
+        total_pago: results.total_pago,
+        juros_totais: results.juros_totais
+      });
+    }
   }, []);
 
   const handleDynamicCalc = React.useCallback((inputs: Record<string, any>, outputs: Record<string, any>) => {
