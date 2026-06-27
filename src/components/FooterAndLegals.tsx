@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check } from 'lucide-react';
+import { useLocation } from 'wouter';
 
 interface FooterAndLegalsProps {
   onCategoryClick: (category: string) => void;
@@ -8,6 +9,7 @@ interface FooterAndLegalsProps {
 }
 
 export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClick, onCalculatorClick, categories }) => {
+  const [_, setLocation] = useLocation();
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -40,10 +42,13 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             <p className="text-xs text-slate-400 leading-relaxed">
               Plataforma profissional de ferramentas matemáticas, simulações trabalhistas, diagnósticos de saúde, logística e agronegócio do Brasil. Projetamos utilitários 100% gratuitos, rápidos e práticos para ajudar você a poupar tempo e tomar as melhores decisões no dia a dia.
             </p>
-            <div className="flex items-center gap-1.5 mt-2 bg-slate-850 bg-slate-800 p-2.5 rounded-xl border border-slate-700/50 w-fit">
+            <button 
+              onClick={() => setLocation('/contato')}
+              className="flex items-center gap-1.5 mt-2 bg-slate-800 hover:bg-slate-750 p-2.5 rounded-xl border border-slate-700/50 w-fit text-left cursor-pointer transition-colors"
+            >
               <Mail className="w-3.5 h-3.5 text-blue-400" />
-              <span className="text-[10.5px] font-mono text-slate-300 select-all">contato@brasilcalculadoras.com.br</span>
-            </div>
+              <span className="text-[10.5px] font-mono text-slate-300">contato@brasilcalculadoras.com.br</span>
+            </button>
           </div>
 
           {/* Quick Categories Col */}
@@ -67,25 +72,32 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Políticas & AdSense</h4>
             <div className="flex flex-col gap-2.5">
               <button
-                onClick={() => setShowPrivacy(true)}
+                onClick={() => setLocation('/politica-de-privacidade')}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <Shield className="w-3.5 h-3.5 text-blue-400" />
                 <span>Política de Privacidade</span>
               </button>
               <button
-                onClick={() => setShowTerms(true)}
+                onClick={() => setLocation('/termos-de-uso')}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <FileText className="w-3.5 h-3.5 text-blue-400" />
                 <span>Termos e Condições</span>
               </button>
               <button
-                onClick={() => setShowAbout(true)}
+                onClick={() => setLocation('/sobre')}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <Info className="w-3.5 h-3.5 text-blue-400" />
                 <span>Sobre a Central</span>
+              </button>
+              <button
+                onClick={() => setLocation('/contato')}
+                className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
+              >
+                <Mail className="w-3.5 h-3.5 text-blue-400" />
+                <span>Contato & Suporte</span>
               </button>
             </div>
           </div>

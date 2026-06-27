@@ -28,7 +28,8 @@ import { useLocation } from 'wouter';
 
 // Custom imports
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
-import { AdSenseBanner, AdSensePublisherDashboard } from './components/AdSenseBanner';
+import { AdSenseBanner } from './components/AdSenseBanner';
+import { LegalPage } from './components/LegalPages';
 import { CompoundInterestCalc } from './components/CompoundInterestCalc';
 import { CltVsPjCalc } from './components/CltVsPjCalc';
 import { ProfitMarginCalc } from './components/ProfitMarginCalc';
@@ -379,6 +380,39 @@ export default function App() {
 
   // Dynamic Page Title & SEO Meta Updates on calculator or category change
   useEffect(() => {
+    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato'].includes(location)) {
+      const legalTitles: Record<string, { title: string; desc: string }> = {
+        '/politica-de-privacidade': {
+          title: 'Política de Privacidade | Brasil Calculadoras',
+          desc: 'Confira nossa Política de Privacidade. Saiba como seus dados são protegidos e como utilizamos cookies em conformidade com a LGPD e o Google AdSense.'
+        },
+        '/termos-de-uso': {
+          title: 'Termos e Condições de Uso | Brasil Calculadoras',
+          desc: 'Conheça os Termos e Condições de Uso da plataforma Brasil Calculadoras e entenda a natureza informativa de nossas ferramentas gratuitas.'
+        },
+        '/sobre': {
+          title: 'Sobre a Central | Brasil Calculadoras',
+          desc: 'Saiba mais sobre a missão do Brasil Calculadoras, nossa equipe técnica e nosso compromisso com a exatidão matemática e utilidade pública.'
+        },
+        '/contato': {
+          title: 'Contato e Suporte | Brasil Calculadoras',
+          desc: 'Entre em contato com a equipe do Brasil Calculadoras para tirar dúvidas, enviar sugestões ou reportar pontos de melhoria.'
+        }
+      };
+      const current = legalTitles[location];
+      if (current) {
+        document.title = current.title;
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (!metaDesc) {
+          metaDesc = document.createElement('meta');
+          metaDesc.setAttribute('name', 'description');
+          document.head.appendChild(metaDesc);
+        }
+        metaDesc.setAttribute('content', current.desc);
+      }
+      return;
+    }
+
     const isHome = location === '/' || location === '';
     if (isHome) {
       const homeTitle = 'Brasil Calculadoras | Calculadoras Online Gratuitas Finanças, Trabalho e Saúde';
@@ -1059,34 +1093,15 @@ export default function App() {
       {/* Main content grid view */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
         
-        {/* AdSense Publisher Live Simulation Metrics Bar (If Active & Admin Mode) */}
-        {showPublisherDashboard && isAdmin && (
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full"
-          >
-            <AdSensePublisherDashboard
-              stats={publisherStats}
-              onOptimize={() => {
-                setAdClicks(prev => prev + 3);
-                triggerToast('✨ Inteligência AdSense: Posição do banner otimizada automaticamente para maior CTR (+3 cliques)!');
-              }}
-            />
-          </motion.div>
-        )}
-
-        {/* AdSense Top Header Banner - Displayed on the user interface */}
-        <div className="w-full">
-          <AdSenseBanner 
-            category={activeCalc?.category || 'financas'}
-            layout="horizontal"
-            onAdClicked={handleAdClicked}
-            refreshTrigger={adRefreshTrigger}
-          />
-        </div>
-
-        {location === '/' || location === '' ? (
+        {location === '/politica-de-privacidade' ? (
+          <LegalPage type="privacy" onNavigateHome={() => setLocation('/')} />
+        ) : location === '/termos-de-uso' ? (
+          <LegalPage type="terms" onNavigateHome={() => setLocation('/')} />
+        ) : location === '/sobre' ? (
+          <LegalPage type="about" onNavigateHome={() => setLocation('/')} />
+        ) : location === '/contato' ? (
+          <LegalPage type="contact" onNavigateHome={() => setLocation('/')} />
+        ) : location === '/' || location === '' ? (
           <HomepageView 
             onSelectCalculator={selectCalculator}
             onSelectCategory={(catKey) => {

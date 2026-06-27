@@ -40,8 +40,34 @@ CALCULATORS_CATALOG.forEach((calc) => {
   </url>`;
 });
 
-xml += `\n</urlset>`;
+// Páginas Institucionais (E-E-A-T e AdSense)
+xml += `
+  <!-- Páginas Institucionais -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/politica-de-privacidade</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://brasilcalculadoras.com.br/termos-de-uso</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://brasilcalculadoras.com.br/sobre</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://brasilcalculadoras.com.br/contato</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+</urlset>`;
 
 fs.writeFileSync(sitemapPath, xml, 'utf-8');
-console.log(`✅ Sitemap gerado com sucesso contendo ${CALCULATORS_CATALOG.length + 1 + Object.keys(CATEGORY_KEY_TO_SLUG).length} URLs!`);
-
+console.log(`✅ Sitemap gerado com sucesso contendo ${CALCULATORS_CATALOG.length + 5 + Object.keys(CATEGORY_KEY_TO_SLUG).length} URLs!`);

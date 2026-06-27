@@ -373,3 +373,80 @@ CALCULATORS_CATALOG.forEach(calc => {
   fs.writeFileSync(path.join(calcDir, 'index.html'), rendered, 'utf8');
 });
 console.log('✅ Priority Calculators pre-rendered!');
+
+// 4. Pre-render Institutional & Legal Pages (AdSense & EEAT Compliance)
+const legalPagesConfig = [
+  {
+    slug: 'politica-de-privacidade',
+    title: 'Política de Privacidade | Brasil Calculadoras',
+    description: 'Confira nossa Política de Privacidade. Saiba como seus dados são protegidos e como utilizamos cookies em conformidade com a LGPD e o Google AdSense.',
+    heading: 'Política de Privacidade',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">A sua privacidade é de extrema importância para o <strong>Brasil Calculadoras</strong>. Esta Política de Privacidade descreve de forma clara como informações são tratadas em conformidade com a LGPD e o Regulamento Geral de Proteção de Dados (GDPR).</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Arquivos de Log e Cookies do Google AdSense</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Terceiros, incluindo o Google, usam cookies para veicular anúncios com base em visitas anteriores do usuário a este site. Com o uso de cookies de publicidade (incluindo o cookie DART), o Google e seus parceiros podem veicular anúncios para os usuários com base em suas visitas na Internet.</p>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Os usuários podem desativar a publicidade personalizada acessando as Configurações de Anúncios do Google. Todas as simulações em nossas calculadoras são processadas estritamente de forma local no navegador do usuário.</p>
+    `
+  },
+  {
+    slug: 'termos-de-uso',
+    title: 'Termos e Condições de Uso | Brasil Calculadoras',
+    description: 'Conheça os Termos e Condições de Uso da plataforma Brasil Calculadoras e entenda a natureza informativa de nossas ferramentas gratuitas.',
+    heading: 'Termos e Condições de Uso',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">Ao acessar e utilizar o Brasil Calculadoras, você concorda com nossos Termos de Uso. Todas as nossas ferramentas e simuladores têm caráter exclusivamente educativo e informativo.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Isenção de Responsabilidade</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Os resultados emitidos não constituem pareceres jurídicos, médicos ou contábeis definitivos. Recomendamos a consulta com profissionais regulados (advogados, contadores ou nutricionistas) para decisões oficiais.</p>
+    `
+  },
+  {
+    slug: 'sobre',
+    title: 'Sobre a Central | Brasil Calculadoras',
+    description: 'Saiba mais sobre a missão do Brasil Calculadoras, nossa equipe técnica e nosso compromisso com a exatidão matemática e utilidade pública.',
+    heading: 'Sobre o Brasil Calculadoras',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">O Brasil Calculadoras é um portal dedicado a disponibilizar ferramentas gratuitas, céleres e de alta precisão técnica para o público brasileiro em áreas trabalhistas, financeiras, saúde e utilidades.</p>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Operado por Brasil Calculadoras Tecnologia & Mídia Digital Ltd. (CNPJ 41.524.305/0001-90), priorizamos rigor técnico, transparência E-E-A-T e navegação livre de burocracias.</p>
+    `
+  },
+  {
+    slug: 'contato',
+    title: 'Contato e Suporte | Brasil Calculadoras',
+    description: 'Entre em contato com a equipe do Brasil Calculadoras para tirar dúvidas, enviar sugestões ou reportar pontos de melhoria.',
+    heading: 'Contato & Suporte Técnico',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">Estamos à disposição para atender dúvidas, sugestões de novas ferramentas e contatos de parcerias institucionais.</p>
+      <p style="font-size: 14px; font-weight: bold; color: #2563eb;">E-mail oficial: contato@brasilcalculadoras.com.br</p>
+    `
+  }
+];
+
+legalPagesConfig.forEach(page => {
+  const canonicalUrl = `https://brasilcalculadoras.com.br/${page.slug}`;
+  const legalHtml = `
+    <header style="padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; font-family: sans-serif;">
+      <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+        <img src="/logo.svg" alt="Brasil Calculadoras" style="height: 36px; width: 36px;" />
+        <div>
+          <strong style="font-size: 18px; color: #1e293b;">Brasil Calculadoras</strong><br/>
+          <small style="color: #888; font-size: 10px; font-weight: bold;">FERRAMENTAS DE EXCELÊNCIA</small>
+        </div>
+      </a>
+    </header>
+    <main style="max-width: 800px; margin: 0 auto; padding: 40px 20px; font-family: sans-serif;">
+      <nav style="font-size: 12px; color: #666; margin-bottom: 25px;">
+        <a href="/" style="color: #3b82f6; text-decoration: none;">Início</a> / <span>${page.heading}</span>
+      </nav>
+      <article style="background: white; border: 1px solid #e2e8f0; padding: 35px; border-radius: 20px;">
+        <h1 style="font-size: 26px; color: #0f172a; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; font-weight: 900;">${page.heading}</h1>
+        ${page.content}
+      </article>
+    </main>
+  `;
+  const rendered = injectMetadata(template, page.title, page.description, canonicalUrl, {}, legalHtml);
+  const pageDir = path.join(distPath, page.slug);
+  ensureDir(pageDir);
+  fs.writeFileSync(path.join(pageDir, 'index.html'), rendered, 'utf8');
+});
+console.log('✅ Institutional & Legal Pages pre-rendered!');
+
