@@ -19,7 +19,8 @@ export const CATEGORY_MAP: Record<string, string> = {
   energia: '☀️ Energia & Sustentabilidade',
   educacao: '📚 Educação & ENEM',
   quimica_fisica: '🧪 Química & Física',
-  tecnologia: '💻 Tecnologia & Computação'
+  tecnologia: '💻 Tecnologia & Computação',
+  pets: '🐾 Pets & Animais'
 };
 
 // 12 Core Calculators that have pre-built custom views
@@ -130,12 +131,403 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base';
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base' | 'pets_idade_cao' | 'pets_idade_gato' | 'pets_racao_cao' | 'pets_agua' | 'saude_agua_humana' | 'saude_exercicio_calorias' | 'financas_ferias_pj';
   inputs: { id: string; label: string; def: any; type: 'number' | 'select' | 'text'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
-}[] = [{
-  "id": "porcentagem-simples",
+}[] = [
+  {
+    "id": "idade-caes",
+    "name": "Idade Humana de Cão",
+    "description": "Estime a idade equivalente do seu cão em anos humanos com base no seu porte físico.",
+    "category": "pets",
+    "icon": "Dog",
+    "tags": ["cão", "cachorro", "idade", "idade humana", "porte", "pet"],
+    "type": "pets_idade_cao",
+    "inputs": [
+      {
+        "id": "porte",
+        "label": "Porte do Cão",
+        "def": "medio",
+        "type": "select",
+        "op": [
+          { "v": "pequeno", "l": "Pequeno (Até 10kg)" },
+          { "v": "medio", "l": "Médio (11kg a 25kg)" },
+          { "v": "grande", "l": "Grande (26kg a 45kg)" },
+          { "v": "gigante", "l": "Gigante (Mais de 45kg)" }
+        ]
+      },
+      {
+        "id": "idade_anos",
+        "label": "Idade Real do Cão (Anos)",
+        "def": 3,
+        "type": "number",
+        "min": 0,
+        "max": 25
+      }
+    ],
+    "outputs": [
+      {
+        "id": "idade_humana",
+        "label": "Idade Equivalente Humana",
+        "suff": " anos",
+        "isPrimary": true
+      }
+    ],
+    "faq": [
+      {
+        "q": "A regra de 1 ano de cão equivale a 7 anos humanos é real?",
+        "a": "Não. Essa é uma estimativa muito simplificada. Cães envelhecem muito rápido nos dois primeiros anos de vida (atingindo a maturidade de um jovem de 15 a 24 anos) e depois o envelhecimento desacelera, dependendo diretamente do porte físico."
+      },
+      {
+        "q": "Por que o porte do cão ajuda no cálculo?",
+        "a": "Cães de porte grande e gigante têm uma expectativa de vida menor e envelhecem biologicamente mais rápido na fase adulta do que cães de pequeno porte."
+      }
+    ]
+  },
+  {
+    "id": "idade-gatos",
+    "name": "Idade Humana de Gato",
+    "description": "Estime a idade equivalente do seu gato em anos humanos.",
+    "category": "pets",
+    "icon": "Cat",
+    "tags": ["gato", "idade", "idade humana", "pet"],
+    "type": "pets_idade_gato",
+    "inputs": [
+      {
+        "id": "idade_anos",
+        "label": "Idade Real do Gato (Anos)",
+        "def": 3,
+        "type": "number",
+        "min": 0,
+        "max": 30
+      }
+    ],
+    "outputs": [
+      {
+        "id": "idade_humana",
+        "label": "Idade Equivalente Humana",
+        "suff": " anos",
+        "isPrimary": true
+      }
+    ],
+    "faq": [
+      {
+        "q": "Como é feito o cálculo da idade do gato?",
+        "a": "O primeiro ano do gato equivale a cerca de 15 anos humanos. O segundo ano equivale a cerca de 9 anos humanos adicionais (totalizando 24 anos). A partir daí, cada ano do gato equivale a 4 anos humanos."
+      },
+      {
+        "q": "Qual a expectativa de vida média de um gato?",
+        "a": "Gatos que vivem sob cuidados domésticos internos costumam viver de 12 a 15 anos, mas muitos chegam facilmente aos 20 anos ou mais devido a cuidados veterinários adequados."
+      }
+    ]
+  },
+  {
+    "id": "racao-caes",
+    "name": "Porção Diária de Ração",
+    "description": "Calcule a porção diária ideal de ração seca recomendada para o seu cão com base no peso e nível de atividade.",
+    "category": "pets",
+    "icon": "Utensils",
+    "tags": ["ração", "ração cachorro", "alimentação cão", "quantidade de ração", "pet"],
+    "type": "pets_racao_cao",
+    "inputs": [
+      {
+        "id": "peso",
+        "label": "Peso do Cão (kg)",
+        "def": 10,
+        "type": "number",
+        "min": 0.5,
+        "max": 90
+      },
+      {
+        "id": "nivel_atividade",
+        "label": "Nível de Atividade Física",
+        "def": "moderado",
+        "type": "select",
+        "op": [
+          { "v": "baixo", "l": "Baixo (Sedentário / Apenas Passeios Curtos)" },
+          { "v": "moderado", "l": "Moderado (Passeios Diários de 30-60 min)" },
+          { "v": "ativo", "l": "Ativo (Cão de Trabalho ou Esporte / Passeios Longos)" }
+        ]
+      },
+      {
+        "id": "estagio_vida",
+        "label": "Estágio de Vida / Condição",
+        "def": "adulto",
+        "type": "select",
+        "op": [
+          { "v": "filhote", "l": "Filhote (Em Crescimento)" },
+          { "v": "adulto", "l": "Adulto Inteiro" },
+          { "v": "senior_castrado", "l": "Sênior ou Castrado" }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "quantidade_diaria",
+        "label": "Porção Recomendada por Dia",
+        "suff": " gramas/dia",
+        "isPrimary": true
+      },
+      {
+        "id": "calorias_diarias",
+        "label": "Necessidade Calórica Estimada",
+        "suff": " kcal/dia"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Como funciona o cálculo calórico para cães?",
+        "a": "Primeiro calcula-se a Necessidade Energética Basal (RER) através da fórmula: 70 * (Peso em kg^0.75). Esse valor é multiplicado por um fator que depende da idade, castração e nível de atividade física do animal."
+      },
+      {
+        "q": "Quantas vezes ao dia devo dividir a porção?",
+        "a": "Para cães adultos, recomenda-se dividir a quantidade total em 2 porções diárias (manhã e noite). Filhotes precisam comer de 3 a 4 vezes ao dia."
+      }
+    ]
+  },
+  {
+    "id": "agua-pets",
+    "name": "Água Recomendada para Pets",
+    "description": "Estime a quantidade diária recomendada de água para o seu cão ou gato manter-se hidratado.",
+    "category": "pets",
+    "icon": "Droplet",
+    "tags": ["água pet", "hidratação cão", "água gato", "água cachorro", "pet"],
+    "type": "pets_agua",
+    "inputs": [
+      {
+        "id": "especie",
+        "label": "Espécie do Pet",
+        "def": "cao",
+        "type": "select",
+        "op": [
+          { "v": "cao", "l": "Cão (Cachorro)" },
+          { "v": "gato", "l": "Gato" }
+        ]
+      },
+      {
+        "id": "peso",
+        "label": "Peso do Pet (kg)",
+        "def": 8,
+        "type": "number",
+        "min": 0.5,
+        "max": 90
+      },
+      {
+        "id": "clima",
+        "label": "Clima da Região",
+        "def": "ameno",
+        "type": "select",
+        "op": [
+          { "v": "ameno", "l": "Ameno / Frio" },
+          { "v": "quente", "l": "Quente / Verão" }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "agua_diaria",
+        "label": "Ingestão Recomendada",
+        "suff": " ml/dia",
+        "isPrimary": true
+      }
+    ],
+    "faq": [
+      {
+        "q": "Como estimular gatos a beber mais água?",
+        "a": "Gatos preferem água corrente. O uso de fontes elétricas de água, espalhar múltiplos potes pela casa e oferecer alimento úmido (sachês) são excelentes estratégias."
+      },
+      {
+        "q": "Quais são os sinais de desidratação no pet?",
+        "a": "Falta de elasticidade na pele (quando puxada ela não volta rápido), gengivas secas ou pegajosas, letargia e olhos fundos são sinais de alerta para desidratação."
+      }
+    ]
+  },
+  {
+    "id": "agua-humana",
+    "name": "Ingestão de Água Diária",
+    "description": "Calcule sua meta diária de hidratação ideal (em litros e copos) com base no seu peso, nível de atividade e clima.",
+    "category": "saude",
+    "icon": "Droplet",
+    "tags": ["água", "água por dia", "hidratação humana", "copos de água", "peso", "saúde"],
+    "type": "saude_agua_humana",
+    "inputs": [
+      {
+        "id": "peso",
+        "label": "Seu Peso (kg)",
+        "def": 70,
+        "type": "number",
+        "min": 20,
+        "max": 250
+      },
+      {
+        "id": "atividade",
+        "label": "Atividade Física Diária",
+        "def": "sedentario",
+        "type": "select",
+        "op": [
+          { "v": "sedentario", "l": "Sedentário (Sem exercício)" },
+          { "v": "moderado", "l": "Moderado (Até 60 min de exercício)" },
+          { "v": "intenso", "l": "Intenso (Mais de 60 min de exercício pesado)" }
+        ]
+      },
+      {
+        "id": "clima",
+        "label": "Clima Predominante",
+        "def": "ameno",
+        "type": "select",
+        "op": [
+          { "v": "frio", "l": "Frio" },
+          { "v": "ameno", "l": "Ameno" },
+          { "v": "quente", "l": "Quente" }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "agua_diaria",
+        "label": "Consumo de Água Recomendado",
+        "suff": " Litros/dia",
+        "isPrimary": true
+      },
+      {
+        "id": "copos_agua",
+        "label": "Equivalente em Copos (250ml)",
+        "suff": " copos/dia"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Qual a base matemática para o cálculo de água?",
+        "a": "A base recomendada por especialistas é de 35ml de água para cada quilograma de peso corporal. Esse valor é ajustado para cima com a prática de exercícios (perda pelo suor) e temperaturas elevadas."
+      },
+      {
+        "q": "Beber água demais faz mal?",
+        "a": "Sim, em casos extremos. A hiper-hidratação pode causar hiponatremia (baixa concentração de sódio no sangue), mas para a maioria das pessoas o risco comum é a desidratação."
+      }
+    ]
+  },
+  {
+    "id": "exercicio-calorias",
+    "name": "Calorias por Exercício",
+    "description": "Estime o gasto calórico (kcal) gerado por diferentes modalidades de atividades físicas com base no seu peso e tempo.",
+    "category": "saude",
+    "icon": "Zap",
+    "tags": ["calorias", "calorias exercício", "queimar calorias", "peso", "aeróbico", "academia"],
+    "type": "saude_exercicio_calorias",
+    "inputs": [
+      {
+        "id": "peso",
+        "label": "Seu Peso (kg)",
+        "def": 70,
+        "type": "number",
+        "min": 30,
+        "max": 200
+      },
+      {
+        "id": "atividade",
+        "label": "Modalidade de Exercício",
+        "def": "caminhada",
+        "type": "select",
+        "op": [
+          { "v": "corrida", "l": "Corrida (Corrida moderada a ~9 km/h)" },
+          { "v": "ciclismo", "l": "Ciclismo (Intensidade moderada)" },
+          { "v": "natacao", "l": "Natação (Estilo livre moderado)" },
+          { "v": "musculacao", "l": "Musculação (Treinamento com pesos)" },
+          { "v": "caminhada", "l": "Caminhada (Ritmo moderado a ~5 km/h)" }
+        ]
+      },
+      {
+        "id": "tempo",
+        "label": "Duração do Exercício (Minutos)",
+        "def": 45,
+        "type": "number",
+        "min": 1,
+        "max": 300
+      }
+    ],
+    "outputs": [
+      {
+        "id": "calorias_queimadas",
+        "label": "Total de Calorias Queimadas",
+        "suff": " kcal",
+        "isPrimary": true
+      }
+    ],
+    "faq": [
+      {
+        "q": "O que é o MET?",
+        "a": "MET significa Equivalente Metabólico de Tarefa. É uma unidade que expressa a intensidade de uma atividade em relação ao repouso. Uma atividade com MET de 10 gasta 10 vezes mais energia do que ficar sentado em repouso."
+      },
+      {
+        "q": "O gasto calórico calculado é 100% preciso?",
+        "a": "Não. É uma estimativa científica confiável. O gasto real depende de fatores como composição corporal (massa gorda vs magra), idade, eficiência mecânica no exercício e temperatura ambiente."
+      }
+    ]
+  },
+  {
+    "id": "ferias-pj-equivalente",
+    "name": "Férias PJ vs CLT Equivalente",
+    "description": "Calcule o valor faturamento mensal e hora PJ necessários para cobrir os benefícios anuais CLT com direito a um período de descanso faturado.",
+    "category": "financas",
+    "icon": "Briefcase",
+    "tags": ["pj clt", "férias pj", "hora pj", "valor hora", "comparativo", "benefícios"],
+    "type": "financas_ferias_pj",
+    "inputs": [
+      {
+        "id": "salario_clt",
+        "label": "Salário Bruto Mensal CLT",
+        "def": 5000,
+        "type": "number",
+        "pref": "R$"
+      },
+      {
+        "id": "beneficios",
+        "label": "Benefícios Mensais CLT (VR, VA, Saúde, etc.)",
+        "def": 800,
+        "type": "number",
+        "pref": "R$"
+      },
+      {
+        "id": "horas_mes",
+        "label": "Horas Contratadas Mensais",
+        "def": 168,
+        "type": "number",
+        "min": 40,
+        "max": 240
+      }
+    ],
+    "outputs": [
+      {
+        "id": "valor_hora_pj_minimo",
+        "label": "Valor Hora PJ Mínimo Equivalente",
+        "pref": "R$/hora",
+        "isPrimary": true
+      },
+      {
+        "id": "faturamento_pj_equivalente",
+        "label": "Faturamento Mensal PJ Equivalente",
+        "pref": "R$/mês"
+      },
+      {
+        "id": "custo_anual_clt",
+        "label": "Custo Anual Total CLT Equivalente",
+        "pref": "R$"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Por que o cálculo considera 11 meses de trabalho para o PJ?",
+        "a": "Diferente da CLT, profissionais PJ geralmente não têm férias remuneradas em lei. Para poder descansar 30 dias no ano mantendo a renda equivalente, o PJ precisa acumular o valor necessário durante os outros 11 meses faturados."
+      },
+      {
+        "q": "Quais encargos PJ estão previstos neste cálculo?",
+        "a": "O cálculo inclui a dedução média do Simples Nacional no Anexo III (6% de imposto sobre a nota fiscal) e uma provisão para contabilidade (R$ 150 mensais), além de uma taxa de segurança extra de 5% sobre as verbas CLT."
+      }
+    ]
+  },
+  {
+    "id": "porcentagem-simples",
   "name": "Porcentagem Rápida",
   "description": "Realize de forma direta cálculos de acréscimos ou descontos relativos de parcelas numéricas básicas.",
   "category": "matematica",
@@ -5631,7 +6023,102 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       const v1 = parseFloat(valInputs[firstKey] || 0);
       const v2 = parseFloat(valInputs[secondKey] || 0);
 
-      if (raw.type === 'simple_tax') {
+      if (raw.type === 'pets_idade_cao') {
+        const porte = valInputs['porte'] || 'medio';
+        const idadeReal = parseFloat(valInputs['idade_anos'] || 0);
+        let humana = 0;
+        if (idadeReal <= 1) {
+          humana = idadeReal * 15;
+        } else if (idadeReal === 2) {
+          humana = 24;
+        } else {
+          let factor = 5;
+          if (porte === 'pequeno') factor = 4;
+          else if (porte === 'medio') factor = 5;
+          else if (porte === 'grande') factor = 6;
+          else if (porte === 'gigante') factor = 7;
+          humana = 24 + (idadeReal - 2) * factor;
+        }
+        results['idade_humana'] = Math.round(humana);
+      }
+      else if (raw.type === 'pets_idade_gato') {
+        const idadeReal = parseFloat(valInputs['idade_anos'] || 0);
+        let humana = 0;
+        if (idadeReal <= 1) {
+          humana = idadeReal * 15;
+        } else if (idadeReal === 2) {
+          humana = 24;
+        } else {
+          humana = 24 + (idadeReal - 2) * 4;
+        }
+        results['idade_humana'] = Math.round(humana);
+      }
+      else if (raw.type === 'pets_racao_cao') {
+        const peso = parseFloat(valInputs['peso'] || 0);
+        const atividade = valInputs['nivel_atividade'] || 'moderado';
+        const estagio = valInputs['estagio_vida'] || 'adulto';
+        const rer = 70 * Math.pow(peso, 0.75);
+        let k = 1.6;
+        if (estagio === 'filhote') {
+          k = 2.5;
+        } else if (estagio === 'senior_castrado') {
+          k = 1.0;
+        } else {
+          if (atividade === 'baixo') k = 1.2;
+          else if (atividade === 'moderado') k = 1.6;
+          else if (atividade === 'ativo') k = 2.0;
+        }
+        const kcal = rer * k;
+        results['calorias_diarias'] = Math.round(kcal);
+        results['quantidade_diaria'] = Math.round(kcal / 3.5);
+      }
+      else if (raw.type === 'pets_agua') {
+        const especie = valInputs['especie'] || 'cao';
+        const peso = parseFloat(valInputs['peso'] || 0);
+        const clima = valInputs['clima'] || 'ameno';
+        const base = especie === 'cao' ? 60 : 50;
+        let agua = peso * base;
+        if (clima === 'quente') agua *= 1.3;
+        results['agua_diaria'] = Math.round(agua);
+      }
+      else if (raw.type === 'saude_agua_humana') {
+        const peso = parseFloat(valInputs['peso'] || 0);
+        const atividade = valInputs['atividade'] || 'sedentario';
+        const clima = valInputs['clima'] || 'ameno';
+        const base = peso * 35;
+        let addAct = 0;
+        if (atividade === 'moderado') addAct = 500;
+        else if (atividade === 'intenso') addAct = 1000;
+        let addCli = 0;
+        if (clima === 'frio') addCli = -200;
+        else if (clima === 'quente') addCli = 500;
+        const totalMl = Math.max(1000, base + addAct + addCli);
+        results['agua_diaria'] = parseFloat((totalMl / 1000).toFixed(2));
+        results['copos_agua'] = Math.ceil(totalMl / 250);
+      }
+      else if (raw.type === 'saude_exercicio_calorias') {
+        const peso = parseFloat(valInputs['peso'] || 0);
+        const tempo = parseFloat(valInputs['tempo'] || 0);
+        const atividade = valInputs['atividade'] || 'caminhada';
+        let met = 3.8;
+        if (atividade === 'corrida') met = 9.8;
+        else if (atividade === 'ciclismo') met = 7.5;
+        else if (atividade === 'natacao') met = 6.0;
+        else if (atividade === 'musculacao') met = 3.5;
+        const kcal = (met * 3.5 * peso * tempo) / 200;
+        results['calorias_queimadas'] = Math.round(kcal);
+      }
+      else if (raw.type === 'financas_ferias_pj') {
+        const clt = parseFloat(valInputs['salario_clt'] || 0);
+        const ben = parseFloat(valInputs['beneficios'] || 0);
+        const hrs = parseFloat(valInputs['horas_mes'] || 168);
+        const custoCltAnual = (clt * 13.33) + (clt * 0.08 * 12) + (ben * 12) + (clt * 0.05 * 12);
+        const grossPjAnual = (custoCltAnual + 1800) / 0.94;
+        results['custo_anual_clt'] = parseFloat(custoCltAnual.toFixed(2));
+        results['faturamento_pj_equivalente'] = parseFloat((grossPjAnual / 12).toFixed(2));
+        results['valor_hora_pj_minimo'] = parseFloat((grossPjAnual / (12 * hrs)).toFixed(2));
+      }
+      else if (raw.type === 'simple_tax') {
         // Progressive INSS model simulation
         let tax = 0;
         if (v1 > 1412) {

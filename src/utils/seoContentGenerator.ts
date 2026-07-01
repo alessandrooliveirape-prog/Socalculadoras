@@ -38,8 +38,10 @@ export const CATEGORY_SLUG_MAP: Record<string, string> = {
   'gastronomia-eventos': 'eventos',
   'energia-sustentabilidade': 'energia',
   'educacao-enem': 'educacao',
+  'quimica-fizica-ciencia': 'quimica_fisica', // Wait, quimica-fizica or quimica-fisica? The original had quimica-fisica-ciencia
   'quimica-fisica-ciencia': 'quimica_fisica',
-  'tecnologia-computacao': 'tecnologia'
+  'tecnologia-computacao': 'tecnologia',
+  'pets-animais': 'pets'
 };
 
 export const CATEGORY_KEY_TO_SLUG: Record<string, string> = {
@@ -60,7 +62,8 @@ export const CATEGORY_KEY_TO_SLUG: Record<string, string> = {
   energia: 'energia-sustentabilidade',
   educacao: 'educacao-enem',
   quimica_fisica: 'quimica-fisica-ciencia',
-  tecnologia: 'tecnologia-computacao'
+  tecnologia: 'tecnologia-computacao',
+  pets: 'pets-animais'
 };
 
 export const CATEGORY_MAP_RAW: Record<string, string> = {
@@ -81,7 +84,8 @@ export const CATEGORY_MAP_RAW: Record<string, string> = {
   energia: 'Energia & Sustentabilidade',
   educacao: 'Educação & ENEM',
   quimica_fisica: 'Química & Física',
-  tecnologia: 'Tecnologia & Computação'
+  tecnologia: 'Tecnologia & Computação',
+  pets: 'Pets & Animais'
 };
 
 // Bespoke database for popular calculators (EEAT Content and intent FAQs)
@@ -436,6 +440,17 @@ const CATEGORY_SEO_DATABASE: Record<string, CategoryHubSeoContent> = {
       { q: 'O que é a regra dos 4% (ou SWR) para viver de renda passiva?', a: 'É uma métrica financeira que sugere que você pode retirar com segurança 4% do valor total da sua carteira de investimentos no primeiro ano de aposentadoria, reajustado pela inflação nos anos seguintes, sem exaurir o patrimônio por 30 anos.' },
       { q: 'Qual o teto máximo de pagamento de benefício do INSS?', a: 'É o valor limite estabelecido anualmente pelo governo federal para as aposentadorias do Regime Geral. Contribuições acima deste limite não elevam o valor do benefício final.' }
     ]
+  },
+  pets: {
+    title: 'Calculadoras de Pets & Animais | Brasil Calculadoras',
+    description: 'Ferramentas de nutrição, hidratação e idade biológica de cães e gatos. Calcule a porção diária de ração ideal, a meta de água e a idade do seu pet em anos humanos.',
+    introduction: 'Cuidar de um animal de estimação exige atenção a detalhes biológicos e nutricionais fundamentais. Fatores como o peso, o nível de atividade física e a idade influenciam diretamente a quantidade de alimento seca (ração) e a hidratação diária de que seu pet necessita para manter-se saudável e com energia. Nossas calculadoras veterinárias simplificam estas estimativas teóricas.',
+    importance: 'Evitar tanto a obesidade quanto a desnutrição nos pets previne o surgimento de problemas articulares, cardíacos e renais. Obter metas estimadas baseadas em equações de necessidade calórica diária e necessidades hídricas ajuda tutores a regular a porção de ração e monitorar se o pet está bebendo a quantidade correta de água.',
+    faq: [
+      { q: 'Como é calculada a porção de ração para cães?', a: 'O cálculo baseia-se na Necessidade Energética Basal (RER) de acordo com o peso metabólico do animal, multiplicada por um fator específico que varia com a idade, castração e nível de atividade.' },
+      { q: 'Quanta água um cão ou gato deve beber?', a: 'Em média, cães precisam de 50 a 60ml de água por kg ao dia, e gatos precisam de 45 a 50ml por kg. Em climas mais quentes, essa necessidade aumenta cerca de 30%.' },
+      { q: 'Por que calcular a idade humana do pet?', a: 'Nos ajuda a compreender melhor o estágio de desenvolvimento do animal (infância, juventude, idade adulta ou velhice), adequando os cuidados de saúde e a ração de acordo com a idade biológica real.' }
+    ]
   }
 };
 
@@ -568,6 +583,22 @@ const generateCategorySeoText = (calc: CalculatorDef): Partial<CalculatorSeoCont
       faq = [
         { q: 'O que é a taxa mínima da concessionária de energia?', a: 'Mesmo gerando 100% da sua energia solar, faturas de redes ligadas ao sistema de distribuição pagam taxas básicas de iluminação pública e disponibilidade.' },
         { q: 'Como economizar na conta de luz?', a: 'Mapeie os aparelhos de maior consumo em kWh e controle a duração de uso diário sugerida pela nossa calculadora de aparelhos elétricos.' }
+      ];
+      break;
+
+    case 'pets':
+      whatIs = `Cuidar da saúde e do bem-estar dos nossos animais de estimação é uma prioridade que exige atenção a parâmetros biológicos e nutricionais exatos. A ferramenta **${name}** serve como um guia de apoio para tutores, cuidadores e profissionais do setor pet. Com ela, é possível estimar a idade humana equivalente de cães e gatos, calcular a porção diária ideal de ração seca e planejar a hidratação recomendada. Centralizar essas estimativas previne problemas decorrentes de sobredose alimentar (como a obesidade canina) e desidratação em felinos.`;
+      howItWorks = `O motor de cálculo analisa as variáveis inseridas nos campos de *${inputLabels}* (como peso em kg, estágio de vida e nível de atividade) e aplica equações de necessidade energética basal ou fatores de conversão biológica por porte. As respostas precisas são geradas nos campos de *${outputLabels}*.`;
+      practicalExample = `Ao preencher a calculadora de ração com o peso e atividade do seu cachorro, o algoritmo processa a necessidade metabólica real do animal e indica a quantidade exata em gramas diárias que deve ser oferecida, dividida em porções equilibradas.`;
+      whenToUse = `Utilize este utilitário de pets sempre que precisar ajustar a dieta do seu cão ou gato, monitorar o consumo hídrico diário em épocas quentes ou estimar o envelhecimento biológico real do seu companheiro de estimação.`;
+      importantTips = `As estimativas são calculadas com base em equações nutricionais padrão. Lembre-se de que a qualidade calórica de cada marca de ração varia, sendo indispensável consultar as tabelas do fabricante ou um médico veterinário.`;
+      sources = [
+        { name: 'Embrapa - Produção de Animais de Estimação', url: 'https://www.embrapa.br/' },
+        { name: 'CRMV - Conselho Regional de Medicina Veterinária', url: 'https://www.cfmv.gov.br/' }
+      ];
+      faq = [
+        { q: `Como as calculadoras de pets ajudam no dia a dia?`, a: `Elas fornecem estimativas rápidas baseadas em consensos veterinários de alimentação e metabolismo, auxiliando na manutenção do peso saudável do seu animal.` },
+        { q: 'Devo levar meu pet ao veterinário?', a: 'Sim. Os simuladores servem para suporte educativo e planejamento inicial doméstico, não substituindo exames e dietas veterinárias personalizadas.' }
       ];
       break;
 

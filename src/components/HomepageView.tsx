@@ -68,7 +68,8 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
     profissoes: 'Cálculo completo de rescisão CLT, décimo terceiro, provisão de férias, horas extras e FGTS.',
     matematica: 'Regra de três simples, porcentagens rápidas, equações de 2º grau e médias escolares.',
     imobiliario: 'Simuladores Price vs SAC, reajuste de aluguel, cap rate e estimativas fiscais de ITBI.',
-    veiculos: 'Comparação de álcool vs gasolina, depreciação FIPE, consumo de viagem e IPVA.'
+    veiculos: 'Comparação de álcool vs gasolina, depreciação FIPE, consumo de viagem e IPVA.',
+    pets: 'Meta de ração diária, hidratação e idade em anos humanos para cães e gatos.'
   };
 
   const intentGroups = [
@@ -243,7 +244,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             const rawLabel = CATEGORY_MAP_RAW[key] || label;
             const count = categoryCounts[key] || 0;
             const desc = categoryDescriptions[key] || 'Ferramentas de alta precisão baseadas em normas nacionais.';
-            const emoji = key === 'financas' ? '💰' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : '🚗';
+            const emoji = key === 'financas' ? '💰' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'pets' ? '🐾' : '🚗';
 
             return (
               <div

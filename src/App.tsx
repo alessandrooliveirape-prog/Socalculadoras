@@ -916,6 +916,8 @@ export default function App() {
         return 'Cálculos de transporte de cargas, taxas de cubagem, leis de estadia de caminhoneiros e custos por quilômetro rodado de frotas exigem agilidade e precisão comercial. Esta central simplifica o dia a dia da logística rodoviária brasileira com cálculos rápidos e conformidade legal.';
       case 'agronegocio':
         return 'O agronegócio de sucesso une campo e tecnologia. Estimar o Peso de Mil Sementes (PMS), calcular calagem e adubação teórica do solo, e guiar a distribuição linear de grãos maximiza a germinação industrial e as colheitas. Use os simuladores rurais para otimizar seus insumos agrícolas.';
+      case 'pets':
+        return 'Calcular a ração ideal por peso e atividade, acompanhar a ingestão diária de água recomendada para cães e gatos, e estimar a idade equivalente do pet em anos humanos garante uma vida longa e saudável ao seu animal de estimação. Use nossas ferramentas veterinárias gratuitas.';
       default:
         return 'Esta calculadora rápida e intuitiva foi desenhada para facilitar o seu dia a dia, automatizando fórmulas complexas em respostas imediatas de uso profissional. Salve seus resultados, exporte em PDF de alta qualidade e compartilhe relatórios completos de forma 100% gratuita.';
     }
@@ -1174,7 +1176,7 @@ export default function App() {
                   >
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="shrink-0 text-xs">
-                        {key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : '⏱️'}
+                        {key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : key === 'pets' ? '🐾' : '⏱️'}
                       </span>
                       <span className="truncate">{CATEGORY_MAP_RAW[key] || label}</span>
                     </div>
@@ -1551,7 +1553,7 @@ export default function App() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {Object.entries(CATEGORY_MAP).map(([key, label]) => {
                           const slug = CATEGORY_KEY_TO_SLUG[key];
-                          const emoji = key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : '⏱️';
+                          const emoji = key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : key === 'pets' ? '🐾' : '⏱️';
                           const rawLabel = CATEGORY_MAP_RAW[key] || label;
                           const count = categoryCounts[key] || 0;
 
@@ -1574,7 +1576,8 @@ export default function App() {
                             energia: 'Dimensionamento solar fotovoltaico, consumo KWh e economia.',
                             educacao: 'Média do ENEM, nota de corte de vestibulares e histórico escolar.',
                             quimica_fisica: 'Velocidade, densidade, conversor de temperatura e gases.',
-                            tecnologia: 'Conversor de bases numéricas, tempo de download e aspect ratio.'
+                            tecnologia: 'Conversor de bases numéricas, tempo de download e aspect ratio.',
+                            pets: 'Metas de ração diária, hidratação e idade humana de cães e gatos.'
                           };
 
                           const desc = categoryDescriptions[key] || 'Ferramentas de precisão matemática para o dia a dia.';
