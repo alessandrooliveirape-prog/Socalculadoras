@@ -131,11 +131,254 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base' | 'pets_idade_cao' | 'pets_idade_gato' | 'pets_racao_cao' | 'pets_agua' | 'saude_agua_humana' | 'saude_exercicio_calorias' | 'financas_ferias_pj';
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base' | 'pets_idade_cao' | 'pets_idade_gato' | 'pets_racao_cao' | 'pets_agua' | 'saude_agua_humana' | 'saude_exercicio_calorias' | 'financas_ferias_pj' | 'veiculos_carro_eletrico' | 'financas_juros_abusivos' | 'juridico_cripto_imposto';
   inputs: { id: string; label: string; def: any; type: 'number' | 'select' | 'text'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
 }[] = [
+  {
+    "id": "carro-eletrico-vs-combustivel",
+    "name": "Carro Elétrico vs Combustão",
+    "description": "Compare o custo de rodagem e a economia gerada ao substituir um veículo tradicional por um carro elétrico.",
+    "category": "veiculos",
+    "icon": "Zap",
+    "tags": ["elétrico", "combustão", "carro elétrico", "byd", "gasolina", "economia", "recarga"],
+    "type": "veiculos_carro_eletrico",
+    "inputs": [
+      {
+        "id": "capacidade_bateria",
+        "label": "Capacidade da Bateria (kWh)",
+        "def": 40,
+        "type": "number",
+        "min": 10,
+        "max": 120
+      },
+      {
+        "id": "preco_kwh",
+        "label": "Preço da Energia (R$/kWh)",
+        "def": 0.85,
+        "type": "number",
+        "min": 0.1,
+        "max": 3.0,
+        "step": 0.05
+      },
+      {
+        "id": "autonomia_eletrico",
+        "label": "Autonomia Total Estimada (km)",
+        "def": 300,
+        "type": "number",
+        "min": 50,
+        "max": 1000
+      },
+      {
+        "id": "consumo_combustivel",
+        "label": "Consumo Média Combustão (km/L)",
+        "def": 10,
+        "type": "number",
+        "min": 2,
+        "max": 40,
+        "step": 0.5
+      },
+      {
+        "id": "preco_combustivel",
+        "label": "Preço do Combustível (R$/L)",
+        "def": 5.80,
+        "type": "number",
+        "min": 2.0,
+        "max": 10.0,
+        "step": 0.05
+      },
+      {
+        "id": "distancia_mensal",
+        "label": "Distância Rodada por Mês (km)",
+        "def": 1500,
+        "type": "number",
+        "min": 100,
+        "max": 20000
+      }
+    ],
+    "outputs": [
+      {
+        "id": "economia_mensal",
+        "label": "Economia Estimada por Mês",
+        "pref": "R$ ",
+        "isPrimary": true
+      },
+      {
+        "id": "economia_anual",
+        "label": "Economia Estimada por Ano",
+        "pref": "R$ "
+      },
+      {
+        "id": "custo_recarga_mensal",
+        "label": "Gasto Mensal com Energia",
+        "pref": "R$ "
+      },
+      {
+        "id": "custo_combustivel_mensal",
+        "label": "Gasto Mensal com Combustível",
+        "pref": "R$ "
+      }
+    ],
+    "faq": [
+      {
+        "q": "O cálculo considera as perdas de recarga?",
+        "a": "Geralmente, há uma perda média de 10% a 15% na transferência de energia da tomada para a bateria (perdas por calor no carregador). Para manter a estimativa prática, a fórmula calcula o consumo direto, mas recomenda-se provisionar uma margem extra de 10% no gasto real."
+      },
+      {
+        "q": "Como encontrar a tarifa de energia correta?",
+        "a": "A tarifa de energia (kWh) varia conforme a sua cidade e a concessionária (ex: Enel, Light, Copel), constando em detalhes na sua conta de luz mensal, incluindo taxas e impostos integrados."
+      }
+    ]
+  },
+  {
+    "id": "juros-abusivos-financiamento",
+    "name": "Cálculo de Juros Abusivos",
+    "description": "Avalie se as taxas cobradas no seu financiamento estão em patamar abusivo comparadas à taxa média de juros do Banco Central.",
+    "category": "financas",
+    "icon": "AlertTriangle",
+    "tags": ["juros abusivos", "financiamento", "empréstimo", "banco central", "abusivo", "parcela"],
+    "type": "financas_juros_abusivos",
+    "inputs": [
+      {
+        "id": "valor_financiado",
+        "label": "Valor Efetivamente Financiado (R$)",
+        "def": 40000,
+        "type": "number"
+      },
+      {
+        "id": "taxa_juros_contratada",
+        "label": "Taxa de Juros Contratada (% ao mês)",
+        "def": 2.80,
+        "type": "number",
+        "step": 0.05
+      },
+      {
+        "id": "parcelas_totais",
+        "label": "Quantidade de Parcelas (Meses)",
+        "def": 48,
+        "type": "number",
+        "min": 6,
+        "max": 360
+      },
+      {
+        "id": "valor_parcela_paga",
+        "label": "Valor da Parcela Paga (R$)",
+        "def": 1550,
+        "type": "number"
+      },
+      {
+        "id": "taxa_media_bacen",
+        "label": "Taxa Média do Mercado (BACEN) (% ao mês)",
+        "def": 1.80,
+        "type": "number",
+        "step": 0.05
+      }
+    ],
+    "outputs": [
+      {
+        "id": "status_abusivo",
+        "label": "Avaliação de Abusividade",
+        "isPrimary": true
+      },
+      {
+        "id": "diferenca_mensal",
+        "label": "Cobrança Excedente por Parcela",
+        "pref": "R$ "
+      },
+      {
+        "id": "diferenca_total",
+        "label": "Cobrança Excedente no Total",
+        "pref": "R$ "
+      },
+      {
+        "id": "valor_parcela_justa",
+        "label": "Parcela Sugerida (Sem Excesso)",
+        "pref": "R$ "
+      },
+      {
+        "id": "total_pago_real",
+        "label": "Custo Efetivo Total do Contrato",
+        "pref": "R$ "
+      },
+      {
+        "id": "total_pago_justo",
+        "label": "Custo Total Ajustado pela Média",
+        "pref": "R$ "
+      }
+    ],
+    "faq": [
+      {
+        "q": "O que caracteriza juros abusivos segundo a Justiça?",
+        "a": "O Superior Tribunal de Justiça (STJ) entende que uma taxa é considerada abusiva quando ultrapassa substancialmente a taxa média de juros praticada pelo mercado para a mesma modalidade de operação na data do contrato, sem justificativa plausível de risco de crédito pelo banco."
+      },
+      {
+        "q": "Posso parar de pagar a parcela ao entrar com ação?",
+        "a": "Nunca pare de pagar as parcelas sem uma autorização judicial (liminar). O não pagamento causará a negativação do seu nome nos órgãos de proteção ao crédito e risco de busca e apreensão do bem financiado."
+      }
+    ]
+  },
+  {
+    "id": "imposto-criptomoedas-gcap",
+    "name": "Imposto sobre Criptomoedas (GCAP)",
+    "description": "Calcule o ganho de capital e o imposto de renda devido em alienações mensais de criptoativos, verificando a faixa de isenção.",
+    "category": "juridico",
+    "icon": "Coins",
+    "tags": ["criptomoedas", "cripto", "bitcoin", "imposto de renda", "gcap", "isenção", "ganho de capital"],
+    "type": "juridico_cripto_imposto",
+    "inputs": [
+      {
+        "id": "valor_vendas_mes",
+        "label": "Total de Vendas de Cripto no Mês (R$)",
+        "def": 40000,
+        "type": "number"
+      },
+      {
+        "id": "custo_aquisicao",
+        "label": "Custo de Aquisição Médio (R$)",
+        "def": 25000,
+        "type": "number"
+      },
+      {
+        "id": "outros_custos",
+        "label": "Taxas Adicionais (Gás, Corretagem) (R$)",
+        "def": 200,
+        "type": "number"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "imposto_devido",
+        "label": "Imposto de Renda Devido",
+        "pref": "R$ ",
+        "isPrimary": true
+      },
+      {
+        "id": "isento_status",
+        "label": "Enquadramento Legal (Isenção)"
+      },
+      {
+        "id": "lucro_liquido",
+        "label": "Lucro Líquido Apurado",
+        "pref": "R$ "
+      },
+      {
+        "id": "aliquota_ir",
+        "label": "Alíquota Aplicável",
+        "suff": "%"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Qual é a faixa de isenção mensal para criptoativos?",
+        "a": "Pessoas físicas que realizem alienações (vendas, permutas) de criptoativos cujo valor total no mês seja igual ou inferior a R$ 35.000,00 estão isentas de imposto de renda sobre o ganho de capital auferido."
+      },
+      {
+        "q": "O que acontece em caso de permuta entre duas criptos?",
+        "a": "A Receita Federal equipara a permuta de duas criptomoedas (ex: trocar Bitcoin por Ethereum) a uma venda seguida de compra, devendo ser computado o ganho de capital caso as operações totais excedam o limite mensal de R$ 35 mil."
+      }
+    ]
+  },
   {
     "id": "idade-caes",
     "name": "Idade Humana de Cão",
@@ -6023,7 +6266,88 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       const v1 = parseFloat(valInputs[firstKey] || 0);
       const v2 = parseFloat(valInputs[secondKey] || 0);
 
-      if (raw.type === 'pets_idade_cao') {
+      if (raw.type === 'veiculos_carro_eletrico') {
+        const bat = parseFloat(valInputs['capacidade_bateria'] || 40);
+        const kwh = parseFloat(valInputs['preco_kwh'] || 0.85);
+        const aut = parseFloat(valInputs['autonomia_eletrico'] || 300);
+        const com = parseFloat(valInputs['consumo_combustivel'] || 10);
+        const prc = parseFloat(valInputs['preco_combustivel'] || 5.80);
+        const dist = parseFloat(valInputs['distancia_mensal'] || 1500);
+
+        const costPerKmEle = (bat * kwh) / aut;
+        const costPerKmCom = prc / com;
+
+        const mensEle = costPerKmEle * dist;
+        const mensCom = costPerKmCom * dist;
+        const econMens = mensCom - mensEle;
+        const econAnu = econMens * 12;
+
+        results['custo_recarga_mensal'] = parseFloat(mensEle.toFixed(2));
+        results['custo_combustivel_mensal'] = parseFloat(mensCom.toFixed(2));
+        results['economia_mensal'] = parseFloat(Math.max(0, econMens).toFixed(2));
+        results['economia_anual'] = parseFloat(Math.max(0, econAnu).toFixed(2));
+      }
+      else if (raw.type === 'financas_juros_abusivos') {
+        const financiado = parseFloat(valInputs['valor_financiado'] || 40000);
+        const taxaContratada = parseFloat(valInputs['taxa_juros_contratada'] || 2.8);
+        const parcelas = parseFloat(valInputs['parcelas_totais'] || 48);
+        const pmtContratada = parseFloat(valInputs['valor_parcela_paga'] || 1550);
+        const taxaBacen = parseFloat(valInputs['taxa_media_bacen'] || 1.8);
+
+        // PMT Justa (BACEN)
+        const i = taxaBacen / 100;
+        let pmtJusta = 0;
+        if (i > 0) {
+          pmtJusta = financiado * (i * Math.pow(1 + i, parcelas)) / (Math.pow(1 + i, parcelas) - 1);
+        } else {
+          pmtJusta = financiado / parcelas;
+        }
+
+        const totalReal = pmtContratada * parcelas;
+        const totalJusto = pmtJusta * parcelas;
+        const difMensal = pmtContratada - pmtJusta;
+        const difTotal = totalReal - totalJusto;
+
+        let status = 'Juros dentro da média do mercado (Seguro)';
+        if (taxaContratada > taxaBacen * 1.5) {
+          status = '🚨 Risco Alto de Abusividade (Taxa > 50% da Média)';
+        } else if (taxaContratada > taxaBacen * 1.2) {
+          status = '⚠️ Risco Moderado de Abusividade (Taxa > 20% da Média)';
+        }
+
+        results['total_pago_real'] = parseFloat(totalReal.toFixed(2));
+        results['total_pago_justo'] = parseFloat(totalJusto.toFixed(2));
+        results['valor_parcela_justa'] = parseFloat(pmtJusta.toFixed(2));
+        results['diferenca_mensal'] = parseFloat(Math.max(0, difMensal).toFixed(2));
+        results['diferenca_total'] = parseFloat(Math.max(0, difTotal).toFixed(2));
+        results['status_abusivo'] = status;
+      }
+      else if (raw.type === 'juridico_cripto_imposto') {
+        const vendas = parseFloat(valInputs['valor_vendas_mes'] || 40000);
+        const aquisicao = parseFloat(valInputs['custo_aquisicao'] || 25000);
+        const custos = parseFloat(valInputs['outros_custos'] || 200);
+
+        const lucro = vendas - aquisicao - custos;
+        const isento = vendas <= 35000;
+
+        let aliquota = 0;
+        let imposto = 0;
+        let status = 'Isento de IR (Vendas mensais até R$ 35 mil)';
+
+        if (!isento) {
+          status = 'Tributável via GCAP (Vendas mensais acima de R$ 35 mil)';
+          if (lucro > 0) {
+            aliquota = 15; // default GCAP rate for gains up to 5M
+            imposto = lucro * 0.15;
+          }
+        }
+
+        results['lucro_liquido'] = parseFloat(Math.max(0, lucro).toFixed(2));
+        results['imposto_devido'] = parseFloat(Math.max(0, imposto).toFixed(2));
+        results['aliquota_ir'] = aliquota;
+        results['isento_status'] = status;
+      }
+      else if (raw.type === 'pets_idade_cao') {
         const porte = valInputs['porte'] || 'medio';
         const idadeReal = parseFloat(valInputs['idade_anos'] || 0);
         let humana = 0;

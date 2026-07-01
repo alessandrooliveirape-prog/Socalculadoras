@@ -225,6 +225,27 @@
     <changefreq>daily</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- Carro Elétrico vs Combustão -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/carro-eletrico-vs-combustivel</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Cálculo de Juros Abusivos -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/juros-abusivos-financiamento</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Imposto sobre Criptomoedas (GCAP) -->
+  <url>
+    <loc>https://brasilcalculadoras.com.br/imposto-criptomoedas-gcap</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>
   <!-- Idade Humana de Cão -->
   <url>
     <loc>https://brasilcalculadoras.com.br/idade-caes</loc>
