@@ -35,7 +35,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              A sua privacidade é de extrema importância para o <strong>Brasil Calculadoras</strong> (acessível via <a href="https://brasilcalculadoras.com.br" className="text-blue-600 underline font-semibold">brasilcalculadoras.com.br</a>). Esta Política de Privacidade descreve de forma clara e transparente quais informações pessoais são coletadas, como são utilizadas, armazenadas e protegidas, em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018) e o Regulamento Geral de Proteção de Dados (GDPR).
+              A sua privacidade é de extrema importância para o <strong>Brasil Calculadoras</strong> (acessível via <a href="https://www.brasilcalculadoras.com.br" className="text-blue-600 underline font-semibold">www.brasilcalculadoras.com.br</a>). Esta Política de Privacidade descreve de forma clara e transparente quais informações pessoais são coletadas, como são utilizadas, armazenadas e protegidas, em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018) e o Regulamento Geral de Proteção de Dados (GDPR).
             </p>
 
             <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2 flex items-center gap-2">

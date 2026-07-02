@@ -310,13 +310,13 @@ export default function App() {
             "@type": "ListItem",
             "position": 1,
             "name": "Início",
-            "item": "https://brasilcalculadoras.com.br/"
+            "item": "https://www.brasilcalculadoras.com.br/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": catLabel,
-            "item": `https://brasilcalculadoras.com.br/${catSlug}`
+            "item": `https://www.brasilcalculadoras.com.br/${catSlug}`
           },
           {
             "@type": "ListItem",
@@ -361,7 +361,7 @@ export default function App() {
             "@type": "ListItem",
             "position": 1,
             "name": "Início",
-            "item": "https://brasilcalculadoras.com.br/"
+            "item": "https://www.brasilcalculadoras.com.br/"
           },
           {
             "@type": "ListItem",
@@ -417,7 +417,7 @@ export default function App() {
     if (isHome) {
       const homeTitle = 'Brasil Calculadoras | Calculadoras Online Gratuitas Finanças, Trabalho e Saúde';
       const homeDesc = 'Calculadoras online gratuitas para finanças, trabalho, saúde, estudos, veículos e muito mais. Simulações rápidas, sem cadastro e 100% gratuitas.';
-      const canonicalUrl = 'https://brasilcalculadoras.com.br/';
+      const canonicalUrl = 'https://www.brasilcalculadoras.com.br/';
 
       document.title = homeTitle;
 
@@ -459,11 +459,11 @@ export default function App() {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Brasil Calculadoras",
-          "url": "https://brasilcalculadoras.com.br/",
+          "url": "https://www.brasilcalculadoras.com.br/",
           "description": homeDesc,
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://brasilcalculadoras.com.br/?q={search_term_string}",
+            "target": "https://www.brasilcalculadoras.com.br/?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         };
@@ -477,7 +477,7 @@ export default function App() {
 
     if (activeCategoryHub) {
       const hubData = getCategoryHubContent(activeCategoryHub);
-      const canonicalUrl = `https://brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
+      const canonicalUrl = `https://www.brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
       
       document.title = hubData.title;
 
@@ -517,7 +517,7 @@ export default function App() {
     if (!activeCalc) return;
 
     const seoData = getSeoContentForCalculator(activeCalc);
-    const canonicalUrl = `https://brasilcalculadoras.com.br/${activeCalculator}`;
+    const canonicalUrl = `https://www.brasilcalculadoras.com.br/${activeCalculator}`;
 
     document.title = seoData.title;
 

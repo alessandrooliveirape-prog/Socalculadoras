@@ -27,17 +27,17 @@ function ensureDir(dirPath: string) {
 // 1. Pre-render Homepage
 const homeTitle = 'Brasil Calculadoras | Calculadoras Online Gratuitas Finanças, Trabalho e Saúde';
 const homeDesc = 'Calculadoras online gratuitas para finanças, trabalho, saúde, estudos, veículos e muito mais. Simulações rápidas, sem cadastro e 100% gratuitas.';
-const homeUrl = 'https://brasilcalculadoras.com.br/';
+const homeUrl = 'https://www.brasilcalculadoras.com.br/';
 
 const homepageSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Brasil Calculadoras",
-  "url": "https://brasilcalculadoras.com.br/",
+  "url": "https://www.brasilcalculadoras.com.br/",
   "description": homeDesc,
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://brasilcalculadoras.com.br/?q={search_term_string}",
+    "target": "https://www.brasilcalculadoras.com.br/?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 };
@@ -151,7 +151,7 @@ console.log('✅ Homepage pre-rendered!');
 // 2. Pre-render Category Hubs
 Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([catKey, slug]) => {
   const hubData = getCategoryHubContent(catKey);
-  const canonicalUrl = `https://brasilcalculadoras.com.br/${slug}`;
+  const canonicalUrl = `https://www.brasilcalculadoras.com.br/${slug}`;
   const label = CATEGORY_MAP_RAW[catKey] || catKey;
 
   const collectionSchema = {
@@ -172,7 +172,7 @@ Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([catKey, slug]) => {
         "@type": "ListItem",
         "position": 1,
         "name": "Início",
-        "item": "https://brasilcalculadoras.com.br/"
+        "item": "https://www.brasilcalculadoras.com.br/"
       },
       {
         "@type": "ListItem",
@@ -245,7 +245,7 @@ console.log('✅ Category Hubs pre-rendered!');
 // 3. Pre-render Priority Calculators
 CALCULATORS_CATALOG.forEach(calc => {
   const seoData = getSeoContentForCalculator(calc);
-  const canonicalUrl = `https://brasilcalculadoras.com.br/${calc.id}`;
+  const canonicalUrl = `https://www.brasilcalculadoras.com.br/${calc.id}`;
   const catLabel = CATEGORY_MAP_RAW[calc.category] || calc.category;
   const catSlug = CATEGORY_KEY_TO_SLUG[calc.category] || '';
 
@@ -274,13 +274,13 @@ CALCULATORS_CATALOG.forEach(calc => {
         "@type": "ListItem",
         "position": 1,
         "name": "Início",
-        "item": "https://brasilcalculadoras.com.br/"
+        "item": "https://www.brasilcalculadoras.com.br/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": catLabel,
-        "item": `https://brasilcalculadoras.com.br/${catSlug}`
+        "item": `https://www.brasilcalculadoras.com.br/${catSlug}`
       },
       {
         "@type": "ListItem",
@@ -422,7 +422,7 @@ const legalPagesConfig = [
 ];
 
 legalPagesConfig.forEach(page => {
-  const canonicalUrl = `https://brasilcalculadoras.com.br/${page.slug}`;
+  const canonicalUrl = `https://www.brasilcalculadoras.com.br/${page.slug}`;
   const legalHtml = `
     <header style="padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; font-family: sans-serif;">
       <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
