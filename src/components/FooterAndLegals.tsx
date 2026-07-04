@@ -114,7 +114,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
         {/* Outer bottom copyright credits */}
         <div className="max-w-7xl mx-auto px-4 md:px-6 border-t border-slate-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center select-none">
           <p className="text-[10.5px] text-slate-500 font-mono">
-            &copy; 2026 Brasil Calculadoras. Todos os direitos reservados. CNPJ 41.524.305/0001-90.
+            &copy; 2026 Brasil Calculadoras. Todos os direitos reservados.
           </p>
           <div className="flex gap-4 text-[10.5px]">
             <span className="text-slate-500 font-mono">ID do Editor: pub-8160658026927094</span>

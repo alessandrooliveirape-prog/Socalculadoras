@@ -154,11 +154,10 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
             </p>
 
             <div className="bg-blue-50 border border-blue-150 rounded-2xl p-5 mt-2 flex flex-col gap-2">
-              <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Identificação da Mantenedora:</h3>
+              <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Contato Editorial:</h3>
               <p className="text-xs text-blue-800 m-0">
-                Brasil Calculadoras Tecnologia & Mídia Digital Ltd.<br />
-                CNPJ: 41.524.305/0001-90<br />
-                E-mail corporativo: contato@brasilcalculadoras.com.br
+                Brasil Calculadoras<br />
+                E-mail: contato@brasilcalculadoras.com.br
               </p>
             </div>
           </section>

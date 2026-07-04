@@ -406,7 +406,7 @@ const legalPagesConfig = [
     heading: 'Sobre o Brasil Calculadoras',
     content: `
       <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">O Brasil Calculadoras é um portal dedicado a disponibilizar ferramentas gratuitas, céleres e de alta precisão técnica para o público brasileiro em áreas trabalhistas, financeiras, saúde e utilidades.</p>
-      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Operado por Brasil Calculadoras Tecnologia & Mídia Digital Ltd. (CNPJ 41.524.305/0001-90), priorizamos rigor técnico, transparência E-E-A-T e navegação livre de burocracias.</p>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Operado por Brasil Calculadoras, priorizamos rigor técnico, transparência E-E-A-T e navegação livre de burocracias.</p>
     `
   },
   {
