@@ -6246,6 +6246,290 @@ const RAW_DYNAMIC_METADATA: {
     "faq": [
       { "q": "Como funciona o sistema binário?", "a": "O sistema binário utiliza apenas os dígitos 0 e 1, que representam os estados desligado e ligado em circuitos eletrônicos digitais." }
     ]
+  },
+  {
+    "id": "calculadora-de-salario-liquido",
+    "name": "Calculadora de Salário Líquido",
+    "description": "Calcule seu salário líquido mensal descontando INSS, IRRF e benefícios legais da sua remuneração bruta.",
+    "category": "profissoes",
+    "icon": "DollarSign",
+    "tags": ["salário líquido", "salário", "clt", "inss", "irrf", "desconto", "renda"],
+    "type": "trab_salario_liquido",
+    "inputs": [
+      {
+        "id": "salario_bruto",
+        "label": "Salário Bruto (R$)",
+        "def": 3500,
+        "type": "number",
+        "pref": "R$"
+      },
+      {
+        "id": "dependentes",
+        "label": "Número de Dependentes",
+        "def": 0,
+        "type": "number"
+      },
+      {
+        "id": "desconto_vt",
+        "label": "Desconto de Vale Transporte (%)",
+        "def": 6,
+        "type": "number",
+        "suff": "%"
+      },
+      {
+        "id": "outros_descontos",
+        "label": "Outros Descontos (R$)",
+        "def": 0,
+        "type": "number",
+        "pref": "R$"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "salario_liquido",
+        "label": "Salário Líquido Mensal",
+        "pref": "R$ ",
+        "isPrimary": true
+      },
+      {
+        "id": "desc_inss",
+        "label": "Desconto de INSS",
+        "pref": "R$ "
+      },
+      {
+        "id": "desc_irrf",
+        "label": "Desconto de IRRF",
+        "pref": "R$ "
+      },
+      {
+        "id": "total_descontos",
+        "label": "Total de Descontos",
+        "pref": "R$ "
+      }
+    ],
+    "faq": [
+      {
+        "q": "Como é calculado o INSS?",
+        "a": "O INSS é calculado de forma progressiva, aplicando-se faixas de alíquotas (7,5%, 9%, 12% e 14%) sobre cada parcela do seu salário bruto até o teto estipulado pela Previdência Social."
+      },
+      {
+        "q": "Vale Transporte desconta do salário?",
+        "a": "Sim, pela lei da CLT o empregador pode descontar até 6% do seu salário base (ou o valor total das passagens, o que for menor) referente ao benefício de vale transporte."
+      }
+    ]
+  },
+  {
+    "id": "calculadora-de-seguro-desemprego",
+    "name": "Calculadora Seguro Desemprego",
+    "description": "Descubra o valor e a quantidade de parcelas que você tem direito ao dar entrada no Seguro Desemprego.",
+    "category": "profissoes",
+    "icon": "ShieldCheck",
+    "tags": ["seguro desemprego", "desemprego", "demissão", "parcelas", "benefício", "trabalhador"],
+    "type": "trab_seguro_desemprego",
+    "inputs": [
+      {
+        "id": "media_salarios",
+        "label": "Média dos Últimos 3 Salários (R$)",
+        "def": 2500,
+        "type": "number",
+        "pref": "R$"
+      },
+      {
+        "id": "meses_trabalhados",
+        "label": "Meses Trabalhados no Último Emprego",
+        "def": 18,
+        "type": "number"
+      },
+      {
+        "id": "solicitacoes",
+        "label": "Quantas vezes já solicitou o seguro?",
+        "def": 1,
+        "type": "number"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "valor_parcela",
+        "label": "Valor Estimado da Parcela",
+        "pref": "R$ ",
+        "isPrimary": true
+      },
+      {
+        "id": "qtd_parcelas",
+        "label": "Quantidade de Parcelas",
+        "suff": " parcelas"
+      },
+      {
+        "id": "valor_total",
+        "label": "Valor Total a Receber",
+        "pref": "R$ "
+      }
+    ],
+    "faq": [
+      {
+        "q": "Como a média salarial influencia a parcela?",
+        "a": "O governo usa a média dos seus últimos três salários registrados na carteira antes da demissão para enquadrá-lo em uma das três faixas de pagamento (sempre respeitando o teto máximo e o piso do salário mínimo)."
+      },
+      {
+        "q": "Quantas parcelas eu vou receber?",
+        "a": "A quantidade varia de 3 a 5 parcelas dependendo do tempo de vínculo empregatício e de quantas vezes você já solicitou o benefício ao longo da vida profissional."
+      }
+    ]
+  },
+  {
+    "id": "calculadora-idade-gestacional",
+    "name": "Calculadora Idade Gestacional",
+    "description": "Calcule com precisão de semanas e dias o seu tempo de gravidez e a data provável do parto.",
+    "category": "saude",
+    "icon": "Baby",
+    "tags": ["gravidez", "idade gestacional", "parto", "gestante", "bebê", "semanas de gravidez"],
+    "type": "saude_gestacao",
+    "inputs": [
+      {
+        "id": "dias_desde_dum",
+        "label": "Dias desde a Última Menstruação (DUM)",
+        "def": 140,
+        "type": "number"
+      },
+      {
+        "id": "ciclo",
+        "label": "Tamanho Médio do Ciclo (dias)",
+        "def": 28,
+        "type": "number"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "idade_semanas",
+        "label": "Idade Gestacional",
+        "isPrimary": true
+      },
+      {
+        "id": "dias_restantes",
+        "label": "Dias Restantes até o Parto",
+        "suff": " dias"
+      },
+      {
+        "id": "trimestre",
+        "label": "Trimestre Atual"
+      }
+    ],
+    "faq": [
+      {
+        "q": "O que é DUM?",
+        "a": "DUM significa Data da Última Menstruação. É o marco inicial padrão utilizado por obstetras no mundo inteiro para contar as semanas de gestação, mesmo que a concepção ocorra cerca de duas semanas depois."
+      },
+      {
+        "q": "Até quantas semanas dura uma gestação normal?",
+        "a": "Uma gravidez normal a termo dura cerca de 280 dias ou 40 semanas a partir da DUM. No entanto, bebês podem nascer com segurança entre 37 e 42 semanas."
+      }
+    ]
+  },
+  {
+    "id": "consumo-de-combustivel-kml",
+    "name": "Calculadora de Combustível",
+    "description": "Estime o gasto exato e a quantidade de litros necessários para sua viagem considerando a autonomia do veículo.",
+    "category": "veiculos",
+    "icon": "Fuel",
+    "tags": ["combustível", "gasolina", "etanol", "viagem", "consumo", "carro", "km/l", "gasto"],
+    "type": "vei_consumo_combustivel",
+    "inputs": [
+      {
+        "id": "distancia",
+        "label": "Distância da Viagem (km)",
+        "def": 250,
+        "type": "number"
+      },
+      {
+        "id": "consumo",
+        "label": "Autonomia / Consumo do Veículo (km/L)",
+        "def": 11,
+        "type": "number"
+      },
+      {
+        "id": "preco_litro",
+        "label": "Preço do Combustível (R$/L)",
+        "def": 5.85,
+        "type": "number",
+        "pref": "R$"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "custo_viagem",
+        "label": "Custo Estimado da Viagem",
+        "pref": "R$ ",
+        "isPrimary": true
+      },
+      {
+        "id": "litros_gastos",
+        "label": "Combustível Necessário",
+        "suff": " Litros"
+      },
+      {
+        "id": "custo_por_km",
+        "label": "Custo por Quilômetro Rodado",
+        "pref": "R$ "
+      }
+    ],
+    "faq": [
+      {
+        "q": "O ar-condicionado altera o consumo?",
+        "a": "Sim, trafegar com ar-condicionado ligado pode reduzir a autonomia do veículo em cerca de 10% a 20%, aumentando o custo final da viagem."
+      },
+      {
+        "q": "O que afeta a autonomia real do carro na estrada?",
+        "a": "A autonomia é altamente influenciada por excesso de peso (muita bagagem/passageiros), pneus descalibrados e forma de condução (acelerações bruscas)."
+      }
+    ]
+  },
+  {
+    "id": "calculadora-de-ipva",
+    "name": "Calculadora de IPVA Anual",
+    "description": "Saiba o valor do imposto automotivo (IPVA) cruzando a alíquota do seu estado com o valor venal do carro.",
+    "category": "veiculos",
+    "icon": "Car",
+    "tags": ["ipva", "imposto", "carro", "moto", "veículo", "tabela fipe"],
+    "type": "vei_ipva_calc",
+    "inputs": [
+      {
+        "id": "valor_fipe",
+        "label": "Valor do Veículo na Tabela FIPE (R$)",
+        "def": 65000,
+        "type": "number",
+        "pref": "R$"
+      },
+      {
+        "id": "aliquota",
+        "label": "Alíquota do IPVA do seu Estado (%)",
+        "def": 4.0,
+        "type": "number",
+        "suff": "%"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "valor_ipva",
+        "label": "Valor Total do IPVA",
+        "pref": "R$ ",
+        "isPrimary": true
+      },
+      {
+        "id": "parcela_ipva",
+        "label": "Se parcelado (3x sem juros)",
+        "pref": "3x de R$ "
+      }
+    ],
+    "faq": [
+      {
+        "q": "De onde vem a alíquota do IPVA?",
+        "a": "As Secretarias da Fazenda de cada estado brasileiro definem a alíquota anualmente. A taxa varia, em média, de 2% a 4% do valor venal para carros de passeio."
+      },
+      {
+        "q": "O valor da Tabela FIPE oscila?",
+        "a": "Sim. O governo costuma travar e utilizar o valor venal (FIPE) avaliado no mês de setembro do ano imediatamente anterior à cobrança do imposto para estabelecer a base de cálculo."
+      }
+    ]
   }
 ];
 
@@ -7822,7 +8106,110 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
           results['resultado'] = val.toString(8);
         }
       }
-return results;
+      else if (raw.type === 'trab_salario_liquido') {
+        const bruto = parseFloat(valInputs['salario_bruto'] || 0);
+        const dependentes = parseInt(valInputs['dependentes'] || 0);
+        const vtPercent = parseFloat(valInputs['desconto_vt'] || 0);
+        const outrosDesc = parseFloat(valInputs['outros_descontos'] || 0);
+
+        let inss = 0;
+        if (bruto <= 1412) inss = bruto * 0.075;
+        else if (bruto <= 2666.68) inss = (1412 * 0.075) + ((bruto - 1412) * 0.09);
+        else if (bruto <= 4000.03) inss = (1412 * 0.075) + (1254.68 * 0.09) + ((bruto - 2666.68) * 0.12);
+        else if (bruto <= 7786.02) inss = (1412 * 0.075) + (1254.68 * 0.09) + (1333.35 * 0.12) + ((bruto - 4000.03) * 0.14);
+        else inss = 908.85;
+
+        const deducaoDep = dependentes * 189.59;
+        const baseIrrf = bruto - inss - deducaoDep;
+        let irrf = 0;
+        if (baseIrrf > 4664.68) irrf = (baseIrrf * 0.275) - 884.96;
+        else if (baseIrrf > 3751.05) irrf = (baseIrrf * 0.225) - 651.73;
+        else if (baseIrrf > 2826.65) irrf = (baseIrrf * 0.15) - 370.40;
+        else if (baseIrrf > 2112.00) irrf = (baseIrrf * 0.075) - 158.40;
+        
+        irrf = Math.max(0, irrf);
+        const descontoVtReais = (bruto * (vtPercent / 100));
+        const totalDescontos = inss + irrf + descontoVtReais + outrosDesc;
+        const liquido = bruto - totalDescontos;
+
+        results['salario_liquido'] = parseFloat(liquido.toFixed(2));
+        results['desc_inss'] = parseFloat(inss.toFixed(2));
+        results['desc_irrf'] = parseFloat(irrf.toFixed(2));
+        results['total_descontos'] = parseFloat(totalDescontos.toFixed(2));
+      }
+      else if (raw.type === 'trab_seguro_desemprego') {
+        const media = parseFloat(valInputs['media_salarios'] || 0);
+        const meses = parseInt(valInputs['meses_trabalhados'] || 0);
+        const solicita = parseInt(valInputs['solicitacoes'] || 1);
+
+        let parcela = 0;
+        if (media <= 2041.39) parcela = media * 0.8;
+        else if (media <= 3402.65) parcela = (2041.39 * 0.8) + ((media - 2041.39) * 0.5);
+        else parcela = 2313.74;
+
+        if (parcela < 1412) parcela = 1412;
+
+        let qtd = 3;
+        if (solicita === 1) {
+            if (meses >= 12 && meses <= 23) qtd = 4;
+            else if (meses >= 24) qtd = 5;
+        } else if (solicita === 2) {
+            if (meses >= 9 && meses <= 11) qtd = 3;
+            else if (meses >= 12 && meses <= 23) qtd = 4;
+            else if (meses >= 24) qtd = 5;
+        } else {
+            if (meses >= 6 && meses <= 11) qtd = 3;
+            else if (meses >= 12 && meses <= 23) qtd = 4;
+            else if (meses >= 24) qtd = 5;
+        }
+
+        if (meses < 6) {
+           qtd = 0;
+           parcela = 0;
+        }
+
+        results['valor_parcela'] = parseFloat(parcela.toFixed(2));
+        results['qtd_parcelas'] = qtd;
+        results['valor_total'] = parseFloat((parcela * qtd).toFixed(2));
+      }
+      else if (raw.type === 'saude_gestacao') {
+        const diasDum = parseInt(valInputs['dias_desde_dum'] || 0);
+        const semanas = Math.floor(diasDum / 7);
+        const diasExtras = diasDum % 7;
+        const totalDiasParto = 280;
+        const faltam = totalDiasParto - diasDum;
+
+        let tri = "1º Trimestre (Semanas 1 a 13)";
+        if (semanas >= 14 && semanas <= 26) tri = "2º Trimestre (Semanas 14 a 26)";
+        else if (semanas >= 27) tri = "3º Trimestre (Semana 27 ao Parto)";
+
+        results['idade_semanas'] = `${semanas} semanas e ${diasExtras} dias`;
+        results['dias_restantes'] = faltam > 0 ? faltam : 0;
+        results['trimestre'] = tri;
+      }
+      else if (raw.type === 'vei_consumo_combustivel') {
+        const dist = parseFloat(valInputs['distancia'] || 0);
+        const cons = parseFloat(valInputs['consumo'] || 1);
+        const preco = parseFloat(valInputs['preco_litro'] || 0);
+
+        const litros = dist / cons;
+        const custo = litros * preco;
+
+        results['custo_viagem'] = parseFloat(custo.toFixed(2));
+        results['litros_gastos'] = parseFloat(litros.toFixed(2));
+        results['custo_por_km'] = parseFloat((custo / (dist || 1)).toFixed(2));
+      }
+      else if (raw.type === 'vei_ipva_calc') {
+        const fipe = parseFloat(valInputs['valor_fipe'] || 0);
+        const al = parseFloat(valInputs['aliquota'] || 0);
+
+        const ipva = fipe * (al / 100);
+
+        results['valor_ipva'] = parseFloat(ipva.toFixed(2));
+        results['parcela_ipva'] = parseFloat((ipva / 3).toFixed(2));
+      }
+
+      return results;
     };
 
     // Dynamically build inputs & outputs casting raw mappings
