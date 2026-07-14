@@ -69,7 +69,9 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
     matematica: 'Regra de três simples, porcentagens rápidas, equações de 2º grau e médias escolares.',
     imobiliario: 'Simuladores Price vs SAC, reajuste de aluguel, cap rate e estimativas fiscais de ITBI.',
     veiculos: 'Comparação de álcool vs gasolina, depreciação FIPE, consumo de viagem e IPVA.',
-    pets: 'Meta de ração diária, hidratação e idade em anos humanos para cães e gatos.'
+    pets: 'Meta de ração diária, hidratação e idade em anos humanos para cães e gatos.',
+    datas: 'Diferença entre datas, contagem de dias úteis, conversão de horas e planejamento temporal.',
+    maternidade: 'Data provável do parto, custo mensal com bebê, idade gestacional e planejamento familiar.'
   };
 
   const intentGroups = [

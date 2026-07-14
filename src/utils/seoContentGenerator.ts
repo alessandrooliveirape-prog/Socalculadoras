@@ -41,7 +41,9 @@ export const CATEGORY_SLUG_MAP: Record<string, string> = {
   'quimica-fizica-ciencia': 'quimica_fisica', // Wait, quimica-fizica or quimica-fisica? The original had quimica-fisica-ciencia
   'quimica-fisica-ciencia': 'quimica_fisica',
   'tecnologia-computacao': 'tecnologia',
-  'pets-animais': 'pets'
+  'pets-animais': 'pets',
+  'datas-planejamento': 'datas',
+  'maternidade-bebe': 'maternidade'
 };
 
 export const CATEGORY_KEY_TO_SLUG: Record<string, string> = {
@@ -63,7 +65,9 @@ export const CATEGORY_KEY_TO_SLUG: Record<string, string> = {
   educacao: 'educacao-enem',
   quimica_fisica: 'quimica-fisica-ciencia',
   tecnologia: 'tecnologia-computacao',
-  pets: 'pets-animais'
+  pets: 'pets-animais',
+  datas: 'datas-planejamento',
+  maternidade: 'maternidade-bebe'
 };
 
 export const CATEGORY_MAP_RAW: Record<string, string> = {
@@ -85,7 +89,9 @@ export const CATEGORY_MAP_RAW: Record<string, string> = {
   educacao: 'Educação & ENEM',
   quimica_fisica: 'Química & Física',
   tecnologia: 'Tecnologia & Computação',
-  pets: 'Pets & Animais'
+  pets: 'Pets & Animais',
+  datas: 'Datas & Planejamento',
+  maternidade: 'Maternidade & Bebê'
 };
 
 // Bespoke database for popular calculators (EEAT Content and intent FAQs)

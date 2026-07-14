@@ -20,7 +20,9 @@ export const CATEGORY_MAP: Record<string, string> = {
   educacao: '📚 Educação & ENEM',
   quimica_fisica: '🧪 Química & Física',
   tecnologia: '💻 Tecnologia & Computação',
-  pets: '🐾 Pets & Animais'
+  pets: '🐾 Pets & Animais',
+  datas: '📅 Datas & Planejamento',
+  maternidade: '👶 Maternidade & Bebê'
 };
 
 // 12 Core Calculators that have pre-built custom views
@@ -131,7 +133,7 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base' | 'pets_idade_cao' | 'pets_idade_gato' | 'pets_racao_cao' | 'pets_agua' | 'saude_agua_humana' | 'saude_exercicio_calorias' | 'financas_ferias_pj' | 'veiculos_carro_eletrico' | 'financas_juros_abusivos' | 'juridico_cripto_imposto';
+  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base' | 'pets_idade_cao' | 'pets_idade_gato' | 'pets_racao_cao' | 'pets_agua' | 'saude_agua_humana' | 'saude_exercicio_calorias' | 'financas_ferias_pj' | 'veiculos_carro_eletrico' | 'financas_juros_abusivos' | 'juridico_cripto_imposto' | 'trab_inss' | 'trab_irrf' | 'trab_salario_hora' | 'fin_emprestimo' | 'fin_das_mei' | 'fin_gorjeta' | 'datas_diferenca' | 'datas_uteis' | 'datas_horas_decimais' | 'mat_dpp' | 'mat_custo_bebe' | 'edu_enem_sisu' | 'mat_proporcao_aurea';
   inputs: { id: string; label: string; def: any; type: 'number' | 'select' | 'text'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
@@ -6530,6 +6532,377 @@ const RAW_DYNAMIC_METADATA: {
         "a": "Sim. O governo costuma travar e utilizar o valor venal (FIPE) avaliado no mês de setembro do ano imediatamente anterior à cobrança do imposto para estabelecer a base de cálculo."
       }
     ]
+  },
+  {
+    "id": "simulador-inss-salario",
+    "name": "Simulador de Desconto INSS 2026",
+    "description": "Calcule o valor exato do desconto previdenciário (INSS) sobre o seu salário bruto usando a tabela progressiva atualizada para 2026.",
+    "category": "profissoes",
+    "icon": "ShieldCheck",
+    "tags": ["inss", "desconto", "previdência", "salário", "contribuição", "tabela progressiva", "clt", "2026"],
+    "type": "trab_inss",
+    "inputs": [
+      { "id": "salario_bruto", "label": "Salário Bruto Mensal (R$)", "def": 3500, "type": "number", "min": 0, "max": 50000, "step": 100 }
+    ],
+    "outputs": [
+      { "id": "desconto_inss", "label": "Desconto INSS Mensal", "pref": "R$ ", "isPrimary": true },
+      { "id": "aliquota_efetiva", "label": "Alíquota Efetiva", "suff": "%" },
+      { "id": "salario_apos_inss", "label": "Salário após INSS", "pref": "R$ " },
+      { "id": "faixa_contribuicao", "label": "Faixa de Contribuição" }
+    ],
+    "faq": [
+      { "q": "O que é a tabela progressiva do INSS?", "a": "Desde a Reforma da Previdência de 2019, o INSS utiliza alíquotas progressivas (7,5%, 9%, 12% e 14%), aplicadas faixa a faixa sobre o salário. Isso significa que quem ganha mais paga proporcionalmente mais, mas cada porção do salário é tributada pela alíquota correspondente à sua faixa." },
+      { "q": "Qual o teto do INSS em 2026?", "a": "O teto de contribuição previdenciária em 2026 é de R$ 8.157,41, o que resulta em uma contribuição máxima mensal de aproximadamente R$ 951,63 para segurados empregados sob o regime CLT." },
+      { "q": "Autônomos pagam o mesmo valor de INSS?", "a": "Não. Contribuintes individuais (autônomos) recolhem 20% sobre o salário de contribuição escolhido, enquanto o MEI contribui com 5% sobre o salário mínimo. As alíquotas progressivas se aplicam apenas a empregados CLT e domésticos." }
+    ]
+  },
+  {
+    "id": "simulador-irrf-salario",
+    "name": "Simulador de Imposto de Renda (IRRF) 2026",
+    "description": "Calcule o desconto do Imposto de Renda Retido na Fonte sobre o seu salário, considerando a dedução de INSS e dependentes na tabela 2026.",
+    "category": "profissoes",
+    "icon": "Receipt",
+    "tags": ["irrf", "imposto de renda", "desconto", "salário", "dependentes", "tabela ir", "2026", "dedução"],
+    "type": "trab_irrf",
+    "inputs": [
+      { "id": "salario_bruto", "label": "Salário Bruto Mensal (R$)", "def": 5000, "type": "number", "min": 0, "max": 100000, "step": 100 },
+      { "id": "dependentes", "label": "Número de Dependentes", "def": 0, "type": "number", "min": 0, "max": 20 },
+      { "id": "outros_descontos", "label": "Outros Descontos Legais (R$)", "def": 0, "type": "number" }
+    ],
+    "outputs": [
+      { "id": "valor_irrf", "label": "Desconto IRRF Mensal", "pref": "R$ ", "isPrimary": true },
+      { "id": "desc_inss_calc", "label": "Desconto INSS (calculado)", "pref": "R$ " },
+      { "id": "base_calculo", "label": "Base de Cálculo do IR", "pref": "R$ " },
+      { "id": "aliquota_ir", "label": "Alíquota Aplicada", "suff": "%" },
+      { "id": "liquido_estimado", "label": "Salário Líquido Estimado", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "Quem é isento do IRRF em 2026?", "a": "Em 2026, estão isentos do Imposto de Renda Retido na Fonte os trabalhadores cuja base de cálculo mensal (salário bruto menos INSS e deduções legais) seja de até R$ 2.259,20. Isso equivale a um salário bruto de aproximadamente R$ 2.824,00 para quem não possui dependentes." },
+      { "q": "Quanto vale a dedução por dependente?", "a": "Cada dependente (filhos menores de 21 anos, cônjuge sem renda, pais idosos sob sua guarda, entre outros) gera uma dedução fixa de R$ 189,59 por mês na base de cálculo do IRRF." }
+    ]
+  },
+  {
+    "id": "adicional-noturno-clt",
+    "name": "Calculadora de Adicional Noturno",
+    "description": "Calcule o valor do adicional noturno de 20% sobre a hora normal, considerando a hora noturna reduzida de 52 minutos e 30 segundos.",
+    "category": "profissoes",
+    "icon": "Moon",
+    "tags": ["adicional noturno", "hora noturna", "clt", "trabalho noturno", "20%", "52 minutos", "salário"],
+    "type": "trab_noturno",
+    "inputs": [
+      { "id": "salario", "label": "Salário Base Mensal (R$)", "def": 2500, "type": "number", "min": 0, "max": 50000 },
+      { "id": "horas_mes", "label": "Jornada Mensal (horas)", "def": 220, "type": "number", "min": 100, "max": 300 },
+      { "id": "horas_noturnas", "label": "Horas Noturnas no Mês (relógio)", "def": 40, "type": "number", "min": 0, "max": 200 }
+    ],
+    "outputs": [
+      { "id": "adicional", "label": "Adicional Noturno Total", "pref": "R$ ", "isPrimary": true },
+      { "id": "hora_normal", "label": "Valor da Hora Normal", "pref": "R$ " },
+      { "id": "hora_noturna", "label": "Valor da Hora Noturna", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "Por que a hora noturna tem apenas 52 minutos e 30 segundos?", "a": "A CLT (Art. 73, §1º) define que a hora noturna corresponde a 52 minutos e 30 segundos de trabalho. Isso significa que 7 horas de relógio entre 22h e 5h equivalem a 8 horas de trabalho para fins de pagamento, funcionando como um bônus adicional ao trabalhador noturno." },
+      { "q": "Qual o período considerado noturno?", "a": "Para trabalhadores urbanos, o horário noturno vai das 22h às 5h do dia seguinte. Para rurais na lavoura, é das 21h às 5h, e na pecuária, das 20h às 4h. O adicional mínimo previsto em lei é de 20% sobre a hora diurna." }
+    ]
+  },
+  {
+    "id": "calculadora-vale-transporte",
+    "name": "Calculadora de Vale-Transporte",
+    "description": "Descubra o desconto de até 6% do salário referente ao vale-transporte e quanto a empresa deve complementar mensalmente.",
+    "category": "profissoes",
+    "icon": "Bus",
+    "tags": ["vale transporte", "vt", "desconto", "6%", "passagem", "clt", "transporte", "ônibus"],
+    "type": "trab_vt",
+    "inputs": [
+      { "id": "salario", "label": "Salário Bruto Mensal (R$)", "def": 2500, "type": "number", "min": 0, "max": 50000 },
+      { "id": "custo_vt", "label": "Custo Mensal com Transporte (R$)", "def": 330, "type": "number", "min": 0, "max": 5000 }
+    ],
+    "outputs": [
+      { "id": "desconto", "label": "Desconto no Seu Salário (até 6%)", "pref": "R$ ", "isPrimary": true },
+      { "id": "parte_empresa", "label": "Complemento Pago pela Empresa", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "O desconto de VT pode ultrapassar 6%?", "a": "Não. A legislação limita o desconto do vale-transporte a no máximo 6% do salário base do empregado. Se o custo real das passagens for menor que 6%, o desconto será o custo real. Se for maior, a empresa arca com a diferença." },
+      { "q": "Quem tem direito ao vale-transporte?", "a": "Todo empregado CLT que utilize transporte público coletivo para o deslocamento residência-trabalho e vice-versa tem direito ao VT, independentemente da distância. O benefício é custeado parcialmente pelo empregado (até 6%) e parcialmente pelo empregador." }
+    ]
+  },
+  {
+    "id": "calculadora-salario-hora",
+    "name": "Calculadora de Salário por Hora",
+    "description": "Converta seu salário mensal em valor por hora de acordo com a sua jornada de trabalho (220h, 180h ou 150h mensais).",
+    "category": "profissoes",
+    "icon": "Timer",
+    "tags": ["salário hora", "valor hora", "jornada", "clt", "220 horas", "180 horas", "freelancer"],
+    "type": "trab_salario_hora",
+    "inputs": [
+      { "id": "salario_mensal", "label": "Salário Mensal (R$)", "def": 3000, "type": "number", "min": 0, "max": 100000 },
+      { "id": "jornada", "label": "Jornada Semanal", "def": 44, "type": "select", "op": [{ "v": 44, "l": "44h/semana (220h/mês)" }, { "v": 36, "l": "36h/semana (180h/mês)" }, { "v": 30, "l": "30h/semana (150h/mês)" }, { "v": 40, "l": "40h/semana (200h/mês)" }] }
+    ],
+    "outputs": [
+      { "id": "valor_hora", "label": "Valor da Sua Hora de Trabalho", "pref": "R$ ", "isPrimary": true },
+      { "id": "horas_mes", "label": "Total de Horas Mensais", "suff": "h" },
+      { "id": "valor_dia", "label": "Valor do Dia de Trabalho", "pref": "R$ " },
+      { "id": "valor_minuto", "label": "Valor por Minuto", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "Por que a jornada de 44h/semana resulta em 220h/mês?", "a": "A CLT adota a fórmula: horas semanais × 5 semanas = horas mensais. Portanto, 44h × 5 = 220h mensais. Esse é o divisor padrão utilizado para calcular o valor da hora de trabalho de um empregado com jornada integral." },
+      { "q": "Freelancers devem usar qual jornada?", "a": "Profissionais autônomos ou freelancers podem usar qualquer jornada como referência, mas o mais comum é dividir o salário desejado por 160h a 176h (equivalente a 8h/dia × 20 a 22 dias úteis) para chegar ao valor da hora cobrada." }
+    ]
+  },
+  {
+    "id": "simulador-emprestimo-pessoal",
+    "name": "Simulador de Empréstimo Pessoal",
+    "description": "Simule parcelas mensais, juros totais e custo efetivo de empréstimos pessoais usando o sistema de amortização Price.",
+    "category": "financas",
+    "icon": "Landmark",
+    "tags": ["empréstimo", "financiamento", "parcela", "juros", "price", "crédito pessoal", "banco", "consignado"],
+    "type": "fin_emprestimo",
+    "inputs": [
+      { "id": "valor_emprestimo", "label": "Valor do Empréstimo (R$)", "def": 10000, "type": "number", "min": 100, "max": 500000 },
+      { "id": "taxa_mensal", "label": "Taxa de Juros (% ao mês)", "def": 1.99, "type": "number", "min": 0.1, "max": 15, "step": 0.01 },
+      { "id": "parcelas", "label": "Número de Parcelas (meses)", "def": 24, "type": "number", "min": 2, "max": 360 }
+    ],
+    "outputs": [
+      { "id": "valor_parcela", "label": "Valor da Parcela Mensal", "pref": "R$ ", "isPrimary": true },
+      { "id": "total_pago", "label": "Total a Ser Pago", "pref": "R$ " },
+      { "id": "juros_totais", "label": "Juros Totais Pagos", "pref": "R$ " },
+      { "id": "custo_percentual", "label": "Custo do Empréstimo", "suff": "%" }
+    ],
+    "faq": [
+      { "q": "O que é o sistema Price de amortização?", "a": "No sistema Price (tabela Price), todas as parcelas têm o mesmo valor fixo durante todo o período do empréstimo. A composição interna muda: nas primeiras parcelas, a maior parte é juros; nas últimas, a maior parte é amortização do principal." },
+      { "q": "Como saber se a taxa de juros é abusiva?", "a": "Compare a taxa oferecida com a taxa média de mercado divulgada pelo Banco Central (BACEN). Empréstimos pessoais não consignados costumam ter taxas entre 3% e 8% ao mês. Consignados ficam entre 1,5% e 2,5%. Taxas muito acima da média podem configurar abusividade." }
+    ]
+  },
+  {
+    "id": "calculadora-das-mei",
+    "name": "Calculadora DAS MEI 2026",
+    "description": "Calcule o valor mensal da guia DAS do Microempreendedor Individual por tipo de atividade, atualizado com o salário mínimo de 2026.",
+    "category": "financas",
+    "icon": "FileText",
+    "tags": ["mei", "das", "microempreendedor", "guia mensal", "imposto mei", "cnpj", "simples nacional", "2026"],
+    "type": "fin_das_mei",
+    "inputs": [
+      { "id": "atividade", "label": "Tipo de Atividade", "def": 1, "type": "select", "op": [{ "v": 1, "l": "Comércio / Indústria" }, { "v": 2, "l": "Prestação de Serviços" }, { "v": 3, "l": "Comércio + Serviços" }] },
+      { "id": "faturamento_mensal", "label": "Faturamento Médio Mensal (R$)", "def": 5000, "type": "number", "min": 0, "max": 7083 }
+    ],
+    "outputs": [
+      { "id": "valor_das", "label": "Valor do DAS Mensal", "pref": "R$ ", "isPrimary": true },
+      { "id": "inss_mei", "label": "Contribuição INSS (5%)", "pref": "R$ " },
+      { "id": "icms_mei", "label": "ICMS", "pref": "R$ " },
+      { "id": "iss_mei", "label": "ISS", "pref": "R$ " },
+      { "id": "das_anual", "label": "Custo Anual com DAS", "pref": "R$ " },
+      { "id": "limite_anual", "label": "Limite de Faturamento Anual", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "Qual o limite de faturamento do MEI em 2026?", "a": "O limite anual de faturamento do MEI em 2026 é de R$ 81.000,00, o que equivale a aproximadamente R$ 6.750,00 por mês. Ultrapassar esse limite pode resultar no desenquadramento automático do regime e migração para o Simples Nacional." },
+      { "q": "O MEI tem direito a aposentadoria?", "a": "Sim. Ao contribuir mensalmente com o DAS, o MEI garante acesso a benefícios previdenciários como aposentadoria por idade (65 anos homens / 62 anos mulheres), auxílio-doença, salário-maternidade e pensão por morte para dependentes." }
+    ]
+  },
+  {
+    "id": "calculadora-gorjeta",
+    "name": "Calculadora de Gorjeta e Divisão de Conta",
+    "description": "Divida a conta do restaurante entre os participantes, com cálculo automático de gorjeta percentual e valor individual.",
+    "category": "financas",
+    "icon": "UtensilsCrossed",
+    "tags": ["gorjeta", "conta", "restaurante", "divisão", "10%", "taxa de serviço", "garçom"],
+    "type": "fin_gorjeta",
+    "inputs": [
+      { "id": "subtotal", "label": "Valor Total da Conta (R$)", "def": 250, "type": "number", "min": 1, "max": 50000 },
+      { "id": "gorjeta_pct", "label": "Percentual de Gorjeta (%)", "def": 10, "type": "number", "min": 0, "max": 100 },
+      { "id": "pessoas", "label": "Número de Pessoas", "def": 4, "type": "number", "min": 1, "max": 50 }
+    ],
+    "outputs": [
+      { "id": "valor_por_pessoa", "label": "Valor por Pessoa (com gorjeta)", "pref": "R$ ", "isPrimary": true },
+      { "id": "gorjeta_total", "label": "Gorjeta Total", "pref": "R$ " },
+      { "id": "total_com_gorjeta", "label": "Conta Total com Gorjeta", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "A gorjeta de 10% é obrigatória no Brasil?", "a": "Não. A taxa de serviço de 10% cobrada em restaurantes é uma sugestão e não é obrigatória. O consumidor pode recusar o pagamento. Porém, quando incluída na nota fiscal como 'taxa de serviço', deve ser revertida aos funcionários conforme a Lei nº 13.419/2017." },
+      { "q": "Qual a diferença entre gorjeta e taxa de serviço?", "a": "A gorjeta é um valor voluntário dado pelo cliente diretamente ao garçom. A taxa de serviço é um percentual cobrado pelo estabelecimento na conta, que deve ser distribuído entre os funcionários conforme acordo coletivo da categoria." }
+    ]
+  },
+  {
+    "id": "diferenca-entre-datas",
+    "name": "Calculadora de Diferença entre Datas",
+    "description": "Calcule quantos dias, semanas, meses e anos existem entre duas datas. Útil para contratos, prazos legais e planejamento pessoal.",
+    "category": "datas",
+    "icon": "CalendarDays",
+    "tags": ["diferença entre datas", "dias entre datas", "quantos dias", "prazo", "contagem", "meses entre datas"],
+    "type": "datas_diferenca",
+    "inputs": [
+      { "id": "dia1", "label": "Dia Inicial", "def": 1, "type": "number", "min": 1, "max": 31 },
+      { "id": "mes1", "label": "Mês Inicial", "def": 1, "type": "number", "min": 1, "max": 12 },
+      { "id": "ano1", "label": "Ano Inicial", "def": 2025, "type": "number", "min": 1900, "max": 2100 },
+      { "id": "dia2", "label": "Dia Final", "def": 14, "type": "number", "min": 1, "max": 31 },
+      { "id": "mes2", "label": "Mês Final", "def": 7, "type": "number", "min": 1, "max": 12 },
+      { "id": "ano2", "label": "Ano Final", "def": 2026, "type": "number", "min": 1900, "max": 2100 }
+    ],
+    "outputs": [
+      { "id": "total_dias", "label": "Total de Dias", "suff": " dias", "isPrimary": true },
+      { "id": "total_semanas", "label": "Total de Semanas", "suff": " semanas" },
+      { "id": "total_meses", "label": "Total de Meses", "suff": " meses" },
+      { "id": "total_anos", "label": "Total em Anos e Meses" },
+      { "id": "total_horas", "label": "Total em Horas", "suff": "h" }
+    ],
+    "faq": [
+      { "q": "O cálculo considera anos bissextos?", "a": "Sim. A ferramenta utiliza o calendário civil padrão e considera automaticamente os anos bissextos (fevereiro com 29 dias) ao calcular a diferença entre as datas informadas." },
+      { "q": "Para que serve calcular a diferença entre datas?", "a": "Essa ferramenta é útil para diversos cenários: calcular tempo de contrato de trabalho, verificar prazo de validade de documentos, conferir tempo de contribuição ao INSS, planejar eventos futuros ou simplesmente saber quantos dias faltam para uma data importante." }
+    ]
+  },
+  {
+    "id": "dias-uteis-entre-datas",
+    "name": "Calculadora de Dias Úteis",
+    "description": "Conte apenas os dias úteis (sem sábados, domingos e feriados nacionais) entre duas datas no calendário brasileiro.",
+    "category": "datas",
+    "icon": "CalendarCheck",
+    "tags": ["dias úteis", "dias comerciais", "feriados", "prazo", "business days", "contagem útil"],
+    "type": "datas_uteis",
+    "inputs": [
+      { "id": "dia1", "label": "Dia Inicial", "def": 1, "type": "number", "min": 1, "max": 31 },
+      { "id": "mes1", "label": "Mês Inicial", "def": 7, "type": "number", "min": 1, "max": 12 },
+      { "id": "ano1", "label": "Ano Inicial", "def": 2026, "type": "number", "min": 2020, "max": 2035 },
+      { "id": "dia2", "label": "Dia Final", "def": 31, "type": "number", "min": 1, "max": 31 },
+      { "id": "mes2", "label": "Mês Final", "def": 7, "type": "number", "min": 1, "max": 12 },
+      { "id": "ano2", "label": "Ano Final", "def": 2026, "type": "number", "min": 2020, "max": 2035 }
+    ],
+    "outputs": [
+      { "id": "dias_uteis", "label": "Dias Úteis no Período", "isPrimary": true },
+      { "id": "dias_totais", "label": "Dias Corridos Totais" },
+      { "id": "fins_semana", "label": "Finais de Semana" },
+      { "id": "feriados_encontrados", "label": "Feriados Nacionais no Período" }
+    ],
+    "faq": [
+      { "q": "Quais feriados nacionais são considerados?", "a": "São considerados os 9 feriados nacionais fixos do Brasil: Confraternização Universal (1/1), Tiradentes (21/4), Dia do Trabalho (1/5), Independência (7/9), Nossa Sra. Aparecida (12/10), Finados (2/11), Proclamação da República (15/11), Consciência Negra (20/11) e Natal (25/12). Feriados estaduais e municipais não são incluídos." },
+      { "q": "O resultado inclui as datas inicial e final?", "a": "Sim. Ambas as datas (inicial e final) são incluídas na contagem, desde que sejam dias úteis. Se a data inicial for um sábado, por exemplo, a contagem começa na segunda-feira seguinte." }
+    ]
+  },
+  {
+    "id": "conversor-horas-decimais",
+    "name": "Conversor de Horas para Decimal",
+    "description": "Converta horas no formato HH:MM para o formato decimal utilizado em folhas de ponto e sistemas de RH.",
+    "category": "datas",
+    "icon": "Clock",
+    "tags": ["horas decimais", "converter horas", "ponto eletrônico", "folha de ponto", "hora decimal", "RH"],
+    "type": "datas_horas_decimais",
+    "inputs": [
+      { "id": "horas", "label": "Horas (parte inteira)", "def": 8, "type": "number", "min": 0, "max": 999 },
+      { "id": "minutos", "label": "Minutos", "def": 30, "type": "number", "min": 0, "max": 59 }
+    ],
+    "outputs": [
+      { "id": "decimal", "label": "Formato Decimal", "suff": "h", "isPrimary": true },
+      { "id": "total_minutos", "label": "Total em Minutos", "suff": " min" },
+      { "id": "total_segundos", "label": "Total em Segundos", "suff": " seg" }
+    ],
+    "faq": [
+      { "q": "Por que o formato decimal é usado em folhas de ponto?", "a": "O formato decimal facilita cálculos matemáticos. Por exemplo, 8h30min em decimal é 8,50h. Multiplicar 8,50 × R$ 25,00/hora é mais simples do que fazer a conta com horas e minutos separadamente. Sistemas de RH e contabilidade adotam esse padrão." },
+      { "q": "Como converter manualmente?", "a": "Divida os minutos por 60 e some com as horas inteiras. Exemplo: 8 horas e 45 minutos = 8 + (45 ÷ 60) = 8 + 0,75 = 8,75 horas decimais." }
+    ]
+  },
+  {
+    "id": "data-provavel-parto",
+    "name": "Calculadora da Data Provável do Parto (DPP)",
+    "description": "Descubra a data estimada do nascimento do bebê pela regra de Naegele, a partir dos dias desde a última menstruação.",
+    "category": "maternidade",
+    "icon": "Baby",
+    "tags": ["data provável do parto", "dpp", "naegele", "gravidez", "parto", "gestação", "bebê", "nascimento"],
+    "type": "mat_dpp",
+    "inputs": [
+      { "id": "dias_desde_dum", "label": "Dias desde a Última Menstruação (DUM)", "def": 90, "type": "number", "min": 0, "max": 300 }
+    ],
+    "outputs": [
+      { "id": "semanas_gestacao", "label": "Idade Gestacional Atual", "isPrimary": true },
+      { "id": "dias_para_parto", "label": "Dias Restantes até o Parto (est.)", "suff": " dias" },
+      { "id": "semanas_restantes", "label": "Semanas Restantes" },
+      { "id": "trimestre", "label": "Trimestre Atual" },
+      { "id": "progresso", "label": "Progresso da Gestação", "suff": "%" }
+    ],
+    "faq": [
+      { "q": "O que é a regra de Naegele?", "a": "A regra de Naegele é o método padrão utilizado por obstetras para estimar a Data Provável do Parto (DPP). Ela consiste em adicionar 280 dias (40 semanas) à data da última menstruação (DUM). É uma estimativa, pois apenas 5% dos bebês nascem na data prevista." },
+      { "q": "A DPP é uma data exata?", "a": "Não. A DPP é uma estimativa estatística. A maioria dos bebês nasce entre 38 e 42 semanas de gestação. O médico acompanha o desenvolvimento por ultrassom e ajusta a previsão conforme necessário ao longo do pré-natal." }
+    ]
+  },
+  {
+    "id": "custo-mensal-bebe",
+    "name": "Calculadora de Custo Mensal com Bebê",
+    "description": "Estime os gastos mensais com um recém-nascido incluindo fraldas, leite, consultas pediátricas e itens essenciais.",
+    "category": "maternidade",
+    "icon": "ShoppingBag",
+    "tags": ["custo bebê", "fraldas", "enxoval", "gasto mensal", "recém nascido", "leite", "pediatra"],
+    "type": "mat_custo_bebe",
+    "inputs": [
+      { "id": "fraldas_dia", "label": "Fraldas por Dia", "def": 8, "type": "number", "min": 1, "max": 20 },
+      { "id": "preco_fralda", "label": "Preço Unitário da Fralda (R$)", "def": 0.90, "type": "number", "min": 0.2, "max": 5, "step": 0.05 },
+      { "id": "usa_formula", "label": "Usa Fórmula Infantil?", "def": 0, "type": "select", "op": [{ "v": 0, "l": "Não (Amamentação)" }, { "v": 1, "l": "Sim (Fórmula)" }] },
+      { "id": "latas_mes", "label": "Latas de Fórmula por Mês", "def": 4, "type": "number", "min": 0, "max": 10 },
+      { "id": "preco_lata", "label": "Preço da Lata (R$)", "def": 55, "type": "number", "min": 20, "max": 200 },
+      { "id": "consultas_mes", "label": "Consultas Médicas por Mês", "def": 1, "type": "number", "min": 0, "max": 5 },
+      { "id": "preco_consulta", "label": "Preço da Consulta (R$)", "def": 250, "type": "number", "min": 0, "max": 1000 },
+      { "id": "outros_gastos", "label": "Outros Gastos (pomadas, roupas, etc) (R$)", "def": 200, "type": "number", "min": 0, "max": 5000 }
+    ],
+    "outputs": [
+      { "id": "custo_mensal", "label": "Custo Mensal Estimado", "pref": "R$ ", "isPrimary": true },
+      { "id": "custo_fraldas", "label": "Gasto com Fraldas", "pref": "R$ " },
+      { "id": "custo_alimentacao", "label": "Gasto com Alimentação", "pref": "R$ " },
+      { "id": "custo_saude", "label": "Gasto com Saúde", "pref": "R$ " },
+      { "id": "custo_anual", "label": "Projeção Anual", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "Quantas fraldas um bebê usa por dia em média?", "a": "Recém-nascidos (0 a 3 meses) usam entre 8 e 12 fraldas por dia. Dos 3 aos 6 meses, a média cai para 6 a 8 fraldas. Após os 6 meses, a necessidade reduz para 4 a 6 fraldas diárias até o desfralde, que costuma ocorrer entre 2 e 3 anos." },
+      { "q": "Amamentação é realmente mais econômica?", "a": "Sim, significativamente. Uma lata de fórmula infantil custa entre R$ 40 e R$ 120 e dura cerca de uma semana. A amamentação exclusiva nos primeiros 6 meses pode economizar entre R$ 500 e R$ 2.000 por mês, além dos benefícios nutricionais comprovados para o bebê." }
+    ]
+  },
+  {
+    "id": "simulador-nota-enem",
+    "name": "Simulador de Nota ENEM para SiSU",
+    "description": "Calcule sua média ponderada do ENEM com pesos personalizados para simular a nota de corte em cursos do SiSU.",
+    "category": "educacao",
+    "icon": "GraduationCap",
+    "tags": ["enem", "sisu", "nota", "média ponderada", "vestibular", "universidade", "peso enem", "prouni"],
+    "type": "edu_enem_sisu",
+    "inputs": [
+      { "id": "nota_cn", "label": "Ciências da Natureza", "def": 550, "type": "number", "min": 0, "max": 1000 },
+      { "id": "nota_ch", "label": "Ciências Humanas", "def": 600, "type": "number", "min": 0, "max": 1000 },
+      { "id": "nota_lc", "label": "Linguagens e Códigos", "def": 580, "type": "number", "min": 0, "max": 1000 },
+      { "id": "nota_mt", "label": "Matemática", "def": 620, "type": "number", "min": 0, "max": 1000 },
+      { "id": "nota_red", "label": "Redação", "def": 700, "type": "number", "min": 0, "max": 1000 },
+      { "id": "peso_cn", "label": "Peso: Ciências da Natureza", "def": 1, "type": "number", "min": 0.5, "max": 5, "step": 0.5 },
+      { "id": "peso_ch", "label": "Peso: Ciências Humanas", "def": 1, "type": "number", "min": 0.5, "max": 5, "step": 0.5 },
+      { "id": "peso_lc", "label": "Peso: Linguagens", "def": 1, "type": "number", "min": 0.5, "max": 5, "step": 0.5 },
+      { "id": "peso_mt", "label": "Peso: Matemática", "def": 1, "type": "number", "min": 0.5, "max": 5, "step": 0.5 },
+      { "id": "peso_red", "label": "Peso: Redação", "def": 1, "type": "number", "min": 0.5, "max": 5, "step": 0.5 }
+    ],
+    "outputs": [
+      { "id": "media_ponderada", "label": "Média Ponderada Final", "isPrimary": true },
+      { "id": "media_simples", "label": "Média Simples (sem pesos)" },
+      { "id": "melhor_area", "label": "Sua Melhor Área" },
+      { "id": "soma_pesos", "label": "Soma Total dos Pesos" }
+    ],
+    "faq": [
+      { "q": "O que são os pesos no SiSU?", "a": "Cada universidade e curso atribui pesos diferentes às 5 provas do ENEM. Por exemplo, um curso de Engenharia costuma dar peso 3 para Matemática e peso 1 para as demais. Os pesos são divulgados no edital do SiSU de cada instituição e afetam diretamente a sua nota final." },
+      { "q": "Onde encontrar os pesos de cada curso?", "a": "Os pesos são publicados no Portal do SiSU (sisu.mec.gov.br) durante o período de inscrição. Cada curso em cada universidade pode ter pesos diferentes. Sites como 'SiSU Simulador' também compilam essas informações." }
+    ]
+  },
+  {
+    "id": "proporcao-aurea-design",
+    "name": "Calculadora de Proporção Áurea (φ)",
+    "description": "Calcule dimensões proporcionais usando a razão áurea (1.618) para design gráfico, arquitetura, tipografia e layouts harmônicos.",
+    "category": "matematica",
+    "icon": "Ruler",
+    "tags": ["proporção áurea", "golden ratio", "phi", "1.618", "design", "fibonacci", "layout", "arquitetura"],
+    "type": "mat_proporcao_aurea",
+    "inputs": [
+      { "id": "medida_conhecida", "label": "Medida Conhecida", "def": 100, "type": "number", "min": 0.01, "max": 100000, "step": 0.01 },
+      { "id": "tipo_calculo", "label": "Tipo de Cálculo", "def": 1, "type": "select", "op": [{ "v": 1, "l": "Encontrar medida MAIOR (× φ)" }, { "v": 2, "l": "Encontrar medida MENOR (÷ φ)" }] }
+    ],
+    "outputs": [
+      { "id": "medida_resultante", "label": "Medida Proporcional", "isPrimary": true },
+      { "id": "proporcao", "label": "Proporção (A : B)" },
+      { "id": "soma_segmentos", "label": "Soma dos Segmentos" },
+      { "id": "razao_verificacao", "label": "Razão (deve ser ≈ 1.618)" }
+    ],
+    "faq": [
+      { "q": "O que é a proporção áurea?", "a": "A proporção áurea (representada pela letra grega φ - phi) é a razão irracional de aproximadamente 1,618033. Ela aparece naturalmente em conchas, flores, galáxias e no corpo humano. No design, é usada para criar composições visualmente harmônicas e equilibradas." },
+      { "q": "Como aplicar a proporção áurea em design?", "a": "Use φ para definir proporções entre elementos: se um container tem 1000px de largura, o conteúdo principal pode ter 618px e a sidebar 382px (1000 ÷ 1.618 ≈ 618). Aplique também em tipografia (tamanho do corpo × 1.618 = tamanho do título) e espaçamentos." }
+    ]
   }
 ];
 
@@ -8207,6 +8580,228 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
 
         results['valor_ipva'] = parseFloat(ipva.toFixed(2));
         results['parcela_ipva'] = parseFloat((ipva / 3).toFixed(2));
+      }
+      // ========== NEW CALCULATORS (Expansion 2026) ==========
+      else if (raw.type === 'trab_inss') {
+        const bruto = parseFloat(valInputs['salario_bruto'] || 0);
+        // Tabela progressiva INSS 2026
+        let inss = 0;
+        let faixa = '';
+        if (bruto <= 1518) { inss = bruto * 0.075; faixa = '1ª Faixa (7,5%)'; }
+        else if (bruto <= 2793.88) { inss = (1518 * 0.075) + ((bruto - 1518) * 0.09); faixa = '2ª Faixa (até 9%)'; }
+        else if (bruto <= 4190.83) { inss = (1518 * 0.075) + (1275.88 * 0.09) + ((bruto - 2793.88) * 0.12); faixa = '3ª Faixa (até 12%)'; }
+        else if (bruto <= 8157.41) { inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + ((bruto - 4190.83) * 0.14); faixa = '4ª Faixa (até 14%)'; }
+        else { inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + (3966.58 * 0.14); faixa = 'Teto Máximo'; }
+        const aliqEfetiva = bruto > 0 ? (inss / bruto) * 100 : 0;
+        results['desconto_inss'] = parseFloat(inss.toFixed(2));
+        results['aliquota_efetiva'] = parseFloat(aliqEfetiva.toFixed(2));
+        results['salario_apos_inss'] = parseFloat((bruto - inss).toFixed(2));
+        results['faixa_contribuicao'] = faixa;
+      }
+      else if (raw.type === 'trab_irrf') {
+        const bruto = parseFloat(valInputs['salario_bruto'] || 0);
+        const deps = parseInt(valInputs['dependentes'] || 0);
+        const outDesc = parseFloat(valInputs['outros_descontos'] || 0);
+        // Primeiro calcula INSS progressivo
+        let inss = 0;
+        if (bruto <= 1518) inss = bruto * 0.075;
+        else if (bruto <= 2793.88) inss = (1518 * 0.075) + ((bruto - 1518) * 0.09);
+        else if (bruto <= 4190.83) inss = (1518 * 0.075) + (1275.88 * 0.09) + ((bruto - 2793.88) * 0.12);
+        else if (bruto <= 8157.41) inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + ((bruto - 4190.83) * 0.14);
+        else inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + (3966.58 * 0.14);
+        const deducaoDep = deps * 189.59;
+        const baseIr = bruto - inss - deducaoDep - outDesc;
+        let irrf = 0; let aliq = 0;
+        if (baseIr > 4664.68) { irrf = (baseIr * 0.275) - 896.00; aliq = 27.5; }
+        else if (baseIr > 3751.05) { irrf = (baseIr * 0.225) - 662.77; aliq = 22.5; }
+        else if (baseIr > 2826.65) { irrf = (baseIr * 0.15) - 381.44; aliq = 15; }
+        else if (baseIr > 2259.20) { irrf = (baseIr * 0.075) - 169.44; aliq = 7.5; }
+        irrf = Math.max(0, irrf);
+        results['valor_irrf'] = parseFloat(irrf.toFixed(2));
+        results['desc_inss_calc'] = parseFloat(inss.toFixed(2));
+        results['base_calculo'] = parseFloat(Math.max(0, baseIr).toFixed(2));
+        results['aliquota_ir'] = aliq;
+        results['liquido_estimado'] = parseFloat((bruto - inss - irrf - outDesc).toFixed(2));
+      }
+      else if (raw.type === 'trab_salario_hora') {
+        const salario = parseFloat(valInputs['salario_mensal'] || 0);
+        const jornada = parseInt(valInputs['jornada'] || 44);
+        const horasMes = jornada * 5;
+        const valorHora = horasMes > 0 ? salario / horasMes : 0;
+        results['valor_hora'] = parseFloat(valorHora.toFixed(2));
+        results['horas_mes'] = horasMes;
+        results['valor_dia'] = parseFloat((valorHora * (jornada / (jornada <= 30 ? 5 : jornada <= 36 ? 6 : jornada <= 40 ? 5 : 7.33))).toFixed(2));
+        results['valor_minuto'] = parseFloat((valorHora / 60).toFixed(4));
+      }
+      else if (raw.type === 'fin_emprestimo') {
+        const pv = parseFloat(valInputs['valor_emprestimo'] || 0);
+        const taxaM = parseFloat(valInputs['taxa_mensal'] || 0) / 100;
+        const n = parseInt(valInputs['parcelas'] || 1);
+        let pmt = 0;
+        if (taxaM > 0 && n > 0) {
+          pmt = pv * (taxaM * Math.pow(1 + taxaM, n)) / (Math.pow(1 + taxaM, n) - 1);
+        } else if (n > 0) { pmt = pv / n; }
+        const totalPago = pmt * n;
+        const jurosTotais = totalPago - pv;
+        const custoPerc = pv > 0 ? (jurosTotais / pv) * 100 : 0;
+        results['valor_parcela'] = parseFloat(pmt.toFixed(2));
+        results['total_pago'] = parseFloat(totalPago.toFixed(2));
+        results['juros_totais'] = parseFloat(jurosTotais.toFixed(2));
+        results['custo_percentual'] = parseFloat(custoPerc.toFixed(1));
+      }
+      else if (raw.type === 'fin_das_mei') {
+        const atividade = parseInt(valInputs['atividade'] || 1);
+        const fat = parseFloat(valInputs['faturamento_mensal'] || 0);
+        const salMin = 1518; // Salário mínimo 2026
+        const inssMei = salMin * 0.05;
+        let icms = 0; let iss = 0;
+        if (atividade === 1) { icms = 1; iss = 0; }
+        else if (atividade === 2) { icms = 0; iss = 5; }
+        else { icms = 1; iss = 5; }
+        const das = inssMei + icms + iss;
+        results['valor_das'] = parseFloat(das.toFixed(2));
+        results['inss_mei'] = parseFloat(inssMei.toFixed(2));
+        results['icms_mei'] = parseFloat(icms.toFixed(2));
+        results['iss_mei'] = parseFloat(iss.toFixed(2));
+        results['das_anual'] = parseFloat((das * 12).toFixed(2));
+        results['limite_anual'] = 81000;
+      }
+      else if (raw.type === 'fin_gorjeta') {
+        const sub = parseFloat(valInputs['subtotal'] || 0);
+        const gorjPct = parseFloat(valInputs['gorjeta_pct'] || 0) / 100;
+        const pessoas = parseInt(valInputs['pessoas'] || 1);
+        const gorjTotal = sub * gorjPct;
+        const total = sub + gorjTotal;
+        const porPessoa = pessoas > 0 ? total / pessoas : total;
+        results['valor_por_pessoa'] = parseFloat(porPessoa.toFixed(2));
+        results['gorjeta_total'] = parseFloat(gorjTotal.toFixed(2));
+        results['total_com_gorjeta'] = parseFloat(total.toFixed(2));
+      }
+      else if (raw.type === 'datas_diferenca') {
+        const d1 = parseInt(valInputs['dia1'] || 1);
+        const m1 = parseInt(valInputs['mes1'] || 1);
+        const a1 = parseInt(valInputs['ano1'] || 2025);
+        const d2 = parseInt(valInputs['dia2'] || 1);
+        const m2 = parseInt(valInputs['mes2'] || 1);
+        const a2 = parseInt(valInputs['ano2'] || 2026);
+        const date1 = new Date(a1, m1 - 1, d1);
+        const date2 = new Date(a2, m2 - 1, d2);
+        const diffMs = Math.abs(date2.getTime() - date1.getTime());
+        const dias = Math.round(diffMs / (1000 * 60 * 60 * 24));
+        const semanas = parseFloat((dias / 7).toFixed(1));
+        const meses = parseFloat((dias / 30.44).toFixed(1));
+        const anos = Math.floor(dias / 365.25);
+        const mesesRest = Math.round((dias % 365.25) / 30.44);
+        results['total_dias'] = dias;
+        results['total_semanas'] = semanas;
+        results['total_meses'] = meses;
+        results['total_anos'] = `${anos} ano(s) e ${mesesRest} mês(es)`;
+        results['total_horas'] = dias * 24;
+      }
+      else if (raw.type === 'datas_uteis') {
+        const d1 = parseInt(valInputs['dia1'] || 1);
+        const m1 = parseInt(valInputs['mes1'] || 1);
+        const a1 = parseInt(valInputs['ano1'] || 2026);
+        const d2 = parseInt(valInputs['dia2'] || 1);
+        const m2 = parseInt(valInputs['mes2'] || 1);
+        const a2 = parseInt(valInputs['ano2'] || 2026);
+        const start = new Date(a1, m1 - 1, d1);
+        const end = new Date(a2, m2 - 1, d2);
+        // Feriados nacionais fixos
+        const feriadosFixos = [[1,1],[21,4],[1,5],[7,9],[12,10],[2,11],[15,11],[20,11],[25,12]];
+        let uteis = 0; let fds = 0; let feriados = 0;
+        const current = new Date(start);
+        const totalDias = Math.round(Math.abs(end.getTime() - start.getTime()) / (1000*60*60*24)) + 1;
+        for (let i = 0; i < totalDias; i++) {
+          const dia = current.getDay();
+          const isFds = (dia === 0 || dia === 6);
+          const isFeriado = feriadosFixos.some(f => f[0] === current.getDate() && f[1] === (current.getMonth() + 1));
+          if (isFds) fds++;
+          else if (isFeriado) feriados++;
+          else uteis++;
+          current.setDate(current.getDate() + 1);
+        }
+        results['dias_uteis'] = uteis;
+        results['dias_totais'] = totalDias;
+        results['fins_semana'] = fds;
+        results['feriados_encontrados'] = feriados;
+      }
+      else if (raw.type === 'datas_horas_decimais') {
+        const h = parseInt(valInputs['horas'] || 0);
+        const m = parseInt(valInputs['minutos'] || 0);
+        const decimal = h + (m / 60);
+        results['decimal'] = parseFloat(decimal.toFixed(4));
+        results['total_minutos'] = (h * 60) + m;
+        results['total_segundos'] = ((h * 60) + m) * 60;
+      }
+      else if (raw.type === 'mat_dpp') {
+        const diasDum = parseInt(valInputs['dias_desde_dum'] || 0);
+        const totalDiasParto = 280;
+        const semanas = Math.floor(diasDum / 7);
+        const diasExtras = diasDum % 7;
+        const faltam = Math.max(0, totalDiasParto - diasDum);
+        const semanasRest = Math.floor(faltam / 7);
+        const progresso = Math.min(100, (diasDum / totalDiasParto) * 100);
+        let tri = '1º Trimestre (Semanas 1-13)';
+        if (semanas >= 14 && semanas <= 26) tri = '2º Trimestre (Semanas 14-26)';
+        else if (semanas >= 27) tri = '3º Trimestre (Semana 27 ao Parto)';
+        results['semanas_gestacao'] = `${semanas} semanas e ${diasExtras} dias`;
+        results['dias_para_parto'] = faltam;
+        results['semanas_restantes'] = `${semanasRest} semanas`;
+        results['trimestre'] = tri;
+        results['progresso'] = parseFloat(progresso.toFixed(1));
+      }
+      else if (raw.type === 'mat_custo_bebe') {
+        const frDia = parseInt(valInputs['fraldas_dia'] || 8);
+        const frPreco = parseFloat(valInputs['preco_fralda'] || 0.90);
+        const usaForm = parseInt(valInputs['usa_formula'] || 0);
+        const latas = parseInt(valInputs['latas_mes'] || 0);
+        const precoLata = parseFloat(valInputs['preco_lata'] || 55);
+        const consultas = parseInt(valInputs['consultas_mes'] || 1);
+        const precoConsulta = parseFloat(valInputs['preco_consulta'] || 250);
+        const outros = parseFloat(valInputs['outros_gastos'] || 200);
+        const custoFraldas = frDia * frPreco * 30;
+        const custoAlim = usaForm === 1 ? latas * precoLata : 0;
+        const custoSaude = consultas * precoConsulta;
+        const total = custoFraldas + custoAlim + custoSaude + outros;
+        results['custo_mensal'] = parseFloat(total.toFixed(2));
+        results['custo_fraldas'] = parseFloat(custoFraldas.toFixed(2));
+        results['custo_alimentacao'] = parseFloat(custoAlim.toFixed(2));
+        results['custo_saude'] = parseFloat(custoSaude.toFixed(2));
+        results['custo_anual'] = parseFloat((total * 12).toFixed(2));
+      }
+      else if (raw.type === 'edu_enem_sisu') {
+        const cn = parseFloat(valInputs['nota_cn'] || 0);
+        const ch = parseFloat(valInputs['nota_ch'] || 0);
+        const lc = parseFloat(valInputs['nota_lc'] || 0);
+        const mt = parseFloat(valInputs['nota_mt'] || 0);
+        const red = parseFloat(valInputs['nota_red'] || 0);
+        const pCn = parseFloat(valInputs['peso_cn'] || 1);
+        const pCh = parseFloat(valInputs['peso_ch'] || 1);
+        const pLc = parseFloat(valInputs['peso_lc'] || 1);
+        const pMt = parseFloat(valInputs['peso_mt'] || 1);
+        const pRed = parseFloat(valInputs['peso_red'] || 1);
+        const somaPesos = pCn + pCh + pLc + pMt + pRed;
+        const ponderada = somaPesos > 0 ? (cn*pCn + ch*pCh + lc*pLc + mt*pMt + red*pRed) / somaPesos : 0;
+        const simples = (cn + ch + lc + mt + red) / 5;
+        const notas: [string, number][] = [['Ciências da Natureza', cn], ['Ciências Humanas', ch], ['Linguagens', lc], ['Matemática', mt], ['Redação', red]];
+        const melhor = notas.reduce((a, b) => b[1] > a[1] ? b : a);
+        results['media_ponderada'] = parseFloat(ponderada.toFixed(2));
+        results['media_simples'] = parseFloat(simples.toFixed(2));
+        results['melhor_area'] = `${melhor[0]} (${melhor[1]} pts)`;
+        results['soma_pesos'] = somaPesos;
+      }
+      else if (raw.type === 'mat_proporcao_aurea') {
+        const medida = parseFloat(valInputs['medida_conhecida'] || 100);
+        const tipo = parseInt(valInputs['tipo_calculo'] || 1);
+        const phi = 1.618033988749895;
+        let resultante = 0; let a = 0; let b = 0;
+        if (tipo === 1) { resultante = medida * phi; a = resultante; b = medida; }
+        else { resultante = medida / phi; a = medida; b = resultante; }
+        results['medida_resultante'] = parseFloat(resultante.toFixed(4));
+        results['proporcao'] = `${parseFloat(a.toFixed(2))} : ${parseFloat(b.toFixed(2))}`;
+        results['soma_segmentos'] = parseFloat((a + b).toFixed(4));
+        results['razao_verificacao'] = parseFloat((a / (b || 1)).toFixed(6));
       }
 
       return results;
