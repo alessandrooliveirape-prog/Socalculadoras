@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf';
 import { CalcStatePayload } from '../App';
 
 export const handleExportPDF = (payload: CalcStatePayload) => {
-  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs } = payload;
+  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs, adsenseEarningsResults } = payload;
     const doc = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -103,6 +103,128 @@ export const handleExportPDF = (payload: CalcStatePayload) => {
         yPos += 6;
       });
     } 
+    else if (activeCalculator === 'calculadora-ganhos-adsense' && adsenseEarningsResults) {
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.text('RESUMO DOS GANHOS ESTIMADOS', 15, yPos);
+      yPos += 8;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.text(`Categoria do Site (Nicho):`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.category}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Regiao dos Visitantes:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.region}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Visitantes Unicos Mensais:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.visitors.toLocaleString('pt-BR')}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Paginas Visitadas por Sessao:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.pagesPerVisit.toFixed(1)} paginas`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Total de Anuncios por Pagina:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.adsPerPage} blocos`, 105, yPos);
+      yPos += 8;
+
+      doc.setFillColor(248, 250, 252);
+      doc.rect(15, yPos, 180, 22, 'F');
+      doc.setFont('Helvetica', 'bold');
+      doc.text('RESULTADO DA PROJECAO FINANCEIRA', 18, yPos + 5);
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Ganhos Mensais Estimados:`, 18, yPos + 11);
+      doc.setFont('Helvetica', 'bold');
+      doc.setTextColor(16, 185, 129); // green
+      doc.text(`R$ ${adsenseEarningsResults.monthlyEarnings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos + 11);
+      doc.setTextColor(15, 23, 42); // back to dark
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Faturamento Anual Projetado:`, 18, yPos + 17);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`R$ ${adsenseEarningsResults.annualEarnings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos + 17);
+      yPos += 28;
+
+      // Metrics grid
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.text('METRICAS DETALHADAS DE RENTABILIDADE', 15, yPos);
+      yPos += 8;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.text(`Visualizacoes Mensais (Pageviews):`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.monthlyPageviews.toLocaleString('pt-BR')}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`RPM de Pagina Medio Estimado:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`R$ ${adsenseEarningsResults.rpm.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`CTR (Click-Through Rate) Estimado:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.ctr.toFixed(2)} %`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`CPC (Custo por Clique) Medio:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`R$ ${adsenseEarningsResults.cpc.toFixed(2)}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Cliques Estimados no Mes:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.clicks.toLocaleString('pt-BR')}`, 105, yPos);
+      yPos += 6;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`Impressoes de Anuncios no Mes:`, 15, yPos);
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${adsenseEarningsResults.adImpressions.toLocaleString('pt-BR')}`, 105, yPos);
+      yPos += 14;
+
+      // Projections table
+      doc.setFont('Helvetica', 'bold');
+      doc.text('TABELA DE PROJECAO POR VOLUME DE TRAFEGO', 15, yPos);
+      yPos += 8;
+
+      doc.setFillColor(248, 250, 252);
+      doc.rect(15, yPos, 180, 7, 'F');
+      doc.setFontSize(9);
+      doc.text('Cenario de Trafego', 18, yPos + 5);
+      doc.text('Visitantes Unicos', 58, yPos + 5);
+      doc.text('Visualizacoes de Pagina', 108, yPos + 5);
+      doc.text('Ganhos Mensais', 158, yPos + 5);
+      yPos += 7;
+
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8.5);
+      adsenseEarningsResults.data.forEach((row: any) => {
+        doc.line(15, yPos, 195, yPos);
+        const scenarioLabel = `${row.trafficLevel}% trafego`;
+        doc.text(scenarioLabel, 18, yPos + 4.5);
+        doc.text(row.visitors.toLocaleString('pt-BR'), 58, yPos + 4.5);
+        doc.text(row.pageviews.toLocaleString('pt-BR'), 108, yPos + 4.5);
+        doc.text(`R$ ${row.earnings.toLocaleString('pt-BR')}`, 158, yPos + 4.5);
+        yPos += 6;
+      });
+    }
     else if (activeCalculator === 'clt-pj' && cltVsPjResults) {
       doc.setFont('Helvetica', 'bold');
       doc.setFontSize(11);

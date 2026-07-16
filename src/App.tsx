@@ -47,6 +47,7 @@ import { FooterAndLegals } from './components/FooterAndLegals';
 import { HomepageView } from './components/HomepageView';
 import { SimplePercentageCalc } from './components/SimplePercentageCalc';
 import { CarFinanceCalc } from './components/CarFinanceCalc';
+import { AdSenseEarningsCalc } from './components/AdSenseEarningsCalc';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
@@ -201,6 +202,7 @@ export default function App() {
   const [aposentadoriaINSSResults, setAposentadoriaINSSResults] = useState<any>(null);
   const [porcentagemSimplesResults, setPorcentagemSimplesResults] = useState<any>(null);
   const [financiamentoVeiculoResults, setFinanciamentoVeiculoResults] = useState<any>(null);
+  const [adsenseEarningsResults, setAdsenseEarningsResults] = useState<any>(null);
 
   // Simulated ad stats states
   const [adImpressions, setAdImpressions] = useState(24);
@@ -697,6 +699,10 @@ export default function App() {
     }
   }, []);
 
+  const handleAdSenseEarningsCalc = React.useCallback((results: any) => {
+    setAdsenseEarningsResults(results);
+  }, []);
+
   const handleDynamicCalc = React.useCallback((inputs: Record<string, any>, outputs: Record<string, any>) => {
     setDynamicCalcInputs(inputs);
     setDynamicCalcOutputs(outputs);
@@ -720,7 +726,8 @@ export default function App() {
     dynamicCalcInputs,
     dynamicCalcOutputs,
     porcentagemSimplesResults,
-    financiamentoVeiculoResults
+    financiamentoVeiculoResults,
+    adsenseEarningsResults
   });
 
   // Save current operation to historical log
@@ -826,13 +833,14 @@ export default function App() {
     if (activeCalculator === 'simulador-de-aposentadoria-inss') return !!aposentadoriaINSSResults;
     if (activeCalculator === 'porcentagem-simples') return !!porcentagemSimplesResults;
     if (activeCalculator === 'financiamento-veiculo') return !!financiamentoVeiculoResults;
+    if (activeCalculator === 'calculadora-ganhos-adsense') return !!adsenseEarningsResults;
     if (activeCalc?.isDynamic) return Object.keys(dynamicCalcOutputs).length > 0;
     return false;
   }, [
     activeCalculator, activeCalc, compoundInterestResults, cltVsPjResults, profitMarginResults,
     healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults,
     horasExtrasResults, aposentadoriaINSSResults, dynamicCalcOutputs, porcentagemSimplesResults,
-    financiamentoVeiculoResults
+    financiamentoVeiculoResults, adsenseEarningsResults
   ]);
 
   const getShareableText = () => {
@@ -890,6 +898,12 @@ export default function App() {
       text += `• Prestação Mensal: R$ ${financiamentoVeiculoResults.valor_parcela.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
       text += `• Juros Totais: R$ ${financiamentoVeiculoResults.juros_totais.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
       text += `• Total Pago: R$ ${financiamentoVeiculoResults.total_pago.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+    } else if (activeCalculator === 'calculadora-ganhos-adsense' && adsenseEarningsResults) {
+      text += `• Ganhos Mensais Estimados: R$ ${adsenseEarningsResults.monthlyEarnings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• Faturamento Anual Projetado: R$ ${adsenseEarningsResults.annualEarnings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• RPM Médio: R$ ${adsenseEarningsResults.rpm.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
+      text += `• CTR Estimado: ${adsenseEarningsResults.ctr.toFixed(2)}%\n`;
+      text += `• CPC Médio: R$ ${adsenseEarningsResults.cpc.toFixed(2)}\n`;
     } else if (activeCalc?.isDynamic && dynamicCalcOutputs) {
       activeCalc.outputs?.forEach(out => {
         const val = dynamicCalcOutputs[out.id];
@@ -1470,7 +1484,10 @@ export default function App() {
                   {activeCalculator === 'financiamento-veiculo' && (
                     <CarFinanceCalc onCalculate={handleFinanciamentoVeiculoCalc} />
                   )}
-                  {activeCalc?.isDynamic && activeCalculator !== 'porcentagem-simples' && activeCalculator !== 'financiamento-veiculo' && (
+                  {activeCalculator === 'calculadora-ganhos-adsense' && (
+                    <AdSenseEarningsCalc onCalculate={handleAdSenseEarningsCalc} />
+                  )}
+                  {activeCalc?.isDynamic && activeCalculator !== 'porcentagem-simples' && activeCalculator !== 'financiamento-veiculo' && activeCalculator !== 'calculadora-ganhos-adsense' && (
                     <GenericDynamicCalc 
                       calculator={activeCalc}
                       onCalculate={handleDynamicCalc}
@@ -1576,7 +1593,7 @@ export default function App() {
                             energia: 'Dimensionamento solar fotovoltaico, consumo KWh e economia.',
                             educacao: 'Média do ENEM, nota de corte de vestibulares e histórico escolar.',
                             quimica_fisica: 'Velocidade, densidade, conversor de temperatura e gases.',
-                            tecnologia: 'Conversor de bases numéricas, tempo de download e aspect ratio.',
+                            tecnologia: 'Conversão de bases, tempo de download, aspect ratio e lucros do AdSense.',
                             pets: 'Metas de ração diária, hidratação e idade humana de cães e gatos.'
                           };
 
@@ -1886,4 +1903,5 @@ export interface CalcStatePayload {
   dynamicCalcOutputs: any;
   porcentagemSimplesResults?: any;
   financiamentoVeiculoResults?: any;
+  adsenseEarningsResults?: any;
 }

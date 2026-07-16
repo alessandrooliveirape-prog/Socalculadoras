@@ -122,6 +122,14 @@ const CORE_CALCULATORS: CalculatorDef[] = [
     category: 'aposentadoria',
     icon: 'ShieldCheck',
     tags: ['inss', 'aposentadoria', 'previdência', 'simulação', 'tempo', 'contribuição']
+  },
+  {
+    id: 'calculadora-ganhos-adsense',
+    name: 'Calculadora de Ganhos AdSense 2026',
+    description: 'Estime os ganhos mensais e anuais do seu site com o Google AdSense com base na categoria, região de visitantes e volume de tráfego.',
+    category: 'tecnologia',
+    icon: 'DollarSign',
+    tags: ['adsense', 'ganhos', 'monetização', 'site', 'blog', 'seo', 'marketing', 'cpc', 'cpm', 'rpm']
   }
 ];
 
@@ -133,7 +141,7 @@ const RAW_DYNAMIC_METADATA: {
   category: string;
   icon: string;
   tags: string[];
-  type: 'percentage' | 'ratio' | 'sum' | 'multiply' | 'subtract' | 'compound' | 'simple_tax' | 'agro_grains' | 'agro_cattle' | 'agro_land' | 'agro_soil' | 'agro_feed' | 'agro_seeds' | 'log_freight' | 'log_cost_per_km' | 'log_cubage' | 'log_waiting_time' | 'log_driver_hours' | 'const_tijolos' | 'const_tinta' | 'const_piso' | 'evento_churrasco' | 'evento_receita' | 'evento_bebida' | 'energia_consumo' | 'energia_solar' | 'energia_carbono' | 'edu_sisu' | 'edu_ponderada' | 'edu_leitura' | 'trab_fgts' | 'trab_noturno' | 'trab_insalubridade' | 'trab_periculosidade' | 'trab_seguro' | 'trab_vt' | 'trab_falta' | 'vei_flex' | 'vei_consumption' | 'vei_ipva' | 'vei_depreciation' | 'vei_km_reimbursement' | 'vei_finance' | 'vei_move_brasil' | 'vei_insurance' | 'vei_travel_time' | 'vei_toll_split' | 'vei_maintenance' | 'mat_porcentagem' | 'mat_media_ponderada' | 'mat_pitagoras' | 'mat_area_formas' | 'mat_potencia_raiz' | 'mat_fatorial' | 'mat_sociedade' | 'mat_bhaskara' | 'imob_price_sac' | 'imob_reajuste' | 'imob_itbi' | 'imob_cap_rate' | 'imob_amortizacao' | 'imob_alugar_comprar' | 'imob_cet' | 'imob_m2' | 'imob_rateio' | 'imob_iptu' | 'est_desvio_padrao' | 'est_margem_erro' | 'est_combinatoria' | 'est_probabilidade' | 'est_churn' | 'est_crescimento' | 'est_funil' | 'est_mediana_moda' | 'est_confianca' | 'est_cac_ltv' | 'jur_mora' | 'jur_correcao' | 'jur_custas' | 'jur_pensao' | 'jur_ganho_capital' | 'jur_divisao_bens' | 'jur_inventario' | 'jur_simples_nacional' | 'jur_iss' | 'jur_irrf_invest' | 'util_cambio' | 'util_conta_bar' | 'util_energia_comp' | 'util_ar_btu' | 'util_tinta_m2' | 'util_chuveiro' | 'util_buffet' | 'util_freezer' | 'util_rejunte' | 'util_supermercado' | 'apo_prev_privada' | 'apo_viver_renda' | 'apo_reserva' | 'apo_depreciacao' | 'apo_inflacao' | 'apo_fgts_corr' | 'apo_custo_apos' | 'apo_swr' | 'apo_liberdade' | 'sci_speed' | 'sci_temp' | 'sci_density' | 'tech_download' | 'tech_aspect' | 'tech_base' | 'pets_idade_cao' | 'pets_idade_gato' | 'pets_racao_cao' | 'pets_agua' | 'saude_agua_humana' | 'saude_exercicio_calorias' | 'financas_ferias_pj' | 'veiculos_carro_eletrico' | 'financas_juros_abusivos' | 'juridico_cripto_imposto' | 'trab_inss' | 'trab_irrf' | 'trab_salario_hora' | 'fin_emprestimo' | 'fin_das_mei' | 'fin_gorjeta' | 'datas_diferenca' | 'datas_uteis' | 'datas_horas_decimais' | 'mat_dpp' | 'mat_custo_bebe' | 'edu_enem_sisu' | 'mat_proporcao_aurea';
+  type: string;
   inputs: { id: string; label: string; def: any; type: 'number' | 'select' | 'text'; op?: {v: any; l: string}[]; pref?: string; suff?: string; min?: number; max?: number; step?: number }[];
   outputs: { id: string; label: string; pref?: string; suff?: string; isPrimary?: boolean }[];
   faq: { q: string; a: string }[];
@@ -6903,6 +6911,69 @@ const RAW_DYNAMIC_METADATA: {
       { "q": "O que é a proporção áurea?", "a": "A proporção áurea (representada pela letra grega φ - phi) é a razão irracional de aproximadamente 1,618033. Ela aparece naturalmente em conchas, flores, galáxias e no corpo humano. No design, é usada para criar composições visualmente harmônicas e equilibradas." },
       { "q": "Como aplicar a proporção áurea em design?", "a": "Use φ para definir proporções entre elementos: se um container tem 1000px de largura, o conteúdo principal pode ter 618px e a sidebar 382px (1000 ÷ 1.618 ≈ 618). Aplique também em tipografia (tamanho do corpo × 1.618 = tamanho do título) e espaçamentos." }
     ]
+  },
+  {
+    "id": "calculadora-de-cpm",
+    "name": "Calculadora de CPM",
+    "description": "Estime o CPM (Custo por Mil impressões) de campanhas de tráfego pago ou calcule o orçamento ideal.",
+    "category": "tecnologia",
+    "icon": "Eye",
+    "tags": ["cpm", "marketing", "ads", "anúncio", "tráfego", "impressões", "custo", "mídia"],
+    "type": "tech_cpm",
+    "inputs": [
+      { "id": "custo_total", "label": "Custo Total da Campanha (R$)", "def": 500, "type": "number", "min": 0.01 },
+      { "id": "impressoes", "label": "Número de Impressões", "def": 100000, "type": "number", "min": 1 }
+    ],
+    "outputs": [
+      { "id": "cpm", "label": "CPM (Custo por Mil)", "pref": "R$ ", "isPrimary": true },
+      { "id": "custo_por_exibicao", "label": "Custo por Exibição Única", "pref": "R$ " }
+    ],
+    "faq": [
+      { "q": "O que significa CPM?", "a": "CPM significa 'Custo por Mil'. É uma das métricas mais tradicionais da publicidade, correspondendo ao custo para exibir um anúncio mil vezes." },
+      { "q": "Como é calculado o CPM?", "a": "Divida o valor investido pelo volume total de impressões e multiplique por 1.000. Exemplo: R$ 500 investidos para 100 mil visualizações resulta em um CPM de R$ 5,00." }
+    ]
+  },
+  {
+    "id": "calculadora-de-ctr",
+    "name": "Calculadora de CTR (Taxa de Cliques)",
+    "description": "Meça a taxa de cliques (Click-Through Rate) de banners, artigos ou e-mails marketing.",
+    "category": "tecnologia",
+    "icon": "MousePointer",
+    "tags": ["ctr", "cliques", "impressões", "anúncio", "marketing", "conversão", "taxa de cliques"],
+    "type": "tech_ctr",
+    "inputs": [
+      { "id": "cliques", "label": "Cliques Recebidos", "def": 1500, "type": "number", "min": 0 },
+      { "id": "impressoes", "label": "Impressões Totais", "def": 100000, "type": "number", "min": 1 }
+    ],
+    "outputs": [
+      { "id": "ctr", "label": "CTR (Click-Through Rate)", "suff": "%", "isPrimary": true },
+      { "id": "media_desempenho", "label": "Status de Desempenho" }
+    ],
+    "faq": [
+      { "q": "O que é CTR?", "a": "CTR é o percentual de impressões que resultaram em cliques. Ajuda a entender a relevância e atratividade do anúncio." },
+      { "q": "Qual é um CTR considerado bom?", "a": "Varia de acordo com o canal. Em banners de rede de display do AdSense, 1.5% a 2.5% é a média. Em buscas do Google Search, CTRs de 3% a 6% ou mais são ótimos." }
+    ]
+  },
+  {
+    "id": "calculadora-de-cpc",
+    "name": "Calculadora de CPC (Custo por Clique)",
+    "description": "Calcule o Custo por Clique médio de campanhas patrocinadas ou anúncios digitais.",
+    "category": "tecnologia",
+    "icon": "DollarSign",
+    "tags": ["cpc", "custo por clique", "clique", "anúncio", "ads", "adsense", "marketing", "investimento"],
+    "type": "tech_cpc",
+    "inputs": [
+      { "id": "custo_total", "label": "Custo Total da Campanha (R$)", "def": 300, "type": "number", "min": 0.01 },
+      { "id": "cliques", "label": "Total de Cliques Gerados", "def": 450, "type": "number", "min": 1 }
+    ],
+    "outputs": [
+      { "id": "cpc", "label": "CPC Médio", "pref": "R$ ", "isPrimary": true },
+      { "id": "cliques_por_real", "label": "Cliques por R$ 1,00" }
+    ],
+    "faq": [
+      { "q": "O que significa CPC?", "a": "CPC é o Custo por Clique, ou seja, o preço médio cobrado por cada clique efetuado em um anúncio." },
+      { "q": "Como funciona o custo por clique?", "a": "O cálculo é feito dividindo o custo acumulado de publicidade pelo número de cliques legítimos recebidos. CPC = Custo / Cliques." }
+    ]
   }
 ];
 
@@ -7098,6 +7169,35 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         results['custo_anual_clt'] = parseFloat(custoCltAnual.toFixed(2));
         results['faturamento_pj_equivalente'] = parseFloat((grossPjAnual / 12).toFixed(2));
         results['valor_hora_pj_minimo'] = parseFloat((grossPjAnual / (12 * hrs)).toFixed(2));
+      }
+      else if (raw.type === 'tech_cpm') {
+        const custo = parseFloat(valInputs['custo_total'] || 0);
+        const imp = parseFloat(valInputs['impressoes'] || 1);
+        const cpm = imp > 0 ? (custo / imp) * 1000 : 0;
+        const porExib = imp > 0 ? custo / imp : 0;
+        results['cpm'] = parseFloat(cpm.toFixed(2));
+        results['custo_por_exibicao'] = parseFloat(porExib.toFixed(4));
+      }
+      else if (raw.type === 'tech_ctr') {
+        const cliques = parseFloat(valInputs['cliques'] || 0);
+        const imp = parseFloat(valInputs['impressoes'] || 1);
+        const ctr = imp > 0 ? (cliques / imp) * 100 : 0;
+        
+        let desempenho = 'Baixo (Menos de 1%)';
+        if (ctr >= 5) desempenho = 'Excelente (Acima de 5%)';
+        else if (ctr >= 2) desempenho = 'Bom / Médio (Entre 2% e 5%)';
+        else if (ctr >= 1) desempenho = 'Razoável (Entre 1% e 2%)';
+
+        results['ctr'] = parseFloat(ctr.toFixed(2));
+        results['media_desempenho'] = desempenho;
+      }
+      else if (raw.type === 'tech_cpc') {
+        const custo = parseFloat(valInputs['custo_total'] || 0);
+        const cliques = parseFloat(valInputs['cliques'] || 1);
+        const cpc = cliques > 0 ? custo / cliques : 0;
+        const cliquesPorReal = cpc > 0 ? 1 / cpc : 0;
+        results['cpc'] = parseFloat(cpc.toFixed(2));
+        results['cliques_por_real'] = parseFloat(cliquesPorReal.toFixed(2));
       }
       else if (raw.type === 'simple_tax') {
         // Progressive INSS model simulation

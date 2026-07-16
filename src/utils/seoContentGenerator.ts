@@ -96,6 +96,25 @@ export const CATEGORY_MAP_RAW: Record<string, string> = {
 
 // Bespoke database for popular calculators (EEAT Content and intent FAQs)
 const CORE_SEO_DATABASE: Record<string, Partial<CalculatorSeoContent>> = {
+  'calculadora-ganhos-adsense': {
+    title: 'Calculadora de Ganhos AdSense 2026 | Simule seus Lucros',
+    description: 'Estime seus ganhos mensais e anuais com o Google AdSense 2026. Calcule o faturamento estimado de acordo com a categoria de site, tráfego e região dos visitantes.',
+    whatIs: 'A Calculadora de Ganhos do Google AdSense 2026 é um simulador avançado desenvolvido para criadores de conteúdo, webmasters, blogueiros e profissionais de marketing digital. Ela permite estimar a receita gerada por publicidade de display em sites, portais de conteúdo e blogs com base nas taxas de leilão de anunciantes (CPC e RPM) vigentes. Entender a estimativa de faturamento é crucial para direcionar estratégias de aquisição de tráfego orgânico (SEO) e planejar a viabilidade financeira e o ROI de projetos digitais antes de investir tempo e recursos na produção de conteúdo em larga escala.',
+    howItWorks: 'A ferramenta simula os ganhos cruzando três variáveis fundamentais: o nicho temático do seu site (que define a intenção de compra e o interesse dos anunciantes), a origem demográfica dos visitantes (que dita o poder de compra e o valor médio pago por clique na região) e o volume de tráfego mensal qualificado. As projeções são baseadas em fórmulas matemáticas que calculam as impressões totais de banners por página, aplicam taxas de clique estimadas (CTR) e o custo médio por clique (CPC) para o nicho escolhido, resultando nos ganhos finais e no RPM médio da página.',
+    practicalExample: 'Se o seu blog de Tecnologia e Computação recebe 100.000 visitantes únicos por mês, com uma média de 2,2 páginas visitadas por sessão, isso resulta em 220.000 visualizações de páginas mensais. Considerando que você exibe 3 anúncios por página e possui um CTR médio de 1,8% com um CPC de R$ 0,95 para tráfego latino-americano/brasileiro, seu site gerará cerca de 11.880 cliques nos anúncios. Isso se traduz em um faturamento mensal estimado de R$ 11.286,00 e um RPM médio de R$ 51,30.',
+    whenToUse: 'Use esta ferramenta sempre que estiver planejando criar um novo blog, mudar de nicho editorial, projetar o faturamento de portais existentes, ou comparar os ganhos reais do seu painel do AdSense com as estimativas médias do mercado de publicidade programática.',
+    importantTips: 'Para maximizar os lucros com AdSense, invista em SEO de cauda longa (atraindo usuários altamente segmentados), otimize a velocidade de carregamento do site e utilize formatos de anúncios nativos e âncoras (auto ads), que historicamente aumentam o CTR geral sem prejudicar gravemente a experiência do usuário.',
+    sources: [
+      { name: 'Ajuda do Google AdSense - Como Funciona', url: 'https://support.google.com/adsense/answer/6242051' },
+      { name: 'Métricas de desempenho do AdSense', url: 'https://support.google.com/adsense/answer/2923297' }
+    ],
+    faq: [
+      { q: 'O AdSense paga por cliques ou por visualizações?', a: 'Historicamente o AdSense pagava majoritariamente por cliques (CPC), mas nas atualizações recentes ele passou a priorizar a remuneração por impressões visualizadas (CPM). Nossa calculadora simula de forma unificada as duas métricas correlacionando-as matematicamente.' },
+      { q: 'Por que a região do tráfego altera tanto os ganhos?', a: 'Anunciantes em países como EUA, Canadá e Reino Unido têm orçamentos maiores e maior concorrência, o que eleva consideravelmente o CPC e o RPM. Tráfegos desses países podem render de 3 a 5 vezes mais do que tráfego de países em desenvolvimento.' },
+      { q: 'O que é RPM no Google AdSense?', a: 'RPM é o rendimento por mil visualizações de página. É calculado dividindo os ganhos estimados pelo número de visualizações de página e multiplicando por 1.000.' },
+      { q: 'É garantido que vou ganhar exatamente o valor calculado?', a: 'Não. Os cálculos são estimativas baseadas em médias de mercado. Fatores como qualidade do conteúdo, layout do site, sazonalidade (como datas comerciais) e comportamento dos usuários influenciam diretamente nos ganhos finais.' }
+    ]
+  },
   'calculo-fgts-acumulado': {
     title: 'Calculadora de FGTS Online Grátis | Brasil Calculadoras',
     description: 'Calcule o saldo acumulado do seu FGTS, depósitos mensais estimados de acordo com o seu salário e regras de contribuição da CLT.',

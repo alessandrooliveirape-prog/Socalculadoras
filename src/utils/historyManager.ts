@@ -5,10 +5,14 @@ export const buildHistorySummary = (payload: CalcStatePayload) => {
   let inputsObj: any = {};
   let outputsObj: any = {};
   
-  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rule3Results, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs, porcentagemSimplesResults, financiamentoVeiculoResults } = payload;
+  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rule3Results, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs, porcentagemSimplesResults, financiamentoVeiculoResults, adsenseEarningsResults } = payload;
     if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
       summaryText = `Valor Final: R$ ${compoundInterestResults.finalAmount.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}. Lucro acumulado em juros de R$ ${compoundInterestResults.totalInterest.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
       inputsObj = { finalAmount: compoundInterestResults.finalAmount };
+    } else if (activeCalculator === 'calculadora-ganhos-adsense' && adsenseEarningsResults) {
+      summaryText = `Ganhos mensais estimados: R$ ${adsenseEarningsResults.monthlyEarnings.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}. Tráfego: ${adsenseEarningsResults.visitors.toLocaleString('pt-BR')} visitantes/mês.`;
+      inputsObj = { category: adsenseEarningsResults.category, region: adsenseEarningsResults.region, visitors: adsenseEarningsResults.visitors, pagesPerVisit: adsenseEarningsResults.pagesPerVisit };
+      outputsObj = { monthlyEarnings: adsenseEarningsResults.monthlyEarnings, annualEarnings: adsenseEarningsResults.annualEarnings, rpm: adsenseEarningsResults.rpm };
     } else if (activeCalculator === 'clt-pj' && cltVsPjResults) {
       summaryText = `Melhor opção: ${cltVsPjResults.isPjBetter ? 'PJ' : 'CLT'}. Diferença mensal de R$ ${cltVsPjResults.difference.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}.`;
     } else if (activeCalculator === 'margem-lucro' && profitMarginResults) {

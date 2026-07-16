@@ -1,7 +1,7 @@
 import { CalcStatePayload } from '../App';
 
 export const handleExportCSV = (payload: CalcStatePayload) => {
-  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs } = payload;
+  const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs, adsenseEarningsResults } = payload;
     let csvContent = '\uFEFF'; // UTF-8 BOM indicator for perfect Excel formatting in Portuguese
     let filename = 'relatorio-central.csv';
 
@@ -23,6 +23,26 @@ export const handleExportCSV = (payload: CalcStatePayload) => {
         csvContent += `${row.month === 0 ? 'Inicio' : 'Mes ' + row.month};${row.totalInvested};${row.interestEarned};${row.totalInterest};${row.balance}\n`;
       });
     } 
+    else if (activeCalculator === 'calculadora-ganhos-adsense' && adsenseEarningsResults) {
+      filename = 'ganhos-estimados-adsense.csv';
+      csvContent += `PROJEÇÃO DE GANHOS DO GOOGLE ADSENSE\n`;
+      csvContent += `Nicho de Conteudo;${adsenseEarningsResults.category}\n`;
+      csvContent += `Regiao de Origem do Trafego;${adsenseEarningsResults.region}\n`;
+      csvContent += `Visitantes Mensais;${adsenseEarningsResults.visitors}\n`;
+      csvContent += `Paginas por Visitante;${adsenseEarningsResults.pagesPerVisit}\n`;
+      csvContent += `Anuncios por Pagina;${adsenseEarningsResults.adsPerPage}\n`;
+      csvContent += `Ganhos Mensais Estimados;R$ ${adsenseEarningsResults.monthlyEarnings.toFixed(2)}\n`;
+      csvContent += `Faturamento Anual Projetado;R$ ${adsenseEarningsResults.annualEarnings.toFixed(2)}\n`;
+      csvContent += `RPM de Pagina Medio;R$ ${adsenseEarningsResults.rpm.toFixed(2)}\n`;
+      csvContent += `CTR Estimado;${adsenseEarningsResults.ctr.toFixed(2)}%\n`;
+      csvContent += `CPC Medio;R$ ${adsenseEarningsResults.cpc.toFixed(2)}\n\n`;
+
+      // Table traffic levels
+      csvContent += `Cenario de Trafego;Visitantes Unicos;Visualizacoes de Pagina;Ganhos Mensais Estimados\n`;
+      adsenseEarningsResults.data.forEach((row: any) => {
+        csvContent += `${row.trafficLevel}%;${row.visitors};${row.pageviews};R$ ${row.earnings.toFixed(2)}\n`;
+      });
+    }
     else if (activeCalculator === 'clt-pj' && cltVsPjResults) {
       filename = 'comparativo-clt-pj.csv';
       csvContent += `RESULTADO COMPARATIVO DE CONTRATO DO TRABALHO\n`;
