@@ -275,6 +275,41 @@ export default function App() {
     tag.setAttribute('content', contentValue);
   };
 
+  const checkSeoOverrides = (canonicalUrl: string) => {
+    const centralSupaUrl = 'https://tezwamjdetiigwigvayt.supabase.co';
+    const centralSupaKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlendhbWpkZXRpaWd3aWd2YXl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5NTYxMDIsImV4cCI6MjA5OTUzMjEwMn0.AJ_xFlk4MmEiC1ECoNLz9-3PkoKqOmJvb2dS2zBYWDE';
+    const siteId = 'sc-domain:brasilcalculadoras.com.br';
+    
+    const reqUrl = `${centralSupaUrl}/rest/v1/seo_overrides?site_id=eq.${siteId}&url=eq.${encodeURIComponent(canonicalUrl)}&approved=eq.true&select=optimized_title,optimized_meta`;
+
+    fetch(reqUrl, {
+      headers: {
+        'apikey': centralSupaKey,
+        'Authorization': `Bearer ${centralSupaKey}`
+      }
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error();
+    })
+    .then(data => {
+      const override = data?.[0];
+      if (override) {
+        console.log(`[SEO Central] Aplicando override REST para: ${canonicalUrl}`);
+        document.title = override.optimized_title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          metaDesc.setAttribute('content', override.optimized_meta);
+        }
+        updateMetaTag('property', 'og:title', override.optimized_title);
+        updateMetaTag('property', 'og:description', override.optimized_meta);
+        updateMetaTag('name', 'twitter:title', override.optimized_title);
+        updateMetaTag('name', 'twitter:description', override.optimized_meta);
+      }
+    })
+    .catch(() => {});
+  };
+
   const injectCalculatorSchema = (calc: any, seoData: any, canonicalUrl: string) => {
     try {
       let script = document.getElementById('jsonld-seo') as HTMLScriptElement;
@@ -411,6 +446,7 @@ export default function App() {
           document.head.appendChild(metaDesc);
         }
         metaDesc.setAttribute('content', current.desc);
+        checkSeoOverrides('https://www.brasilcalculadoras.com.br' + location);
       }
       return;
     }
@@ -474,6 +510,7 @@ export default function App() {
 
       logSeoInteraction('/', 'view');
       setAdRefreshTrigger(prev => prev + 1);
+      checkSeoOverrides(canonicalUrl);
       return;
     }
 
@@ -512,6 +549,7 @@ export default function App() {
       logSeoInteraction('/' + CATEGORY_KEY_TO_SLUG[activeCategoryHub], 'view');
 
       setAdRefreshTrigger(prev => prev + 1);
+      checkSeoOverrides(canonicalUrl);
       return;
     }
 
@@ -552,6 +590,7 @@ export default function App() {
     logSeoInteraction('/' + activeCalculator, 'view');
 
     setAdRefreshTrigger(prev => prev + 1);
+    checkSeoOverrides(canonicalUrl);
   }, [activeCalculator, activeCategoryHub]);
 
   const triggerToast = (msg: string) => {
