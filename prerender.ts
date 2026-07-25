@@ -121,21 +121,32 @@ function injectMetadata(htmlTemplate: string, title: string, description: string
     res = res.replace('</head>', `<link rel="canonical" href="${url}" />\n</head>`);
   }
 
-  // Add Open Graph tags
-  const ogTags = `
-    <meta property="og:title" content="${title}" />
-    <meta property="og:description" content="${description}" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${title}" />
-    <meta name="twitter:description" content="${description}" />
-  `;
-  res = res.replace('</head>', `${ogTags}\n</head>`);
+  // Replace og:title
+  if (res.includes('property="og:title"')) {
+    res = res.replace(/<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i, `<meta property="og:title" content="${title}" />`);
+  } else {
+    res = res.replace('</head>', `<meta property="og:title" content="${title}" />\n</head>`);
+  }
 
-  // Add JSON-LD schema
-  const schemaScript = `<script type="application/ld+json" id="jsonld-seo">${JSON.stringify(schema)}</script>`;
-  res = res.replace('</head>', `${schemaScript}\n</head>`);
+  // Replace og:description
+  if (res.includes('property="og:description"')) {
+    res = res.replace(/<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i, `<meta property="og:description" content="${description}" />`);
+  } else {
+    res = res.replace('</head>', `<meta property="og:description" content="${description}" />\n</head>`);
+  }
+
+  // Replace og:url
+  if (res.includes('property="og:url"')) {
+    res = res.replace(/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/i, `<meta property="og:url" content="${url}" />`);
+  } else {
+    res = res.replace('</head>', `<meta property="og:url" content="${url}" />\n</head>`);
+  }
+
+  // Add JSON-LD schema (only if it has keys)
+  if (schema && Object.keys(schema).length > 0) {
+    const schemaScript = `<script type="application/ld+json" id="jsonld-seo">${JSON.stringify(schema)}</script>`;
+    res = res.replace('</head>', `${schemaScript}\n</head>`);
+  }
 
   // Inject body content into div#root
   res = res.replace('<div id="root"></div>', `<div id="root">${bodyContent}</div>`);
@@ -313,10 +324,7 @@ CALCULATORS_CATALOG.forEach(calc => {
         <p style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 0;">${calc.description}</p>
       </section>
 
-      <section style="background: #f8fafc; border: 1px dashed #cbd5e1; padding: 40px 20px; text-align: center; border-radius: 16px; margin-bottom: 35px; color: #64748b;">
-        <h2 style="font-size: 16px; color: #475569; margin-top: 0; margin-bottom: 10px; font-weight: 800;">Simulador Interativo Ativo</h2>
-        <p style="font-size: 12px; margin-bottom: 0;">O formulário dinâmico e os gráficos estão sendo carregados. Habilite o JavaScript no seu navegador para simular.</p>
-      </section>
+
 
       <section style="margin-bottom: 35px;">
         <h2 style="font-size: 16px; color: #0f172a; margin-bottom: 10px; font-weight: 800;">O que é e para que serve</h2>
@@ -385,7 +393,9 @@ const legalPagesConfig = [
       <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">A sua privacidade é de extrema importância para o <strong>Brasil Calculadoras</strong>. Esta Política de Privacidade descreve de forma clara como informações são tratadas em conformidade com a LGPD e o Regulamento Geral de Proteção de Dados (GDPR).</p>
       <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Arquivos de Log e Cookies do Google AdSense</h2>
       <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Terceiros, incluindo o Google, usam cookies para veicular anúncios com base em visitas anteriores do usuário a este site. Com o uso de cookies de publicidade (incluindo o cookie DART), o Google e seus parceiros podem veicular anúncios para os usuários com base em suas visitas na Internet.</p>
-      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Os usuários podem desativar a publicidade personalizada acessando as Configurações de Anúncios do Google. Todas as simulações em nossas calculadoras são processadas estritamente de forma local no navegador do usuário.</p>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Os usuários podem desativar a publicidade personalizada acessando as Configurações de Anúncios do Google. Todas as simulações em nossas calculadoras são processadas estritamente de forma local no navegador do usuário, garantindo a sua total privacidade.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Segurança dos Dados Pessoais</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Não exigimos cadastro, login ou fornecimento de e-mails para a utilização das ferramentas. Os dados inseridos nos campos das calculadoras não são salvos em nossos servidores e desaparecem assim que você fecha a aba do navegador.</p>
     `
   },
   {
@@ -394,9 +404,11 @@ const legalPagesConfig = [
     description: 'Conheça os Termos e Condições de Uso da plataforma Brasil Calculadoras e entenda a natureza informativa de nossas ferramentas gratuitas.',
     heading: 'Termos e Condições de Uso',
     content: `
-      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">Ao acessar e utilizar o Brasil Calculadoras, você concorda com nossos Termos de Uso. Todas as nossas ferramentas e simuladores têm caráter exclusivamente educativo e informativo.</p>
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">Ao acessar e utilizar o portal Brasil Calculadoras, você concorda expressamente com nossos Termos e Condições de Uso. Recomendamos a leitura atenta das condições abaixo antes de utilizar qualquer serviço.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Natureza Informativa das Ferramentas</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Todas as nossas ferramentas, tabelas e simuladores têm caráter exclusivamente educativo e informativo. Embora nossa equipe faça o máximo esforço para manter as fórmulas atualizadas com a legislação vigente (como tabelas do INSS e IRRF), não garantimos a precisão absoluta em 100% dos casos devido a particularidades individuais e atualizações governamentais de última hora.</p>
       <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Isenção de Responsabilidade</h2>
-      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Os resultados emitidos não constituem pareceres jurídicos, médicos ou contábeis definitivos. Recomendamos a consulta com profissionais regulados (advogados, contadores ou nutricionistas) para decisões oficiais.</p>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Os resultados emitidos pelas nossas calculadoras não constituem pareceres jurídicos, médicos, contábeis ou laudos oficiais definitivos. O Brasil Calculadoras se exime de qualquer responsabilidade por decisões financeiras, trabalhistas ou de saúde tomadas exclusivamente com base em nossos simuladores. Recomendamos enfaticamente a consulta com profissionais regulados (advogados, contadores ou nutricionistas) para decisões e cálculos oficiais.</p>
     `
   },
   {
@@ -405,8 +417,11 @@ const legalPagesConfig = [
     description: 'Saiba mais sobre a missão do Brasil Calculadoras, nossa equipe técnica e nosso compromisso com a exatidão matemática e utilidade pública.',
     heading: 'Sobre o Brasil Calculadoras',
     content: `
-      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">O Brasil Calculadoras é um portal dedicado a disponibilizar ferramentas gratuitas, céleres e de alta precisão técnica para o público brasileiro em áreas trabalhistas, financeiras, saúde e utilidades.</p>
-      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Operado por Brasil Calculadoras, priorizamos rigor técnico, transparência E-E-A-T e navegação livre de burocracias.</p>
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">O Brasil Calculadoras é um portal online dedicado a democratizar o acesso a informações complexas, disponibilizando ferramentas gratuitas, céleres e de alta precisão técnica para o público brasileiro em diversas áreas fundamentais, como cálculos trabalhistas, planejamento financeiro, saúde e utilidades matemáticas cotidianas.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Nossa Missão e Visão</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Nascemos com o objetivo de descomplicar a burocracia brasileira. Sabemos que calcular uma rescisão, entender os juros compostos de um financiamento ou conferir o desconto do INSS no holerite podem ser tarefas desafiadoras. Nossa visão é ser a principal central de ferramentas utilitárias do país, sempre com foco em usabilidade imediata e sem barreiras (sem cadastros ou paywalls).</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Compromisso de Qualidade (E-E-A-T)</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Operado por especialistas em desenvolvimento e matemática aplicada, priorizamos o rigor técnico. Revisamos constantemente nossas calculadoras de acordo com as diretrizes de Expertise, Autoridade e Confiabilidade (E-E-A-T) recomendadas pelo Google, para garantir uma navegação segura, livre de burocracias e repleta de informações úteis para o seu dia a dia.</p>
     `
   },
   {
@@ -415,8 +430,10 @@ const legalPagesConfig = [
     description: 'Entre em contato com a equipe do Brasil Calculadoras para tirar dúvidas, enviar sugestões ou reportar pontos de melhoria.',
     heading: 'Contato & Suporte Técnico',
     content: `
-      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">Estamos à disposição para atender dúvidas, sugestões de novas ferramentas e contatos de parcerias institucionais.</p>
-      <p style="font-size: 14px; font-weight: bold; color: #2563eb;">E-mail oficial: contato@brasilcalculadoras.com.br</p>
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">A transparência e o canal aberto com nossos usuários são pilares do Brasil Calculadoras. Estamos à inteira disposição para atender dúvidas sobre o uso das calculadoras, receber sugestões de novas ferramentas e avaliar propostas de parcerias institucionais.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Como Falar Conosco</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Se você encontrou algum erro em um cálculo, deseja reportar um bug no sistema ou tem uma ideia brilhante para uma nova calculadora, sinta-se à vontade para nos enviar uma mensagem. Nossa equipe de suporte técnico e editorial analisará a sua mensagem o mais rápido possível.</p>
+      <p style="font-size: 14px; font-weight: bold; color: #2563eb; background: #eff6ff; padding: 15px; border-radius: 8px; display: inline-block;">✉️ E-mail oficial: contato@brasilcalculadoras.com.br</p>
     `
   }
 ];
@@ -443,7 +460,20 @@ legalPagesConfig.forEach(page => {
       </article>
     </main>
   `;
-  const rendered = injectMetadata(template, page.title, page.description, canonicalUrl, {}, legalHtml);
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": page.title,
+    "description": page.description,
+    "url": canonicalUrl,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Brasil Calculadoras",
+      "url": "https://www.brasilcalculadoras.com.br"
+    }
+  };
+
+  const rendered = injectMetadata(template, page.title, page.description, canonicalUrl, pageSchema, legalHtml);
   const pageDir = path.join(distPath, page.slug);
   ensureDir(pageDir);
   fs.writeFileSync(path.join(pageDir, 'index.html'), rendered, 'utf8');

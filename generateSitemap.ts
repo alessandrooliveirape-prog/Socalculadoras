@@ -24,8 +24,8 @@ Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([key, slug]) => {
   <url>
     <loc>https://www.brasilcalculadoras.com.br/${slug}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.90</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>`;
 });
 
@@ -35,8 +35,8 @@ CALCULATORS_CATALOG.forEach((calc) => {
   <url>
     <loc>https://www.brasilcalculadoras.com.br/${calc.id}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
   </url>`;
 });
 
