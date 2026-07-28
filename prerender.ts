@@ -250,6 +250,7 @@ Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([catKey, slug]) => {
   const catDir = path.join(distPath, slug);
   ensureDir(catDir);
   fs.writeFileSync(path.join(catDir, 'index.html'), rendered, 'utf8');
+  fs.writeFileSync(path.join(distPath, `${slug}.html`), rendered, 'utf8');
 });
 console.log('✅ Category Hubs pre-rendered!');
 
@@ -379,6 +380,7 @@ CALCULATORS_CATALOG.forEach(calc => {
   const calcDir = path.join(distPath, calc.id);
   ensureDir(calcDir);
   fs.writeFileSync(path.join(calcDir, 'index.html'), rendered, 'utf8');
+  fs.writeFileSync(path.join(distPath, `${calc.id}.html`), rendered, 'utf8');
 });
 console.log('✅ Priority Calculators pre-rendered!');
 
@@ -477,6 +479,7 @@ legalPagesConfig.forEach(page => {
   const pageDir = path.join(distPath, page.slug);
   ensureDir(pageDir);
   fs.writeFileSync(path.join(pageDir, 'index.html'), rendered, 'utf8');
+  fs.writeFileSync(path.join(distPath, `${page.slug}.html`), rendered, 'utf8');
 });
 console.log('✅ Institutional & Legal Pages pre-rendered!');
 
