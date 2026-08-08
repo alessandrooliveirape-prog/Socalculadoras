@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
 
 User-agent: Mediapartners-Google
 Allow: /
