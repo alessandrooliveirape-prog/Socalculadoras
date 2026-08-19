@@ -3,6 +3,7 @@ Allow: /
 Disallow: /api/
 Disallow: /*?*utm_*
 Disallow: /*?*ref=*
+Disallow: /admin*
 
 User-agent: Mediapartners-Google
 Allow: /
