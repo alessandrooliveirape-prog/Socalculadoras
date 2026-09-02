@@ -2186,7 +2186,7 @@ const RAW_DYNAMIC_METADATA: {
 {
   "id": "move-brasil",
   "name": "Simulador Move Brasil",
-  "description": "Simule as parcelas e juros do programa federal de financiamento e renovação de frota para taxistas e motoristas de aplicativo.",
+  "description": "Simule as parcelas e juros do programa federal de financiamento e renovação de frota para taxistas e motoristas de aplicativo (teto de R$ 200 mil e prazos de até 84 meses).",
   "category": "veiculos",
   "icon": "Car",
   "tags": [
@@ -2201,7 +2201,7 @@ const RAW_DYNAMIC_METADATA: {
   "inputs": [
     {
       "id": "valor_veiculo",
-      "label": "Valor do Veículo (máx. R$ 150.000)",
+      "label": "Valor do Veículo (máx. R$ 200.000)",
       "def": 100000,
       "type": "number",
       "pref": "R$"
@@ -2231,7 +2231,7 @@ const RAW_DYNAMIC_METADATA: {
     },
     {
       "id": "prazo",
-      "label": "Prazo do Financiamento",
+      "label": "Prazo do Financiamento (até 84 meses)",
       "def": 48,
       "type": "number",
       "suff": "meses"
@@ -2263,19 +2263,23 @@ const RAW_DYNAMIC_METADATA: {
   "faq": [
     {
       "q": "O que é o programa Move Brasil?",
-      "a": "O Move Brasil é um programa do Governo Federal para incentivar a renovação de frotas de taxistas e motoristas de aplicativo através de linhas de financiamento de até R$ 30 bilhões com juros reduzidos."
+      "a": "O Move Brasil é um programa do Governo Federal para incentivar a renovação de frota de taxistas e motoristas de aplicativo com linhas de financiamento de juros bonificados, teto de até R$ 200 mil e prazos de até 84 meses."
     },
     {
       "q": "Quem pode solicitar o financiamento do Move Brasil?",
-      "a": "Taxistas registrados ativos e motoristas de aplicativo cadastrados há pelo menos 12 meses com no mínimo 100 corridas realizadas no período."
+      "a": "Taxistas com registro ativo e motoristas de aplicativo cadastrados há pelo menos 12 meses com histórico mínimo de 100 corridas no período."
     },
     {
       "q": "Quais são as taxas de juros do programa?",
-      "a": "As taxas máximas definidas pelo CMN são de 11,5% ao ano (0,91% ao mês) para mulheres e de 12,5% ao ano (0,99% ao mês) para homens."
+      "a": "As taxas nominais de referência são de até 11,5% ao ano (0,91% ao mês) para mulheres e de até 12,5% ao ano (0,99% ao mês) para homens."
     },
     {
       "q": "Quais carros são elegíveis para o Move Brasil?",
-      "a": "Veículos novos (0km) com valor de até R$ 150.000, que atendam a critérios de eficiência energética e sustentabilidade (flex, híbridos ou elétricos)."
+      "a": "Veículos novos (0 km) com valor de mercado de até R$ 200.000, que atendam aos critérios de sustentabilidade e eficiência energética (flex, híbridos, etanol ou elétricos)."
+    },
+    {
+      "q": "Como funciona o processo de solicitação?",
+      "a": "1º passo: cadastro digital e validação de elegibilidade no portal oficial gov.br/movebrasil (resultado em até 5 dias úteis); 2º passo: análise de crédito junto aos bancos parceiros e concessionárias credenciadas."
     }
   ]
 },
