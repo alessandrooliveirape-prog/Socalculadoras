@@ -2117,22 +2117,26 @@ const RAW_DYNAMIC_METADATA: {
 },
 {
   "id": "financiamento-veiculo",
-  "name": "Simulador Parcelas Auto",
-  "description": "Entenda os encargos tributários e taxa de juros de contratos de CDC de veículos.",
+  "name": "Simulador de Financiamento de Veículos e CDC 2026: Carros e Motos",
+  "description": "Simule o financiamento CDC de carros e motos em 2026. Calcule o valor das parcelas fixas, taxa de juros, entrada recomendada e amortização antecipada.",
   "category": "veiculos",
   "icon": "Car",
   "tags": [
     "financiamento",
     "carro",
+    "moto",
     "cdc",
-    "banco"
+    "credito direto ao consumidor",
+    "banco",
+    "amortizacao",
+    "veiculo"
   ],
   "type": "vei_finance",
   "inputs": [
     {
       "id": "valor_veiculo",
-      "label": "Valor do Veículo",
-      "def": 50000,
+      "label": "Valor do Veículo (Carro / Moto)",
+      "def": 65000,
       "type": "number",
       "pref": "R$"
     },
@@ -2146,7 +2150,7 @@ const RAW_DYNAMIC_METADATA: {
     {
       "id": "taxa_mensal",
       "label": "Taxa de Juros Mensal (a.m.)",
-      "def": 1.8,
+      "def": 1.79,
       "type": "number",
       "suff": "%"
     },
@@ -2161,13 +2165,13 @@ const RAW_DYNAMIC_METADATA: {
   "outputs": [
     {
       "id": "valor_parcela",
-      "label": "Prestação Mensal (CDC)",
+      "label": "Prestação Mensal (CDC Tabela Price)",
       "pref": "R$",
       "isPrimary": true
     },
     {
       "id": "total_pago",
-      "label": "Valor Total Pago (Financiado)",
+      "label": "Valor Total Pago (Financiado + Entrada)",
       "pref": "R$"
     },
     {
@@ -2178,15 +2182,23 @@ const RAW_DYNAMIC_METADATA: {
   ],
   "faq": [
     {
-      "q": "O que é o financiamento tipo CDC?",
-      "a": "No Crédito Direto ao Consumidor (CDC), o comprador pega um empréstimo direto com o banco para pagar o vendedor e o veículo fica alienado ao banco até a quitação da última parcela."
+      "q": "O que é o financiamento tipo CDC (Crédito Direto ao Consumidor)?",
+      "a": "No Crédito Direto ao Consumidor (CDC), o comprador pega um empréstimo direto com o banco para pagar o vendedor e o veículo fica alienado fiduciariamente ao banco até a quitação da última parcela."
+    },
+    {
+      "q": "Qual a diferença entre financiamento CDC e Leasing veicular?",
+      "a": "No CDC o veículo sai registrado no nome do comprador desde o primeiro dia (com gravame de alienação fiduciária). No Leasing, o veículo fica registrado em nome do banco até o final do contrato, quando o comprador pode optar por exercer a compra."
+    },
+    {
+      "q": "Posso amortizar antecipadamente as parcelas no CDC com desconto de juros?",
+      "a": "Sim! Pelo Artigo 52, § 2º do Código de Defesa do Consumidor e normas do Banco Central, você tem direito à liquidação antecipada total ou parcial do saldo devedor com redução proporcional de todos os juros futuros (amortização de trás para frente)."
     }
   ]
 },
 {
   "id": "move-brasil",
-  "name": "Simulador Move Brasil",
-  "description": "Simule as parcelas e juros do programa federal de financiamento e renovação de frota para taxistas e motoristas de aplicativo (teto de R$ 200 mil e prazos de até 84 meses).",
+  "name": "Simulador Move Brasil 2026: Carros, Motos e Caminhões (BB, Caixa e BNDES)",
+  "description": "Simule o financiamento MOVE Brasil para carros, motos e caminhões leves (motoristas de app, taxistas e entregadores) pelo Banco do Brasil, Caixa e BNDES.",
   "category": "veiculos",
   "icon": "Car",
   "tags": [
@@ -2194,39 +2206,60 @@ const RAW_DYNAMIC_METADATA: {
     "financiamento",
     "aplicativo",
     "taxista",
+    "moto",
+    "motoboy",
+    "caminhao",
+    "banco do brasil",
+    "caixa",
     "bndes",
-    "crédito"
+    "credito"
   ],
   "type": "vei_move_brasil",
   "inputs": [
     {
+      "id": "categoria_veiculo",
+      "label": "Categoria do Veículo",
+      "def": "carro",
+      "type": "select",
+      "op": [
+        { "v": "carro", "l": "Carro (App / Táxi - Teto R$ 150 mil)" },
+        { "v": "moto", "l": "Moto de Entregador (Teto R$ 35 mil)" },
+        { "v": "caminhao", "l": "Caminhão Leve / VUC (Teto R$ 400 mil)" }
+      ]
+    },
+    {
       "id": "valor_veiculo",
-      "label": "Valor do Veículo (máx. R$ 200.000)",
-      "def": 100000,
+      "label": "Valor do Veículo",
+      "def": 80000,
       "type": "number",
       "pref": "R$"
     },
     {
       "id": "entrada",
       "label": "Valor de Entrada",
-      "def": 20000,
+      "def": 16000,
       "type": "number",
       "pref": "R$"
     },
     {
+      "id": "banco",
+      "label": "Instituição Financeira Parceira",
+      "def": "bb",
+      "type": "select",
+      "op": [
+        { "v": "bb", "l": "Banco do Brasil (Taxa subsidiada BNDES)" },
+        { "v": "caixa", "l": "Caixa Econômica Federal (Linha Social)" },
+        { "v": "bndes", "l": "BNDES / Cooperativas Credenciadas" }
+      ]
+    },
+    {
       "id": "genero",
-      "label": "Gênero do Beneficiário",
+      "label": "Perfil do Beneficiário",
       "def": "mulher",
       "type": "select",
       "op": [
-        {
-          "v": "mulher",
-          "l": "Mulher (Taxa de 11,5% a.a. / 0,91% a.m.)"
-        },
-        {
-          "v": "homem",
-          "l": "Homem (Taxa de 12,5% a.a. / 0,99% a.m.)"
-        }
+        { "v": "mulher", "l": "Mulher Motorista / Entregadora (Taxa a partir de 0,85% a.m.)" },
+        { "v": "homem", "l": "Padrão Geral (Taxa a partir de 0,93% a.m.)" }
       ]
     },
     {
@@ -2240,46 +2273,51 @@ const RAW_DYNAMIC_METADATA: {
   "outputs": [
     {
       "id": "valor_parcela",
-      "label": "Prestação Mensal (Tabela Price)",
+      "label": "Prestação Mensal MOVE Brasil",
       "pref": "R$",
       "isPrimary": true
     },
     {
+      "id": "parcela_mercado",
+      "label": "Parcela Mercado Tradicional (~18% a.a.)",
+      "pref": "R$"
+    },
+    {
       "id": "total_pago",
-      "label": "Valor Total Pago (Financiado + Entrada)",
+      "label": "Valor Total Pago MOVE (Financiado + Entrada)",
       "pref": "R$"
     },
     {
       "id": "juros_totais",
-      "label": "Total de Juros Pagos",
+      "label": "Total de Juros Pagos MOVE",
       "pref": "R$"
     },
     {
       "id": "economia_juros",
-      "label": "Economia Estimada vs Mercado",
+      "label": "Economia com o MOVE Brasil vs Mercado",
       "pref": "R$"
     }
   ],
   "faq": [
     {
-      "q": "O que é o programa Move Brasil?",
-      "a": "O Move Brasil é um programa do Governo Federal para incentivar a renovação de frota de taxistas e motoristas de aplicativo com linhas de financiamento de juros bonificados, teto de até R$ 200 mil e prazos de até 84 meses."
+      "q": "Quem tem direito ao financiamento do Move Brasil?",
+      "a": "Têm direito taxistas ativos registrados, motoristas de transporte por aplicativo com cadastro ativo há pelo menos 12 meses, entregadores/motoboys de plataformas e caminhoneiros autônomos."
     },
     {
-      "q": "Quem pode solicitar o financiamento do Move Brasil?",
-      "a": "Taxistas com registro ativo e motoristas de aplicativo cadastrados há pelo menos 12 meses com histórico mínimo de 100 corridas no período."
+      "q": "Posso financiar moto pelo Move Brasil?",
+      "a": "Sim! Entregadores e motoboys cadastrados em plataformas de delivery têm linha especial para aquisição de motocicletas novas ou elétricas de baixa emissão com teto de até R$ 35 mil e prazos de até 48 a 60 meses."
     },
     {
-      "q": "Quais são as taxas de juros do programa?",
-      "a": "As taxas nominais de referência são de até 11,5% ao ano (0,91% ao mês) para mulheres e de até 12,5% ao ano (0,99% ao mês) para homens."
+      "q": "Caminhões e VUCs entram no programa?",
+      "a": "Sim. Caminhoneiros autônomos e pequenas transportadoras podem financiar veículos utilitários de carga (VUCs) e caminhões leves elegíveis pelo BNDES dentro dos objetivos de descarbonização da frota."
     },
     {
-      "q": "Quais carros são elegíveis para o Move Brasil?",
-      "a": "Veículos novos (0 km) com valor de mercado de até R$ 200.000, que atendam aos critérios de sustentabilidade e eficiência energética (flex, híbridos, etanol ou elétricos)."
+      "q": "Quais bancos operam o Move Brasil?",
+      "a": "O Banco do Brasil, a Caixa Econômica Federal e cooperativas de crédito credenciadas (como Sicredi e Sicoob) são os principais operadores do programa com garantia do Fundo Garantidor de Investimentos (FGI) do BNDES."
     },
     {
-      "q": "Como funciona o processo de solicitação?",
-      "a": "1º passo: cadastro digital e validação de elegibilidade no portal oficial gov.br/movebrasil (resultado em até 5 dias úteis); 2º passo: análise de crédito junto aos bancos parceiros e concessionárias credenciadas."
+      "q": "Quais são as taxas de juros para mulheres e homens?",
+      "a": "Para incentivar a inclusão de mulheres no transporte, as taxas máximas são a partir de 0,85% ao mês (11,5% ao ano) para mulheres e a partir de 0,93% ao mês (12,5% ao ano) para homens, contra 18% a 25% a.a. praticados no mercado comum."
     }
   ]
 },
@@ -4974,24 +5012,31 @@ const RAW_DYNAMIC_METADATA: {
   },
   {
     id: 'falta-injustificada',
-    name: 'Desconto de Falta Injustificada',
-    description: 'Calcule o valor do desconto no salário por dias faltados sem justificativa legal.',
+    name: 'Calculadora de Faltas Injustificadas e DSR (CLT 2026)',
+    description: 'Calcule o desconto de faltas no salário, perda do DSR (Lei 605/49) e reflexo nos dias de férias (Art. 130 CLT) e 13º salário.',
     category: 'profissoes',
     icon: 'Calendar',
-    tags: ['falta', 'desconto', 'dsr', 'salário', 'clt'],
+    tags: ['falta injustificada', 'desconto falta', 'dsr', 'salário', 'clt', 'férias', '13 salário', 'holerite'],
     type: 'trab_falta',
     inputs: [
-      { id: 'salario', label: 'Salário Bruto', def: 2500, type: 'number', pref: 'R$' },
-      { id: 'faltas', label: 'Dias Faltados', def: 1, type: 'number', suff: 'dias' },
-      { id: 'desconta_dsr', label: 'Descontar DSR?', def: 1, type: 'select', op: [{v: 1, l: 'Sim'}, {v: 0, l: 'Não'}] }
+      { id: 'salario', label: 'Salário Bruto Mensal', def: 2800, type: 'number', pref: 'R$' },
+      { id: 'faltas', label: 'Faltas Injustificadas no Mês', def: 1, type: 'number', suff: 'dias' },
+      { id: 'semanas_falta', label: 'Semanas com Falta (Perda DSR Lei 605/49)', def: 1, type: 'number', suff: 'semanas' },
+      { id: 'faltas_ano', label: 'Faltas Acumuladas no Ano (Férias Art. 130)', def: 2, type: 'number', suff: 'faltas' }
     ],
     outputs: [
-      { id: 'desconto_total', label: 'Desconto Total Estimado', pref: 'R$', isPrimary: true },
-      { id: 'desconto_dia', label: 'Desconto do Dia Faltado', pref: 'R$' },
-      { id: 'desconto_dsr', label: 'Desconto do DSR', pref: 'R$' }
+      { id: 'desconto_total', label: 'Desconto Total no Mês (Faltas + DSR)', pref: 'R$', isPrimary: true },
+      { id: 'salario_dia', label: 'Salário-Dia (Divisor 30 - CLT Art. 64)', pref: 'R$' },
+      { id: 'desconto_dia', label: 'Desconto dos Dias de Falta', pref: 'R$' },
+      { id: 'desconto_dsr', label: 'Desconto do Repouso (DSR Lei 605/49)', pref: 'R$' },
+      { id: 'dias_ferias_direito', label: 'Dias de Férias a que tem direito (CLT)', suff: 'dias' },
+      { id: 'dias_ferias_perdidos', label: 'Dias de Férias Perdidos no Período', suff: 'dias' }
     ],
     faq: [
-      { q: 'A falta desconta o DSR?', a: 'Se o funcionário não cumprir integralmente a jornada da semana, ele perde a remuneração do Descanso Semanal Remunerado (DSR) daquela semana correspondente.' }
+      { q: 'Como é calculado o valor do dia descontado por falta injustificada?', a: 'Pelo Artigo 64 da CLT, o salário-dia do trabalhador mensalista é calculado dividindo o salário bruto mensal por 30 (mesmo em meses de 28, 29 ou 31 dias). Se o salário for R$ 3.000, cada dia de falta custa R$ 100,00 de desconto.' },
+      { q: 'Por que a falta injustificada desconta o DSR?', a: 'Pelo Artigo 6º da Lei Federal nº 605/1949, para ter direito à remuneração do repouso semanal remunerado (DSR), o empregado deve ter trabalhado durante toda a semana com pontualidade e assiduidade. Havendo falta injustificada na semana, o empregador tem o direito de descontar o dia da ausência mais 1 dia de repouso semanal.' },
+      { q: 'Quantas faltas injustificadas reduzem as férias do trabalhador?', a: 'Conforme o Artigo 130 da CLT: até 5 faltas no período aquisitivo (30 dias de férias); de 6 a 14 faltas (24 dias de férias); de 15 a 23 faltas (18 dias de férias); de 24 a 32 faltas (12 dias de férias); mais de 32 faltas (perda total do direito a férias no período).' },
+      { q: 'Falta injustificada desconta o 13º salário?', a: 'Sim. Se o trabalhador faltar mais de 15 dias injustificadamente dentro do mesmo mês civil, ele deixa de cumprir a fração mínima de 15 dias trabalhados e perde 1/12 avos do 13º salário relativo àquele mês.' }
     ]
   },
   {
@@ -7584,15 +7629,28 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       else if (raw.type === 'trab_falta') {
         const salario = parseFloat(valInputs['salario'] || 0);
         const faltas = parseFloat(valInputs['faltas'] || 0);
-        const usa_dsr = parseFloat(valInputs['desconta_dsr'] || 0);
+        const semanas = parseFloat(valInputs['semanas_falta'] !== undefined ? valInputs['semanas_falta'] : 1);
+        const faltas_ano = parseFloat(valInputs['faltas_ano'] !== undefined ? valInputs['faltas_ano'] : 0);
         
-        const valor_dia = salario / 30;
+        const valor_dia = salario > 0 ? salario / 30 : 0;
         const desc_dias = valor_dia * faltas;
-        const desc_dsr = usa_dsr === 1 ? valor_dia * faltas : 0; // Aproximação: 1 DSR por semana de falta
+        const desc_dsr = valor_dia * semanas;
+        const desc_total = desc_dias + desc_dsr;
+
+        let ferias_direito = 30;
+        let ferias_perdidas = 0;
+        if (faltas_ano <= 5) { ferias_direito = 30; ferias_perdidas = 0; }
+        else if (faltas_ano <= 14) { ferias_direito = 24; ferias_perdidas = 6; }
+        else if (faltas_ano <= 23) { ferias_direito = 18; ferias_perdidas = 12; }
+        else if (faltas_ano <= 32) { ferias_direito = 12; ferias_perdidas = 18; }
+        else { ferias_direito = 0; ferias_perdidas = 30; }
         
+        results['salario_dia'] = parseFloat(valor_dia.toFixed(2));
         results['desconto_dia'] = parseFloat(desc_dias.toFixed(2));
         results['desconto_dsr'] = parseFloat(desc_dsr.toFixed(2));
-        results['desconto_total'] = parseFloat((desc_dias + desc_dsr).toFixed(2));
+        results['desconto_total'] = parseFloat(desc_total.toFixed(2));
+        results['dias_ferias_direito'] = ferias_direito;
+        results['dias_ferias_perdidos'] = ferias_perdidas;
       }
 
       
@@ -7918,26 +7976,39 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         const pv = parseFloat(valInputs['valor_veiculo'] || 0);
         const ent = parseFloat(valInputs['entrada'] || 0);
         const gen = valInputs['genero'] || 'mulher';
+        const banco = valInputs['banco'] || 'bb';
         const n = parseFloat(valInputs['prazo'] || 48);
         const financed = Math.max(0, pv - ent);
-        const rateM = gen === 'mulher' ? 0.91 : 0.99;
+        
+        let rateM = 0.91;
+        if (banco === 'bb') {
+          rateM = gen === 'mulher' ? 0.85 : 0.93;
+        } else if (banco === 'caixa') {
+          rateM = gen === 'mulher' ? 0.89 : 0.97;
+        } else {
+          rateM = gen === 'mulher' ? 0.91 : 0.99;
+        }
+
         const i = rateM / 100;
         let pmt = 0;
-        if (i > 0) {
+        if (i > 0 && financed > 0) {
           pmt = financed * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
-        } else {
+        } else if (financed > 0 && n > 0) {
           pmt = financed / n;
         }
-        const rateMkt = 1.67 / 100;
+        
+        const rateMkt = 1.67 / 100; // ~18% a 22% a.a. do mercado
         let pmtMkt = 0;
-        if (rateMkt > 0) {
+        if (rateMkt > 0 && financed > 0) {
           pmtMkt = financed * (rateMkt * Math.pow(1 + rateMkt, n)) / (Math.pow(1 + rateMkt, n) - 1);
-        } else {
+        } else if (financed > 0 && n > 0) {
           pmtMkt = financed / n;
         }
+        
         const total = pmt * n;
         const totalMkt = pmtMkt * n;
         results['valor_parcela'] = parseFloat(pmt.toFixed(2));
+        results['parcela_mercado'] = parseFloat(pmtMkt.toFixed(2));
         results['total_pago'] = parseFloat((total + ent).toFixed(2));
         results['juros_totais'] = parseFloat(Math.max(0, total - financed).toFixed(2));
         results['economia_juros'] = parseFloat(Math.max(0, totalMkt - total).toFixed(2));

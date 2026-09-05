@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { Car, Coins, Info, Calendar } from 'lucide-react';
+﻿import React, { useState, useEffect } from 'react';
+import { Car, Coins, Info, Calendar, Sparkles, ShieldCheck } from 'lucide-react';
 
 interface CarFinanceCalcProps {
   onCalculate: (results: any) => void;
 }
 
 export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) => {
-  const [valorVeiculo, setValorVeiculo] = useState<number>(50000);
+  const [valorVeiculo, setValorVeiculo] = useState<number>(65000);
   const [entrada, setEntrada] = useState<number>(15000);
-  const [taxaMensal, setTaxaMensal] = useState<number>(1.8);
+  const [taxaMensal, setTaxaMensal] = useState<number>(1.79);
   const [parcelas, setParcelas] = useState<number>(48);
 
   // Math logic
   const financed = Math.max(0, valorVeiculo - entrada);
-  const i = taxaMensal / 100;
+  const i = (taxaMensal || 0) / 100;
   const n = parcelas || 1;
   
   let valorParcela = 0;
-  if (i > 0) {
+  if (i > 0 && financed > 0) {
     valorParcela = financed * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
-  } else {
+  } else if (financed > 0 && n > 0) {
     valorParcela = financed / n;
   }
   
   const totalPago = (valorParcela * n) + entrada;
   const jurosTotais = Math.max(0, (valorParcela * n) - financed);
+
+  // Estimativa de desconto ao amortizar a última parcela hoje (valor presente)
+  const valorPresenteUltimaParcela = valorParcela > 0 && i > 0 ? valorParcela / Math.pow(1 + i, n) : valorParcela;
+  const economiaAoAmortizarUltima = Math.max(0, valorParcela - valorPresenteUltimaParcela);
 
   // Generate basic amortization schedule
   const schedule = React.useMemo(() => {
@@ -58,20 +62,65 @@ export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) =
     });
   }, [valorVeiculo, entrada, taxaMensal, parcelas, valorParcela, totalPago, jurosTotais, onCalculate]);
 
-  const interestRatio = totalPago > 0 ? (jurosTotais / (totalPago - entrada)) * 100 : 0;
+  const interestRatio = totalPago > entrada ? (jurosTotais / (totalPago - entrada)) * 100 : 0;
+
+  const aplicarPreset = (veiculo: number, ent: number, meses: number, taxa: number) => {
+    setValorVeiculo(veiculo);
+    setEntrada(ent);
+    setParcelas(meses);
+    setTaxaMensal(taxa);
+  };
 
   return (
     <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 md:p-8 flex flex-col gap-6 animate-fadeIn">
       {/* Visual Header */}
-      <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
-        <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl border border-blue-100 shrink-0">
-          <Car className="w-5 h-5 animate-pulse" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl border border-blue-100 shrink-0">
+            <Car className="w-5 h-5 animate-pulse" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-sm font-bold text-slate-800 font-display">Simulador de Financiamento de Veículos e CDC 2026</h3>
+              <span className="hidden sm:inline-block px-2 py-0.5 text-[9px] font-extrabold bg-blue-100 text-blue-700 rounded-full">CDC Oficial</span>
+            </div>
+            <p className="text-[10px] text-slate-400 font-normal leading-tight mt-0.5">
+              Simule prestações fixas no Crédito Direto ao Consumidor (CDC), juros totais e o desconto de juros na amortização antecipada.
+            </p>
+          </div>
         </div>
-        <div>
-          <h3 className="text-sm font-bold text-slate-800 font-display">Simulador de Financiamento de Veículos</h3>
-          <p className="text-[10px] text-slate-400 font-normal leading-tight mt-0.5">
-            Calcule parcelas mensais, juros totais e confira a tabela de amortização CDC.
-          </p>
+      </div>
+
+      {/* Presets Rápidos */}
+      <div className="flex flex-col gap-2">
+        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide flex items-center gap-1">
+          <Sparkles className="w-3 h-3 text-amber-500" /> Presets Rápidos para Carros e Motos:
+        </span>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <button
+            type="button"
+            onClick={() => aplicarPreset(65000, 15000, 48, 1.79)}
+            className="p-2.5 rounded-xl border text-left transition hover:border-blue-300 hover:bg-blue-50/40 bg-slate-50 border-slate-200 text-slate-700 cursor-pointer"
+          >
+            <span className="block text-[11px] font-bold text-slate-800">🚗 Carro Popular Novo/Semi</span>
+            <span className="block text-[10px] text-slate-500">R$ 65k (Entrada 15k • 48x • 1,79% a.m.)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => aplicarPreset(18000, 4000, 36, 1.95)}
+            className="p-2.5 rounded-xl border text-left transition hover:border-blue-300 hover:bg-blue-50/40 bg-slate-50 border-slate-200 text-slate-700 cursor-pointer"
+          >
+            <span className="block text-[11px] font-bold text-slate-800">🏍️ Moto / Delivery 160cc</span>
+            <span className="block text-[10px] text-slate-500">R$ 18k (Entrada 4k • 36x • 1,95% a.m.)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => aplicarPreset(130000, 35000, 60, 1.65)}
+            className="p-2.5 rounded-xl border text-left transition hover:border-blue-300 hover:bg-blue-50/40 bg-slate-50 border-slate-200 text-slate-700 cursor-pointer"
+          >
+            <span className="block text-[11px] font-bold text-slate-800">🚙 SUV / Caminhonete</span>
+            <span className="block text-[10px] text-slate-500">R$ 130k (Entrada 35k • 60x • 1,65% a.m.)</span>
+          </button>
         </div>
       </div>
 
@@ -143,11 +192,11 @@ export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) =
         {/* Results Card */}
         <div className="bg-slate-50/50 border border-slate-200/60 rounded-2xl p-5 md:p-6 flex flex-col gap-5">
           <span className="text-[10px] font-extrabold text-slate-400 font-mono tracking-wider uppercase block">
-            Resultado da Simulação
+            Resultado da Simulação CDC
           </span>
 
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] font-bold text-slate-500 uppercase">Prestação Mensal (CDC)</span>
+            <span className="text-[10px] font-bold text-slate-500 uppercase">Prestação Mensal (CDC Tabela Price)</span>
             <span className="text-3xl font-extrabold font-mono text-slate-900 leading-none">
               R$ {valorParcela.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
@@ -166,7 +215,7 @@ export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) =
             </div>
             <div className="flex flex-col">
               <span className="text-[9px] font-bold text-slate-400 uppercase">Juros Totais Pagos</span>
-              <span className="text-sm font-bold font-mono text-slate-850 text-slate-800">
+              <span className="text-sm font-bold font-mono text-rose-600">
                 R$ {jurosTotais.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </span>
             </div>
@@ -180,7 +229,7 @@ export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) =
 
           {/* Visual comparison bar */}
           <div className="flex flex-col gap-1 border-t border-slate-200/60 pt-4">
-            <div className="flex justify-between text-[9px] font-bold text-slate-450 text-slate-400 uppercase">
+            <div className="flex justify-between text-[9px] font-bold text-slate-400 uppercase">
               <span>Distribuição do Custo</span>
               <span>Juros: {interestRatio.toFixed(1)}%</span>
             </div>
@@ -206,11 +255,28 @@ export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) =
             </div>
           </div>
 
+          {/* Box de Amortização Antecipada CDC */}
+          <div className="p-3.5 bg-emerald-50/70 border border-emerald-200 rounded-xl flex flex-col gap-1.5 text-xs text-emerald-900">
+            <div className="flex items-center gap-1.5 font-bold text-emerald-800">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Direito à Amortização Antecipada (Art. 52, § 2º CDC)</span>
+            </div>
+            <p className="text-[11px] text-emerald-700 leading-snug">
+              Ao quitar parcelas de <strong>trás para frente</strong>, o banco é obrigado por lei a abater 100% dos juros futuros daquela parcela.
+            </p>
+            {valorParcela > 0 && (
+              <div className="mt-1 pt-1.5 border-t border-emerald-200/70 flex justify-between items-center text-[10.5px]">
+                <span>Se quitar a última parcela (nº {parcelas}) hoje:</span>
+                <strong className="font-mono text-emerald-800 font-bold">Paga ~R$ {valorPresenteUltimaParcela.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (Economia: R$ {economiaAoAmortizarUltima.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })})</strong>
+              </div>
+            )}
+          </div>
+
           {/* Disclaimer warning */}
-          <div className="flex gap-2.5 bg-amber-50/50 border border-amber-100/50 rounded-xl p-3 mt-2 text-[10px] text-slate-650 leading-normal">
+          <div className="flex gap-2.5 bg-amber-50/50 border border-amber-100/50 rounded-xl p-3 mt-1 text-[10px] text-slate-650 leading-normal">
             <Info className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
             <p className="font-normal">
-              <strong>Aviso Trabalhista/Financeiro:</strong> Esta simulação considera regras padrões de juros compostos de tabela Price (CDC). Encargos de IOF, tarifas cadastrais de avaliação (TAC) ou seguros de proteção financeira não estão inclusos e podem elevar o CET (Custo Efetivo Total) real no banco.
+              <strong>Nota Técnica:</strong> Esta simulação adota a Tabela Price convencional do Crédito Direto ao Consumidor (CDC). Despesas com IOF, taxa de cadastro bancário (TAC) e seguro prestamista são adicionadas pelas instituições financeiras no Custo Efetivo Total (CET).
             </p>
           </div>
         </div>
