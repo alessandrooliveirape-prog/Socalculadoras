@@ -24,6 +24,58 @@ function ensureDir(dirPath: string) {
   }
 }
 
+const currentYear = new Date().getFullYear();
+
+const sharedFooterHtml = `
+  <footer style="background: #0f172a; color: #94a3b8; padding: 45px 20px 30px; font-family: sans-serif; margin-top: 60px; border-top: 1px solid #1e293b;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 35px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+          <img src="/logo.svg" alt="Brasil Calculadoras" style="height: 32px; width: 32px;" />
+          <strong style="color: #ffffff; font-size: 16px;">Brasil Calculadoras</strong>
+        </div>
+        <p style="font-size: 12.5px; line-height: 1.6; color: #94a3b8; margin: 0 0 15px;">
+          Central utilitária de simuladores de alta precisão para finanças, trabalho, saúde e dia a dia. Ferramentas gratuitas, sem cadastro e 100% transparentes.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color: #ffffff; font-size: 14px; font-weight: 700; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.5px;">Institucional & Legal</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 2;">
+          <li><a href="/politica-de-privacidade" style="color: #cbd5e1; text-decoration: none;">Política de Privacidade</a></li>
+          <li><a href="/termos-de-uso" style="color: #cbd5e1; text-decoration: none;">Termos de Uso</a></li>
+          <li><a href="/sobre" style="color: #cbd5e1; text-decoration: none;">Sobre Nós</a></li>
+          <li><a href="/contato" style="color: #cbd5e1; text-decoration: none;">Contato & Suporte</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color: #ffffff; font-size: 14px; font-weight: 700; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.5px;">Principais Categorias</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 2;">
+          <li><a href="/trabalhista-profissoes" style="color: #cbd5e1; text-decoration: none;">Cálculos Trabalhistas (CLT)</a></li>
+          <li><a href="/financas-negocios" style="color: #cbd5e1; text-decoration: none;">Investimentos & Finanças</a></li>
+          <li><a href="/saude-dietas" style="color: #cbd5e1; text-decoration: none;">Saúde & Metabolismo</a></li>
+          <li><a href="/matematica-escola" style="color: #cbd5e1; text-decoration: none;">Matemática & Proporções</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color: #ffffff; font-size: 14px; font-weight: 700; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.5px;">Compromisso</h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #94a3b8; margin: 0 0 10px;">
+          Nossas ferramentas operam com fórmulas abertas e parâmetros atualizados. Os resultados têm caráter meramente educativo e orientativo.
+        </p>
+        <span style="display: inline-block; font-size: 11px; background: #1e293b; color: #38bdf8; padding: 4px 8px; border-radius: 6px; font-weight: 600;">
+          🔒 Processamento 100% Local
+        </span>
+      </div>
+    </div>
+
+    <div style="max-width: 1200px; margin: 0 auto; border-top: 1px solid #1e293b; padding-top: 20px; text-align: center; font-size: 12px; color: #64748b;">
+      <p style="margin: 0;">© ${currentYear} Brasil Calculadoras. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+`;
+
 // 1. Pre-render Homepage
 const homeTitle = 'Brasil Calculadoras | Calculadoras Online Gratuitas Finanças, Trabalho e Saúde';
 const homeDesc = 'Calculadoras online gratuitas para finanças, trabalho, saúde, estudos, veículos e muito mais. Simulações rápidas, sem cadastro e 100% gratuitas.';
@@ -100,6 +152,7 @@ const homeHtml = `
       </div>
     </section>
   </main>
+  ${sharedFooterHtml}
 `;
 
 function injectMetadata(htmlTemplate: string, title: string, description: string, url: string, schema: any, bodyContent: string) {
@@ -244,6 +297,7 @@ Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([catKey, slug]) => {
         </section>
       ` : ''}
     </main>
+    ${sharedFooterHtml}
   `;
 
   const rendered = injectMetadata(template, hubData.title, hubData.description, canonicalUrl, [collectionSchema, breadcrumbSchema], hubHtml);
@@ -374,6 +428,7 @@ CALCULATORS_CATALOG.forEach(calc => {
         </section>
       ` : ''}
     </main>
+    ${sharedFooterHtml}
   `;
 
   const rendered = injectMetadata(template, seoData.title, seoData.description, canonicalUrl, [softwareSchema, breadcrumbSchema], calcHtml);
@@ -461,6 +516,7 @@ legalPagesConfig.forEach(page => {
         ${page.content}
       </article>
     </main>
+    ${sharedFooterHtml}
   `;
   const pageSchema = {
     "@context": "https://schema.org",

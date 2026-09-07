@@ -73,7 +73,7 @@ export const GenericDynamicCalc: React.FC<GenericDynamicCalcProps> = ({ calculat
         <div className="flex items-center justify-between border-b border-gray-100 pb-3">
           <div className="flex items-center gap-1.5">
             <h3 className="text-sm font-bold text-slate-800">Parâmetros de Ajuste</h3>
-            <span className="text-[10px] bg-blue-105 bg-blue-100 text-blue-700 font-bold px-1.5 py-0.5 rounded uppercase font-mono tracking-wide">Dinamizado</span>
+            <span className="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded uppercase font-mono tracking-wide">Calculadora Interativa</span>
           </div>
           <button 
             onClick={handleReset}
@@ -215,7 +215,7 @@ export const GenericDynamicCalc: React.FC<GenericDynamicCalcProps> = ({ calculat
           <div className="bg-blue-50/20 border border-blue-100/50 rounded-2xl p-6 flex flex-col gap-4 select-none font-sans">
             <div className="flex items-center gap-2 border-b border-blue-50 pb-2">
               <HelpCircle className="w-4.5 h-4.5 text-blue-600" />
-              <h4 className="text-xs font-bold text-slate-800">Guia de Uso & Informações Ad AdSense</h4>
+              <h4 className="text-xs font-bold text-slate-800">Guia Prático & Perguntas Frequentes</h4>
             </div>
 
             <div className="flex flex-col gap-2.5">

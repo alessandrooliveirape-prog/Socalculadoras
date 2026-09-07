@@ -21,7 +21,7 @@ interface TimeSheetHoursCalcProps {
 
 const DEFAULT_RECORDS: HoursRecord[] = [
   { id: '1', date: '2026-06-01', start: '09:00', end: '18:00', pause: 60, description: 'Desenvolvimento Frontend das calculadoras' },
-  { id: '2', date: '2026-06-02', start: '09:05', end: '17:45', pause: 45, description: 'Ajustes de AdSense e design responsivo' },
+  { id: '2', date: '2026-06-02', start: '09:05', end: '17:45', pause: 45, description: 'Otimização de performance e design responsivo' },
   { id: '3', date: '2026-06-03', start: '08:30', end: '18:30', pause: 60, description: 'Implementação de exportação PDF/Excel' }
 ];
 

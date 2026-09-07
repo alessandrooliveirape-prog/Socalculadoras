@@ -708,7 +708,7 @@ export const handleExportPDF = (payload: CalcStatePayload) => {
     doc.setFontSize(7.5);
     doc.setTextColor(148, 163, 184);
     doc.text('Emitido gratuitamente através da plataforma Brasil Calculadoras.', 15, 280);
-    doc.text('Site monetizado com Google AdSense para gratuidade eterna do usuário final.', 15, 284);
+    doc.text('Acesse https://www.brasilcalculadoras.com.br para mais simulações e ferramentas gratuitas.', 15, 284);
     doc.text('Página 1 de 1', 180, 280);
 
     doc.save(`relatorio-${activeCalculator}.pdf`);

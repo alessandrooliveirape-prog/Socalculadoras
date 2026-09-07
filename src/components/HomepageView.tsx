@@ -110,7 +110,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
   const homepageFaqs = [
     {
       q: 'O Brasil Calculadoras é 100% gratuito?',
-      a: 'Sim, absolutamente gratuito. Nosso propósito é democratizar o acesso a ferramentas matemáticas, financeiras e trabalhistas sem cobrar assinaturas, taxas ou exigir cadastros. O site é mantido através de anúncios patrocinados da rede Google AdSense.'
+      a: 'Sim, absolutamente gratuito. Nosso propósito é democratizar o acesso a ferramentas matemáticas, financeiras e trabalhistas sem cobrar assinaturas, taxas ou exigir cadastros. A plataforma é mantida de forma sustentável através de parcerias e patrocínios digitais transparentes.'
     },
     {
       q: 'Como são atualizadas as fórmulas trabalhistas e fiscais?',

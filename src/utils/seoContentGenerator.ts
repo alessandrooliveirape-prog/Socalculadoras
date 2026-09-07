@@ -537,6 +537,241 @@ const generateCategorySeoText = (calc: CalculatorDef): Partial<CalculatorSeoCont
   let faq: { q: string; a: string }[] = [];
 
   switch (category) {
+    case 'financas':
+      whatIs = `A gestão estratégica de capital e o entendimento de fluxos de rendimento são pilares para a saúde financeira de indivíduos e empresas. A ferramenta **${name}** foi concebida para transformar fórmulas financeiras complexas em diagnósticos imediatos e transparentes. Seja para calcular o poder dos juros compostos com aportes mensais periódicos, projetar o Custo Efetivo Total (CET) de uma operação de crédito ou avaliar o Retorno sobre Investimento (ROI), este simulador elimina cálculos manuais propensos a erros e oferece uma visão analítica exata da evolução do patrimônio.`;
+      howItWorks = `O cálculo correlaciona as grandezas inseridas em *${inputLabels}*, aplicando equações consagradas da matemática financeira — como juros exponenciais $M = C \\times (1 + i)^t$, desconto de fluxos futuros e amortização de capital. O sistema processa os indexadores e taxas de retorno aplicáveis, retornando indicadores detalhados em *${outputLabels}*.`;
+      practicalExample = `Ao simular, por exemplo, um investimento inicial de R$ 5.000,00 com aportes recorrentes de R$ 500,00 a uma taxa de juros real de 0,8% ao mês durante 5 anos, o algoritmo calcula separadamente o total desembolsado do seu bolso e os juros acumulados, demonstrando com exatidão o efeito multiplicador dos juros compostos sobre o saldo final.`;
+      whenToUse = `Utilize a ${name} ao planejar metas de aposentadoria e independência financeira, comparar opções de investimentos de renda fixa e fundos imobiliários, calcular a margem de lucro de produtos para comércio ou renegociar dívidas bancárias.`;
+      importantTips = `Lembre-se de descontar a inflação oficial (IPCA) do período para identificar o ganho real do investimento e atente-se à tabela regressiva do Imposto de Renda (de 22,5% a 15%) incidente sobre rendimentos financeiros.`;
+      sources = [
+        { name: 'Banco Central do Brasil - BACEN', url: 'https://www.bcb.gov.br/' },
+        { name: 'Comissão de Valores Mobiliários - CVM', url: 'https://www.gov.br/cvm/pt-br' },
+        { name: 'Tesouro Direto Oficial', url: 'https://www.tesourodireto.com.br/' }
+      ];
+      faq = [
+        { q: 'Qual a diferença entre juros simples e juros compostos?', a: 'Nos juros simples, a taxa incide apenas sobre o capital inicial. Nos juros compostos ("juros sobre juros"), a taxa incide a cada ciclo sobre o montante acumulado anterior, gerando crescimento exponencial do patrimônio ao longo do tempo.' },
+        { q: 'O que é rendimento real em investimentos?', a: 'Rendimento real é o lucro obtido após subtrair a inflação (IPCA) do rendimento nominal. Se um investimento rende 10% no ano e a inflação foi de 4%, o rendimento real é de aproximadamente 5,77% pela fórmula de Fisher.' }
+      ];
+      break;
+
+    case 'profissoes':
+      whatIs = `A legislação trabalhista brasileira (Consolidação das Leis do Trabalho - CLT) estabelece normas rigorosas para a apuração de salários, adicionais, reflexos e verbas rescisórias. A calculadora **${name}** serve como um recurso indispensável tanto para trabalhadores que desejam conferir a exatidão de seus holerites quanto para contadores, profissionais de Recursos Humanos e empregadores que necessitam simular custos de contratação e rescisão. O simulador simplifica regras burocráticas complexas, garantindo total transparência e segurança nas relações de trabalho.`;
+      howItWorks = `A ferramenta aplica a legislação vigente aos dados inseridos em *${inputLabels}*. Ela calcula o salário-base proporcional, integra adicionais legais (como horas extras a 50% ou 100%, adicional noturno de 20% e adicional de insalubridade/periculosidade) e processa os descontos obrigatórios de INSS (alíquotas progressivas de 7,5% a 14%) e IRPF (tabela progressiva mensal), gerando os valores líquidos consolidados em *${outputLabels}*.`;
+      practicalExample = `Em uma remuneração contratual de R$ 3.500,00 com realização de 20 horas extras a 50%, a ferramenta calcula o valor da hora normal (R$ 15,91 para jornada de 220h), aplica o adicional de 50% (R$ 23,86/h), soma o reflexo obrigatório do DSR (Descanso Semanal Remunerado) e apura o desconto escalonado da Previdência Social, resultando no valor exato a ser creditado em conta bancária.`;
+      whenToUse = `Utilize esta ferramenta no fechamento da folha de pagamento mensal, antes de assinar acordos de rescisão de contrato de trabalho (demissão com ou sem justa causa, pedido de demissão ou acordo mútuo do Art. 484-A da CLT) e no planejamento das parcelas do 13º salário e férias remuneradas.`;
+      importantTips = `O DSR incide obrigatoriamente sobre as horas extras realizadas no mês. Além disso, as alíquotas do INSS desde 2020 são aplicadas de forma progressiva por faixas salariais, e não mais sobre o valor total.`;
+      sources = [
+        { name: 'Ministério do Trabalho e Emprego - MTE', url: 'https://www.gov.br/trabalho-e-emprego/pt-br' },
+        { name: 'Tribunal Superior do Trabalho - TST', url: 'https://www.tst.jus.br/' },
+        { name: 'Planalto - Consolidação das Leis do Trabalho (CLT)', url: 'https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm' }
+      ];
+      faq = [
+        { q: 'Como funciona o cálculo progressivo do INSS?', a: 'O salário bruto é fatiado de acordo com as faixas oficiais da Previdência Social (7,5%, 9%, 12% e 14%). Cada faixa sofre a incidência da sua respectiva alíquota até o teto máximo, somando-se as frações para compor o desconto total.' },
+        { q: 'Quais verbas tenho direito na demissão sem justa causa?', a: 'O trabalhador tem direito ao saldo de salário dos dias trabalhados, aviso prévio (indenizado ou trabalhado), 13º salário proporcional, férias vencidas e proporcionais com o terço constitucional (+1/3), saque integral do FGTS com a multa rescisória de 40% paga pelo empregador e guias do seguro-desemprego.' }
+      ];
+      break;
+
+    case 'saude':
+      whatIs = `O controle e monitoramento de métricas antropométricas e metabólicas são etapas fundamentais para quem busca qualidade de vida, emagrecimento saudável ou ganho de massa muscular (hipertrofia). A ferramenta **${name}** automatiza equações científicas revisadas pela literatura médica internacional para fornecer diagnósticos precisos sobre a Taxa Metabólica Basal (TMB), Gasto Energético Total Diário (TDEE), Índice de Massa Corporal (IMC) e distribuição ideal de macronutrientes. Ela atua como um suporte educativo para orientar escolhas alimentares e rotinas de treino.`;
+      howItWorks = `O algoritmo processa variáveis biométricas inseridas em *${inputLabels}* (como peso corporal em kg, altura em cm, idade, sexo biológico e nível de atividade física semanal). Ele aplica fórmulas consagradas — como a Equação de Mifflin-St Jeor para taxa metabólica e a relação massa/altura ao quadrado — e entrega metas personalizadas e classificações de saúde estruturadas em *${outputLabels}*.`;
+      practicalExample = `Um indivíduo do sexo masculino, com 30 anos, 80 kg, 1,78 m e atividade física moderada (3 a 5 treinos por semana) tem sua taxa metabólica basal estimada em ~1.780 kcal. Ao multiplicar pelo fator de atividade de 1,55, a ferramenta aponta um gasto diário total de ~2.759 kcal. Para emagrecer de forma sustentável com déficit de 500 kcal, a meta diária calculada será de ~2.259 kcal.`;
+      whenToUse = `Utilize este simulador ao iniciar um novo plano alimentar, ajustar calorias e macros de treino, acompanhar a evolução do peso na balança ou verificar a adequação do peso corporal em relação às tabelas da Organização Mundial da Saúde.`;
+      importantTips = `O IMC é um indicador populacional e não diferencia massa muscular de gordura. Praticantes assíduos de musculação podem apresentar IMC na faixa de "sobrepeso" com baixo percentual de gordura corporal. Combine sempre com a medição de circunferências ou bioimpedância.`;
+      sources = [
+        { name: 'Organização Mundial da Saúde - OMS', url: 'https://www.who.int/' },
+        { name: 'Ministério da Saúde - Guia Alimentar para a População Brasileira', url: 'https://www.gov.br/saude/pt-br' },
+        { name: 'Conselho Federal de Nutricionistas - CFN', url: 'https://www.cfn.org.br/' }
+      ];
+      faq = [
+        { q: 'O que é Taxa Metabólica Basal (TMB)?', a: 'A TMB representa a quantidade mínima de calorias que o corpo humano gasta em repouso absoluto durante 24 horas apenas para manter funções vitais, como batimentos cardíacos, respiração e atividade cerebral.' },
+        { q: 'Qual a diferença entre déficit calórico e superávit calórico?', a: 'Déficit calórico é consumir menos calorias do que o corpo gasta ao longo do dia, condição obrigatória para a perda de gordura. Superávit calórico é consumir mais calorias do que o gasto diário, indicado para ganho de peso e hipertrofia muscular.' }
+      ];
+      break;
+
+    case 'matematica':
+      whatIs = `A resolução ágil de cálculos algébricos, relações trigonométricas, equações de múltiplos graus e proporções geométricas é essencial para estudantes de todos os níveis de ensino, vestibulandos, professores e profissionais de engenharia e tecnologia. A ferramenta **${name}** foi desenvolvida para decompor operações numéricas complexas em etapas claras e respostas instantâneas, tornando o aprendizado da matemática mais intuitivo e livre de erros manuais de arredondamento.`;
+      howItWorks = `O motor de cálculo analisa as grandezas fornecidas em *${inputLabels}*, valida a consistência algébrica dos termos e executa algoritmos numéricos de alta precisão (como o Teorema de Pitágoras, a Fórmula de Bhaskara para raízes reais e complexas, proporções diretas/inversas da regra de três e cálculos de porcentagem). O resultado final e as etapas analíticas são exibidos em *${outputLabels}*.`;
+      practicalExample = `Ao calcular a proporcionalidade de grandezas em uma regra de três simples inversa — por exemplo, 4 máquinas realizam um serviço em 12 horas, quanto tempo 6 máquinas levariam para fazer o mesmo trabalho —, o sistema multiplica diretamente as grandezas lineares (4 × 12 = 48) e divide pelo novo número de máquinas (48 / 6 = 8 horas), entregando a resposta correta em frações de segundo.`;
+      whenToUse = `Utilize este utilitário matemático para conferir exercícios escolares e listas acadêmicas, resolver questões de provas do ENEM e vestibulares, efetuar dimensionamentos técnicos de medidas em obras e projetos ou calcular porcentagens e frações do cotidiano.`;
+      importantTips = `Antes de aplicar qualquer fórmula de proporção ou geometria, certifique-se de que todas as medidas estão na mesma unidade (por exemplo, metros com metros ou minutos com minutos), pois a divergência de unidades distorce o resultado.`;
+      sources = [
+        { name: 'Sociedade Brasileira de Matemática - SBM', url: 'https://www.sbm.org.br/' },
+        { name: 'Instituto de Matemática Pura e Aplicada - IMPA', url: 'https://impa.br/' },
+        { name: 'Portal da Matemática OBMEP', url: 'https://portaldamatematica.obmep.org.br/' }
+      ];
+      faq = [
+        { q: 'Como diferenciar grandezas diretamente de inversamente proporcionais?', a: 'Em grandezas diretamente proporcionais, quando uma aumenta, a outra também aumenta na mesma razão (ex: tempo de trabalho e quantidade produzida). Em grandezas inversamente proporcionais, quando uma aumenta, a outra diminui proporcionalmente (ex: velocidade e tempo de viagem).' },
+        { q: 'Como converter porcentagem em número decimal para cálculos?', a: 'Basta dividir a porcentagem por 100. Exemplo: 15% equivale a 15 / 100 = 0,15. Para calcular 15% de R$ 200, multiplica-se 200 por 0,15, resultando em R$ 30.' }
+      ];
+      break;
+
+    case 'imobiliario':
+      whatIs = `A compra, venda, locação e investimento em imóveis envolvem valores expressivos e compromissos financeiros de longo prazo que podem se estender por até 30 ou 35 anos. A calculadora **${name}** fornece transparência matemática total para quem deseja comparar sistemas de amortização de financiamentos habitacionais (como SAC versus Tabela Price), calcular o rendimento de aluguéis (Cap Rate), simular custos de impostos de transmissão (ITBI) e cartório ou reajustar valores de locação por índices oficiais como IPCA e IGP-M.`;
+      howItWorks = `A lógica interna processa os dados contratuais informados em *${inputLabels}* (valor do imóvel, entrada inicial, taxa de juros nominal/efetiva e prazo em meses). O algoritmo projeta a evolução do saldo devedor mês a mês, calcula o valor de cada parcela com a amortização e os juros correspondentes e exibe os totais consolidados em *${outputLabels}*.`;
+      practicalExample = `Em um financiamento imobiliário de R$ 300.000,00 em 360 meses a uma taxa de juros de 9,5% ao ano, o simulador compara a evolução das prestações: no sistema SAC, a primeira prestação começa mais alta (~R$ 3.208,00) e decresce mensalmente até R$ 839,00 na última parcela. Na Tabela Price, as parcelas são fixas em ~R$ 2.522,00, mas o montante total de juros pago ao fim dos 30 anos no SAC costuma ser cerca de R$ 80.000,00 menor.`;
+      whenToUse = `Utilize esta ferramenta ao negociar a compra da casa própria junto a bancos (Caixa, BB, Itaú, Bradesco, Santander), avaliar a rentabilidade de um imóvel para locação comercial ou residencial, calcular despesas de escritura e registro ou atualizar contratos de aluguel no aniversário do contrato.`;
+      importantTips = `O Custo Efetivo Total (CET) inclui seguros obrigatórios (MIP e DFI) e taxas de administração bancária. Sempre solicite e compare o CET entre instituições bancárias, e não apenas a taxa de juros nominal informada na propaganda.`;
+      sources = [
+        { name: 'Caixa Econômica Federal - Habitação', url: 'https://www.caixa.gov.br/' },
+        { name: 'Banco Central do Brasil - Financiamento Imobiliário', url: 'https://www.bcb.gov.br/' },
+        { name: 'ABECIP - Associação Brasileira das Entidades de Crédito Imobiliário', url: 'https://www.abecip.org.br/' }
+      ];
+      faq = [
+        { q: 'Qual a diferença básica entre os sistemas SAC e Tabela Price?', a: 'No SAC (Sistema de Amortização Constante), o valor da amortização é idêntico em todas as parcelas, fazendo com que as prestações diminuam a cada mês à medida que o saldo devedor cai. Na Tabela Price, as prestações têm valor fixo, mas amortizam muito pouco o saldo devedor no início do financiamento.' },
+        { q: 'O que é Cap Rate e como avaliar no setor imobiliário?', a: 'O Cap Rate (Capitalization Rate) é a taxa de retorno anual de um imóvel alugado. Calcula-se dividindo a receita líquida anual de aluguel pelo valor total de mercado do imóvel. No Brasil, um Cap Rate anual entre 5% e 8% líquido é historicamente considerado atrativo para imóveis residenciais.' }
+      ];
+      break;
+
+    case 'veiculos':
+      whatIs = `Calcular com precisão os custos de posse, combustível, manutenção e tributos veiculares é indispensável para motoristas particulares, condutores de aplicativo e gestores de frotas logísticas. A calculadora **${name}** foi estruturada para resolver dúvidas imediatas do dia a dia automotivo, como a melhor escolha entre etanol e gasolina nos postos de combustível, a projeção de gastos totais de viagens rodoviárias, a simulação de parcelas de financiamento CDC e a estimativa de IPVA baseada nas alíquotas estaduais e na Tabela FIPE.`;
+      howItWorks = `O sistema recebe os parâmetros técnicos de entrada em *${inputLabels}* (preços dos combustíveis por litro, consumo médio do carro em km/l, distância percorrida ou valor venal do veículo). A ferramenta aplica equações de rendimento energético e tarifas proporcionais, apresentando os resultados analíticos em *${outputLabels}*.`;
+      practicalExample = `Ao chegar ao posto com a gasolina a R$ 5,79 e o etanol a R$ 3,69, a ferramenta divide 3,69 por 5,79, obtendo a razão de 0,637 (63,7%). Como o valor é inferior à referência de paridade padrão de 70%, a calculadora indica imediatamente que abastecer com etanol trará uma economia financeira real de cerca de 9% por quilômetro rodado.`;
+      whenToUse = `Use este utilitário no posto de gasolina antes de abastecer, ao planejar orçamentos de viagens de férias ou trabalho (somando combustível e pedágios), ao negociar a compra de um carro novo ou usado ou ao calcular a provisão anual do imposto de IPVA e taxa de licenciamento.`;
+      importantTips = `Veículos flex modernos podem ter rendimento do etanol entre 68% e 75% da gasolina. Fazer a média real de consumo no hodômetro (km rodados divididos por litros abastecidos) fornece o ponto de equilíbrio exato do seu modelo específico.`;
+      sources = [
+        { name: 'Fundação Instituto de Pesquisas Econômicas - Tabela FIPE', url: 'https://veiculos.fipe.org.br/' },
+        { name: 'Secretaria Nacional de Trânsito - SENATRAN', url: 'https://www.gov.br/transportes/pt-br/assuntos/transito/senatran' },
+        { name: 'Agência Nacional do Petróleo - ANP (Levantamento de Preços)', url: 'https://www.gov.br/anp/pt-br' }
+      ];
+      faq = [
+        { q: 'Por que a regra dos 70% é usada entre álcool e gasolina?', a: 'O etanol possui menor poder calorífico que a gasolina, gerando em média 70% da energia pelo mesmo volume queimado. Portanto, o etanol só é mais econômico se o seu preço na bomba for menor que 70% do preço da gasolina.' },
+        { q: 'Como calcular o custo real por quilômetro rodado?', a: 'Divida o preço do litro do combustível pelo consumo médio do carro (km/l). Se a gasolina custa R$ 5,80 e o carro faz 10 km/l, o custo em combustível é de R$ 0,58 por quilômetro rodado.' }
+      ];
+      break;
+
+    case 'estatistica':
+      whatIs = `A estatística inferencial e descritiva fornece os alicerces quantitativos para a tomada de decisões corporativas, pesquisas científicas, marketing orientado a dados e validação de hipóteses analíticas. A **${name}** atua como um assistente de computação probabilística, permitindo calcular rapidamente medidas de posição (média, mediana, moda), indicadores de variabilidade e dispersão (variância, desvio padrão, coeficiente de variação) e dimensionamento amostral com intervalos de confiança e margens de erro aceitáveis.`;
+      howItWorks = `O algoritmo processa a sequência ou os parâmetros inseridos em *${inputLabels}*. Ele computa as fórmulas matemáticas estatísticas padronizadas (como $\\sigma = \\sqrt{\\frac{\\sum(x_i - \\mu)^2}{N}}$ para desvio padrão ou a fórmula de Cochran para tamanho de amostra), devolvendo os resultados estruturados em *${outputLabels}*.`;
+      practicalExample = `Ao dimensionar uma pesquisa de mercado para uma população de 50.000 clientes com nível de confiança de 95% e margem de erro máxima de 5%, o sistema processa a distribuição normal padrão ($Z = 1,96$) e aponta a necessidade de coletar exatamente 381 questionários válidos para que o resultado tenha rigor estatístico.`;
+      whenToUse = `Utilize esta ferramenta em projetos de pesquisa acadêmica, dissertações e TCCs, ao avaliar resultados de testes A/B em plataformas digitais, ao analisar o controle estatístico de processos fabris ou ao estruturar pesquisas de satisfação (NPS).`;
+      importantTips = `Em amostras com menos de 30 elementos ou populações heterogêneas com muitos outliers (valores extremos), a mediana costuma ser uma medida de tendência central muito mais representativa que a média aritmética simples.`;
+      sources = [
+        { name: 'Instituto Brasileiro de Geografia e Estatística - IBGE', url: 'https://www.ibge.gov.br/' },
+        { name: 'Associação Brasileira de Estatística - ABE', url: 'https://redeabe.org.br/' },
+        { name: 'Conselho Federal de Estatística - CONFE', url: 'https://confe.org.br/' }
+      ];
+      faq = [
+        { q: 'Qual a diferença entre desvio padrão e variância?', a: 'A variância mede a dispersão dos dados em relação à média, mas sua unidade é o quadrado da unidade original. O desvio padrão é a raiz quadrada da variância, trazendo a medida de dispersão de volta para a mesma unidade dos dados analisados.' },
+        { q: 'O que significa um nível de confiança de 95% em uma pesquisa?', a: 'Significa que se a mesma pesquisa fosse repetida 100 vezes nas mesmas condições, em 95 dessas repetições o resultado real da população estaria dentro da margem de erro estimada.' }
+      ];
+      break;
+
+    case 'juridico':
+      whatIs = `A contagem de prazos processuais e a atualização monetária de valores em litígio exigem rigor absoluto para evitar a preclusão ou perdas patrimoniais decorrentes da mora. A ferramenta **${name}** foi programada em estrita observância às disposições do Código de Processo Civil (CPC/2015) e da legislação trabalhista e civil brasileira, proporcionando a advogados, servidores, peritos e cidadãos uma ferramenta confiável para apurar prazos em dias úteis, honorários sucumbenciais e atualização de créditos com juros e correção monetária.`;
+      howItWorks = `O sistema cruza as datas e valores informados em *${inputLabels}* com as regras legais vigentes. Ele exclui sábados, domingos e feriados judiciais na contagem de prazos processuais, aplica a correção monetária por indexadores oficiais (IPCA-E, INPC ou SELIC) e calcula os juros de mora legais, apresentando os dados consolidados em *${outputLabels}*.`;
+      practicalExample = `Ao ser intimado de uma decisão judicial na sexta-feira com prazo de 15 dias úteis, o sistema considera a publicação efetiva na segunda-feira subsequente (primeiro dia útil seguinte à disponibilização) e inicia a contagem no dia útil posterior (terça-feira), mapeando com exatidão a data fatal sem risco de preclusão temporal.`;
+      whenToUse = `Utilize esta ferramenta no cumprimento de prazos judiciais e administrativos, na elaboração de memórias de cálculo para execuções de títulos judiciais e extrajudiciais, na apuração de honorários advocatícios e na atualização de débitos contratuais em cobrança.`;
+      importantTips = `Verifique se no seu tribunal regional ou comarca existem portarias específicas de suspensão de prazos (como feriados locais, emendas de feriados ou indisponibilidade do sistema eletrônico PJe), que devem ser somadas à contagem padrão.`;
+      sources = [
+        { name: 'Conselho Nacional de Justiça - CNJ', url: 'https://www.cnj.jus.br/' },
+        { name: 'Ordem dos Advogados do Brasil - OAB Nacional', url: 'https://www.oab.org.br/' },
+        { name: 'Portal da Legislação - Planalto (Código de Processo Civil)', url: 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm' }
+      ];
+      faq = [
+        { q: 'Como funciona a contagem de prazos em dias úteis no CPC/2015?', a: 'Nos termos do Art. 219 do CPC/2015, contam-se somente os dias úteis na apuração de prazos processuais civis. Exclui-se o dia do começo e inclui-se o dia do vencimento conforme o Art. 224.' },
+        { q: 'Qual índice é utilizado para atualizar débitos cíveis?', a: 'Tradicionalmente utilizam-se o IPCA-E ou INPC com juros de mora de 1% ao mês. Atualmente, a jurisprudência consolidada do Superior Tribunal de Justiça (STJ) e a Lei nº 14.905/2024 definem a taxa SELIC como padrão geral, deduzindo-se o IPCA na apuração de juros reais.' }
+      ];
+      break;
+
+    case 'utilitarios':
+      whatIs = `Ferramentas utilitárias que resolvem conversões de medidas, cálculos de proporção cotidiana, manipulação de texto e cronometragem rápida poupam horas de esforço manual. A calculadora **${name}** consolida padrões internacionais de unidades de medida (SI) e normas do INMETRO para executar conversões exatas e cálculos de rotina doméstica ou técnica em uma interface limpa, veloz e acessível de qualquer dispositivo.`;
+      howItWorks = `O sistema aplica fatores de conversão universais aos valores inseridos em *${inputLabels}* (como conversões entre polegadas, centímetros, pés e metros, ou contagem algorítmica de palavras e caracteres). Ele calcula as proporções exatas e exibe as grandezas equivalentes em *${outputLabels}*.`;
+      practicalExample = `Ao converter uma receita ou especificação técnica de equipamentos dos Estados Unidos que utiliza 14 polegadas de largura, o sistema multiplica pelo fator exato de 2,54 cm/pol, devolvendo 35,56 cm imediatamente, sem necessidade de consultas a tabelas impressas.`;
+      whenToUse = `Utilize este utilitário ao comprar produtos importados com especificações em medidas anglo-saxãs, conferir limites de caracteres de redações acadêmicas e posts em mídias sociais, converter unidades de cozinha ou calcular cronometragens de rotinas diárias.`;
+      importantTips = `Preste atenção à diferença entre unidades que possuem nomes parecidos mas valores distintos, como onças líquidas (fluid ounces - volume) e onças comuns (ounces - massa/peso).`;
+      sources = [
+        { name: 'Instituto Nacional de Metrologia, Qualidade e Tecnologia - INMETRO', url: 'https://www.gov.br/inmetro/pt-br' },
+        { name: 'BIPM - Bureau International des Poids et Mesures', url: 'https://www.bipm.org/' }
+      ];
+      faq = [
+        { q: 'Quantos centímetros tem uma polegada?', a: 'Uma polegada (inch) tem exatamente 2,54 centímetros conforme convenção internacional do sistema métrico.' },
+        { q: 'Quantas gramas tem uma libra (lb)?', a: 'Uma libra internacional padrão (pound avoirdupois) equivale a exatamente 453,59237 gramas (aproximadamente 454 gramas).' }
+      ];
+      break;
+
+    case 'aposentadoria':
+      whatIs = `A Reforma da Previdência Social (Emenda Constitucional nº 103/2019) alterou profundamente os critérios para a concessão de benefícios no Brasil, instituindo idades mínimas progressivas e múltiplas regras de transição. A calculadora **${name}** foi desenhada para esclarecer as regras previdenciárias e financeiras, permitindo simular o tempo de contribuição restante, a melhor regra de transição do INSS (pedágio de 50%, pedágio de 100%, pontos ou idade mínima) e o montante financeiro necessário em carteiras de investimentos para conquistar a independência financeira de viver de renda passiva.`;
+      howItWorks = `A ferramenta analisa os dados pessoais e contributivos informados em *${inputLabels}* (data de nascimento, sexo biológico, tempo de contribuição acumulado até novembro de 2019 e tempo posterior). Ela projeta o cumprimento dos requisitos em cada regra de transição do INSS ou calcula a retirada segura baseada na Regra dos 4% (Trinity Study) para renda passiva, entregando as previsões em *${outputLabels}*.`;
+      practicalExample = `Um trabalhador do sexo masculino com 33 anos de contribuição em novembro de 2019 que precisava de mais 2 anos para se aposentar pela regra antiga pode simular a regra do pedágio de 50%: ele deverá cumprir os 2 anos faltantes mais 50% de pedágio (1 ano adicional), totalizando 3 anos a partir da promulgação da reforma.`;
+      whenToUse = `Utilize esta ferramenta ao planejar sua aposentadoria junto ao INSS antes de fazer o pedido no portal Meu INSS, ao comparar os planos de previdência complementar PGBL versus VGBL e ao calcular aportes mensais para acumular patrimônio gerador de dividendos e renda passiva.`;
+      importantTips = `Pedir a aposentadoria sem simular previamente todas as regras de transição pode resultar em um benefício permanentemente menor devido à incidência do fator previdenciário na regra de pedágio de 50%. Sempre avalie se aguardar alguns meses na regra de 100% compensa o valor mensal final.`;
+      sources = [
+        { name: 'Instituto Nacional do Seguro Social - Meu INSS', url: 'https://meu.inss.gov.br/' },
+        { name: 'Ministério da Previdência Social', url: 'https://www.gov.br/previdencia/pt-br' },
+        { name: 'Planalto - Emenda Constitucional nº 103/2019', url: 'https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm' }
+      ];
+      faq = [
+        { q: 'O que é a regra dos pontos na aposentadoria do INSS?', a: 'A regra de transição por pontos soma a sua idade ao seu tempo total de contribuição. Essa pontuação exigida sobe um ponto a cada ano até atingir o limite de 100 pontos para mulheres e 105 pontos para homens.' },
+        { q: 'Como funciona a Regra dos 4% para viver de renda?', a: 'A Regra dos 4% sugere que você pode resgatar com segurança até 4% do total da sua carteira de investimentos no primeiro ano de aposentadoria (ajustando pela inflação nos anos seguintes) com altíssima probabilidade de que o patrimônio dure por mais de 30 anos.' }
+      ];
+      break;
+
+    case 'eventos':
+      whatIs = `O sucesso de confraternizações, casamentos, churrascos e festas de aniversário depende de um planejamento gastronômico exato. Comprar a menos deixa os convidados insatisfeitos; comprar a mais gera desperdício financeiro e de alimentos. A calculadora **${name}** foi calibrada com métricas profissionais de buffet e eventos para calcular as quantidades ideais de carnes, acompanhamentos, cervejas, bebidas não alcoólicas e descartáveis conforme o perfil e duração da sua celebração.`;
+      howItWorks = `O algoritmo analisa os parâmetros informados em *${inputLabels}* (número de homens, mulheres e crianças, duração em horas e preferências de cardápio). Ele multiplica cada perfil pelas médias gastronômicas consolidadas (ex: 400g a 500g de carne por adulto em churrascos de 4 horas; 1 litro de refrigerante/água por pessoa), retornando a lista de compras completa em *${outputLabels}*.`;
+      practicalExample = `Para um churrasco de 20 adultos (12 homens e 8 mulheres) com 5 horas de duração, o sistema calcula ~9,6 kg de carnes (divididos entre picanha, fraldinha, linguiça e frango), 4 caixas de cerveja em lata e 12 litros de refrigerante e água mineral, garantindo fartura com economia.`;
+      whenToUse = `Utilize esta ferramenta ao organizar festas de família, churrascos com amigos, recepções de casamento, formaturas ou confraternizações corporativas de final de ano.`;
+      importantTips = `Em dias com temperaturas superiores a 30ºC, aumente a provisão de água mineral e gelo em pelo menos 30%, pois o consumo de líquidos não alcoólicos se eleva expressivamente.`;
+      sources = [
+        { name: 'Abrasel - Associação Brasileira de Bares e Restaurantes', url: 'https://abrasel.com.br/' },
+        { name: 'SENAC - Cursos de Gastronomia e Eventos', url: 'https://www.senac.br/' }
+      ];
+      faq = [
+        { q: 'Quanta carne calcular por pessoa em um churrasco?', a: 'Calcula-se em média 400g de carne para mulheres e 500g para homens em eventos com duração de 4 a 5 horas. Se houver muitos acompanhamentos (arroz, maionese, pão de alho), esse valor pode ser reduzido para 350g por adulto.' },
+        { q: 'Quantos litros de cerveja estimar por convidado?', a: 'Para convidados que bebem cerveja, a média recomendada é de 1,5 a 2 litros por pessoa (cerca de 4 a 6 latas de 350ml) para um evento de 4 a 6 horas.' }
+      ];
+      break;
+
+
+    case 'educacao':
+      whatIs = `Acompanhar o rendimento acadêmico semestral e calcular a nota ponderada do ENEM com os pesos do SISU são passos decisivos para a conquista de vagas nas universidades federais e estaduais do país. A calculadora **${name}** descomplica fórmulas de médias aritméticas, ponderadas e conceitos de aprovação escolar, oferecendo aos vestibulandos e universitários uma visão precisa das pontuações necessárias em cada matéria para atingir as notas de corte pretendidas.`;
+      howItWorks = `A ferramenta aplica a fórmula da média ponderada oficial às notas e pesos cadastrados em *${inputLabels}*: $\\text{Nota Final} = \\frac{\\sum (\\text{Nota}_i \\times \\text{Peso}_i)}{\\sum \\text{Peso}_i}$. O algoritmo computa os critérios de arredondamento e exibe o resultado consolidado e a situação acadêmica estimada em *${outputLabels}*.`;
+      practicalExample = `Para um candidato concorrendo a Engenharia no SISU com pesos 4 para Matemática, 3 para Natureza, 2 para Redação, 1 para Linguagens e 1 para Humanas: ao inserir suas notas do exame, o sistema calcula a pontuação final ponderada de forma exata, permitindo comparar imediatamente com a nota de corte do ano anterior.`;
+      whenToUse = `Utilize esta ferramenta durante o período de inscrições do SISU, PROUNI e FIES para testar diferentes combinações de cursos e universidades, e ao longo do semestre letivo para monitorar as notas mínimas necessárias para aprovação sem prova final.`;
+      importantTips = `Cada universidade federal possui autonomia para definir seus próprios pesos por curso no SISU. Sempre consulte o Termo de Adesão da instituição no portal oficial do Ministério da Educação para inserir os pesos exatos do curso desejado.`;
+      sources = [
+        { name: 'INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira', url: 'https://www.gov.br/inep/pt-br' },
+        { name: 'Ministério da Educação - SISU', url: 'https://acessounico.mec.gov.br/sisu' }
+      ];
+      faq = [
+        { q: 'Como funciona a média ponderada do SISU?', a: 'A nota de cada uma das 5 áreas do ENEM (Redação, Matemática, Ciências da Natureza, Ciências Humanas e Linguagens) é multiplicada pelo peso determinado pela universidade para aquele curso específico. Em seguida, soma-se tudo e divide-se pela soma total dos pesos.' },
+        { q: 'O que é a nota de corte?', a: 'A nota de corte é a menor nota necessária para ficar entre os classificados no número de vagas disponíveis de um determinado curso no encerramento de cada dia de inscrição do SISU.' }
+      ];
+      break;
+
+    case 'datas':
+      whatIs = `Calcular intervalos entre datas, computar dias úteis desconsiderando feriados nacionais e projetar cronogramas de entrega são necessidades fundamentais em contratos comerciais, gestão de projetos e planejamento pessoal. A ferramenta **${name}** foi desenvolvida para automatizar a contagem cronológica precisa, cruzando o calendário oficial civil brasileiro com algoritmos de determinação de feriados móveis e regras de prazos em dias corridos ou úteis.`;
+      howItWorks = `O sistema recebe as datas de referência em *${inputLabels}* e analisa o calendário juliano/gregoriano. Ele mapeia os finais de semana (sábados e domingos) e os feriados nacionais previstos na Lei Federal nº 662/1949 e Lei nº 10.607/2002, entregando os dias corridos, dias úteis e a data de vencimento exata em *${outputLabels}*.`;
+      practicalExample = `Ao programar uma entrega comercial com prazo de 30 dias úteis a partir de 1º de junho, o algoritmo projeta o cronograma desconsiderando os finais de semana e o feriado de Corpus Christi, indicando a data limite exata de conclusão sem risco de atrasos contratuais.`;
+      whenToUse = `Utilize esta ferramenta no planejamento de prazos contratuais com fornecedores, na contagem regressiva para datas comemorativas e vestibulares, na apuração de tempo de serviço e na gestão de cronogramas ágeis de projetos corporativos.`;
+      importantTips = `Prazos que vencem em feriados ou finais de semana são automaticamente prorrogados para o primeiro dia útil subsequente de acordo com o padrão civil brasileiro.`;
+      sources = [
+        { name: 'Febraban - Feriados Bancários Oficiais', url: 'https://feriadosbancarios.febraban.org.br/' },
+        { name: 'Planalto - Feriados Nacionais (Lei nº 662/1949)', url: 'https://www.planalto.gov.br/ccivil_03/leis/l0662.htm' }
+      ];
+      faq = [
+        { q: 'Como são calculados os feriados móveis como Carnaval e Páscoa?', a: 'A Páscoa é determinada pelo primeiro domingo após a primeira lua cheia que ocorre a partir do equinócio de primavera (no hemisfério norte). A partir da data da Páscoa, calculam-se o Carnaval (47 dias antes) e Corpus Christi (60 dias depois).' },
+        { q: 'O sábado é considerado dia útil?', a: 'Para fins bancários e processuais, o sábado não é dia útil. No entanto, para a CLT (jornada de trabalho comum de 44h semanais), o sábado é considerado dia útil não trabalhado ou compensado, exceto quando for feriado.' }
+      ];
+      break;
+
+    case 'maternidade':
+      whatIs = `O acompanhamento do desenvolvimento gestacional semana a semana e a previsão da Data Provável do Parto (DPP) trazem tranquilidade e organização para as famílias e gestantes. A calculadora **${name}** baseia-se em protocolos obstétricos padronizados pela FEBRASGO e pelo Ministério da Saúde para calcular a Idade Gestacional (IG) em semanas e dias, a data estimada do parto a partir da Data da Última Menstruação (DUM) e a janela provável de ovulação.`;
+      howItWorks = `O algoritmo processa a DUM inserida em *${inputLabels}* e aplica a tradicional Regra de Naegele: soma-se 7 dias ao primeiro dia da última menstruação e subtrai-se 3 meses (ou somam-se 9 meses), considerando uma gestação humana a termo com média de 40 semanas (280 dias). As estimativas obstétricas são apresentadas de forma didática em *${outputLabels}*.`;
+      practicalExample = `Com a Data da Última Menstruação informada em 15 de março de 2026, a calculadora soma 7 dias (22 de março) e retrocede 3 meses, indicando que a Data Provável do Parto (DPP) estimada ocorrerá no dia 22 de dezembro de 2026, informando também a semana gestacional atual.`;
+      whenToUse = `Utilize esta ferramenta logo após a confirmação do teste de gravidez para planejar o início do pré-natal, organizar a compra do enxoval e agendar as ultrassonografias obstétricas essenciais de primeiro e segundo trimestres.`;
+      importantTips = `Apenas cerca de 5% dos bebês nascem exatamente no dia previsto da DPP. O nascimento a termo é considerado completamente saudável quando ocorre entre a 37ª e a 42ª semana de gestação.`;
+      sources = [
+        { name: 'FEBRASGO - Federação Brasileira das Associações de Ginecologia e Obstetrícia', url: 'https://www.febrasgo.org.br/' },
+        { name: 'Ministério da Saúde - Atenção ao Pré-Natal e Puerpério', url: 'https://www.gov.br/saude/pt-br' },
+        { name: 'Organização Mundial da Saúde - Cuidados na Maternidade', url: 'https://www.who.int/' }
+      ];
+      faq = [
+        { q: 'O que é a Regra de Naegele?', a: 'É o método padrão internacional utilizado por médicos obstetras para estimar a data do parto. Ela adiciona 7 dias à data da última menstruação e subtrai 3 meses do calendário anual.' },
+        { q: 'Quantas semanas dura uma gravidez normal?', a: 'Uma gestação humana a termo dura em média 40 semanas (cerca de 280 dias ou 9 meses e 10 dias). Considera-se a termo o bebê nascido entre 37 semanas completas e 41 semanas e 6 dias.' }
+      ];
+      break;
+
     case 'quimica_fisica':
       whatIs = `A ciência exata nos permite compreender e metrificar o comportamento da matéria e das forças no universo. A ferramenta **${name}** serve como um assistente de cálculo científico e acadêmico para estudantes de ensino médio, vestibulandos, professores ou profissionais técnicos. Com ela, equações complexas de transformações térmicas, cinemática básica e densidade volumétrica são simplificadas. O planejamento de experimentos de laboratório ou a resolução de tarefas de física e química tornam-se muito mais rápidos e menos sujeitos a erros manuais de aproximação ou conversão de escalas.`;
       howItWorks = `A lógica interna da calculadora processa as grandezas inseridas em *${inputLabels}* de acordo com as constantes físicas universais (como a conversão de escala termométrica ou a relação de massa e volume). Ela realiza a equivalência matemática e apresenta os valores exatos de *${outputLabels}* de forma imediata.`;

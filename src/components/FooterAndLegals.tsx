@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check } from 'lucide-react';
 import { useLocation } from 'wouter';
+import { CATEGORY_KEY_TO_SLUG } from '../utils/seoContentGenerator';
 
 interface FooterAndLegalsProps {
   onCategoryClick: (category: string) => void;
@@ -55,58 +56,82 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           <div className="md:col-span-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Segmentos Clave</h4>
             <div className="flex flex-col gap-2.5">
-              {Object.entries(categories).slice(0, 5).map(([key, label]) => (
-                <button
-                  key={key}
-                  onClick={() => onCategoryClick(key)}
-                  className="text-left text-xs text-slate-400 hover:text-blue-400 transition-colors cursor-pointer font-medium"
-                >
-                  {label}
-                </button>
-              ))}
+              {Object.entries(categories).slice(0, 5).map(([key, label]) => {
+                const slug = CATEGORY_KEY_TO_SLUG[key] || key;
+                return (
+                  <a
+                    key={key}
+                    href={`/${slug}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setLocation('/' + slug);
+                      onCategoryClick(key);
+                    }}
+                    className="text-left text-xs text-slate-400 hover:text-blue-400 transition-colors cursor-pointer font-medium"
+                  >
+                    {label}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
-          {/* AdSense Legal Requirements Col */}
+          {/* Institutional & Legal Requirements Col */}
           <div className="md:col-span-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Políticas & AdSense</h4>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Institucional & Legal</h4>
             <div className="flex flex-col gap-2.5">
-              <button
-                onClick={() => setLocation('/politica-de-privacidade')}
+              <a
+                href="/politica-de-privacidade"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/politica-de-privacidade');
+                }}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <Shield className="w-3.5 h-3.5 text-blue-400" />
                 <span>Política de Privacidade</span>
-              </button>
-              <button
-                onClick={() => setLocation('/termos-de-uso')}
+              </a>
+              <a
+                href="/termos-de-uso"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/termos-de-uso');
+                }}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <FileText className="w-3.5 h-3.5 text-blue-400" />
                 <span>Termos e Condições</span>
-              </button>
-              <button
-                onClick={() => setLocation('/sobre')}
+              </a>
+              <a
+                href="/sobre"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/sobre');
+                }}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <Info className="w-3.5 h-3.5 text-blue-400" />
                 <span>Sobre a Central</span>
-              </button>
-              <button
-                onClick={() => setLocation('/contato')}
+              </a>
+              <a
+                href="/contato"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/contato');
+                }}
                 className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <Mail className="w-3.5 h-3.5 text-blue-400" />
                 <span>Contato & Suporte</span>
-              </button>
+              </a>
             </div>
           </div>
 
           {/* Editorial Disclaimer Col */}
           <div className="md:col-span-2">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Isenção</h4>
-            <p className="text-[10px] text-slate-450 text-slate-400 leading-normal">
-              Os resultados emitidos por esta central têm caráter de projeção técnica provisória. Consulte profissionais regulados (contadores, nutricionistas ou advogados) antes de celebrar decisões definitivas comerciais.
+            <p className="text-[10px] text-slate-400 leading-normal">
+              Os resultados emitidos por esta central têm caráter de projeção técnica provisória e educativa. Consulte profissionais regulados (contadores, nutricionistas ou advogados) antes de celebrar decisões definitivas comerciais.
             </p>
           </div>
         </div>
@@ -117,8 +142,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             &copy; 2026 Brasil Calculadoras. Todos os direitos reservados.
           </p>
           <div className="flex gap-4 text-[10.5px]">
-            <span className="text-slate-500 font-mono">ID do Editor: pub-8160658026927094</span>
-            <span className="text-emerald-500 animate-pulse">● Google Certified Partner</span>
+            <span className="text-slate-500 font-sans text-[11px]">Plataforma Independente de Ferramentas de Utilidade Pública</span>
           </div>
         </div>
       </footer>
@@ -245,8 +269,8 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               <h4 className="text-xs font-bold text-slate-850 text-slate-800">Nossa Missão</h4>
               <p>Buscamos desmistificar a matemática financeira e burocracias laborais do cotidiano brasileiro. Muitas vezes ficamos perdidos em equações complexas de rescisões CLT, metas de calorias, juros de de financiamento ou cálculo para o agronegócio e logística. O Brasil Calculadoras consolida dezenas dessas necessidades em uma interface única, leve e veloz.</p>
               
-              <h4 className="text-xs font-bold text-slate-800">Gratuidade e Monetização</h4>
-              <p>Manter servidores de alta performance, atualizações diárias de indexadores e segurança da informação custa caro. Por essa razão, nós veiculamos banners inteligentes do Google AdSense. A publicidade viabiliza que todo o acervo continue livre de assinaturas ou cadastros obrigatórios, respeitando sua privacidade e adblocks normais.</p>
+              <h4 className="text-xs font-bold text-slate-800">Gratuidade e Sustentabilidade</h4>
+              <p>A sustentabilidade da plataforma é viabilizada por parcerias de publicidade digital e patrocínios programáticos éticos. Esses recursos nos permitem manter toda a infraestrutura técnica online, atualizada e 100% gratuita para toda a população brasileira, sem a necessidade de cadastros, cobranças ou assinaturas pagas.</p>
               
               <h4 className="text-xs font-bold text-slate-800">Design de Excelência</h4>
               <p>Acreditamos que ferramentas profissionais devem ter visual de excelência, sem poluição de margens ou popups cegos. Buscamos balancear contrastes, tipografia impecável da família Inter e animações que deem satisfação ao calcular.</p>

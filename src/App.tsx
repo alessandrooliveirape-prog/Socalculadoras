@@ -239,8 +239,12 @@ export default function App() {
       }
     }
 
-    const path = location.replace(/^\//, '');
+    const path = location.replace(/^\//, '').replace(/\/$/, '');
     if (path) {
+      if (['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato'].includes(path)) {
+        setActiveCategoryHub(null);
+        return;
+      }
       if (CATEGORY_SLUG_MAP[path]) {
         const cat = CATEGORY_SLUG_MAP[path];
         setActiveCategoryHub(cat);
@@ -417,7 +421,8 @@ export default function App() {
 
   // Dynamic Page Title & SEO Meta Updates on calculator or category change
   useEffect(() => {
-    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato'].includes(location)) {
+    const normalizedPath = (location || '').replace(/\/$/, '') || '/';
+    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato'].includes(normalizedPath)) {
       const legalTitles: Record<string, { title: string; desc: string }> = {
         '/politica-de-privacidade': {
           title: 'Política de Privacidade | Brasil Calculadoras',
@@ -436,7 +441,7 @@ export default function App() {
           desc: 'Entre em contato com a equipe do Brasil Calculadoras para tirar dúvidas, enviar sugestões ou reportar pontos de melhoria.'
         }
       };
-      const current = legalTitles[location];
+      const current = legalTitles[normalizedPath];
       if (current) {
         document.title = current.title;
         let metaDesc = document.querySelector('meta[name="description"]');
@@ -446,7 +451,23 @@ export default function App() {
           document.head.appendChild(metaDesc);
         }
         metaDesc.setAttribute('content', current.desc);
-        checkSeoOverrides('https://www.brasilcalculadoras.com.br' + location);
+
+        let canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (!canonicalLink) {
+          canonicalLink = document.createElement('link');
+          canonicalLink.setAttribute('rel', 'canonical');
+          document.head.appendChild(canonicalLink);
+        }
+        canonicalLink.setAttribute('href', 'https://www.brasilcalculadoras.com.br' + normalizedPath);
+
+        updateMetaTag('property', 'og:title', current.title);
+        updateMetaTag('property', 'og:description', current.desc);
+        updateMetaTag('property', 'og:url', 'https://www.brasilcalculadoras.com.br' + normalizedPath);
+        updateMetaTag('property', 'og:type', 'website');
+        updateMetaTag('name', 'twitter:title', current.title);
+        updateMetaTag('name', 'twitter:description', current.desc);
+
+        checkSeoOverrides('https://www.brasilcalculadoras.com.br' + normalizedPath);
       }
       return;
     }
@@ -1009,6 +1030,8 @@ export default function App() {
     triggerToast('🔗 Link direto desta calculadora copiado para a área de transferência!');
   };
 
+  const normalizedLocation = (location || '').replace(/\/$/, '') || '/';
+
   return (
     <div className="min-h-screen bg-slate-50/50 flex flex-col font-sans leading-relaxed text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
       
@@ -1148,15 +1171,15 @@ export default function App() {
       {/* Main content grid view */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
         
-        {location === '/politica-de-privacidade' ? (
+        {normalizedLocation === '/politica-de-privacidade' ? (
           <LegalPage type="privacy" onNavigateHome={() => setLocation('/')} />
-        ) : location === '/termos-de-uso' ? (
+        ) : normalizedLocation === '/termos-de-uso' ? (
           <LegalPage type="terms" onNavigateHome={() => setLocation('/')} />
-        ) : location === '/sobre' ? (
+        ) : normalizedLocation === '/sobre' ? (
           <LegalPage type="about" onNavigateHome={() => setLocation('/')} />
-        ) : location === '/contato' ? (
+        ) : normalizedLocation === '/contato' ? (
           <LegalPage type="contact" onNavigateHome={() => setLocation('/')} />
-        ) : location === '/' || location === '' ? (
+        ) : normalizedLocation === '/' ? (
           <HomepageView 
             onSelectCalculator={selectCalculator}
             onSelectCategory={(catKey) => {
