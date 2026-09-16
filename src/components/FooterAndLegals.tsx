@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check } from 'lucide-react';
+import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check, Code } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { CATEGORY_KEY_TO_SLUG } from '../utils/seoContentGenerator';
 
@@ -123,6 +123,17 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               >
                 <Mail className="w-3.5 h-3.5 text-blue-400" />
                 <span>Contato & Suporte</span>
+              </a>
+              <a
+                href="/desenvolvedores"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/desenvolvedores');
+                }}
+                className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
+              >
+                <Code className="w-3.5 h-3.5 text-blue-400" />
+                <span>API & Desenvolvedores</span>
               </a>
             </div>
           </div>

@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "fonte": "Brasil Calculadoras",
+    "url": "https://www.brasilcalculadoras.com.br",
+    "titulo": "Tabela Progressiva Mensal do Imposto de Renda Retido na Fonte (IRRF)",
+    "vigencia": "2026",
+    "atualizado_em": "2026-09-16T17:57:02.020Z",
+    "licenca": "Uso público e livre com atribuição de fonte obrigatória"
+  },
+  "dados": {
+    "faixa_isencao_ate": 2259.2,
+    "deducao_por_dependente": 189.59,
+    "desconto_simplificado_mensal": 564.8,
+    "faixas": [
+      {
+        "faixa": 1,
+        "base_calculo_de": 0,
+        "base_calculo_ate": 2259.2,
+        "aliquota_percentual": 0,
+        "aliquota_decimal": 0,
+        "parcela_a_deduzir": 0
+      },
+      {
+        "faixa": 2,
+        "base_calculo_de": 2259.21,
+        "base_calculo_ate": 2826.65,
+        "aliquota_percentual": 7.5,
+        "aliquota_decimal": 0.075,
+        "parcela_a_deduzir": 169.44
+      },
+      {
+        "faixa": 3,
+        "base_calculo_de": 2826.66,
+        "base_calculo_ate": 3751.05,
+        "aliquota_percentual": 15,
+        "aliquota_decimal": 0.15,
+        "parcela_a_deduzir": 381.44
+      },
+      {
+        "faixa": 4,
+        "base_calculo_de": 3751.06,
+        "base_calculo_ate": 4664.68,
+        "aliquota_percentual": 22.5,
+        "aliquota_decimal": 0.225,
+        "parcela_a_deduzir": 662.77
+      },
+      {
+        "faixa": 5,
+        "base_calculo_de": 4664.69,
+        "base_calculo_ate": null,
+        "aliquota_percentual": 27.5,
+        "aliquota_decimal": 0.275,
+        "parcela_a_deduzir": 896
+      }
+    ],
+    "observacoes": "O contribuinte pode optar pelo desconto simplificado caso seja mais benéfico que as deduções legais (INSS, dependentes e pensão alimentícia)."
+  }
+}

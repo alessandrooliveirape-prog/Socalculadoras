@@ -1,0 +1,1251 @@
+{
+  "meta": {
+    "fonte": "Brasil Calculadoras",
+    "url": "https://www.brasilcalculadoras.com.br",
+    "titulo": "Catálogo de Calculadoras e Simuladores Online",
+    "total_ferramentas": 177,
+    "atualizado_em": "2026-09-16T17:57:02.020Z",
+    "licenca": "Uso público e livre com atribuição de fonte obrigatória"
+  },
+  "calculadoras": [
+    {
+      "id": "juros-compostos",
+      "nome": "Juros Compostos",
+      "descricao": "Calcule a evolução capital de investimentos com depósitos recorrentes e simulação em gráficos de crescimento.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/juros-compostos"
+    },
+    {
+      "id": "clt-pj",
+      "nome": "Comparador CLT vs PJ",
+      "descricao": "Compare remunerações líquidas de carteira assinada versus prestador de serviços incluindo tributação de notas fiscais.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/clt-pj"
+    },
+    {
+      "id": "margem-lucro",
+      "nome": "Margem de Lucro & Markup",
+      "descricao": "Encontre preços ideais de venda de mercadorias considerando custos, despesas acessórias e metas de rentabilidade livre.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/margem-lucro"
+    },
+    {
+      "id": "imc",
+      "nome": "Metabolismo e IMC Tracker",
+      "descricao": "Descubra seu Índice de Massa Corporal (IMC), taxa metabólica ideal BMR e necessidades calóricas totais.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/imc"
+    },
+    {
+      "id": "registro-horas",
+      "nome": "Calculadora de Horas (Timesheet)",
+      "descricao": "Organize turnos e horas de trabalho, gerencie intervalos e calcule o faturamento líquida com taxas de freelancer.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/registro-horas"
+    },
+    {
+      "id": "regra-tres",
+      "nome": "Regra de Três Rápida",
+      "descricao": "Resolva proporções matemáticas simples de forma direta ou inversa entre grandezas distinctas instantaneamente.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/regra-tres"
+    },
+    {
+      "id": "contador-texto",
+      "nome": "Análise de Texto & Word Counter",
+      "descricao": "Analise e formate caixa alta/baixa, conte caracteres totais, parágrafos, palavras e estime tempos de leitura rápida.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/contador-texto"
+    },
+    {
+      "id": "calculadora-de-rescisao-clt",
+      "nome": "Cálculo de Rescisão CLT",
+      "descricao": "Simulação completa de acertos rescisórios para demissões sem justa causa ou pedidos de demissão CLT.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-rescisao-clt"
+    },
+    {
+      "id": "calculadora-de-decimo-terceiro",
+      "nome": "Cálculo de 13º Salário",
+      "descricao": "Estime o valor bruto e líquido da primeira, segunda ou de ambas as parcelas do décimo terceiro salário.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-decimo-terceiro"
+    },
+    {
+      "id": "calculadora-de-ferias-clt",
+      "nome": "Férias Proporcionais & Vendidas",
+      "descricao": "Calcule o valor das fáceis normais ou proporcionais, terço constitucional e adicione o abono pecuniário por venda.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-ferias-clt"
+    },
+    {
+      "id": "calculadora-de-horas-extras",
+      "nome": "Horas Extras com Adicional",
+      "descricao": "Calcule o valor de horas extras com adicional de 50% e 100% sobre o seu salário bruto de referência.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-horas-extras"
+    },
+    {
+      "id": "simulador-de-aposentadoria-inss",
+      "nome": "Simulador INSS / Aposentadoria",
+      "descricao": "Acompanhe seu tempo de contribuição previdenciária e projete estimativas nas regras gerais de transição.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-de-aposentadoria-inss"
+    },
+    {
+      "id": "calculadora-ganhos-adsense",
+      "nome": "Calculadora de Ganhos AdSense 2026",
+      "descricao": "Estime os ganhos mensais e anuais do seu site com o Google AdSense com base na categoria, região de visitantes e volume de tráfego.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-ganhos-adsense"
+    },
+    {
+      "id": "carro-eletrico-vs-combustivel",
+      "nome": "Carro Elétrico vs Combustão",
+      "descricao": "Compare o custo de rodagem e a economia gerada ao substituir um veículo tradicional por um carro elétrico.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/carro-eletrico-vs-combustivel"
+    },
+    {
+      "id": "juros-abusivos-financiamento",
+      "nome": "Cálculo de Juros Abusivos",
+      "descricao": "Avalie se as taxas cobradas no seu financiamento estão em patamar abusivo comparadas à taxa média de juros do Banco Central.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/juros-abusivos-financiamento"
+    },
+    {
+      "id": "imposto-criptomoedas-gcap",
+      "nome": "Imposto sobre Criptomoedas (GCAP)",
+      "descricao": "Calcule o ganho de capital e o imposto de renda devido em alienações mensais de criptoativos, verificando a faixa de isenção.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/imposto-criptomoedas-gcap"
+    },
+    {
+      "id": "idade-caes",
+      "nome": "Idade Humana de Cão",
+      "descricao": "Estime a idade equivalente do seu cão em anos humanos com base no seu porte físico.",
+      "categoria": "pets",
+      "url": "https://www.brasilcalculadoras.com.br/idade-caes"
+    },
+    {
+      "id": "idade-gatos",
+      "nome": "Idade Humana de Gato",
+      "descricao": "Estime a idade equivalente do seu gato em anos humanos.",
+      "categoria": "pets",
+      "url": "https://www.brasilcalculadoras.com.br/idade-gatos"
+    },
+    {
+      "id": "racao-caes",
+      "nome": "Porção Diária de Ração",
+      "descricao": "Calcule a porção diária ideal de ração seca recomendada para o seu cão com base no peso e nível de atividade.",
+      "categoria": "pets",
+      "url": "https://www.brasilcalculadoras.com.br/racao-caes"
+    },
+    {
+      "id": "agua-pets",
+      "nome": "Água Recomendada para Pets",
+      "descricao": "Estime a quantidade diária recomendada de água para o seu cão ou gato manter-se hidratado.",
+      "categoria": "pets",
+      "url": "https://www.brasilcalculadoras.com.br/agua-pets"
+    },
+    {
+      "id": "agua-humana",
+      "nome": "Ingestão de Água Diária",
+      "descricao": "Calcule sua meta diária de hidratação ideal (em litros e copos) com base no seu peso, nível de atividade e clima.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/agua-humana"
+    },
+    {
+      "id": "exercicio-calorias",
+      "nome": "Calorias por Exercício",
+      "descricao": "Estime o gasto calórico (kcal) gerado por diferentes modalidades de atividades físicas com base no seu peso e tempo.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/exercicio-calorias"
+    },
+    {
+      "id": "ferias-pj-equivalente",
+      "nome": "Férias PJ vs CLT Equivalente",
+      "descricao": "Calcule o valor faturamento mensal e hora PJ necessários para cobrir os benefícios anuais CLT com direito a um período de descanso faturado.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/ferias-pj-equivalente"
+    },
+    {
+      "id": "porcentagem-simples",
+      "nome": "Porcentagem Rápida",
+      "descricao": "Realize de forma direta cálculos de acréscimos ou descontos relativos de parcelas numéricas básicas.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/porcentagem-simples"
+    },
+    {
+      "id": "media-ponderada",
+      "nome": "Média Ponderada Escolar",
+      "descricao": "Calcule notas parciais estruturadas no peso diferenciado distribuído de cada trabalho ou prova avaliatória.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/media-ponderada"
+    },
+    {
+      "id": "pitagoras-triangulo",
+      "nome": "Teorema de Pitágoras",
+      "descricao": "Encontre o comprimento exato da hipotenusa ou de catetos em triângulos retângulos.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/pitagoras-triangulo"
+    },
+    {
+      "id": "area-circulo-retangulo",
+      "nome": "Área & Perímetro de Formas",
+      "descricao": "Obtenha a superfície espacial e o contorno de figuras planas geométricas usuais.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/area-circulo-retangulo"
+    },
+    {
+      "id": "potencia-raiz",
+      "nome": "Potências e Raiz Quadrada",
+      "descricao": "Resolva radiciações e potenciações simples exponenciais aritméticas com precisão decimal.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/potencia-raiz"
+    },
+    {
+      "id": "fatorial-num",
+      "nome": "Cálculo de Fatorial",
+      "descricao": "Calcule o produto multiplicativo do fatorial de qualquer inteiro positivo sequencial.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/fatorial-num"
+    },
+    {
+      "id": "regra-de-sociedade",
+      "nome": "Regra de Sociedade Comercial",
+      "descricao": "Divida lucros corporativos proporcionalmente de acordo com a quota de aporte financeiro dos sócios.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/regra-de-sociedade"
+    },
+    {
+      "id": "equacao-segundo-grau",
+      "nome": "Equação do 2º Grau (Bhaskara)",
+      "descricao": "Simulador de raízes da equação clássica de segundo grau identificando discriminante Delta.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/equacao-segundo-grau"
+    },
+    {
+      "id": "financiamento-price-sac",
+      "nome": "Financiamento Price vs SAC",
+      "descricao": "Compare as tabelas amortizatórias de parcelas de moradias cruzando taxas de avaliação.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/financiamento-price-sac"
+    },
+    {
+      "id": "reajuste-aluguel",
+      "nome": "Reajuste Anual de Contrato",
+      "descricao": "Estime o novo boleto de moradia updated com base nos índices inflacionários comerciais (IGP-M, IPCA).",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/reajuste-aluguel"
+    },
+    {
+      "id": "custos-itbi",
+      "nome": "Custos de ITBI e Registro",
+      "descricao": "Prepare o provimento de despesas de impostos de transferência de escritura e registro de imóveis.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/custos-itbi"
+    },
+    {
+      "id": "cap-rate",
+      "nome": "Retorno de Ativos (Cap Rate)",
+      "descricao": "Calcule a rentabilidade anual passiva sobre aluguel de imóveis em relação ao valor de compra.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/cap-rate"
+    },
+    {
+      "id": "amortizacao-extra",
+      "nome": "Simulador de Amortização Extra",
+      "descricao": "Veja as reduções de tempo de juros ao injetar depósitos adicionais nas prestações pendentes.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/amortizacao-extra"
+    },
+    {
+      "id": "alugar-vs-comprar",
+      "nome": "Alugar ou Comprar Imóvel",
+      "descricao": "Determine se a locação do imóvel comparado a um financiamento resulta em economia financeira.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/alugar-vs-comprar"
+    },
+    {
+      "id": "custo-efetivo-total",
+      "nome": "Custo Efetivo Total (CET)",
+      "descricao": "Identifique a taxa anual integral e juros implícitos reais praticados no mercado financeiro.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/custo-efetivo-total"
+    },
+    {
+      "id": "valor-metro-quadrado",
+      "nome": "Comparador de Valor de m²",
+      "descricao": "Analise avaliações de imóveis concorrentes estimando o custo-benefício de área privativa construída.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/valor-metro-quadrado"
+    },
+    {
+      "id": "rateio-condominio",
+      "nome": "Rateio de Reforma Predial",
+      "descricao": "Divida custos de conservação comuns de prédios baseados em áreas de fração ideal.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/rateio-condominio"
+    },
+    {
+      "id": "iptu-proporcional",
+      "nome": "Rateio IPTU Proporcional",
+      "descricao": "Divida o carnê do IPTU em parcelas proporcionais de meses de posse do imóvel entre comprador e vendedor.",
+      "categoria": "imobiliario",
+      "url": "https://www.brasilcalculadoras.com.br/iptu-proporcional"
+    },
+    {
+      "id": "alcool-gasolina",
+      "nome": "Álcool ou Gasolina Praticidade",
+      "descricao": "Encontre o combustível mais econômico com base na regra de 70% de rendimento de motores Flex.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/alcool-gasolina"
+    },
+    {
+      "id": "consumo-combustivel",
+      "nome": "Consumo de Combustível Viagem",
+      "descricao": "Calcule as médias de consumo de combustível do seu automóvel e ordene custos de combustível estimativos para rotas.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/consumo-combustivel"
+    },
+    {
+      "id": "ipva-estimado",
+      "nome": "IPVA Estimado de Veículo",
+      "descricao": "Estime a despesa do imposto automotor baseado em alíquotas estaduais sobre a tabela Fipe.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/ipva-estimado"
+    },
+    {
+      "id": "depreciacao-fipe",
+      "nome": "Curva de Depreciação (Fipe)",
+      "descricao": "Simule o declínio de valor de mercado e desvalorização de marcas de carros de ano a ano.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/depreciacao-fipe"
+    },
+    {
+      "id": "custo-km-rodado",
+      "nome": "Reembolso por Km Rodado",
+      "descricao": "Estime o custo por quilômetro ideal para reembolso empresarial ponderando pneu, combustível e manutenção.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/custo-km-rodado"
+    },
+    {
+      "id": "financiamento-veiculo",
+      "nome": "Simulador de Financiamento de Veículos e CDC 2026: Carros e Motos",
+      "descricao": "Simule o financiamento CDC de carros e motos em 2026. Calcule o valor das parcelas fixas, taxa de juros, entrada recomendada e amortização antecipada.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/financiamento-veiculo"
+    },
+    {
+      "id": "move-brasil",
+      "nome": "Simulador Move Brasil 2026: Carros, Motos e Caminhões (BB, Caixa e BNDES)",
+      "descricao": "Simule o financiamento MOVE Brasil para carros, motos e caminhões leves (motoristas de app, taxistas e entregadores) pelo Banco do Brasil, Caixa e BNDES.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/move-brasil"
+    },
+    {
+      "id": "seguro-perfil",
+      "nome": "Avaliação Custos de Seguro",
+      "descricao": "Descubra a média de acréscimo de taxas de cobertura por perfis estatísticos de risco de trânsito.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/seguro-perfil"
+    },
+    {
+      "id": "tempo-viagem",
+      "nome": "Tempo Estimado de Trajeto",
+      "descricao": "Planeje os tempos de chegada em estradas integrando distâncias e velocidade de fluxo de rodovias.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/tempo-viagem"
+    },
+    {
+      "id": "rateio-pedagio",
+      "nome": "Rateio Paritário de Viagem",
+      "descricao": "Divida pedágios de estradas e custos de bomba de combustível igualmente por viajante.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/rateio-pedagio"
+    },
+    {
+      "id": "manutencao-carro",
+      "nome": "Orçamento de Revisão Anual",
+      "descricao": "Crie uma provisão mensal preventiva para custos mecânicos recorrentes e troca de óleo periódica.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/manutencao-carro"
+    },
+    {
+      "id": "desvio-padrao",
+      "nome": "Desvio Padrão e Variância",
+      "descricao": "Analise a dispersão de dados e desvios de uma série de amostras numéricas.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/desvio-padrao"
+    },
+    {
+      "id": "margem-erro",
+      "nome": "Margem de Erro de Pesquisas",
+      "descricao": "Calcule a segurança estatística de entrevistas com base no tamanho do público amostral avaliado.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/margem-erro"
+    },
+    {
+      "id": "analise-combinatoria",
+      "nome": "Arranjos e Combinações",
+      "descricao": "Resolva o número de conjuntos e combinações possíveis para agrupamentos estatísticos.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/analise-combinatoria"
+    },
+    {
+      "id": "probabilidade-evento",
+      "nome": "Probabilidade de Ocorrências",
+      "descricao": "Identifique as chances nominais de um evento ocorrer isoladamente em espaços amostrais.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/probabilidade-evento"
+    },
+    {
+      "id": "churn-rate",
+      "nome": "Métrica de Churn (SaaS/Loja)",
+      "descricao": "Analise o percentual de evasão de clientes registrados que interromperam contratos de receita recorrente.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/churn-rate"
+    },
+    {
+      "id": "crescimento-mensal",
+      "nome": "Taxa Crescimento MoM",
+      "descricao": "Mensura o rácio de crescimento em andamento de receitas em relação ao ciclo de meses anteriores.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/crescimento-mensal"
+    },
+    {
+      "id": "conversao-funil",
+      "nome": "Funil de Conversão e Leads",
+      "descricao": "Acompanhe as passagens de visitas para leads qualificados e vendas finalizadas de seu funil comercial.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/conversao-funil"
+    },
+    {
+      "id": "mediana-moda",
+      "nome": "Média, Mediana & Moda",
+      "descricao": "Avalie as tendências centrais geográficas presentes em dados unificados de amostras.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/mediana-moda"
+    },
+    {
+      "id": "intervalo-confianca",
+      "nome": "Intervalo de Confiança",
+      "descricao": "Defina a amplitude estimada que protege a média real de amostras populacionais.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/intervalo-confianca"
+    },
+    {
+      "id": "conversao-cac",
+      "nome": "CAC vs LTV Eficiência",
+      "descricao": "Compare o custo de aquisição (CAC) com o valor vitalício gerado pelo cliente (LTV) de sua firma.",
+      "categoria": "estatistica",
+      "url": "https://www.brasilcalculadoras.com.br/conversao-cac"
+    },
+    {
+      "id": "mora-judicial",
+      "nome": "Mora e Multas de Contratos",
+      "descricao": "Calcule juros de mora acumuláveis ordinários e multas estipuladas de débitos pendentes financeiros.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/mora-judicial"
+    },
+    {
+      "id": "correcao-monetaria",
+      "nome": "Correção Monetária de Valores",
+      "descricao": "Atualize quantias financeiras históricas corrigidas por taxas e indexadores regulatórios civis.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/correcao-monetaria"
+    },
+    {
+      "id": "custas-processuais",
+      "nome": "Custas Judiciais Estimadas",
+      "descricao": "Simule preliminarmente as guias financeiras de taxas judiciais de distribuição do seu processo.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/custas-processuais"
+    },
+    {
+      "id": "pensao-alimenticia",
+      "nome": "Pensão Alimentícia Projeções",
+      "descricao": "Identifique proporções sugestivas de amparo pensonal de acordo com a renda do devedor alimentício.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/pensao-alimenticia"
+    },
+    {
+      "id": "ganho-capital",
+      "nome": "IR s/ Ganho de Capital",
+      "descricao": "Calcule as faixas de imposto devidas sobre o lucro líquido gerado na alienação de bens e imóveis.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/ganho-capital"
+    },
+    {
+      "id": "divisao-bens",
+      "nome": "Divisão de Bens de Divórcio",
+      "descricao": "Esquematize a partilha societária de bens baseada em regimes nupciais estabelecidos no Brasil.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/divisao-bens"
+    },
+    {
+      "id": "inventario-partilha",
+      "nome": "Inventário e Herança Partilha",
+      "descricao": "Estime taxas de imposto de herança (ITCMD) e custos processuais de partilha pátria.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/inventario-partilha"
+    },
+    {
+      "id": "tabela-simples",
+      "nome": "Simples Nacional Simulador",
+      "descricao": "Saiba o imposto gerado no Simples Nacional baseados em tabelas de faturamento cumulativo e anexos.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/tabela-simples"
+    },
+    {
+      "id": "aliquota-iss",
+      "nome": "Custos de ISS s/ Serviços",
+      "descricao": "Identifique o repasse de imposto municipal ISS sobre notas fiscais de seu tomador.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/aliquota-iss"
+    },
+    {
+      "id": "irrf-investimentos",
+      "nome": "IR s/ Aplicações Financeiras",
+      "descricao": "Calcule a mordida do leão na venda de renda fixa e fundos com base na data do saque.",
+      "categoria": "juridico",
+      "url": "https://www.brasilcalculadoras.com.br/irrf-investimentos"
+    },
+    {
+      "id": "conversor-moedas",
+      "nome": "Conversor de Câmbio Moedas",
+      "descricao": "Converta faturamento em divisas internacionais com taxas de câmbios pré-definidos (Dólar, Euro, Real).",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/conversor-moedas"
+    },
+    {
+      "id": "conta-bar",
+      "nome": "Divisor de Conta do Bar",
+      "descricao": "Divida a conta do bar ou restaurante de forma justa incluindo gorjetas de garçom voluntárias.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/conta-bar"
+    },
+    {
+      "id": "energia-eletrica",
+      "nome": "Consumo Elétrico Comparado",
+      "descricao": "Determine o custo de operação de eletrodomésticos cruzando Watts e tarifa contratual local.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/energia-eletrica"
+    },
+    {
+      "id": "ar-condicionado",
+      "nome": "Ar Condicionado ideal (BTUs)",
+      "descricao": "Calcule o dimensionamento térmico e BTUs recomendados para climatização de aposentos.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/ar-condicionado"
+    },
+    {
+      "id": "quantidade-tinta",
+      "nome": "Cálculo de Latas de Tinta",
+      "descricao": "Identifique a quantidade de latas exigidas para pintura de áreas prediais quadrangulares.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/quantidade-tinta"
+    },
+    {
+      "id": "agua-chuveiro",
+      "nome": "Consumo do Banho de Chuveiro",
+      "descricao": "Meça as tarifas agregadas de água e energia ao passar minutos embaixo do chuveiro elétrico.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/agua-chuveiro"
+    },
+    {
+      "id": "churrasco-festa",
+      "nome": "Churrasco Evento Ingredientes",
+      "descricao": "Estime as porções alimentares de carne e bebidas ideais por convidado para evitar desperdício em festas.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/churrasco-festa"
+    },
+    {
+      "id": "alimentos-congelados",
+      "nome": "Prazo Freezer Descongelamento",
+      "descricao": "Saiba o tempo permitido de armazenamento e retenção de frescor nutritivo no freezer comercial.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/alimentos-congelados"
+    },
+    {
+      "id": "espacador-azulejo",
+      "nome": "Quantidade Pisos & Azulejos",
+      "descricao": "Identifique as dimensões e número de revestimentos necessários para pavimentação.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/espacador-azulejo"
+    },
+    {
+      "id": "lista-supermercado",
+      "nome": "Protetor Carrinho Supermercado",
+      "descricao": "Consolide suas despesas no caixa com margens de estimativas para compras mensais de despensa.",
+      "categoria": "utilitarios",
+      "url": "https://www.brasilcalculadoras.com.br/lista-supermercado"
+    },
+    {
+      "id": "previdenca-privada",
+      "nome": "Previdência Privada Acúmulo",
+      "descricao": "Pondere se aportes mensais de previdência VGBL ou PGBL com imposto regressivo protegem seu futuro.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/previdenca-privada"
+    },
+    {
+      "id": "viver-de-renda",
+      "nome": "Capital de Viver de Renda",
+      "descricao": "Quantifique o montante financeiro exigido investido para retirar o equivalente ao seu salário mensal de direito.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/viver-de-renda"
+    },
+    {
+      "id": "reserva-emergencia",
+      "nome": "Reserva Emergência Custos",
+      "descricao": "Defina o colchão de liquidez para cobrir de 6 a 12 meses das despesas e contas básicas.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/reserva-emergencia"
+    },
+    {
+      "id": "depreciacao-maquinas",
+      "nome": "Provisão Desgaste Equipamentos",
+      "descricao": "Preveja as substituições periódicas de máquinas corporativas ou laptops de trabalho.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/depreciacao-maquinas"
+    },
+    {
+      "id": "inflacao-futura",
+      "nome": "Corrosor de Poupanças Futura",
+      "descricao": "Veja o declínio do poder de compra de quantias paradas em horizontes de longo prazo.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/inflacao-futura"
+    },
+    {
+      "id": "fgts-corrigido",
+      "nome": "Fundo Garantido Corrigido (FGTS)",
+      "descricao": "Simule o crescimento fictício de contas em regimes ordinários de atualização monetária de 3%.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/fgts-corrigido"
+    },
+    {
+      "id": "custo-aposentadoria",
+      "nome": "Planejador Estilo de Vida (Retired)",
+      "descricao": "Calcule as contrações naturais de gastos domésticos decorrentes do avanço da melhor idade.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/custo-aposentadoria"
+    },
+    {
+      "id": "renda-eterna",
+      "nome": "Taxa Segura de Retirada (SWR)",
+      "descricao": "Descubra a taxa percentual de retirada anual que impede que seus fundos venham a faltar na velhice.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/renda-eterna"
+    },
+    {
+      "id": "aposentadoria-preco-liberdade",
+      "nome": "Milestone de Liberdade Financeira",
+      "descricao": "Descubra a idade teórica aproximada para conquistar a independência de salários fixados de terceiros.",
+      "categoria": "aposentadoria",
+      "url": "https://www.brasilcalculadoras.com.br/aposentadoria-preco-liberdade"
+    },
+    {
+      "id": "calculo-fgts-acumulado",
+      "nome": "Calculadora de FGTS",
+      "descricao": "Calcule o total aproximado acumulado de Fundo de Garantia do Tempo de Serviço.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculo-fgts-acumulado"
+    },
+    {
+      "id": "adicional-noturno",
+      "nome": "Adicional Noturno",
+      "descricao": "Calcule o adicional para trabalhos realizados em período noturno (urbano: 22h às 5h).",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/adicional-noturno"
+    },
+    {
+      "id": "adicional-insalubridade",
+      "nome": "Adicional de Insalubridade",
+      "descricao": "Estime o valor da insalubridade de acordo com o grau de exposição do trabalhador.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/adicional-insalubridade"
+    },
+    {
+      "id": "adicional-periculosidade",
+      "nome": "Adicional de Periculosidade",
+      "descricao": "Cálculo de 30% de periculosidade para funções perigosas com risco à vida.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/adicional-periculosidade"
+    },
+    {
+      "id": "estimativa-seguro-desemprego",
+      "nome": "Seguro-Desemprego",
+      "descricao": "Estime o valor das parcelas do benefício governamental de Seguro-Desemprego.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/estimativa-seguro-desemprego"
+    },
+    {
+      "id": "desconto-vale-transporte",
+      "nome": "Desconto de Vale-Transporte",
+      "descricao": "Descubra quanto a empresa pode descontar pelo fornecimento do Vale-Transporte.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/desconto-vale-transporte"
+    },
+    {
+      "id": "falta-injustificada",
+      "nome": "Calculadora de Faltas Injustificadas e DSR (CLT 2026)",
+      "descricao": "Calcule o desconto de faltas no salário, perda do DSR (Lei 605/49) e reflexo nos dias de férias (Art. 130 CLT) e 13º salário.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/falta-injustificada"
+    },
+    {
+      "id": "simulador-inss-salario",
+      "nome": "Desconto Progressivo de INSS",
+      "descricao": "Estime a dedução de INSS incidente sobre o salário bruto sob as alíquotas vigentes do regime geral.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-inss-salario"
+    },
+    {
+      "id": "simulador-irrf-salario",
+      "nome": "Desconto IRRF Mensal",
+      "descricao": "Simulador de desconto de Imposto de Renda Retido na Fonte (IRRF) com base no salário líquido de INSS.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-irrf-salario"
+    },
+    {
+      "id": "rendimento-poupanca",
+      "nome": "Rendimento de Poupança",
+      "descricao": "Estime o rendimento de um saldo depositado na caderneta de poupança em relação às regras da Taxa Selic.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/rendimento-poupanca"
+    },
+    {
+      "id": "conversor-inflacao-ipca",
+      "nome": "Calculadora IPCA Acumulado",
+      "descricao": "Compare a perda de poder de compra de quantias financeiras devido à inflação acumulada.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/conversor-inflacao-ipca"
+    },
+    {
+      "id": "custo-capital-giro",
+      "nome": "Giro de Caixa Corporativo",
+      "descricao": "Estime a necessidade de capital de giro necessário para cobrir ciclos de operações de empresas.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/custo-capital-giro"
+    },
+    {
+      "id": "roi-investimento-comum",
+      "nome": "Retorno de Investimento (ROI)",
+      "descricao": "Meça a rentabilidade de um investimento analisando a relação ganho bruto vs custos.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/roi-investimento-comum"
+    },
+    {
+      "id": "faturamento-lucro-presumido",
+      "nome": "Simulador IRPJ Lucro Presumido",
+      "descricao": "Simule o cálculo simplificado de impostos com margens pré-estabelecidas de lucro presumido.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/faturamento-lucro-presumido"
+    },
+    {
+      "id": "ponto-de-equilibrio-venda",
+      "nome": "Ponto de Equilíbrio (Break even)",
+      "descricao": "Quantifique o volume de comercialização de produtos que deve ser vendido para obter lucro zero.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/ponto-de-equilibrio-venda"
+    },
+    {
+      "id": "consumo-agua-ideal",
+      "nome": "Consumo Diário de Água",
+      "descricao": "Estime a cota hídrica diária ideal recomendada com base na massa corporal corporal.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/consumo-agua-ideal"
+    },
+    {
+      "id": "percentual-gordura-corp",
+      "nome": "Percentual de Gordura Estimado",
+      "descricao": "Obtenha estimativas da constituição corporal cruzando dados de circunferências do corpo.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/percentual-gordura-corp"
+    },
+    {
+      "id": "frequencia-cardiaca-alvo",
+      "nome": "Frequência Cardíaca de Esporte",
+      "descricao": "Encontre suas zonas de pulsação cardíaca ideal para treinos esportivos aeróbicos saudáveis.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/frequencia-cardiaca-alvo"
+    },
+    {
+      "id": "calculo-calorias-metabolismo",
+      "nome": "Metabolismo Basal Ativo (TMB)",
+      "descricao": "Simulador do quantitativo de calorias necessárias gastas em repouso absoluto ou atividade diária leve.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/calculo-calorias-metabolismo"
+    },
+    {
+      "id": "calculadora-sono-ideal",
+      "nome": "Ciclos de Sono Ideal",
+      "descricao": "Projete os horários recomendados para dormir para acordar descansado sem interromper ciclos profundos de sono.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-sono-ideal"
+    },
+    {
+      "id": "calorias-atividades-fisicas",
+      "nome": "Gasto Calórico por Atividade",
+      "descricao": "Estime a perda energética média após realizar sessões prolongadas de atividades de exercícios.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/calorias-atividades-fisicas"
+    },
+    {
+      "id": "peso-ideal-corp-raciol",
+      "nome": "Proporção Corporal Recomendada",
+      "descricao": "Calcule faixas nominais ideais de peso saudável associados aos limites de seu perfil biométrico.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/peso-ideal-corp-raciol"
+    },
+    {
+      "id": "distribuição-macronutrientes",
+      "nome": "Divisão de Macros (Dietas)",
+      "descricao": "Planeje sua ingestão de macronutrientes balanceada baseada em metas de consumo nutricional diário.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/distribuição-macronutrientes"
+    },
+    {
+      "id": "pressao-arterial-check",
+      "nome": "Análise de Pressão Vascular",
+      "descricao": "Classifique a integridade de medições de sua pressão de modo preliminar e analítico.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/pressao-arterial-check"
+    },
+    {
+      "id": "honorarios-advogado",
+      "nome": "Honorários de Advocatícios",
+      "descricao": "Estime o valor final sugerido de honorários contratuais mais êxito em ações jurídicas comuns.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/honorarios-advogado"
+    },
+    {
+      "id": "plantao-medico",
+      "nome": "Plantão Médico e Clínico",
+      "descricao": "Controle o rendimento de um plantão médico considerando carga horária, adicionais ou impostos de notas.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/plantao-medico"
+    },
+    {
+      "id": "comissao-corretor",
+      "nome": "Comissão de Corretor",
+      "descricao": "Quantifique a comissão de intermediação imobiliária em transações imobiliárias.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/comissao-corretor"
+    },
+    {
+      "id": "diaria-freelancer",
+      "nome": "Diária de Designer & Dev",
+      "descricao": "Encontre o preço de diária correto integrando metas de faturamento, dias úteis e softwares de trabalho.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/diaria-freelancer"
+    },
+    {
+      "id": "frete-autonomo",
+      "nome": "Estimativa de Frete de Carga",
+      "descricao": "Calcule o frete de caminhões com base na distância percorrida, desgaste de pneus e pedágio.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/frete-autonomo"
+    },
+    {
+      "id": "markup-artesanato",
+      "nome": "Markup de Artesanato",
+      "descricao": "Precifique itens manuais costurando matéria-prima, tempo gasto e despesas acessórias.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/markup-artesanato"
+    },
+    {
+      "id": "salario-professor",
+      "nome": "Cálculo de Hora Aula Professor",
+      "descricao": "Remuneração agregando quantidade de turmas ministradas, hora-atividade e gratificação de classe.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/salario-professor"
+    },
+    {
+      "id": "comissao-vendedor",
+      "nome": "Comissão de Vendedor Comercial",
+      "descricao": "Estime o comissionamento mensal de vendas associados a cotas progressivas de metas de balanço comercial.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/comissao-vendedor"
+    },
+    {
+      "id": "traducao-texto",
+      "nome": "Orçamento de Tradutor Freelancer",
+      "descricao": "Sinale o orçamento de tradução correlacionando o número de palavras e grau de complexidade do arquivo.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/traducao-texto"
+    },
+    {
+      "id": "fotografo-evento",
+      "nome": "Orçamento de Fotógrafo",
+      "descricao": "Estime valores referenciados para ensaios fotográficos cobrindo tempo de tratamento e deslocamento.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/fotografo-evento"
+    },
+    {
+      "id": "agro-produtividade-graos",
+      "nome": "Produtividade de Grãos (Milho/Soja)",
+      "descricao": "Calcule a produtividade de colheita em sacas/hectare e projete a produção total em toneladas e lucratividade.",
+      "categoria": "agronegocio",
+      "url": "https://www.brasilcalculadoras.com.br/agro-produtividade-graos"
+    },
+    {
+      "id": "agro-lote-gado-corte",
+      "nome": "Viabilidade de Lote de Gado de Corte",
+      "descricao": "Estime o peso médio em arrobas (@), rendimento de carcaça e a receita na venda de cabeças de boi gordo.",
+      "categoria": "agronegocio",
+      "url": "https://www.brasilcalculadoras.com.br/agro-lote-gado-corte"
+    },
+    {
+      "id": "agro-conversor-medidas-terra",
+      "nome": "Conversor de Medidas de Terra",
+      "descricao": "Converta hectares para alqueires (paulista, mineiro, baiano) e metros quadrados.",
+      "categoria": "agronegocio",
+      "url": "https://www.brasilcalculadoras.com.br/agro-conversor-medidas-terra"
+    },
+    {
+      "id": "agro-calagem-solo",
+      "nome": "Necessidade de Calagem (Solo)",
+      "descricao": "Calcule a quantidade sugerida de calcário por hectare para corrigir a acidez de plantio de terras.",
+      "categoria": "agronegocio",
+      "url": "https://www.brasilcalculadoras.com.br/agro-calagem-solo"
+    },
+    {
+      "id": "agro-racao-animal",
+      "nome": "Dimensionamento de Ração e Silo",
+      "descricao": "Estime o consumo diário de ração por plantel de cabeças e a autonomia de abastecimento do silo.",
+      "categoria": "agronegocio",
+      "url": "https://www.brasilcalculadoras.com.br/agro-racao-animal"
+    },
+    {
+      "id": "agro-semeadura-densidade",
+      "nome": "Densidade de Semeadura e Plantio",
+      "descricao": "Calcule o número ideal de sementes recomendadas por metro corrido de fileira e peso total consumido.",
+      "categoria": "agronegocio",
+      "url": "https://www.brasilcalculadoras.com.br/agro-semeadura-densidade"
+    },
+    {
+      "id": "log-calculo-frete",
+      "nome": "Cálculo de Frete e Margem de Lucro",
+      "descricao": "Calcule o valor sugerido de frete para viagens com base em consumo de combustível, pedágios, custos extras e margem de lucro.",
+      "categoria": "logistica",
+      "url": "https://www.brasilcalculadoras.com.br/log-calculo-frete"
+    },
+    {
+      "id": "log-custo-km-rodado",
+      "nome": "Custo de Km Rodado de Veículo Pesado",
+      "descricao": "Encontre o custo operacional real por quilômetro rodado, desmembrando custos variáveis e custos fixos mensais do veículo.",
+      "categoria": "logistica",
+      "url": "https://www.brasilcalculadoras.com.br/log-custo-km-rodado"
+    },
+    {
+      "id": "log-cubagem-carga",
+      "nome": "Cálculo de Cubagem e Peso Taxável",
+      "descricao": "Calcule o volume em metros cúbicos (m³), o peso cubado da carga e descubra qual peso será cobrado na tabela de frete.",
+      "categoria": "logistica",
+      "url": "https://www.brasilcalculadoras.com.br/log-cubagem-carga"
+    },
+    {
+      "id": "log-lei-estadia",
+      "nome": "Diária de Espera e Descarga (Lei 11.442)",
+      "descricao": "Estime a compensação por tempo parado nos terminais de carga e descarga quando exceder as 5 horas regulamentares por lei.",
+      "categoria": "logistica",
+      "url": "https://www.brasilcalculadoras.com.br/log-lei-estadia"
+    },
+    {
+      "id": "log-jornada-motorista",
+      "nome": "Jornada e Descansos (Lei do Motorista)",
+      "descricao": "Monitore horários de estrada para caminhoneiros e motoristas profissionais, calculando descansos em conformidade com as regras de trânsito.",
+      "categoria": "logistica",
+      "url": "https://www.brasilcalculadoras.com.br/log-jornada-motorista"
+    },
+    {
+      "id": "const-tijolos",
+      "nome": "Calculadora de Tijolos por m²",
+      "descricao": "Estime a quantidade de tijolos ou blocos e a argamassa necessária para levantar paredes.",
+      "categoria": "construcao",
+      "url": "https://www.brasilcalculadoras.com.br/const-tijolos"
+    },
+    {
+      "id": "const-tinta",
+      "nome": "Calculadora de Tinta Predial",
+      "descricao": "Descubra quantos litros e latas de tinta são necessários para pintar seus ambientes.",
+      "categoria": "construcao",
+      "url": "https://www.brasilcalculadoras.com.br/const-tinta"
+    },
+    {
+      "id": "const-piso",
+      "nome": "Calculadora de Pisos e Porcelanato",
+      "descricao": "Encontre a área exata com rodapés e a margem de recortes para comprar o piso ideal.",
+      "categoria": "construcao",
+      "url": "https://www.brasilcalculadoras.com.br/const-piso"
+    },
+    {
+      "id": "evento-churrasco",
+      "nome": "Calculadora de Churrasco",
+      "descricao": "Evite desperdícios calculando a quantidade exata de carnes e bebidas para convidados.",
+      "categoria": "eventos",
+      "url": "https://www.brasilcalculadoras.com.br/evento-churrasco"
+    },
+    {
+      "id": "evento-receita",
+      "nome": "Ficha Técnica de Receitas (Custo)",
+      "descricao": "Precifique doces e salgados somando os custos proporcionais dos ingredientes.",
+      "categoria": "eventos",
+      "url": "https://www.brasilcalculadoras.com.br/evento-receita"
+    },
+    {
+      "id": "evento-bebida",
+      "nome": "Cálculo de Bebidas para Festas",
+      "descricao": "Acerte em cheio no estoque do seu bar de casamento, aniversário ou confraternização.",
+      "categoria": "eventos",
+      "url": "https://www.brasilcalculadoras.com.br/evento-bebida"
+    },
+    {
+      "id": "energia-consumo",
+      "nome": "Custo de Energia Elétrica (Reais)",
+      "descricao": "Transforme os Watts dos seus eletrodomésticos no valor em R$ que eles consomem na conta mensal.",
+      "categoria": "energia",
+      "url": "https://www.brasilcalculadoras.com.br/energia-consumo"
+    },
+    {
+      "id": "energia-solar",
+      "nome": "Dimensionamento de Energia Solar",
+      "descricao": "Descubra quantos painéis fotovoltaicos você precisa para zerar sua conta de energia.",
+      "categoria": "energia",
+      "url": "https://www.brasilcalculadoras.com.br/energia-solar"
+    },
+    {
+      "id": "energia-carbono",
+      "nome": "Pegada de Carbono (Veículos)",
+      "descricao": "Meça quantas árvores você precisa plantar para compensar as emissões anuais do seu carro.",
+      "categoria": "energia",
+      "url": "https://www.brasilcalculadoras.com.br/energia-carbono"
+    },
+    {
+      "id": "edu-sisu",
+      "nome": "Simulador de Nota SISU com Pesos",
+      "descricao": "Calcule sua média exata no ENEM de acordo com os pesos da universidade desejada.",
+      "categoria": "educacao",
+      "url": "https://www.brasilcalculadoras.com.br/edu-sisu"
+    },
+    {
+      "id": "edu-ponderada",
+      "nome": "Média Semestral Universitária",
+      "descricao": "Simule quanto você precisa tirar na prova final para alcançar a aprovação da disciplina.",
+      "categoria": "educacao",
+      "url": "https://www.brasilcalculadoras.com.br/edu-ponderada"
+    },
+    {
+      "id": "edu-leitura",
+      "nome": "Tempo de Leitura de Textos",
+      "descricao": "Estime o tempo de leitura para apostilas, TCCs e provas extensas como o ENEM.",
+      "categoria": "educacao",
+      "url": "https://www.brasilcalculadoras.com.br/edu-leitura"
+    },
+    {
+      "id": "velocidade-media",
+      "nome": "Velocidade Média",
+      "descricao": "Calcule Velocidade Média, Distância Percorrida ou Tempo com base no Teorema do Movimento Uniforme.",
+      "categoria": "quimica_fisica",
+      "url": "https://www.brasilcalculadoras.com.br/velocidade-media"
+    },
+    {
+      "id": "conversor-temperatura",
+      "nome": "Conversor de Temperatura",
+      "descricao": "Converta temperaturas instantaneamente entre Celsius, Fahrenheit e Kelvin.",
+      "categoria": "quimica_fisica",
+      "url": "https://www.brasilcalculadoras.com.br/conversor-temperatura"
+    },
+    {
+      "id": "calculadora-densidade",
+      "nome": "Calculadora de Densidade",
+      "descricao": "Calcule a Densidade absoluta, a Massa ou o Volume ocupado por uma matéria física.",
+      "categoria": "quimica_fisica",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-densidade"
+    },
+    {
+      "id": "tempo-download",
+      "nome": "Tempo de Download de Arquivo",
+      "descricao": "Estime o tempo necessário para baixar um arquivo com base no tamanho dele e velocidade de sua internet.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/tempo-download"
+    },
+    {
+      "id": "aspect-ratio",
+      "nome": "Proporção de Tela & Aspect Ratio",
+      "descricao": "Calcule dimensões proporcionais de imagens ou telas digitais e descubra a fração de aspecto ideal.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/aspect-ratio"
+    },
+    {
+      "id": "conversor-bases",
+      "nome": "Conversor de Bases Numéricas",
+      "descricao": "Converta números da base decimal clássica para sistemas binário, hexadecimal e octal.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/conversor-bases"
+    },
+    {
+      "id": "calculadora-de-salario-liquido",
+      "nome": "Calculadora de Salário Líquido",
+      "descricao": "Calcule seu salário líquido mensal descontando INSS, IRRF e benefícios legais da sua remuneração bruta.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-salario-liquido"
+    },
+    {
+      "id": "calculadora-de-seguro-desemprego",
+      "nome": "Calculadora Seguro Desemprego",
+      "descricao": "Descubra o valor e a quantidade de parcelas que você tem direito ao dar entrada no Seguro Desemprego.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-seguro-desemprego"
+    },
+    {
+      "id": "calculadora-idade-gestacional",
+      "nome": "Calculadora Idade Gestacional",
+      "descricao": "Calcule com precisão de semanas e dias o seu tempo de gravidez e a data provável do parto.",
+      "categoria": "saude",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-idade-gestacional"
+    },
+    {
+      "id": "consumo-de-combustivel-kml",
+      "nome": "Calculadora de Combustível",
+      "descricao": "Estime o gasto exato e a quantidade de litros necessários para sua viagem considerando a autonomia do veículo.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/consumo-de-combustivel-kml"
+    },
+    {
+      "id": "calculadora-de-ipva",
+      "nome": "Calculadora de IPVA Anual",
+      "descricao": "Saiba o valor do imposto automotivo (IPVA) cruzando a alíquota do seu estado com o valor venal do carro.",
+      "categoria": "veiculos",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-ipva"
+    },
+    {
+      "id": "simulador-inss-salario",
+      "nome": "Simulador de Desconto INSS 2026",
+      "descricao": "Calcule o valor exato do desconto previdenciário (INSS) sobre o seu salário bruto usando a tabela progressiva atualizada para 2026.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-inss-salario"
+    },
+    {
+      "id": "simulador-irrf-salario",
+      "nome": "Simulador de Imposto de Renda (IRRF) 2026",
+      "descricao": "Calcule o desconto do Imposto de Renda Retido na Fonte sobre o seu salário, considerando a dedução de INSS e dependentes na tabela 2026.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-irrf-salario"
+    },
+    {
+      "id": "adicional-noturno-clt",
+      "nome": "Calculadora de Adicional Noturno",
+      "descricao": "Calcule o valor do adicional noturno de 20% sobre a hora normal, considerando a hora noturna reduzida de 52 minutos e 30 segundos.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/adicional-noturno-clt"
+    },
+    {
+      "id": "calculadora-vale-transporte",
+      "nome": "Calculadora de Vale-Transporte",
+      "descricao": "Descubra o desconto de até 6% do salário referente ao vale-transporte e quanto a empresa deve complementar mensalmente.",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-vale-transporte"
+    },
+    {
+      "id": "calculadora-salario-hora",
+      "nome": "Calculadora de Salário por Hora",
+      "descricao": "Converta seu salário mensal em valor por hora de acordo com a sua jornada de trabalho (220h, 180h ou 150h mensais).",
+      "categoria": "profissoes",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-salario-hora"
+    },
+    {
+      "id": "simulador-emprestimo-pessoal",
+      "nome": "Simulador de Empréstimo Pessoal",
+      "descricao": "Simule parcelas mensais, juros totais e custo efetivo de empréstimos pessoais usando o sistema de amortização Price.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-emprestimo-pessoal"
+    },
+    {
+      "id": "calculadora-das-mei",
+      "nome": "Calculadora DAS MEI 2026",
+      "descricao": "Calcule o valor mensal da guia DAS do Microempreendedor Individual por tipo de atividade, atualizado com o salário mínimo de 2026.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-das-mei"
+    },
+    {
+      "id": "calculadora-gorjeta",
+      "nome": "Calculadora de Gorjeta e Divisão de Conta",
+      "descricao": "Divida a conta do restaurante entre os participantes, com cálculo automático de gorjeta percentual e valor individual.",
+      "categoria": "financas",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-gorjeta"
+    },
+    {
+      "id": "diferenca-entre-datas",
+      "nome": "Calculadora de Diferença entre Datas",
+      "descricao": "Calcule quantos dias, semanas, meses e anos existem entre duas datas. Útil para contratos, prazos legais e planejamento pessoal.",
+      "categoria": "datas",
+      "url": "https://www.brasilcalculadoras.com.br/diferenca-entre-datas"
+    },
+    {
+      "id": "dias-uteis-entre-datas",
+      "nome": "Calculadora de Dias Úteis",
+      "descricao": "Conte apenas os dias úteis (sem sábados, domingos e feriados nacionais) entre duas datas no calendário brasileiro.",
+      "categoria": "datas",
+      "url": "https://www.brasilcalculadoras.com.br/dias-uteis-entre-datas"
+    },
+    {
+      "id": "conversor-horas-decimais",
+      "nome": "Conversor de Horas para Decimal",
+      "descricao": "Converta horas no formato HH:MM para o formato decimal utilizado em folhas de ponto e sistemas de RH.",
+      "categoria": "datas",
+      "url": "https://www.brasilcalculadoras.com.br/conversor-horas-decimais"
+    },
+    {
+      "id": "data-provavel-parto",
+      "nome": "Calculadora da Data Provável do Parto (DPP)",
+      "descricao": "Descubra a data estimada do nascimento do bebê pela regra de Naegele, a partir dos dias desde a última menstruação.",
+      "categoria": "maternidade",
+      "url": "https://www.brasilcalculadoras.com.br/data-provavel-parto"
+    },
+    {
+      "id": "custo-mensal-bebe",
+      "nome": "Calculadora de Custo Mensal com Bebê",
+      "descricao": "Estime os gastos mensais com um recém-nascido incluindo fraldas, leite, consultas pediátricas e itens essenciais.",
+      "categoria": "maternidade",
+      "url": "https://www.brasilcalculadoras.com.br/custo-mensal-bebe"
+    },
+    {
+      "id": "simulador-nota-enem",
+      "nome": "Simulador de Nota ENEM para SiSU",
+      "descricao": "Calcule sua média ponderada do ENEM com pesos personalizados para simular a nota de corte em cursos do SiSU.",
+      "categoria": "educacao",
+      "url": "https://www.brasilcalculadoras.com.br/simulador-nota-enem"
+    },
+    {
+      "id": "proporcao-aurea-design",
+      "nome": "Calculadora de Proporção Áurea (φ)",
+      "descricao": "Calcule dimensões proporcionais usando a razão áurea (1.618) para design gráfico, arquitetura, tipografia e layouts harmônicos.",
+      "categoria": "matematica",
+      "url": "https://www.brasilcalculadoras.com.br/proporcao-aurea-design"
+    },
+    {
+      "id": "calculadora-de-cpm",
+      "nome": "Calculadora de CPM",
+      "descricao": "Estime o CPM (Custo por Mil impressões) de campanhas de tráfego pago ou calcule o orçamento ideal.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-cpm"
+    },
+    {
+      "id": "calculadora-de-ctr",
+      "nome": "Calculadora de CTR (Taxa de Cliques)",
+      "descricao": "Meça a taxa de cliques (Click-Through Rate) de banners, artigos ou e-mails marketing.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-ctr"
+    },
+    {
+      "id": "calculadora-de-cpc",
+      "nome": "Calculadora de CPC (Custo por Clique)",
+      "descricao": "Calcule o Custo por Clique médio de campanhas patrocinadas ou anúncios digitais.",
+      "categoria": "tecnologia",
+      "url": "https://www.brasilcalculadoras.com.br/calculadora-de-cpc"
+    }
+  ]
+}

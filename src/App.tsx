@@ -30,6 +30,7 @@ import { useLocation } from 'wouter';
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
 import { AdSenseBanner } from './components/AdSenseBanner';
 import { LegalPage } from './components/LegalPages';
+import { DesenvolvedoresView } from './components/DesenvolvedoresView';
 import { CompoundInterestCalc } from './components/CompoundInterestCalc';
 import { CltVsPjCalc } from './components/CltVsPjCalc';
 import { ProfitMarginCalc } from './components/ProfitMarginCalc';
@@ -241,7 +242,7 @@ export default function App() {
 
     const path = location.replace(/^\//, '').replace(/\/$/, '');
     if (path) {
-      if (['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato'].includes(path)) {
+      if (['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato', 'desenvolvedores', 'api'].includes(path)) {
         setActiveCategoryHub(null);
         return;
       }
@@ -422,7 +423,7 @@ export default function App() {
   // Dynamic Page Title & SEO Meta Updates on calculator or category change
   useEffect(() => {
     const normalizedPath = (location || '').replace(/\/$/, '') || '/';
-    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato'].includes(normalizedPath)) {
+    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato', '/desenvolvedores', '/api'].includes(normalizedPath)) {
       const legalTitles: Record<string, { title: string; desc: string }> = {
         '/politica-de-privacidade': {
           title: 'Política de Privacidade | Brasil Calculadoras',
@@ -439,6 +440,14 @@ export default function App() {
         '/contato': {
           title: 'Contato e Suporte | Brasil Calculadoras',
           desc: 'Entre em contato com a equipe do Brasil Calculadoras para tirar dúvidas, enviar sugestões ou reportar pontos de melhoria.'
+        },
+        '/desenvolvedores': {
+          title: 'API Pública & Ferramentas para Desenvolvedores | Brasil Calculadoras',
+          desc: 'Acesse endpoints JSON gratuitos das tabelas oficiais de INSS, IRRF, parâmetros trabalhistas e índices econômicos. Widgets embebíveis para blogs e portais.'
+        },
+        '/api': {
+          title: 'API Pública & Ferramentas para Desenvolvedores | Brasil Calculadoras',
+          desc: 'Acesse endpoints JSON gratuitos das tabelas oficiais de INSS, IRRF, parâmetros trabalhistas e índices econômicos. Widgets embebíveis para blogs e portais.'
         }
       };
       const current = legalTitles[normalizedPath];
@@ -466,6 +475,32 @@ export default function App() {
         updateMetaTag('property', 'og:type', 'website');
         updateMetaTag('name', 'twitter:title', current.title);
         updateMetaTag('name', 'twitter:description', current.desc);
+
+        if (normalizedPath === '/desenvolvedores' || normalizedPath === '/api') {
+          try {
+            let script = document.getElementById('jsonld-seo') as HTMLScriptElement;
+            if (!script) {
+              script = document.createElement('script');
+              script.id = 'jsonld-seo';
+              script.type = 'application/ld+json';
+              document.head.appendChild(script);
+            }
+            const apiSchema = {
+              "@context": "https://schema.org",
+              "@type": "WebAPI",
+              "name": "Brasil Calculadoras Public Data API",
+              "description": current.desc,
+              "url": "https://www.brasilcalculadoras.com.br/desenvolvedores",
+              "documentation": "https://www.brasilcalculadoras.com.br/desenvolvedores",
+              "provider": {
+                "@type": "Organization",
+                "name": "Brasil Calculadoras",
+                "url": "https://www.brasilcalculadoras.com.br"
+              }
+            };
+            script.textContent = JSON.stringify(apiSchema);
+          } catch (e) {}
+        }
 
         checkSeoOverrides('https://www.brasilcalculadoras.com.br' + normalizedPath);
       }
@@ -1179,6 +1214,8 @@ export default function App() {
           <LegalPage type="about" onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/contato' ? (
           <LegalPage type="contact" onNavigateHome={() => setLocation('/')} />
+        ) : normalizedLocation === '/desenvolvedores' || normalizedLocation === '/api' ? (
+          <DesenvolvedoresView onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/' ? (
           <HomepageView 
             onSelectCalculator={selectCalculator}

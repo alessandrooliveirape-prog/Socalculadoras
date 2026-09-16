@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "fonte": "Brasil Calculadoras",
+    "url": "https://www.brasilcalculadoras.com.br",
+    "titulo": "Tabela Progressiva de Contribuição do INSS",
+    "vigencia": "2026",
+    "atualizado_em": "2026-09-16T17:57:02.020Z",
+    "licenca": "Uso público e livre com atribuição de fonte obrigatória"
+  },
+  "dados": {
+    "salario_minimo": 1518,
+    "teto_inss": 8157.41,
+    "teto_desconto_maximo": 952.12,
+    "faixas": [
+      {
+        "faixa": 1,
+        "limite_inferior": 0,
+        "limite_superior": 1518,
+        "aliquota_percentual": 7.5,
+        "aliquota_decimal": 0.075,
+        "desconto_maximo_faixa": 113.85
+      },
+      {
+        "faixa": 2,
+        "limite_inferior": 1518.01,
+        "limite_superior": 2793.88,
+        "aliquota_percentual": 9,
+        "aliquota_decimal": 0.09,
+        "desconto_maximo_faixa": 114.83
+      },
+      {
+        "faixa": 3,
+        "limite_inferior": 2793.89,
+        "limite_superior": 4190.83,
+        "aliquota_percentual": 12,
+        "aliquota_decimal": 0.12,
+        "desconto_maximo_faixa": 167.63
+      },
+      {
+        "faixa": 4,
+        "limite_inferior": 4190.84,
+        "limite_superior": 8157.41,
+        "aliquota_percentual": 14,
+        "aliquota_decimal": 0.14,
+        "desconto_maximo_faixa": 555.32
+      }
+    ],
+    "observacoes": "O cálculo incide de forma progressiva sobre cada parcela do salário de contribuição."
+  }
+}

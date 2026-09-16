@@ -67,7 +67,14 @@ xml += `
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
+  <!-- API Pública e Recursos para Desenvolvedores -->
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/desenvolvedores</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>`;
 
 fs.writeFileSync(sitemapPath, xml, 'utf-8');
-console.log(`✅ Sitemap gerado com sucesso contendo ${CALCULATORS_CATALOG.length + 5 + Object.keys(CATEGORY_KEY_TO_SLUG).length} URLs!`);
+console.log(`✅ Sitemap gerado com sucesso contendo ${CALCULATORS_CATALOG.length + 6 + Object.keys(CATEGORY_KEY_TO_SLUG).length} URLs!`);

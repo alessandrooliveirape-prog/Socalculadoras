@@ -7,6 +7,7 @@ import {
   CATEGORY_KEY_TO_SLUG, 
   CATEGORY_MAP_RAW 
 } from './src/utils/seoContentGenerator';
+import { generateApiData } from './scripts/generateApiEndpoints';
 
 const distPath = path.resolve('./dist');
 const templatePath = path.join(distPath, 'index.html');
@@ -46,6 +47,7 @@ const sharedFooterHtml = `
           <li><a href="/termos-de-uso" style="color: #cbd5e1; text-decoration: none;">Termos de Uso</a></li>
           <li><a href="/sobre" style="color: #cbd5e1; text-decoration: none;">Sobre Nós</a></li>
           <li><a href="/contato" style="color: #cbd5e1; text-decoration: none;">Contato & Suporte</a></li>
+          <li><a href="/desenvolvedores" style="color: #cbd5e1; text-decoration: none;">API & Desenvolvedores</a></li>
         </ul>
       </div>
 
@@ -492,6 +494,32 @@ const legalPagesConfig = [
       <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Se você encontrou algum erro em um cálculo, deseja reportar um bug no sistema ou tem uma ideia brilhante para uma nova calculadora, sinta-se à vontade para nos enviar uma mensagem. Nossa equipe de suporte técnico e editorial analisará a sua mensagem o mais rápido possível.</p>
       <p style="font-size: 14px; font-weight: bold; color: #2563eb; background: #eff6ff; padding: 15px; border-radius: 8px; display: inline-block;">✉️ E-mail oficial: contato@brasilcalculadoras.com.br</p>
     `
+  },
+  {
+    slug: 'desenvolvedores',
+    title: 'API Pública & Ferramentas para Desenvolvedores | Brasil Calculadoras',
+    description: 'Acesse endpoints JSON gratuitos das tabelas oficiais de INSS, IRRF, parâmetros trabalhistas e índices econômicos. Widgets embebíveis para blogs e portais.',
+    heading: 'APIs Públicas & Central de Desenvolvedores',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">O Brasil Calculadoras oferece uma infraestrutura aberta de APIs de dados estáticos para desenvolvedores de software, profissionais de RH, contadores, fintechs e criadores de conteúdo do Brasil. Nossos dados são servidos na borda através de Edge CDN, garantindo latência abaixo de 20ms, tolerância a falhas e custo zero.</p>
+      
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Endpoints Públicos REST (JSON)</h2>
+      <ul style="font-size: 13.5px; line-height: 1.8; color: #475569; margin-bottom: 20px;">
+        <li><b>Tabela INSS:</b> <code>GET /api/v1/tabelas/inss.json</code> — Alíquotas progressivas (7,5% a 14%), faixas salariais e teto previdenciário (R$ 8.157,41).</li>
+        <li><b>Tabela IRRF:</b> <code>GET /api/v1/tabelas/irrf.json</code> — Faixas de isenção, alíquotas (7,5% a 27,5%) e parcelas oficiais a deduzir.</li>
+        <li><b>Parâmetros Trabalhistas:</b> <code>GET /api/v1/tabelas/trabalhista.json</code> — Salário mínimo (R$ 1.518,00), FGTS (8%), multa rescisória (40%) e regras de aviso prévio.</li>
+        <li><b>Índices Financeiros:</b> <code>GET /api/v1/indices/financeiros.json</code> — Taxa Selic meta, CDI estimado e regras da Poupança.</li>
+        <li><b>Catálogo de Calculadoras:</b> <code>GET /api/v1/calculadoras/catalogo.json</code> — Lista estruturada de todas as ferramentas e URLs canônicas.</li>
+      </ul>
+
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Widgets Incorporáveis para Blogs e Portais</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Deseja oferecer simuladores de Juros Compostos, Rescisão Trabalhista CLT ou 13º Salário dentro dos seus artigos? Basta incorporar nosso script leve de 2 linhas:</p>
+      <pre style="background: #0f172a; color: #38bdf8; padding: 15px; border-radius: 8px; font-size: 12px; overflow-x: auto;">&lt;div id="brasil-calc-widget" data-calculator="juros-compostos"&gt;&lt;/div&gt;
+&lt;script src="https://www.brasilcalculadoras.com.br/widget.js" async&gt;&lt;/script&gt;</pre>
+
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Licença e Termos de Uso</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Todos os dados são de uso livre e gratuito tanto para fins pessoais quanto comerciais, com a única exigência de manter a atribuição de autoria através de link dofollow apontando para o Brasil Calculadoras.</p>
+    `
   }
 ];
 
@@ -538,4 +566,8 @@ legalPagesConfig.forEach(page => {
   fs.writeFileSync(path.join(distPath, `${page.slug}.html`), rendered, 'utf8');
 });
 console.log('✅ Institutional & Legal Pages pre-rendered!');
+
+// Generate static JSON API files
+generateApiData();
+console.log('✅ Endpoints públicos da API gerados com sucesso!');
 

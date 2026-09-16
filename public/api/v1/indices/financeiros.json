@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "fonte": "Brasil Calculadoras",
+    "url": "https://www.brasilcalculadoras.com.br",
+    "titulo": "Indicadores e Índices Econômicos de Referência",
+    "vigencia": "2026",
+    "atualizado_em": "2026-09-16T17:57:02.020Z",
+    "licenca": "Uso público e livre com atribuição de fonte obrigatória"
+  },
+  "dados": {
+    "taxa_selic_meta_anual_percentual": 13.25,
+    "taxa_cdi_estimada_anual_percentual": 13.15,
+    "regra_poupanca": {
+      "criterio": "Selic acima de 8,5% a.a.",
+      "rendimento_mensal_percentual": 0.5,
+      "adicional": "Taxa Referencial (TR)",
+      "isencao_ir_pessoa_fisica": true
+    },
+    "inflacao_ipca_acumulado_12m_estimado_percentual": 4.6,
+    "observacao": "Indicadores econômicos para fins didáticos e projeções matemáticas em simuladores financeiros."
+  }
+}
