@@ -281,10 +281,14 @@ export default function App() {
   };
 
   const checkSeoOverrides = (canonicalUrl: string) => {
-    const centralSupaUrl = 'https://tezwamjdetiigwigvayt.supabase.co';
-    const centralSupaKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlendhbWpkZXRpaWd3aWd2YXl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5NTYxMDIsImV4cCI6MjA5OTUzMjEwMn0.AJ_xFlk4MmEiC1ECoNLz9-3PkoKqOmJvb2dS2zBYWDE';
-    const siteId = 'sc-domain:brasilcalculadoras.com.br';
+    const centralSupaUrl = import.meta.env.VITE_SUPABASE_URL;
+    const centralSupaKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const siteId = import.meta.env.VITE_SITE_ID || 'sc-domain:brasilcalculadoras.com.br';
     
+    if (!centralSupaUrl || !centralSupaKey) {
+      return;
+    }
+
     const reqUrl = `${centralSupaUrl}/rest/v1/seo_overrides?site_id=eq.${siteId}&url=eq.${encodeURIComponent(canonicalUrl)}&approved=eq.true&select=optimized_title,optimized_meta`;
 
     fetch(reqUrl, {
