@@ -61,6 +61,7 @@ import {
   CATEGORY_MAP_RAW 
 } from './utils/seoContentGenerator';
 import { logSeoInteraction } from './utils/seoMonitor';
+import { initMonetagPush } from './utils/monetagPush';
 
 
 const Breadcrumbs: React.FC<{ catKey?: string; calcName?: string; catSlug?: string }> = ({ catKey, calcName, catSlug }) => {
@@ -226,6 +227,14 @@ export default function App() {
     } catch (e) {
       console.error(e);
     }
+  }, []);
+
+  // Web Push Monetag: registro não-invasivo respeitando UX, Core Web Vitals e frequência de 15 dias
+  useEffect(() => {
+    const cleanupPush = initMonetagPush();
+    return () => {
+      if (cleanupPush) cleanupPush();
+    };
   }, []);
 
   // Route-based sub-page router for search engines / direct links
