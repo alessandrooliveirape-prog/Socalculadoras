@@ -20,6 +20,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from '../data/calculatorsCatalog';
 import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW } from '../utils/seoContentGenerator';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface HomepageViewProps {
   onSelectCalculator: (id: string) => void;
@@ -374,6 +375,11 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             </p>
           </div>
         </div>
+      </section>
+
+      {/* Recomendações Úteis de Ferramentas e Livros na Amazon */}
+      <section>
+        <AffiliateRecommendationCard category="financas" />
       </section>
 
       {/* FAQ curta institucional */}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Percent, Plus, Minus, Info } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface SimplePercentageCalcProps {
   onCalculate: (results: any) => void;
@@ -179,6 +180,9 @@ export const SimplePercentageCalc: React.FC<SimplePercentageCalcProps> = ({ onCa
               )}
             </div>
           </div>
+
+          {/* Affiliate Product Recommendation */}
+          <AffiliateRecommendationCard category="matematica" className="mt-4" />
         </div>
       </div>
     </div>

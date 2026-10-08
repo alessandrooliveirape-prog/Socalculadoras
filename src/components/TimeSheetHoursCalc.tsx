@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Clock, Plus, Trash2, DollarSign, RotateCcw, Copy, CalendarPlus, Briefcase } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface HoursRecord {
   id: string;
@@ -326,6 +327,9 @@ export const TimeSheetHoursCalc: React.FC<TimeSheetHoursCalcProps> = ({ onCalcul
             </div>
           )}
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="trabalhista" />
       </div>
     </div>
   );

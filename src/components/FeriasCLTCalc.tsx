@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, HelpCircle as HelpIcon, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface FeriasCLTCalcProps {
   onCalculate: (results: any) => void;
@@ -238,6 +239,9 @@ export const FeriasCLTCalc: React.FC<FeriasCLTCalcProps> = ({ onCalculate }) => 
             </div>
           </div>
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="trabalhista" />
 
         {/* FAQ Block */}
         <div className="bg-slate-50/70 border border-slate-200 rounded-xl p-5 flex flex-col gap-4">

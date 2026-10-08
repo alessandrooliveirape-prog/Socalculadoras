@@ -61,17 +61,25 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               </ul>
             </div>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Processamento de Dados das Calculadoras</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Programa de Associados da Amazon</h2>
+            <p>
+              O <strong>Brasil Calculadoras</strong> participa do <strong>Programa de Associados da Amazon</strong> (Amazon Serviços de Varejo do Brasil Ltda.), um programa de publicidade de afiliados desenvolvido para proporcionar aos sites um meio de obter receitas publicitárias por meio de anúncios e links para o site Amazon.com.br.
+            </p>
+            <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 my-2 text-xs text-amber-950 font-medium leading-relaxed">
+              <strong>Declaração Obrigatória:</strong> Como participante do Programa de Associados da Amazon, o Brasil Calculadoras é remunerado por compras qualificadas realizadas a partir dos links de indicação disponibilizados na plataforma, sem nenhum acréscimo de custo ao usuário adquirente.
+            </div>
+
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Processamento de Dados das Calculadoras</h2>
             <p>
               Todas as simulações e cálculos efetuados em nossas ferramentas (como salários, rescisões trabalhistas, IMC e juros compostos) são processados <strong>localmente e de forma 100% confidencial no seu próprio navegador</strong>. O Brasil Calculadoras não armazena, transmite ou compartilha os números financeiros ou dados pessoais digitados nos formulários com servidores externos.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Links para Sites de Terceiros</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">5. Links para Sites de Terceiros</h2>
             <p>
               Nosso site contém links de referência para portais oficiais e fontes governamentais (como Caixa Econômica Federal, Receita Federal e Banco Central). Não nos responsabilizamos pelas políticas de privacidade ou conteúdos praticados por esses sites externos. Recomendamos a leitura das políticas individuais de cada portal visitado.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">5. Direitos do Usuário (LGPD)</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">6. Direitos do Usuário (LGPD)</h2>
             <p>
               Você tem o direito de solicitar a confirmação da existência de tratamento de dados, acesso aos dados, correção de dados incompletos e revogação do consentimento de cookies a qualquer momento através do nosso canal de atendimento pelo e-mail: <a href="mailto:contato@brasilcalculadoras.com.br" className="text-blue-600 font-bold underline">contato@brasilcalculadoras.com.br</a>.
             </p>
@@ -110,6 +118,11 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
             <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Disponibilidade e Modificações</h2>
             <p>
               Buscamos manter o serviço ativo 24 horas por dia, 7 dias por semana. No entanto, reservamo-nos o direito de suspender, atualizar, modificar ou descontinuar qualquer funcionalidade ou ferramenta a qualquer momento, sem aviso prévio, para realizar melhorias técnicas ou adequações legislativas.
+            </p>
+
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Divulgação de Links de Afiliados (Amazon)</h2>
+            <p>
+              Determinadas páginas, artigos e calculadoras contêm links de afiliados vinculados ao Programa de Associados da Amazon. Ao clicar e concluir compras qualificadas por esses links, o Brasil Calculadoras pode receber remuneração por comissão sem nenhum encargo ou valor adicional cobrado de você. O pós-venda, garantia e entrega dos produtos indicados são de responsabilidade integral da plataforma parceira Amazon.com.br.
             </p>
           </section>
         </article>

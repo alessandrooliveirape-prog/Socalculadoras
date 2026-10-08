@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Percent, Hash, AlignLeft, Sparkles, RefreshCw, Layers, Sliders, Type } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface RuleOf3AndTextToolsProps {
   onCalculate: (results: {
@@ -205,6 +206,9 @@ export const RuleOf3AndTextTools: React.FC<RuleOf3AndTextToolsProps> = ({ onCalc
                 <span>{directionType === 'direct' ? `${valA} ÷ ${valB} = ${valC} ÷ X` : `${valA} × ${valB} = ${valC} × X`}</span>
               </div>
             </div>
+
+            {/* Affiliate Product Recommendation */}
+            <AffiliateRecommendationCard category="matematica" className="w-full mt-2" />
           </div>
         </div>
       ) : (
@@ -291,6 +295,9 @@ export const RuleOf3AndTextTools: React.FC<RuleOf3AndTextToolsProps> = ({ onCalc
             <div className="bg-gray-50 border border-gray-100 rounded-lg p-3 mt-1 text-[10px] text-gray-550 leading-relaxed">
               💡 <span className="font-semibold text-gray-700">Dica de SEO:</span> Mantenha parágrafos de até 3 ou 4 linhas e use listas de marcadores (bullets) para melhorar a escabilidade em telas de smartphones.
             </div>
+
+            {/* Affiliate Product Recommendation */}
+            <AffiliateRecommendationCard category="matematica" className="mt-2" />
           </div>
         </div>
       )}

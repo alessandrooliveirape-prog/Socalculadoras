@@ -49,6 +49,7 @@ import { HomepageView } from './components/HomepageView';
 import { SimplePercentageCalc } from './components/SimplePercentageCalc';
 import { CarFinanceCalc } from './components/CarFinanceCalc';
 import { AdSenseEarningsCalc } from './components/AdSenseEarningsCalc';
+import { AffiliateRecommendationCard } from './components/AffiliateRecommendationCard';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
@@ -1418,6 +1419,9 @@ export default function App() {
                     ))}
                   </div>
                 </div>
+
+                {/* Affiliate Product Recommendation for the active Category Hub */}
+                <AffiliateRecommendationCard category={activeCategoryHub} />
 
                 {/* Category FAQs */}
                 {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (

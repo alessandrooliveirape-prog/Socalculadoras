@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Download, DollarSign, HelpCircle, ArrowRight, UserCheck, Activity, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface AposentadoriaINSSCalcProps {
   onCalculate: (results: any) => void;
@@ -196,6 +197,9 @@ export const AposentadoriaINSSCalc: React.FC<AposentadoriaINSSCalcProps> = ({ on
             </div>
           </div>
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="financas" />
 
         {/* Detailed FAQ Block */}
         <div className="bg-slate-50/70 border border-slate-200 rounded-xl p-5 flex flex-col gap-4">

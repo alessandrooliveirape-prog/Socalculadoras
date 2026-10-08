@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ShieldCheck, Wallet, Landmark, HelpCircle, RotateCcw, ArrowRight } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface CltVsPjCalcProps {
   onCalculate: (results: {
@@ -379,6 +380,9 @@ export const CltVsPjCalc: React.FC<CltVsPjCalcProps> = ({ onCalculate }) => {
             </div>
           </div>
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="financas" />
       </div>
     </div>
   );

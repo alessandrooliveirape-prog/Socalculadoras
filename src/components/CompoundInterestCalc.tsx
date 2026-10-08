@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { DollarSign, Percent, Calendar, TrendingUp, RotateCcw, FileText, Table } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface CompoundInterestCalcProps {
   onCalculate: (results: {
@@ -358,6 +359,9 @@ export const CompoundInterestCalc: React.FC<CompoundInterestCalcProps> = ({ onCa
             </table>
           </div>
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="financas" />
       </div>
     </div>
   );

@@ -141,8 +141,11 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           {/* Editorial Disclaimer Col */}
           <div className="md:col-span-2">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Isenção</h4>
-            <p className="text-[10px] text-slate-400 leading-normal">
+            <p className="text-[10px] text-slate-400 leading-normal mb-2">
               Os resultados emitidos por esta central têm caráter de projeção técnica provisória e educativa. Consulte profissionais regulados (contadores, nutricionistas ou advogados) antes de celebrar decisões definitivas comerciais.
+            </p>
+            <p className="text-[9.5px] text-slate-500 leading-normal font-sans">
+              Participante do Programa de Associados da Amazon. Comissões por compras qualificadas.
             </p>
           </div>
         </div>
@@ -217,10 +220,13 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               <p>Nós utilizamos publicidade programática terceirizada do <strong>Google AdSense</strong>. O Google e parceiros terceirizados utilizam cookies persistentes (como o cookie DoubleClick DART) para veicular anúncios segmentados baseados nas visitas anteriores feitas a este e a outros portais na Internet.</p>
               <p>Os usuários podem desativar a exibição de anúncios personalizados visitando as <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Configurações de Anúncios do Google</a>.</p>
               
-              <h4 className="text-xs font-bold text-slate-800">3. Conformidade com a LGPD e GDPR</h4>
+              <h4 className="text-xs font-bold text-slate-800">3. Programa de Associados da Amazon</h4>
+              <p>O Brasil Calculadoras participa do Programa de Associados da Amazon. Como participante, somos remunerados por compras qualificadas realizadas a partir dos links de produtos recomendados no site.</p>
+
+              <h4 className="text-xs font-bold text-slate-800">4. Conformidade com a LGPD e GDPR</h4>
               <p>Nós respeitamos integralmente as diretrizes da Lei Geral de Proteção de Dados (LGPD) brasileira. Não vendemos, alugamos ou comercializamos dados cadastrais ou registros de navegação a empresas terceiras sob nenhuma circunstância.</p>
 
-              <h4 className="text-xs font-bold text-slate-800">4. Contato do Encarregado de Dados</h4>
+              <h4 className="text-xs font-bold text-slate-800">5. Contato do Encarregado de Dados</h4>
               <p>Para dúvidas legais ou requisições de exclusão de históricos, escreva para o e-mail: <code>lgpd@brasilcalculadoras.com.br</code></p>
             </div>
           </div>

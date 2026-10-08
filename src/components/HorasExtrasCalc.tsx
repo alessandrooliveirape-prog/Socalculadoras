@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface HorasExtrasCalcProps {
   onCalculate: (results: any) => void;
@@ -188,6 +189,9 @@ export const HorasExtrasCalc: React.FC<HorasExtrasCalcProps> = ({ onCalculate })
             </div>
           </div>
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="trabalhista" />
 
         {/* FAQ panel description */}
         <div className="bg-slate-50/70 border border-slate-200 rounded-xl p-5 flex flex-col gap-4">

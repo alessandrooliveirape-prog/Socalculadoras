@@ -13,6 +13,7 @@ import {
   Coins, 
   Info
 } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface AdSenseEarningsCalcProps {
   onCalculate: (results: {
@@ -564,6 +565,9 @@ export const AdSenseEarningsCalc: React.FC<AdSenseEarningsCalcProps> = ({ onCalc
             </svg>
           </div>
         </div>
+
+        {/* Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category="financas" />
       </div>
 
       {/* SEO Explanatory Content Section (E-E-A-T) */}

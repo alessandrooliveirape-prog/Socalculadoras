@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { RotateCcw, AlertCircle, HelpCircle, CheckCircle, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CalculatorDef } from '../types';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface GenericDynamicCalcProps {
   calculator: CalculatorDef;
@@ -209,6 +210,9 @@ export const GenericDynamicCalc: React.FC<GenericDynamicCalcProps> = ({ calculat
             </div>
           </div>
         )}
+
+        {/* Contextual Affiliate Product Recommendation */}
+        <AffiliateRecommendationCard category={calculator.category} />
 
         {/* Dynamic Contextual FAQ Area for SEO Optimization and AdSense Guidelines */}
         {calculator.faq && calculator.faq.length > 0 && (

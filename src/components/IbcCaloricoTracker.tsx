@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { HeartPulse, User, RefreshCw, Activity, Sparkles, Scale, Info } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface IbcCaloricoTrackerProps {
   onCalculate: (results: {
@@ -387,6 +388,9 @@ export const IbcCaloricoTracker: React.FC<IbcCaloricoTrackerProps> = ({ onCalcul
               Esta distribuição calórica é sugerida para pessoas que praticam musculação ou treinamento físico. Se você tem condições renais pré-existentes, ajuste o total proteico conforme prescrição médica.
             </p>
           </div>
+
+          {/* Affiliate Product Recommendation */}
+          <AffiliateRecommendationCard category="saude" />
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Car, Coins, Info, Calendar, Sparkles, ShieldCheck } from 'lucide-react';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface CarFinanceCalcProps {
   onCalculate: (results: any) => void;
@@ -279,6 +280,9 @@ export const CarFinanceCalc: React.FC<CarFinanceCalcProps> = ({ onCalculate }) =
               <strong>Nota Técnica:</strong> Esta simulação adota a Tabela Price convencional do Crédito Direto ao Consumidor (CDC). Despesas com IOF, taxa de cadastro bancário (TAC) e seguro prestamista são adicionadas pelas instituições financeiras no Custo Efetivo Total (CET).
             </p>
           </div>
+
+          {/* Affiliate Product Recommendation */}
+          <AffiliateRecommendationCard category="veiculos" />
         </div>
       </div>
 
