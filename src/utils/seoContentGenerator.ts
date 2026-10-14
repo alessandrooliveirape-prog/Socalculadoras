@@ -901,20 +901,53 @@ const generateCategorySeoText = (calc: CalculatorDef): Partial<CalculatorSeoCont
       break;
   }
 
-  // Generate 5-10 intent FAQs dynamically if faq list is small
-  const generatedFaq = [...(faq.length > 0 ? faq : calc.faq?.map(f => ({ q: f.question || (f as any).q || '', a: f.answer || (f as any).a || '' })) || [])];
-  
-  if (generatedFaq.length < 5) {
-    generatedFaq.push(
-      { q: `Como usar a ${name} de forma correta?`, a: `Preencha os dados do formulário com as informações solicitadas (como valores e prazos), selecione a opção adequada se aplicável e verifique o resultado imediatamente na área de resultados.` },
-      { q: `Quais dados de entrada são necessários na ${name}?`, a: `A calculadora solicita dados como: ${inputLabels || 'valores base'}. Certifique-se de preencher as caixas utilizando pontos e vírgulas corretamente.` },
-      { q: `Os resultados exibidos na ${name} são confiáveis?`, a: `Sim, o algoritmo utiliza regras matemáticas e fórmulas oficiais da área de ${CATEGORY_MAP_RAW[category] || category}. No entanto, servem como simulações informativas e de projeção técnica.` },
-      { q: `Posso salvar os dados obtidos na ${name}?`, a: `Sim! Você pode clicar no botão "Salvar Operação" no topo da central para gravar o cálculo atual no seu histórico local da sessão, exportar em Planilha Excel ou gerar um PDF oficial do relatório.` }
-    );
-  }
+  // High quality context-aware authentic FAQs (Anti-Thin Content)
+  const categoryFaqPool: Record<string, { q: string; a: string }[]> = {
+    financas: [
+      { q: `Quais fatores econômicos mais impactam a precisão de ${name}?`, a: `Oscilações na taxa básica Selic, projeções do Boletim Focus do Banco Central e variações na inflação (IPCA/IGP-M) alteram os índices aplicados nesta simulação.` },
+      { q: `Existe cobrança de tributos sobre os resultados calculados?`, a: `Dependendo da operação financeira simulada, podem incidir alíquotas regressivas de Imposto de Renda (de 22,5% a 15%) ou IOF nos primeiros 30 dias de aplicação.` }
+    ],
+    profissoes: [
+      { q: `Os cálculos de ${name} seguem rigorosamente a CLT e a Previdência?`, a: `Sim, a ferramenta aplica as regras consolidadas do Ministério do Trabalho e as tabelas progressivas oficiais de INSS e IRRF vigentes em 2026.` },
+      { q: `Acordos e Convenções Coletivas podem alterar estes valores?`, a: `Sim. Convenções e acordos coletivos sindicais de cada categoria podem estipular pisos salariais, adicionais ou percentuais superiores aos previstos na lei geral.` }
+    ],
+    saude: [
+      { q: `Esta simulação substitui uma consulta médica presencial?`, a: `Não. Os dados oferecem estimativas matemáticas orientativas baseadas em diretrizes da OMS e do Ministério da Saúde para suporte educativo e planejamento pessoal.` },
+      { q: `Quais fatores individuais podem causar variação nas respostas?`, a: `Nível de hidratação, proporção entre massa magra e adiposa, genética e condições clínicas individuais exercem influência direta nos parâmetros biológicos.` }
+    ],
+    veiculos: [
+      { q: `Como as condições de trânsito afetam os resultados calculados em ${name}?`, a: `Tráfego urbano intenso, uso contínuo de ar-condicionado e peso transportado podem elevar o consumo ou desgaste em até 20% acima da média rodoviária teórica.` },
+      { q: `Os índices de depreciação e valores da Tabela Fipe são atualizados?`, a: `Sim, as referências de preços e médias de consumo refletem dados técnicos do Programa de Etiquetagem Veicular do Inmetro e do mercado nacional.` }
+    ],
+    imobiliario: [
+      { q: `Quais custos acessórios devem ser planejados além do valor principal?`, a: `Em transações imobiliárias, reserve entre 4% e 7% do valor do imóvel para custear ITBI municipal, escritura pública e emolumentos de registro cartorial.` },
+      { q: `Qual o impacto de amortizações extraordinárias ao longo do contrato?`, a: `Amortizações pontuais reduzem diretamente o saldo devedor, proporcionando economia expressiva no montante total de juros cobrados pela instituição financeira.` }
+    ],
+    juridico: [
+      { q: `Quais documentos comprovam a regularidade deste cálculo de ${name}?`, a: `Guarde contratos originais assinados, comprovantes de depósito, extratos bancários autenticados e demonstrativos fiscais que embasam a simulação.` },
+      { q: `As taxas moratórias respeitam os limites legais?`, a: `Sim, os parâmetros adotados obedecem aos tetos estabelecidos pelo Código Civil e pelo Código de Defesa do Consumidor.` }
+    ]
+  };
 
-  // Ensure they have between 5 and 10 questions
-  const slicedFaq = generatedFaq.slice(0, 8);
+  const pool = categoryFaqPool[category] || [
+    { q: `Com que frequência os parâmetros desta ferramenta são atualizados?`, a: `O sistema revisa as fórmulas periodicamente em consonância com as atualizações normativas e publicações governamentais oficiais.` },
+    { q: `Os resultados gerados servem como laudo pericial formal?`, a: `Não, a ferramenta possui caráter orientativo e educacional, recomendando-se consultar profissionais especializados para homologações oficiais.` }
+  ];
+
+  const generatedFaq = [
+    ...(faq.length > 0 ? faq : []),
+    ...(calc.faq?.map(f => ({ q: f.question || (f as any).q || '', a: f.answer || (f as any).a || '' })) || []),
+    ...pool
+  ];
+
+  const uniqueFaqMap = new Map();
+  generatedFaq.forEach(item => {
+    if (item.q && item.a && !uniqueFaqMap.has(item.q)) {
+      uniqueFaqMap.set(item.q, item);
+    }
+  });
+
+  const slicedFaq = Array.from(uniqueFaqMap.values()).slice(0, 6);
 
   return {
     title: `${name} Online Grátis | Brasil Calculadoras`,

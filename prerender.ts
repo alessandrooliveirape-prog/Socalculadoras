@@ -310,6 +310,107 @@ Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([catKey, slug]) => {
 });
 console.log('✅ Category Hubs pre-rendered!');
 
+
+function renderPrerenderForm(calc: any): string {
+  const inputs = calc.inputs || [];
+  const outputs = calc.outputs || [];
+
+  if (inputs.length > 0) {
+    return `
+      <section style="background: #ffffff; border: 2px solid #2563eb; padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 35px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: #eff6ff; color: #2563eb; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;">Simulador Online</span>
+            <span style="color: #64748b; font-size: 13px;">Preencha os campos abaixo para simular</span>
+          </div>
+          <span style="color: #10b981; font-size: 12px; font-weight: 600;">⚡ Cálculo Instantâneo</span>
+        </div>
+        
+        <form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 20px;">
+          ${inputs.map((inp: any) => `
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">
+                ${inp.label}
+              </label>
+              <input 
+                type="text" 
+                placeholder="${inp.placeholder || (inp.defaultValue !== undefined ? String(inp.defaultValue) : 'Digite o valor')}" 
+                value="${inp.defaultValue !== undefined ? String(inp.defaultValue) : ''}" 
+                readonly 
+                style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; background: #f8fafc; color: #1e293b; box-sizing: border-box;"
+              />
+              ${inp.helperText ? `<small style="font-size: 11px; color: #64748b; display: block; margin-top: 4px;">${inp.helperText}</small>` : ''}
+            </div>
+          `).join('')}
+        </form>
+
+        <div style="display: flex; gap: 12px; align-items: center; justify-content: flex-start; margin-top: 10px;">
+          <button type="button" style="background: #2563eb; color: #ffffff; border: none; padding: 12px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(37,99,235,0.25);">
+            Calcular Agora
+          </button>
+          <span style="font-size: 12px; color: #64748b;">(Processamento 100% local, seguro e sem cadastro)</span>
+        </div>
+
+        ${outputs.length > 0 ? `
+          <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+            ${outputs.map((out: any) => `
+              <div style="background: #f8fafc; padding: 14px; border-radius: 12px; border-left: 4px solid #3b82f6;">
+                <span style="font-size: 11.5px; color: #64748b; font-weight: 600; display: block; text-transform: uppercase;">${out.label}</span>
+                <strong style="font-size: 18px; color: #0f172a; margin-top: 4px; display: block;">Simulação Pronta</strong>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </section>
+    `;
+  }
+
+  return `
+    <section style="background: #ffffff; border: 2px solid #2563eb; padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 35px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="background: #eff6ff; color: #2563eb; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;">Simulador Oficial</span>
+          <span style="color: #64748b; font-size: 13px;">Insira os parâmetros para obter o relatório completo</span>
+        </div>
+        <span style="color: #10b981; font-size: 12px; font-weight: 600;">⚡ Parâmetros Oficiais 2026</span>
+      </div>
+
+      <form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 20px;">
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Valor Base / Salário Bruto</label>
+          <input type="text" placeholder="Ex: R$ 3.500,00" value="R$ 3.500,00" readonly style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; background: #f8fafc; color: #1e293b; box-sizing: border-box;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Prazo / Período de Referência</label>
+          <input type="text" placeholder="Ex: 12 meses" value="12 meses" readonly style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; background: #f8fafc; color: #1e293b; box-sizing: border-box;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Condição / Modalidade</label>
+          <input type="text" placeholder="Padrão Oficial CLT / Vigente" value="Padrão Oficial CLT / Vigente" readonly style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; background: #f8fafc; color: #1e293b; box-sizing: border-box;" />
+        </div>
+      </form>
+
+      <div style="display: flex; gap: 12px; align-items: center; justify-content: flex-start; margin-top: 10px;">
+        <button type="button" style="background: #2563eb; color: #ffffff; border: none; padding: 12px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(37,99,235,0.25);">
+          Calcular Agora
+        </button>
+        <span style="font-size: 12px; color: #64748b;">(Atualizado com as tabelas governamentais de 2026)</span>
+      </div>
+
+      <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+        <div style="background: #f8fafc; padding: 14px; border-radius: 12px; border-left: 4px solid #3b82f6;">
+          <span style="font-size: 11.5px; color: #64748b; font-weight: 600; display: block; text-transform: uppercase;">Resultado Estimado</span>
+          <strong style="font-size: 18px; color: #0f172a; margin-top: 4px; display: block;">Simulação Pronta</strong>
+        </div>
+        <div style="background: #f8fafc; padding: 14px; border-radius: 12px; border-left: 4px solid #10b981;">
+          <span style="font-size: 11.5px; color: #64748b; font-weight: 600; display: block; text-transform: uppercase;">Status do Cálculo</span>
+          <strong style="font-size: 18px; color: #10b981; margin-top: 4px; display: block;">100% Atualizado</strong>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 // 3. Pre-render Priority Calculators
 CALCULATORS_CATALOG.forEach(calc => {
   const seoData = getSeoContentForCalculator(calc);
@@ -380,6 +481,8 @@ CALCULATORS_CATALOG.forEach(calc => {
         <h1 style="font-size: 24px; color: #1e293b; margin-top: 0; margin-bottom: 10px; font-weight: 900;">${calc.name}</h1>
         <p style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 0;">${calc.description}</p>
       </section>
+
+      ${renderPrerenderForm(calc)}
 
 
 

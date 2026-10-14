@@ -45,9 +45,7 @@ export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
   return (
     <div 
       className={containerStyle}
-      onClick={() => {
-        if (onAdClicked) onAdClicked();
-      }}
+      
     >
       {/* Google AdSense ins tag */}
       <div className="w-full h-full flex items-center justify-center">
