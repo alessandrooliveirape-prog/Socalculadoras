@@ -8,25 +8,106 @@
     {
       "source": "/api/v1/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400" }
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/widget.js",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400" }
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400"
+        }
       ]
     }
   ],
   "routes": [
-    { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
-    { "src": "/robots.txt", "dest": "/robots.txt" },
-    { "src": "/ads.txt", "dest": "/ads.txt" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/quem-somos",
+      "status": 301,
+      "headers": {
+        "Location": "/sobre"
+      }
+    },
+    {
+      "src": "/sobre-nos",
+      "status": 301,
+      "headers": {
+        "Location": "/sobre"
+      }
+    },
+    {
+      "src": "/termos",
+      "status": 301,
+      "headers": {
+        "Location": "/termos-de-uso"
+      }
+    },
+    {
+      "src": "/terms",
+      "status": 301,
+      "headers": {
+        "Location": "/termos-de-uso"
+      }
+    },
+    {
+      "src": "/privacidade",
+      "status": 301,
+      "headers": {
+        "Location": "/politica-de-privacidade"
+      }
+    },
+    {
+      "src": "/privacy-policy",
+      "status": 301,
+      "headers": {
+        "Location": "/politica-de-privacidade"
+      }
+    },
+    {
+      "src": "/fale-conosco",
+      "status": 301,
+      "headers": {
+        "Location": "/contato"
+      }
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "/sitemap.xml"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/robots.txt"
+    },
+    {
+      "src": "/ads.txt",
+      "dest": "/ads.txt"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }

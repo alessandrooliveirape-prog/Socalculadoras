@@ -44,6 +44,7 @@ const sharedFooterHtml = `
         <h4 style="color: #ffffff; font-size: 14px; font-weight: 700; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.5px;">Institucional & Legal</h4>
         <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 2;">
           <li><a href="/politica-de-privacidade" style="color: #cbd5e1; text-decoration: none;">Política de Privacidade</a></li>
+          <li><a href="/cookies" style="color: #cbd5e1; text-decoration: none;">Política de Cookies (LGPD)</a></li>
           <li><a href="/termos-de-uso" style="color: #cbd5e1; text-decoration: none;">Termos de Uso</a></li>
           <li><a href="/sobre" style="color: #cbd5e1; text-decoration: none;">Sobre Nós</a></li>
           <li><a href="/contato" style="color: #cbd5e1; text-decoration: none;">Contato & Suporte</a></li>
@@ -85,15 +86,37 @@ const homeUrl = 'https://www.brasilcalculadoras.com.br/';
 
 const homepageSchema = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Brasil Calculadoras",
-  "url": "https://www.brasilcalculadoras.com.br/",
-  "description": homeDesc,
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://www.brasilcalculadoras.com.br/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.brasilcalculadoras.com.br/#website",
+      "name": "Brasil Calculadoras",
+      "url": "https://www.brasilcalculadoras.com.br/",
+      "description": homeDesc,
+      "inLanguage": "pt-BR",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.brasilcalculadoras.com.br/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.brasilcalculadoras.com.br/#organization",
+      "name": "Brasil Calculadoras",
+      "url": "https://www.brasilcalculadoras.com.br/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.brasilcalculadoras.com.br/logo.svg"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://www.brasilcalculadoras.com.br/contato",
+        "availableLanguage": "Portuguese"
+      }
+    }
+  ]
 };
 
 const homeHtml = `
@@ -302,7 +325,23 @@ Object.entries(CATEGORY_KEY_TO_SLUG).forEach(([catKey, slug]) => {
     ${sharedFooterHtml}
   `;
 
-  const rendered = injectMetadata(template, hubData.title, hubData.description, canonicalUrl, [collectionSchema, breadcrumbSchema], hubHtml);
+  const hubSchemas: any[] = [collectionSchema, breadcrumbSchema];
+  if (hubData.faq && hubData.faq.length > 0) {
+    hubSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      "mainEntity": hubData.faq.map((q: any) => ({
+        "@type": "Question",
+        "name": q.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": q.a
+        }
+      }))
+    });
+  }
+  const rendered = injectMetadata(template, hubData.title, hubData.description, canonicalUrl, hubSchemas, hubHtml);
   const catDir = path.join(distPath, slug);
   ensureDir(catDir);
   fs.writeFileSync(path.join(catDir, 'index.html'), rendered, 'utf8');
@@ -536,7 +575,23 @@ CALCULATORS_CATALOG.forEach(calc => {
     ${sharedFooterHtml}
   `;
 
-  const rendered = injectMetadata(template, seoData.title, seoData.description, canonicalUrl, [softwareSchema, breadcrumbSchema], calcHtml);
+  const calcSchemas: any[] = [softwareSchema, breadcrumbSchema];
+  if (seoData.faq && seoData.faq.length > 0) {
+    calcSchemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      "mainEntity": seoData.faq.map((q: any) => ({
+        "@type": "Question",
+        "name": q.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": q.a
+        }
+      }))
+    });
+  }
+  const rendered = injectMetadata(template, seoData.title, seoData.description, canonicalUrl, calcSchemas, calcHtml);
   const calcDir = path.join(distPath, calc.id);
   ensureDir(calcDir);
   fs.writeFileSync(path.join(calcDir, 'index.html'), rendered, 'utf8');
@@ -546,6 +601,23 @@ console.log('✅ Priority Calculators pre-rendered!');
 
 // 4. Pre-render Institutional & Legal Pages (AdSense & EEAT Compliance)
 const legalPagesConfig = [
+  {
+    slug: 'cookies',
+    title: 'Política de Cookies e Publicidade (LGPD) | Brasil Calculadoras',
+    description: 'Saiba como o Brasil Calculadoras utiliza cookies técnicos, analíticos (GA4) e publicitários (Google AdSense / DART) em total conformidade com a LGPD.',
+    heading: 'Política de Cookies e Transparência Publicitária',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">Esta Política de Cookies explica com total transparência como o portal <strong>Brasil Calculadoras</strong> utiliza cookies e tecnologias similares para garantir o funcionamento ágil dos simuladores e financiar a manutenção gratuita das ferramentas.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">1. Processamento Local nos Simuladores</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Todos os valores financeiros, salariais, trabalhistas e de saúde digitados nas calculadoras são processados exclusivamente na memória do seu dispositivo (Client-Side JavaScript). Não armazenamos nem transmitimos os valores das suas simulações para bancos de dados externos.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">2. Cookies de Publicidade Google AdSense (Cookie DART)</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">O Google, como fornecedor terceirizado, utiliza cookies para exibir anúncios neste portal. Com o cookie DART, o Google pode exibir anúncios com base nas visitas que o leitor realizou a este e a outros sites na Internet. Você pode desativar o cookie DART a qualquer momento visitando a página de Configurações de Anúncios do Google (adssettings.google.com).</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">3. Cookies de Desempenho e Métricas (Google Analytics 4)</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Utilizamos o Google Analytics 4 com anonimização de IP para compreender de forma agregada quais calculadoras são mais utilizadas pelos cidadãos brasileiros e aprimorar continuamente a experiência de navegação e os Core Web Vitals.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">4. Como Gerenciar ou Desativar Cookies</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569;">Você pode configurar seu navegador (Chrome, Safari, Edge, Firefox) para bloquear ou alertar sobre esses cookies. Todas as calculadoras do portal continuam funcionando integralmente mesmo com cookies de terceiros bloqueados.</p>
+    `
+  },
   {
     slug: 'politica-de-privacidade',
     title: 'Política de Privacidade | Brasil Calculadoras',
