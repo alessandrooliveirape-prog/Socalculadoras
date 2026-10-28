@@ -77,4 +77,4 @@ xml += `
 </urlset>`;
 
 fs.writeFileSync(sitemapPath, xml, 'utf-8');
-console.log(`✅ Sitemap gerado com sucesso contendo ${CALCULATORS_CATALOG.length + 6 + Object.keys(CATEGORY_KEY_TO_SLUG).length} URLs!`);
+console.log(`✅ Sitemap gerado com sucesso contendo ${CALCULATORS_CATALOG.length + 7 + Object.keys(CATEGORY_KEY_TO_SLUG).length} URLs!`);
