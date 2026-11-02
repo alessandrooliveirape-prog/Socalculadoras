@@ -1,0 +1,126 @@
+{
+  "site": "https://www.brasilcalculadoras.com.br",
+  "timestamp": "2026-11-02T12:38:11.491Z",
+  "overallScore": 100,
+  "overallStatus": "HEALTHY",
+  "subagents": [
+    {
+      "id": "agent_seo_gsc",
+      "name": "Agente SEO, SSG & Search Console",
+      "role": "Auditor de Indexação Googlebot SSG, Sitemap XML, Schemas JSON-LD & IndexNow",
+      "status": "HEALTHY",
+      "score": 15,
+      "maxScore": 15,
+      "summary": "Sitemap com 207 URLs. SEO Googlebot validado.",
+      "details": {
+        "sitemapUrls": 207,
+        "hasCanonical": true
+      },
+      "issues": [],
+      "selfHealed": false,
+      "healingActions": []
+    },
+    {
+      "id": "agent_monetization",
+      "name": "Agente de Monetização (AdSense Exclusivo & LGPD)",
+      "role": "Auditor de ads.txt, 7 páginas obrigatórias e banimento de redes intrusivas",
+      "status": "HEALTHY",
+      "score": 15,
+      "maxScore": 15,
+      "summary": "ads.txt estrito com AdSense. 7/7 páginas institucionais verificadas.",
+      "details": {
+        "adsTxtValid": true,
+        "missingInstitutionalPages": 0
+      },
+      "issues": [],
+      "selfHealed": false,
+      "healingActions": []
+    },
+    {
+      "id": "agent_infra_cdn",
+      "name": "Agente de Infraestrutura & Edge CDN",
+      "role": "Auditor de Latência, SLA, Redirecionamentos e Vercel Edge",
+      "status": "HEALTHY",
+      "score": 15,
+      "maxScore": 15,
+      "summary": "Infraestrutura Vercel Edge operando com SLA normal (635ms).",
+      "details": {
+        "vercelJsonValid": true,
+        "latencyMs": 635,
+        "status": 200
+      },
+      "issues": [],
+      "selfHealed": false,
+      "healingActions": []
+    },
+    {
+      "id": "agent_catalog_anti_thin",
+      "name": "Agente do Catálogo de Calculadoras & Anti-Thin Content",
+      "role": "Auditor de Fórmulas, Descrições Enriquecidas e Prevenção de Conteúdo Raso",
+      "status": "HEALTHY",
+      "score": 15,
+      "maxScore": 15,
+      "summary": "Catálogo com 177 ferramentas ativas. Zero thin content detectado.",
+      "details": {
+        "totalCalculators": 177,
+        "thinCount": 0
+      },
+      "issues": [],
+      "selfHealed": false,
+      "healingActions": []
+    },
+    {
+      "id": "agent_categories_linking",
+      "name": "Agente de Navegação Contextual & Interlinkagem",
+      "role": "Auditor de Rotas por Categoria, Barra de Troca Rápida e Breadcrumbs",
+      "status": "HEALTHY",
+      "score": 15,
+      "maxScore": 15,
+      "summary": "21 categorias mapeadas com busca sem acento e quick-switch ativo.",
+      "details": {
+        "categoriesCount": 21,
+        "hasQuickSwitch": true,
+        "hasSearchNormalize": true
+      },
+      "issues": [],
+      "selfHealed": false,
+      "healingActions": []
+    },
+    {
+      "id": "agent_public_api",
+      "name": "Agente da API Pública v1 & Dados Oficiais 2026",
+      "role": "Auditor e Gerador de Endpoints JSON Estáticos e Widgets",
+      "status": "HEALTHY",
+      "score": 10,
+      "maxScore": 10,
+      "summary": "Endpoints da API Pública v1 operacionais com dados de 2026.",
+      "details": {
+        "apiGenerated": true
+      },
+      "issues": [],
+      "selfHealed": true,
+      "healingActions": [
+        "Endpoints JSON atualizados via generateApiData()."
+      ]
+    },
+    {
+      "id": "agent_organic_growth",
+      "name": "Agente de Tração Orgânica & Expansão Long-Tail",
+      "role": "Disparador de Indexação Automática IndexNow e Otimização de Retenção",
+      "status": "HEALTHY",
+      "score": 15,
+      "maxScore": 15,
+      "summary": "IndexNow ativo para indexação contínua de novas URLs e tabelas.",
+      "details": {
+        "indexNowPings": "DRY_RUN_SKIPPED"
+      },
+      "issues": [],
+      "selfHealed": false,
+      "healingActions": []
+    }
+  ],
+  "healingSummary": [
+    "Endpoints JSON atualizados via generateApiData()."
+  ],
+  "executionTimeMs": 724
+}

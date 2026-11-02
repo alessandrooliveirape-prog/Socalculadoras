@@ -67,6 +67,24 @@ xml += `
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/cookies</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/transparencia-adsense</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/anunciantes</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
   <!-- API Pública e Recursos para Desenvolvedores -->
   <url>
     <loc>https://www.brasilcalculadoras.com.br/desenvolvedores</loc>

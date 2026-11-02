@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { Percent, ShoppingBag, Tags, AlertCircle, RotateCcw, TrendingUp } from 'lucide-react';
-import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface ProfitMarginCalcProps {
   onCalculate: (results: {
@@ -242,9 +241,6 @@ export const ProfitMarginCalc: React.FC<ProfitMarginCalcProps> = ({ onCalculate 
             </div>
           </div>
         </div>
-
-        {/* Affiliate Product Recommendation */}
-        <AffiliateRecommendationCard category="financas" />
       </div>
     </div>
   );

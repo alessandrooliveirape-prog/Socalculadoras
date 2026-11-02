@@ -695,6 +695,32 @@ const legalPagesConfig = [
       <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Licença e Termos de Uso</h2>
       <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Todos os dados são de uso livre e gratuito tanto para fins pessoais quanto comerciais, com a única exigência de manter a atribuição de autoria através de link dofollow apontando para o Brasil Calculadoras.</p>
     `
+  },
+  {
+    slug: 'transparencia-adsense',
+    title: 'Transparência Google AdSense e Modelo de Sustentação | Brasil Calculadoras',
+    description: 'Entenda nosso modelo de sustentação através do Google AdSense, nossas políticas contra anúncios invasivos e o compromisso com a privacidade e gratuidade dos simuladores.',
+    heading: 'Transparência Google AdSense',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">No <strong>Brasil Calculadoras</strong>, acreditamos na transparência absoluta com nossos leitores e usuários. Todas as nossas dezenas de ferramentas são oferecidas gratuitamente para o público em geral.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Modelo de Financiamento</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Para viabilizar financeiramente a contratação de servidores de alta velocidade, auditoria constante de fórmulas matemáticas e suporte técnico, veiculamos anúncios fornecidos pela plataforma oficial do <strong>Google AdSense</strong>.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Diretrizes Publicitárias Inegociáveis</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Todos os blocos de publicidade são claramente delimitados. Não utilizamos pop-ups, pop-unders, redirecionamentos forçados ou anúncios que impeçam o uso das calculadoras. Nosso arquivo ads.txt é mantido estritamente conforme as diretrizes do Google AdSense para proteger anunciantes e leitores contra fraudes.</p>
+    `
+  },
+  {
+    slug: 'anunciantes',
+    title: 'Mídia, Publicidade e Parcerias Comerciais | Brasil Calculadoras',
+    description: 'Conheça as oportunidades de mídia, veiculação programática via Google AdSense e parcerias institucionais no portal Brasil Calculadoras.',
+    heading: 'Mídia & Anunciantes',
+    content: `
+      <p style="font-size: 14px; line-height: 1.6; color: #334155; margin-bottom: 20px;">O <strong>Brasil Calculadoras</strong> recebe diariamente milhares de profissionais, empresários, contadores e cidadãos em busca de respostas práticas para cálculos de rescisão CLT, investimentos em juros compostos, financiamentos e planejamento financeiro.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Formatos Disponíveis</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Campanhas programáticas através do inventário do Google AdSense e Google Ad Manager, parcerias institucionais e de utilidade pública em categorias específicas e acesso corporativo a endpoints da nossa API Pública de cálculos.</p>
+      <h2 style="font-size: 18px; color: #0f172a; margin-top: 25px; margin-bottom: 10px;">Contato com a Área Comercial</h2>
+      <p style="font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 15px;">Para propostas e parcerias comerciais, entre em contato via e-mail comercial@brasilcalculadoras.com.br ou pelo canal de contato do portal.</p>
+    `
   }
 ];
 

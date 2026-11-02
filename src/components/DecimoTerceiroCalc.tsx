@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Briefcase, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, Clipboard, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface DecimoTerceiroCalcProps {
   onCalculate: (results: any) => void;
@@ -247,9 +246,6 @@ export const DecimoTerceiroCalc: React.FC<DecimoTerceiroCalcProps> = ({ onCalcul
             )}
           </div>
         </div>
-
-        {/* Affiliate Product Recommendation */}
-        <AffiliateRecommendationCard category="trabalhista" />
 
         {/* FAQ block */}
         <div className="bg-slate-50/70 border border-slate-200 rounded-xl p-5 flex flex-col gap-4">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, Trash2, Calendar, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface RescisaoCLTCalcProps {
   onCalculate: (results: any) => void;
@@ -416,9 +415,6 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
             )}
           </div>
         </div>
-
-        {/* Affiliate Product Recommendation */}
-        <AffiliateRecommendationCard category="trabalhista" />
 
         {/* Detailed FAQ Section */}
         <div className="bg-slate-50/70 border border-slate-205 border-slate-200 rounded-xl p-5 flex flex-col gap-4">

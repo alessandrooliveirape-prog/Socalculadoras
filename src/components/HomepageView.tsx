@@ -20,7 +20,20 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from '../data/calculatorsCatalog';
 import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW } from '../utils/seoContentGenerator';
-import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
+
+function normalizeSearchText(text: string): string {
+  return (text || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+function matchesSearchTokens(target: string, queryTokens: string[]): boolean {
+  if (queryTokens.length === 0) return true;
+  const normalizedTarget = normalizeSearchText(target);
+  return queryTokens.every(tok => normalizedTarget.includes(tok));
+}
 
 interface HomepageViewProps {
   onSelectCalculator: (id: string) => void;
@@ -35,6 +48,14 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [faqOpen, setFaqOpen] = useState<Record<number, boolean>>({});
+  const [recentTools] = useState<string[]>(() => {
+    try {
+      const stored = localStorage.getItem('brasilcalculadoras_recent_tools_v1');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
 
   const toggleFaq = (idx: number) => {
     setFaqOpen(prev => ({ ...prev, [idx]: !prev[idx] }));
@@ -54,14 +75,16 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
     POPULAR_TOOLS.some(p => p.id === c.id)
   );
 
-  // Search filter
+  // Search filter com suporte a tokenização e insensibilidade a acentos (NFD)
   const searchResults = searchQuery.trim() === '' 
     ? [] 
-    : CALCULATORS_CATALOG.filter(c => 
-        c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        c.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()))
-      ).slice(0, 8);
+    : (() => {
+        const tokens = normalizeSearchText(searchQuery).split(/\s+/).filter(Boolean);
+        return CALCULATORS_CATALOG.filter(c => {
+          const haystack = `${c.name} ${c.description} ${(c.tags || []).join(' ')}`;
+          return matchesSearchTokens(haystack, tokens);
+        }).slice(0, 10);
+      })();
 
   const categoryDescriptions: Record<string, string> = {
     financas: 'Planejamento de juros compostos, markup de vendas, poupança, amortização e ROI de investimentos.',
@@ -191,6 +214,29 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {/* Calculadoras Acessadas Recentemente */}
+            {recentTools.length > 0 && searchQuery.trim() === '' && (
+              <div className="flex flex-wrap items-center justify-center gap-1.5 mt-3 select-none">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-blue-400" />
+                  <span>Recentes:</span>
+                </span>
+                {recentTools.slice(0, 5).map(id => {
+                  const item = CALCULATORS_CATALOG.find(c => c.id === id);
+                  if (!item) return null;
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => onSelectCalculator(id)}
+                      className="px-2.5 py-1 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 rounded-full text-[10.5px] text-slate-200 hover:text-white transition-all cursor-pointer font-medium"
+                    >
+                      {item.name}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -377,9 +423,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
         </div>
       </section>
 
-      {/* Recomendações Úteis de Ferramentas e Livros na Amazon */}
-      <section>
-        <AffiliateRecommendationCard category="financas" />
+            <section>
       </section>
 
       {/* FAQ curta institucional */}

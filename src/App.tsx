@@ -21,7 +21,8 @@ import {
   Copy,
   ExternalLink,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Zap
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocation } from 'wouter';
@@ -49,7 +50,6 @@ import { HomepageView } from './components/HomepageView';
 import { SimplePercentageCalc } from './components/SimplePercentageCalc';
 import { CarFinanceCalc } from './components/CarFinanceCalc';
 import { AdSenseEarningsCalc } from './components/AdSenseEarningsCalc';
-import { AffiliateRecommendationCard } from './components/AffiliateRecommendationCard';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
@@ -62,7 +62,6 @@ import {
   CATEGORY_MAP_RAW 
 } from './utils/seoContentGenerator';
 import { logSeoInteraction } from './utils/seoMonitor';
-// Monetag push removed
 
 
 const Breadcrumbs: React.FC<{ catKey?: string; calcName?: string; catSlug?: string }> = ({ catKey, calcName, catSlug }) => {
@@ -116,6 +115,20 @@ const POPULAR_GLOBAL_IDS = [
 const getPopularCalculators = (currentId: string) => {
   return CALCULATORS_CATALOG.filter(c => c.id !== currentId && POPULAR_GLOBAL_IDS.includes(c.id)).slice(0, 3);
 };
+
+export function normalizeSearchText(text: string): string {
+  return (text || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+export function matchesSearchTokens(target: string, queryTokens: string[]): boolean {
+  if (queryTokens.length === 0) return true;
+  const normalizedTarget = normalizeSearchText(target);
+  return queryTokens.every(tok => normalizedTarget.includes(tok));
+}
 
 export default function App() {
   const [location, setLocation] = useLocation();
@@ -230,13 +243,6 @@ export default function App() {
     }
   }, []);
 
-  // Web Push Monetag: registro não-invasivo respeitando UX, Core Web Vitals e frequência de 15 dias
-  useEffect(() => {
-    // Monetag push removed
-    return () => {
-      if (cleanupPush) cleanupPush();
-    };
-  }, []);
 
   // Route-based sub-page router for search engines / direct links
   useEffect(() => {
@@ -252,7 +258,7 @@ export default function App() {
 
     const path = location.replace(/^\//, '').replace(/\/$/, '');
     if (path) {
-      if (['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato', 'desenvolvedores', 'api'].includes(path)) {
+      if (['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato', 'cookies', 'transparencia-adsense', 'anunciantes', 'desenvolvedores', 'api'].includes(path)) {
         setActiveCategoryHub(null);
         return;
       }
@@ -437,7 +443,7 @@ export default function App() {
   // Dynamic Page Title & SEO Meta Updates on calculator or category change
   useEffect(() => {
     const normalizedPath = (location || '').replace(/\/$/, '') || '/';
-    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato', '/desenvolvedores', '/api'].includes(normalizedPath)) {
+    if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato', '/cookies', '/transparencia-adsense', '/anunciantes', '/desenvolvedores', '/api'].includes(normalizedPath)) {
       const legalTitles: Record<string, { title: string; desc: string }> = {
         '/politica-de-privacidade': {
           title: 'Política de Privacidade | Brasil Calculadoras',
@@ -454,6 +460,18 @@ export default function App() {
         '/contato': {
           title: 'Contato e Suporte | Brasil Calculadoras',
           desc: 'Entre em contato com a equipe do Brasil Calculadoras para tirar dúvidas, enviar sugestões ou reportar pontos de melhoria.'
+        },
+        '/cookies': {
+          title: 'Política de Cookies e Publicidade (LGPD) | Brasil Calculadoras',
+          desc: 'Saiba como o Brasil Calculadoras utiliza cookies técnicos, analíticos (GA4) e publicitários (Google AdSense) em conformidade com a LGPD.'
+        },
+        '/transparencia-adsense': {
+          title: 'Transparência Google AdSense e Modelo de Sustentação | Brasil Calculadoras',
+          desc: 'Entenda nosso modelo de sustentação através do Google AdSense, nossas diretrizes de anúncios não-intrusivos e o compromisso com a gratuidade dos simuladores.'
+        },
+        '/anunciantes': {
+          title: 'Mídia, Publicidade e Parcerias Comerciais | Brasil Calculadoras',
+          desc: 'Conheça as oportunidades de mídia, veiculação programática via Google AdSense e parcerias institucionais no portal Brasil Calculadoras.'
         },
         '/desenvolvedores': {
           title: 'API Pública & Ferramentas para Desenvolvedores | Brasil Calculadoras',
@@ -702,6 +720,14 @@ export default function App() {
     setSearchQuery('');
     setMenuOpen(false);
 
+    try {
+      const key = 'brasilcalculadoras_recent_tools_v1';
+      const raw = localStorage.getItem(key);
+      const list = raw ? JSON.parse(raw) : [];
+      const updated = [id, ...list.filter((x: string) => x !== id)].slice(0, 8);
+      localStorage.setItem(key, JSON.stringify(updated));
+    } catch {}
+
     // Increment Ad stats (loading ads is a visual monetisation feature)
     setAdImpressions(prev => prev + 2);
 
@@ -887,12 +913,9 @@ export default function App() {
     const isSearching = searchQuery.trim() !== '';
     if (!isSearching) return matchesCategory;
 
-    const term = searchQuery.toLowerCase();
-    const matchesName = calc.name.toLowerCase().includes(term);
-    const matchesDesc = calc.description.toLowerCase().includes(term);
-    const matchesTags = calc.tags.some(t => t.toLowerCase().includes(term));
-
-    return matchesName || matchesDesc || matchesTags;
+    const tokens = normalizeSearchText(searchQuery).split(/\s+/).filter(Boolean);
+    const haystack = `${calc.name} ${calc.description} ${(calc.tags || []).join(' ')}`;
+    return matchesSearchTokens(haystack, tokens);
   });
 
   // Export Results back as a clean structured Spreadsheet (Excel CSV file format)
@@ -1228,6 +1251,12 @@ export default function App() {
           <LegalPage type="about" onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/contato' ? (
           <LegalPage type="contact" onNavigateHome={() => setLocation('/')} />
+        ) : normalizedLocation === '/cookies' ? (
+          <LegalPage type="cookies" onNavigateHome={() => setLocation('/')} />
+        ) : normalizedLocation === '/transparencia-adsense' ? (
+          <LegalPage type="transparency" onNavigateHome={() => setLocation('/')} />
+        ) : normalizedLocation === '/anunciantes' ? (
+          <LegalPage type="advertisers" onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/desenvolvedores' || normalizedLocation === '/api' ? (
           <DesenvolvedoresView onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/' ? (
@@ -1419,9 +1448,6 @@ export default function App() {
                     ))}
                   </div>
                 </div>
-
-                {/* Affiliate Product Recommendation for the active Category Hub */}
-                <AffiliateRecommendationCard category={activeCategoryHub} />
 
                 {/* Category FAQs */}
                 {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (
@@ -1660,6 +1686,39 @@ export default function App() {
                         </button>
                       </div>
                     </motion.div>
+                  )}
+
+                  {/* Quick-Switch Bar entre Ferramentas Irmãs */}
+                  {activeCalc && (
+                    <div id="tool-quick-switch-bar" className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+                      <div className="flex items-center justify-between mb-2.5">
+                        <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                          <Zap className="w-3.5 h-3.5 text-blue-600" />
+                          <span>Outras Ferramentas em {CATEGORY_MAP_RAW[activeCalc.category] || activeCalc.category}</span>
+                        </span>
+                        <a
+                          href={`/${CATEGORY_KEY_TO_SLUG[activeCalc.category] || activeCalc.category}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setLocation('/' + (CATEGORY_KEY_TO_SLUG[activeCalc.category] || activeCalc.category));
+                          }}
+                          className="text-[10px] font-bold text-blue-600 hover:underline"
+                        >
+                          Ver todas →
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                        {CALCULATORS_CATALOG.filter(c => c.category === activeCalc.category && c.id !== activeCalc.id).slice(0, 8).map(sibling => (
+                          <button
+                            key={sibling.id}
+                            onClick={() => selectCalculator(sibling.id as any)}
+                            className="px-3 py-1.5 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-[11px] font-bold text-slate-700 hover:text-blue-700 whitespace-nowrap transition-all shadow-2xs shrink-0 cursor-pointer"
+                          >
+                            {sibling.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   )}
 
                   {/* Homepage Category Hub Portal Directory (Only shown on the root path) */}
