@@ -1,7 +1,7 @@
 {
   "site": "https://www.brasilcalculadoras.com.br",
-  "timestamp": "2026-11-02T12:38:11.491Z",
-  "overallScore": 100,
+  "timestamp": "2026-11-03T18:40:19.738Z",
+  "overallScore": 94,
   "overallStatus": "HEALTHY",
   "subagents": [
     {
@@ -13,8 +13,7 @@
       "maxScore": 15,
       "summary": "Sitemap com 207 URLs. SEO Googlebot validado.",
       "details": {
-        "sitemapUrls": 207,
-        "hasCanonical": true
+        "sitemapUrls": 207
       },
       "issues": [],
       "selfHealed": false,
@@ -24,15 +23,17 @@
       "id": "agent_monetization",
       "name": "Agente de Monetização (AdSense Exclusivo & LGPD)",
       "role": "Auditor de ads.txt, 7 páginas obrigatórias e banimento de redes intrusivas",
-      "status": "HEALTHY",
-      "score": 15,
+      "status": "WARNING",
+      "score": 9,
       "maxScore": 15,
-      "summary": "ads.txt estrito com AdSense. 7/7 páginas institucionais verificadas.",
+      "summary": "ads.txt estrito com AdSense. 0/7 páginas institucionais verificadas.",
       "details": {
         "adsTxtValid": true,
-        "missingInstitutionalPages": 0
+        "missingInstitutionalPages": 7
       },
-      "issues": [],
+      "issues": [
+        "7 das 7 páginas institucionais não pré-renderizadas em dist/."
+      ],
       "selfHealed": false,
       "healingActions": []
     },
@@ -43,10 +44,10 @@
       "status": "HEALTHY",
       "score": 15,
       "maxScore": 15,
-      "summary": "Infraestrutura Vercel Edge operando com SLA normal (635ms).",
+      "summary": "Infraestrutura Vercel Edge operando com SLA normal (233ms).",
       "details": {
         "vercelJsonValid": true,
-        "latencyMs": 635,
+        "latencyMs": 233,
         "status": 200
       },
       "issues": [],
@@ -112,15 +113,18 @@
       "maxScore": 15,
       "summary": "IndexNow ativo para indexação contínua de novas URLs e tabelas.",
       "details": {
-        "indexNowPings": "DRY_RUN_SKIPPED"
+        "indexNowPings": 2
       },
       "issues": [],
-      "selfHealed": false,
-      "healingActions": []
+      "selfHealed": true,
+      "healingActions": [
+        "Submissão IndexNow concluída com 2 respostas válidas."
+      ]
     }
   ],
   "healingSummary": [
-    "Endpoints JSON atualizados via generateApiData()."
+    "Endpoints JSON atualizados via generateApiData().",
+    "Submissão IndexNow concluída com 2 respostas válidas."
   ],
-  "executionTimeMs": 724
+  "executionTimeMs": 1298
 }
