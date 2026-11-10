@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check, Code, Server, Award } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { CATEGORY_KEY_TO_SLUG } from '../utils/seoContentGenerator';
+import { NativeDialog } from './NativeDialog';
 
 interface FooterAndLegalsProps {
   onCategoryClick: (category: string) => void;
@@ -37,7 +38,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           {/* Brand Col */}
           <div className="md:col-span-4 flex flex-col gap-4 select-none">
             <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Brasil Calculadoras" className="h-8 w-8 rounded-lg shadow-sm" />
+              <img src="/logo.svg" alt="Brasil Calculadoras" width="32" height="32" loading="lazy" className="h-8 w-8 rounded-lg shadow-sm" />
               <h3 className="text-md font-display font-extrabold text-white">Brasil Calculadoras</h3>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
@@ -227,104 +228,119 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
       )}
 
       {/* PRIVACY POLICY MODAL */}
-      {showPrivacy && (
-        <div className="fixed inset-0 bg-slate-900/65 backdrop-blur-xs flex items-center justify-center z-120 p-4 font-sans">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-blue-650 text-blue-600" />
-                <h3 className="text-sm font-bold text-slate-800">Política de Privacidade</h3>
-              </div>
-              <button 
-                onClick={() => setShowPrivacy(false)}
-                className="p-1 px-1.5 bg-gray-100 hover:bg-gray-200 text-gray-400 rounded-lg cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
+      <NativeDialog
+        isOpen={showPrivacy}
+        onClose={() => setShowPrivacy(false)}
+        ariaLabelledBy="footer-privacy-title"
+        className="w-full max-w-2xl"
+      >
+        <div className="bg-white rounded-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col font-sans">
+          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-blue-600" aria-hidden="true" />
+              <h3 id="footer-privacy-title" className="text-sm font-bold text-slate-800">Política de Privacidade</h3>
             </div>
-            <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
-              <span className="text-[10px] font-mono text-gray-400 block mb-2">Última atualização: 01 de Junho de 2026</span>
-              <p>Esta Política de Privacidade descreve como a <strong>Brasil Calculadoras</strong> coleta, processa e protege os dados dos utilizadores no site.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">1. Coleta Automatizada e Cookies</h4>
-              <p>O portal coleta de forma automatizada logs técnicos como endereços de IP, tipo de navegador, páginas de referência e tempo de permanência voluntária com o único intuito de aprimoramento da infraestrutura técnica e de segurança da informação.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">2. Google AdSense e Cookies de Terceiros</h4>
-              <p>Nós utilizamos publicidade programática terceirizada do <strong>Google AdSense</strong>. O Google e parceiros terceirizados utilizam cookies persistentes (como o cookie DoubleClick DART) para veicular anúncios segmentados baseados nas visitas anteriores feitas a este e a outros portais na Internet.</p>
-              <p>Os usuários podem desativar a exibição de anúncios personalizados visitando as <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Configurações de Anúncios do Google</a>.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">3. Conformidade com a LGPD e GDPR</h4>
-              <p>Nós respeitamos integralmente as diretrizes da Lei Geral de Proteção de Dados (LGPD) brasileira. Não vendemos, alugamos ou comercializamos dados cadastrais ou registros de navegação a empresas terceiras sob nenhuma circunstância.</p>
+            <button
+              type="button"
+              onClick={() => setShowPrivacy(false)}
+              aria-label="Fechar Política de Privacidade"
+              className="p-1 px-1.5 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-lg cursor-pointer"
+            >
+              <X className="w-4 h-4" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
+            <span className="text-[10px] font-mono text-gray-400 block mb-2">Última atualização: 01 de Junho de 2026</span>
+            <p>Esta Política de Privacidade descreve como a <strong>Brasil Calculadoras</strong> coleta, processa e protege os dados dos utilizadores no site.</p>
 
-              <h4 className="text-xs font-bold text-slate-800">4. Contato do Encarregado de Dados</h4>
-              <p>Para dúvidas legais ou requisições de exclusão de históricos, escreva para o e-mail: <code>lgpd@brasilcalculadoras.com.br</code></p>
-            </div>
+            <h4 className="text-xs font-bold text-slate-800">1. Coleta Automatizada e Cookies</h4>
+            <p>O portal coleta de forma automatizada logs técnicos como endereços de IP, tipo de navegador, páginas de referência e tempo de permanência voluntária com o único intuito de aprimoramento da infraestrutura técnica e de segurança da informação.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">2. Google AdSense e Cookies de Terceiros</h4>
+            <p>Nós utilizamos publicidade programática terceirizada do <strong>Google AdSense</strong>. O Google e parceiros terceirizados utilizam cookies persistentes (como o cookie DoubleClick DART) para veicular anúncios segmentados baseados nas visitas anteriores feitas a este e a outros portais na Internet.</p>
+            <p>Os usuários podem desativar a exibição de anúncios personalizados visitando as <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Configurações de Anúncios do Google</a>.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">3. Conformidade com a LGPD e GDPR</h4>
+            <p>Nós respeitamos integralmente as diretrizes da Lei Geral de Proteção de Dados (LGPD) brasileira. Não vendemos, alugamos ou comercializamos dados cadastrais ou registros de navegação a empresas terceiras sob nenhuma circunstância.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">4. Contato do Encarregado de Dados</h4>
+            <p>Para dúvidas legais ou requisições de exclusão de históricos, escreva para o e-mail: <code>lgpd@brasilcalculadoras.com.br</code></p>
           </div>
         </div>
-      )}
+      </NativeDialog>
 
       {/* TERMS OF USE MODAL */}
-      {showTerms && (
-        <div className="fixed inset-0 bg-slate-900/65 backdrop-blur-xs flex items-center justify-center z-120 p-4 font-sans">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-blue-600" />
-                <h3 className="text-sm font-bold text-slate-800">Termos de Uso</h3>
-              </div>
-              <button 
-                onClick={() => setShowTerms(false)}
-                className="p-1 px-1.5 bg-gray-100 hover:bg-gray-200 text-gray-400 rounded-lg cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
+      <NativeDialog
+        isOpen={showTerms}
+        onClose={() => setShowTerms(false)}
+        ariaLabelledBy="footer-terms-title"
+        className="w-full max-w-2xl"
+      >
+        <div className="bg-white rounded-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col font-sans">
+          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div className="flex items-center gap-2">
+              <FileText className="w-5 h-5 text-blue-600" aria-hidden="true" />
+              <h3 id="footer-terms-title" className="text-sm font-bold text-slate-800">Termos de Uso</h3>
             </div>
-            <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
-              <span className="text-[10px] font-mono text-gray-400 block mb-2">Vigência: Junho de 2026</span>
-              <p>Ao navegar pelo portal da <strong>Brasil Calculadoras</strong>, você concorda expressamente com os seguintes regulamentos de utilização:</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">1. Natureza do Serviço Informativo</h4>
-              <p>As ferramentas computacionais são disponibilizadas inteiramente gratuitas, sob o regime de 'como estão'. Suas equações numéricas simulam relações financeiras, trabalhistas, nutricionais e matemáticas puras e não constituem garantias jurídicas de acerto formal.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">2. Uso Permitido e Proibições</h4>
-              <p>É estritamente vedada a utilização de scripts robóticos automatizados, crawlers intrusivos ou ataques de negação de serviço (DDoS) contra nossa infraestrutura Cloud Run. O descumprimento incorrerá em sanções cíveis de invasão de dispositivos.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">3. Isenção Total de Danos</h4>
-              <p>Os desenvolvedores do portal se isentam de qualquer responsabilidade por eventuais decisões equivocadas, perda de lucros ou demissões decorrentes das estimativas informais sugeridas pelos simuladores.</p>
-            </div>
+            <button
+              type="button"
+              onClick={() => setShowTerms(false)}
+              aria-label="Fechar Termos de Uso"
+              className="p-1 px-1.5 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-lg cursor-pointer"
+            >
+              <X className="w-4 h-4" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
+            <span className="text-[10px] font-mono text-gray-400 block mb-2">Vigência: Junho de 2026</span>
+            <p>Ao navegar pelo portal da <strong>Brasil Calculadoras</strong>, você concorda expressamente com os seguintes regulamentos de utilização:</p>
+
+            <h4 className="text-xs font-bold text-slate-800">1. Natureza do Serviço Informativo</h4>
+            <p>As ferramentas computacionais são disponibilizadas inteiramente gratuitas, sob o regime de 'como estão'. Suas equações numéricas simulam relações financeiras, trabalhistas, nutricionais e matemáticas puras e não constituem garantias jurídicas de acerto formal.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">2. Uso Permitido e Proibições</h4>
+            <p>É estritamente vedada a utilização de scripts robóticos automatizados, crawlers intrusivos ou ataques de negação de serviço (DDoS) contra nossa infraestrutura Cloud Run. O descumprimento incorrerá em sanções cíveis de invasão de dispositivos.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">3. Isenção Total de Danos</h4>
+            <p>Os desenvolvedores do portal se isentam de qualquer responsabilidade por eventuais decisões equivocadas, perda de lucros ou demissões decorrentes das estimativas informais sugeridas pelos simuladores.</p>
           </div>
         </div>
-      )}
+      </NativeDialog>
 
       {/* ABOUT US MODAL */}
-      {showAbout && (
-        <div className="fixed inset-0 bg-slate-900/65 backdrop-blur-xs flex items-center justify-center z-120 p-4 font-sans">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-              <div className="flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-600" />
-                <h3 className="text-sm font-bold text-slate-800">Sobre o Brasil Calculadoras</h3>
-              </div>
-              <button 
-                onClick={() => setShowAbout(false)}
-                className="p-1 px-1.5 bg-gray-100 hover:bg-gray-200 text-gray-400 rounded-lg cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
+      <NativeDialog
+        isOpen={showAbout}
+        onClose={() => setShowAbout(false)}
+        ariaLabelledBy="footer-about-title"
+        className="w-full max-w-2xl"
+      >
+        <div className="bg-white rounded-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col font-sans">
+          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div className="flex items-center gap-2">
+              <Info className="w-5 h-5 text-blue-600" aria-hidden="true" />
+              <h3 id="footer-about-title" className="text-sm font-bold text-slate-800">Sobre o Brasil Calculadoras</h3>
             </div>
-            <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
-              <h4 className="text-xs font-bold text-slate-850 text-slate-800">Nossa Missão</h4>
-              <p>Buscamos desmistificar a matemática financeira e burocracias laborais do cotidiano brasileiro. Muitas vezes ficamos perdidos em equações complexas de rescisões CLT, metas de calorias, juros de de financiamento ou cálculo para o agronegócio e logística. O Brasil Calculadoras consolida dezenas dessas necessidades em uma interface única, leve e veloz.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">Gratuidade e Sustentabilidade</h4>
-              <p>A sustentabilidade da plataforma é viabilizada por parcerias de publicidade digital e patrocínios programáticos éticos. Esses recursos nos permitem manter toda a infraestrutura técnica online, atualizada e 100% gratuita para toda a população brasileira, sem a necessidade de cadastros, cobranças ou assinaturas pagas.</p>
-              
-              <h4 className="text-xs font-bold text-slate-800">Design de Excelência</h4>
-              <p>Acreditamos que ferramentas profissionais devem ter visual de excelência, sem poluição de margens ou popups cegos. Buscamos balancear contrastes, tipografia impecável da família Inter e animações que deem satisfação ao calcular.</p>
-            </div>
+            <button
+              type="button"
+              onClick={() => setShowAbout(false)}
+              aria-label="Fechar Sobre o Brasil Calculadoras"
+              className="p-1 px-1.5 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-lg cursor-pointer"
+            >
+              <X className="w-4 h-4" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="p-6 text-[11px] text-gray-600 space-y-4 leading-relaxed overflow-y-auto">
+            <h4 className="text-xs font-bold text-slate-800">Nossa Missão</h4>
+            <p>Buscamos desmistificar a matemática financeira e burocracias laborais do cotidiano brasileiro. Muitas vezes ficamos perdidos em equações complexas de rescisões CLT, metas de calorias, juros de de financiamento ou cálculo para o agronegócio e logística. O Brasil Calculadoras consolida dezenas dessas necessidades em uma interface única, leve e veloz.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">Gratuidade e Sustentabilidade</h4>
+            <p>A sustentabilidade da plataforma é viabilizada por parcerias de publicidade digital e patrocínios programáticos éticos. Esses recursos nos permitem manter toda a infraestrutura técnica online, atualizada e 100% gratuita para toda a população brasileira, sem a necessidade de cadastros, cobranças ou assinaturas pagas.</p>
+
+            <h4 className="text-xs font-bold text-slate-800">Design de Excelência</h4>
+            <p>Acreditamos que ferramentas profissionais devem ter visual de excelência, sem poluição de margens ou popups cegos. Buscamos balancear contrastes, tipografia impecável da família Inter e animações que deem satisfação ao calcular.</p>
           </div>
         </div>
-      )}
+      </NativeDialog>
     </>
   );
 };

@@ -2,6 +2,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <title>Brasil Calculadoras | Ferramentas Gratuitas e Rápidas</title>
@@ -11,30 +12,32 @@
     <meta property="og:description" content="As melhores calculadoras online gratuitas para facilitar o seu dia a dia. Acesse já!" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
-    
+
+    <!-- Fonts (loaded via HTML link instead of blocking CSS @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    
+
     <meta name="google-adsense-account" content="ca-pub-8160658026927094" />
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8160658026927094" crossorigin="anonymous"></script>
+    <!-- Google AdSense (deprioritized to avoid contending with critical path) -->
+    <script async fetchpriority="low" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8160658026927094" crossorigin="anonymous"></script>
 
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJHZSDP87M"></script>
+    <script async fetchpriority="low" src="https://www.googletagmanager.com/gtag/js?id=G-CJHZSDP87M"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-CJHZSDP87M');
     </script>
-
-    
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

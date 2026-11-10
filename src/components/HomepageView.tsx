@@ -158,9 +158,9 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
           <span className="bg-blue-500/10 border border-blue-500/25 text-blue-400 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full select-none">
             Ecossistema de Simuladores
           </span>
-          <h2 className="text-3xl md:text-5xl font-display font-black tracking-tight leading-tight max-w-2xl bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-5xl font-display font-black tracking-tight leading-tight max-w-2xl bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
             Calculadoras online gratuitas para finanças, trabalho, saúde, estudos, veículos e muito mais.
-          </h2>
+          </h1>
           <p className="text-slate-350 text-xs md:text-sm max-w-lg leading-relaxed text-slate-300 font-normal">
             Facilite sua rotina com cálculos exatos e relatórios profissionais. Ferramentas sem burocracias, sem cadastro e 100% atualizadas com a legislação nacional.
           </p>
@@ -168,10 +168,12 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
           {/* Central Hero Search Bar */}
           <div className="w-full max-w-lg mt-4 relative">
             <span className="absolute left-4 top-3.5 text-slate-400">
-              <Search className="w-5 h-5" />
+              <Search className="w-5 h-5" aria-hidden="true" />
             </span>
             <input 
               type="text"
+              aria-label="Pesquisar calculadoras online"
+              enterKeyHint="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Pesquise calculadoras: juros, rescisão, CLT, IMC, regra de 3..."
@@ -374,7 +376,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       </section>
 
       {/* Bloco Institucional de Confiança */}
-      <section className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8">
+      <section className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 deferred-section">
         <div className="max-w-2xl mx-auto text-center mb-8 flex flex-col gap-2">
           <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest font-mono">
             Sua Central de Planos e Simulações
@@ -427,7 +429,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       </section>
 
       {/* FAQ curta institucional */}
-      <section className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-6 shadow-xs">
+      <section className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-6 shadow-xs deferred-section">
         <div className="flex items-center gap-2.5 border-b border-slate-100 pb-4">
           <HelpCircle className="w-5 h-5 text-blue-500" />
           <h3 className="text-sm font-bold text-slate-800 font-display">Perguntas frequentes (FAQ)</h3>

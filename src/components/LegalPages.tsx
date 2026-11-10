@@ -14,6 +14,18 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
   const [mensagem, setMensagem] = useState('');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ nome?: string; email?: string; mensagem?: string }>({});
+
+  const validateField = (field: 'nome' | 'email' | 'mensagem', val: string) => {
+    const trimmed = val.trim();
+    if (field === 'nome') {
+      return trimmed.length < 2 ? 'Informe seu nome completo.' : '';
+    }
+    if (field === 'email') {
+      return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) ? 'Informe um e-mail válido para retorno.' : '';
+    }
+    return trimmed.length < 5 ? 'Escreva sua mensagem com pelo menos 5 caracteres.' : '';
+  };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,10 +33,20 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
     const cleanEmail = email.trim();
     const cleanMensagem = mensagem.trim();
 
-    if (!cleanNome || !cleanEmail || !cleanMensagem) {
+    const nomeErr = validateField('nome', nome);
+    const emailErr = validateField('email', email);
+    const msgErr = validateField('mensagem', mensagem);
+
+    if (nomeErr || emailErr || msgErr) {
+      setFieldErrors({
+        ...(nomeErr ? { nome: nomeErr } : {}),
+        ...(emailErr ? { email: emailErr } : {}),
+        ...(msgErr ? { mensagem: msgErr } : {}),
+      });
       setStatus('erro');
       return;
     }
+    setFieldErrors({});
 
     setLoading(true);
     setStatus(null);
@@ -297,36 +319,75 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
 
               <form onSubmit={handleContactSubmit} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col gap-4">
                 <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Enviar Mensagem</h3>
+                <p className="text-[11px] text-slate-500 m-0">Campos marcados com <span aria-hidden="true">*</span> são obrigatórios.</p>
                 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Seu Nome Completo *</label>
+                  <label htmlFor="contato-nome" className="block text-xs font-semibold text-slate-700 mb-1">Seu Nome Completo <span aria-hidden="true">*</span></label>
                   <input
+                    id="contato-nome"
                     type="text"
                     required
+                    autoComplete="name"
+                    enterKeyHint="next"
                     disabled={loading}
                     value={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    aria-invalid={Boolean(fieldErrors.nome)}
+                    aria-describedby={fieldErrors.nome ? 'contato-nome-err' : undefined}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setNome(v);
+                      if (fieldErrors.nome) setFieldErrors((prev) => ({ ...prev, nome: validateField('nome', v) || undefined }));
+                    }}
+                    onInvalid={(e) => {
+                      const err = validateField('nome', e.currentTarget.value);
+                      if (err) setFieldErrors((prev) => ({ ...prev, nome: err }));
+                    }}
+                    onBlur={(e) => {
+                      const err = validateField('nome', e.target.value);
+                      setFieldErrors((prev) => ({ ...prev, nome: err || undefined }));
+                    }}
                     placeholder="Digite seu nome"
                     className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 disabled:opacity-60"
                   />
+                  {fieldErrors.nome && <span id="contato-nome-err" className="field-error-msg">{fieldErrors.nome}</span>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Seu E-mail para Retorno *</label>
+                  <label htmlFor="contato-email" className="block text-xs font-semibold text-slate-700 mb-1">Seu E-mail para Retorno <span aria-hidden="true">*</span></label>
                   <input
+                    id="contato-email"
                     type="email"
                     required
+                    autoComplete="email"
+                    spellCheck={false}
+                    enterKeyHint="next"
                     disabled={loading}
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    aria-invalid={Boolean(fieldErrors.email)}
+                    aria-describedby={fieldErrors.email ? 'contato-email-err' : undefined}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setEmail(v);
+                      if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: validateField('email', v) || undefined }));
+                    }}
+                    onInvalid={(e) => {
+                      const err = validateField('email', e.currentTarget.value);
+                      if (err) setFieldErrors((prev) => ({ ...prev, email: err }));
+                    }}
+                    onBlur={(e) => {
+                      const err = validateField('email', e.target.value);
+                      setFieldErrors((prev) => ({ ...prev, email: err || undefined }));
+                    }}
                     placeholder="seuemail@exemplo.com"
                     className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 disabled:opacity-60"
                   />
+                  {fieldErrors.email && <span id="contato-email-err" className="field-error-msg">{fieldErrors.email}</span>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Motivo do Contato *</label>
+                  <label htmlFor="contato-motivo" className="block text-xs font-semibold text-slate-700 mb-1">Motivo do Contato <span aria-hidden="true">*</span></label>
                   <select
+                    id="contato-motivo"
                     disabled={loading}
                     value={motivo}
                     onChange={(e) => setMotivo(e.target.value)}
@@ -341,16 +402,32 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Mensagem Detalhada *</label>
+                  <label htmlFor="contato-mensagem" className="block text-xs font-semibold text-slate-700 mb-1">Mensagem Detalhada <span aria-hidden="true">*</span></label>
                   <textarea
+                    id="contato-mensagem"
                     required
                     rows={4}
                     disabled={loading}
                     value={mensagem}
-                    onChange={(e) => setMensagem(e.target.value)}
+                    aria-invalid={Boolean(fieldErrors.mensagem)}
+                    aria-describedby={fieldErrors.mensagem ? 'contato-mensagem-err' : undefined}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setMensagem(v);
+                      if (fieldErrors.mensagem) setFieldErrors((prev) => ({ ...prev, mensagem: validateField('mensagem', v) || undefined }));
+                    }}
+                    onInvalid={(e) => {
+                      const err = validateField('mensagem', e.currentTarget.value);
+                      if (err) setFieldErrors((prev) => ({ ...prev, mensagem: err }));
+                    }}
+                    onBlur={(e) => {
+                      const err = validateField('mensagem', e.target.value);
+                      setFieldErrors((prev) => ({ ...prev, mensagem: err || undefined }));
+                    }}
                     placeholder="Como podemos ajudar você hoje?"
                     className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 disabled:opacity-60"
                   />
+                  {fieldErrors.mensagem && <span id="contato-mensagem-err" className="field-error-msg">{fieldErrors.mensagem}</span>}
                 </div>
 
                 <button

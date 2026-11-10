@@ -1106,6 +1106,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50/50 flex flex-col font-sans leading-relaxed text-slate-800 antialiased selection:bg-slate-900 selection:text-white">
+      <a href="#conteudo-principal" className="visually-hidden skip-link no-underline">
+        Pular para o conteúdo principal
+      </a>
       
       {/* Toast Notification */}
       <AnimatePresence>
@@ -1149,29 +1152,35 @@ export default function App() {
       <header className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 z-40 transition-shadow">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-18 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <button 
+            <button
+              type="button"
               onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Fechar menu de categorias' : 'Abrir menu de categorias'}
+              aria-expanded={menuOpen}
               className="lg:hidden p-2 text-slate-600 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 rounded-lg cursor-pointer transition-all"
             >
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <div 
-              onClick={handleLogoClick} 
-              className="flex items-center gap-2.5 cursor-pointer select-none group"
+            <button
+              type="button"
+              onClick={handleLogoClick}
+              className="flex items-center gap-2.5 cursor-pointer select-none group text-left"
               title="Clique 5 vezes aqui para ativar/desativar as métricas de simulação do AdSense"
             >
               <img 
                 src="/logo.svg" 
-                alt="Brasil Calculadoras" 
+                alt="Brasil Calculadoras"
+                width="36"
+                height="36"
                 className="h-9 w-9 rounded-xl shadow-md shadow-blue-100/40 group-hover:scale-105 transition-transform duration-200" 
               />
               <div>
-                <h1 className="text-md font-display font-bold text-slate-800 tracking-tight leading-none group-hover:text-blue-600 transition-colors">
+                <span className="block text-md font-display font-bold text-slate-800 tracking-tight leading-none group-hover:text-blue-600 transition-colors">
                   Brasil Calculadoras
-                </h1>
+                </span>
                 <span className="text-[10px] font-semibold text-gray-400 font-mono tracking-wider">FERRAMENTAS DE EXCELÊNCIA</span>
               </div>
-            </div>
+            </button>
             
           </div>
 
@@ -1182,13 +1191,17 @@ export default function App() {
             </span>
             <input 
               type="text"
+              aria-label="Pesquisar calculadoras"
+              enterKeyHint="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Digite para pesquisar: juros, CLT, IMC, texto, matemática..."
               className="w-full pl-10 pr-4 py-2.5 text-xs bg-slate-100 hover:bg-slate-200/50 focus:bg-white border-none focus:ring-2 focus:ring-blue-500 rounded-full outline-none transition-all font-sans font-medium text-slate-800"
             />
             {searchQuery && (
-              <button 
+              <button
+                type="button"
+                aria-label="Limpar busca"
                 onClick={() => setSearchQuery('')}
                 className="absolute right-3.5 top-3 text-gray-400 hover:text-slate-650 cursor-pointer"
               >
@@ -1199,10 +1212,12 @@ export default function App() {
 
           <div className="flex items-center gap-2.5">
             <button
+              type="button"
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 triggerToast('🔗 Link da Central Copiado! Compartilhe o site com seus amigos.');
               }}
+              aria-label="Compartilhar link da central"
               className="p-2 text-slate-600 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 rounded-xl transition-all cursor-pointer active:scale-95"
               title="Compartilhar Link"
             >
@@ -1220,10 +1235,11 @@ export default function App() {
                 <p className="text-center py-6 text-xs text-gray-400 select-none">Nenhuma ferramenta coincide com "{searchQuery}". Tente outros termos.</p>
               ) : (
                 filteredCalculators.map(c => (
-                  <div
+                  <button
+                    type="button"
                     key={c.id}
                     onClick={() => selectCalculator(c.id)}
-                    className="flex justify-between items-center p-2.5 hover:bg-slate-50 cursor-pointer rounded-lg transition-colors"
+                    className="w-full text-left flex justify-between items-center p-2.5 hover:bg-slate-50 cursor-pointer rounded-lg transition-colors"
                   >
                     <div>
                       <h4 className="text-xs font-semibold text-slate-900">{c.name}</h4>
@@ -1232,7 +1248,7 @@ export default function App() {
                     <span className="text-[9px] bg-slate-100 font-mono font-bold text-slate-600 px-2 py-0.5 rounded uppercase">
                       {CATEGORY_MAP_RAW[c.category] || c.category}
                     </span>
-                  </div>
+                  </button>
                 ))
               )}
             </div>
@@ -1241,7 +1257,7 @@ export default function App() {
       </header>
 
       {/* Main content grid view */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
+      <main id="conteudo-principal" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
         
         {normalizedLocation === '/politica-de-privacidade' ? (
           <LegalPage type="privacy" onNavigateHome={() => setLocation('/')} />
@@ -1410,9 +1426,9 @@ export default function App() {
                       Categoria Principal
                     </span>
                   </div>
-                  <h2 className="text-xl md:text-2xl font-display font-black text-slate-800 tracking-tight">
+                  <h1 className="text-xl md:text-2xl font-display font-black text-slate-800 tracking-tight">
                     {getCategoryHubContent(activeCategoryHub).title}
-                  </h2>
+                  </h1>
                   <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
                     {getCategoryHubContent(activeCategoryHub).introduction}
                   </p>
@@ -1546,9 +1562,9 @@ export default function App() {
                       </span>
                       <span className="text-[8px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded select-none">ATIVO</span>
                     </div>
-                    <h2 className="text-lg font-display font-bold text-slate-800 mt-1">
+                    <h1 className="text-lg font-display font-bold text-slate-800 mt-1">
                       {activeCalc?.name}
-                    </h2>
+                    </h1>
                   </div>
 
                   {/* Action operations export links */}
@@ -1813,7 +1829,7 @@ export default function App() {
 
                   {/* Box 2: SEO Exhaustive Technical Guide & Accordion FAQ */}
                   {activeCalc && (
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                    <div className="deferred-section bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
                       
                       {/* Detailed semantic sections */}
                       <div className="flex flex-col gap-5">
@@ -1944,7 +1960,7 @@ export default function App() {
 
                   {/* Box 3: Advanced Internal Linking grids (3 categories: Related, Complementary, Popular) */}
                   {activeCalc && (
-                    <div className="flex flex-col gap-6">
+                    <div className="deferred-section flex flex-col gap-6">
                       
                       {/* Grid 1: Calculadoras da mesma Categoria */}
                       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
@@ -1956,10 +1972,11 @@ export default function App() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                           {relatedCalculators.map(c => (
-                            <div 
-                              key={c.id} 
+                            <button
+                              type="button"
+                              key={c.id}
                               onClick={() => selectCalculator(c.id as any)}
-                              className="group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                              className="w-full text-left group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
                             >
                               <div>
                                 <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">{c.name}</h4>
@@ -1968,7 +1985,7 @@ export default function App() {
                               <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
                                 Calcular Agora <ExternalLink className="w-2.5 h-2.5" />
                               </span>
-                            </div>
+                            </button>
                           ))}
                         </div>
                       </div>
@@ -1983,10 +2000,11 @@ export default function App() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                           {getComplementaryCalculators(activeCalculator, activeCalc.category).map(c => (
-                            <div 
-                              key={c.id} 
+                            <button
+                              type="button"
+                              key={c.id}
                               onClick={() => selectCalculator(c.id as any)}
-                              className="group border border-slate-150 hover:border-amber-200 hover:bg-amber-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                              className="w-full text-left group border border-slate-150 hover:border-amber-200 hover:bg-amber-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
                             >
                               <div>
                                 <h4 className="text-xs font-bold text-slate-800 group-hover:text-amber-600 transition-colors line-clamp-1">{c.name}</h4>
@@ -1995,7 +2013,7 @@ export default function App() {
                               <span className="text-[9px] font-mono font-semibold text-amber-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
                                 Acessar Ferramenta <ExternalLink className="w-2.5 h-2.5" />
                               </span>
-                            </div>
+                            </button>
                           ))}
                         </div>
                       </div>
@@ -2010,10 +2028,11 @@ export default function App() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                           {getPopularCalculators(activeCalculator).map(c => (
-                            <div 
-                              key={c.id} 
+                            <button
+                              type="button"
+                              key={c.id}
                               onClick={() => selectCalculator(c.id as any)}
-                              className="group border border-slate-150 hover:border-emerald-200 hover:bg-emerald-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                              className="w-full text-left group border border-slate-150 hover:border-emerald-200 hover:bg-emerald-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
                             >
                               <div>
                                 <h4 className="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition-colors line-clamp-1">{c.name}</h4>
@@ -2022,7 +2041,7 @@ export default function App() {
                               <span className="text-[9px] font-mono font-semibold text-emerald-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
                                 Simular Agora <ExternalLink className="w-2.5 h-2.5" />
                               </span>
-                            </div>
+                            </button>
                           ))}
                         </div>
                       </div>
