@@ -12,6 +12,10 @@ export default defineConfig(() => {
       },
     },
     build: {
+      modulePreload: {
+        resolveDependencies: (_filename, deps) =>
+          deps.filter((d) => !d.includes('jspdf') && !d.includes('html2canvas') && !d.includes('purify')),
+      },
       rollupOptions: {
         output: {
           manualChunks: {
