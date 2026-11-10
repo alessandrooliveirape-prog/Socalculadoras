@@ -17,9 +17,9 @@ export const CalculatorHistory: React.FC<CalculatorHistoryProps> = ({
     return (
       <div className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm">
         <div className="flex flex-col items-center justify-center gap-2">
-          <History className="w-8 h-8 text-gray-300" />
-          <h4 className="text-sm font-semibold text-slate-700">Histórico de Sessão Vazio</h4>
-          <p className="text-xs text-gray-400 max-w-xs font-mono">
+          <History className="w-8 h-8 text-slate-400" aria-hidden="true" />
+          <h3 className="text-sm font-semibold text-slate-700">Histórico de Sessão Vazio</h3>
+          <p className="text-xs text-slate-600 max-w-xs font-mono">
             À medida que realizar cálculos nas ferramentas, os resumos aparecerão listados aqui automaticamente.
           </p>
         </div>

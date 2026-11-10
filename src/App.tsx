@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { jsPDF } from 'jspdf';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { 
   Calculator, 
   Search, 
@@ -24,36 +23,35 @@ import {
   ChevronRight,
   Zap
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { useLocation } from 'wouter';
 
 // Custom imports
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
 import { AdSenseBanner } from './components/AdSenseBanner';
-import { LegalPage } from './components/LegalPages';
-import { DesenvolvedoresView } from './components/DesenvolvedoresView';
-import { CompoundInterestCalc } from './components/CompoundInterestCalc';
-import { CltVsPjCalc } from './components/CltVsPjCalc';
-import { ProfitMarginCalc } from './components/ProfitMarginCalc';
-import { IbcCaloricoTracker } from './components/IbcCaloricoTracker';
-import { TimeSheetHoursCalc } from './components/TimeSheetHoursCalc';
-import { RuleOf3AndTextTools } from './components/RuleOf3AndTextTools';
-import { CalculatorHistory } from './components/CalculatorHistory';
-import { RescisaoCLTCalc } from './components/RescisaoCLTCalc';
-import { DecimoTerceiroCalc } from './components/DecimoTerceiroCalc';
-import { FeriasCLTCalc } from './components/FeriasCLTCalc';
-import { HorasExtrasCalc } from './components/HorasExtrasCalc';
-import { AposentadoriaINSSCalc } from './components/AposentadoriaINSSCalc';
-import { GenericDynamicCalc } from './components/GenericDynamicCalc';
 import { FooterAndLegals } from './components/FooterAndLegals';
 import { HomepageView } from './components/HomepageView';
-import { SimplePercentageCalc } from './components/SimplePercentageCalc';
-import { CarFinanceCalc } from './components/CarFinanceCalc';
-import { AdSenseEarningsCalc } from './components/AdSenseEarningsCalc';
+
+const LegalPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.LegalPage })));
+const DesenvolvedoresView = lazy(() => import('./components/DesenvolvedoresView').then(m => ({ default: m.DesenvolvedoresView })));
+const CompoundInterestCalc = lazy(() => import('./components/CompoundInterestCalc').then(m => ({ default: m.CompoundInterestCalc })));
+const CltVsPjCalc = lazy(() => import('./components/CltVsPjCalc').then(m => ({ default: m.CltVsPjCalc })));
+const ProfitMarginCalc = lazy(() => import('./components/ProfitMarginCalc').then(m => ({ default: m.ProfitMarginCalc })));
+const IbcCaloricoTracker = lazy(() => import('./components/IbcCaloricoTracker').then(m => ({ default: m.IbcCaloricoTracker })));
+const TimeSheetHoursCalc = lazy(() => import('./components/TimeSheetHoursCalc').then(m => ({ default: m.TimeSheetHoursCalc })));
+const RuleOf3AndTextTools = lazy(() => import('./components/RuleOf3AndTextTools').then(m => ({ default: m.RuleOf3AndTextTools })));
+const CalculatorHistory = lazy(() => import('./components/CalculatorHistory').then(m => ({ default: m.CalculatorHistory })));
+const RescisaoCLTCalc = lazy(() => import('./components/RescisaoCLTCalc').then(m => ({ default: m.RescisaoCLTCalc })));
+const DecimoTerceiroCalc = lazy(() => import('./components/DecimoTerceiroCalc').then(m => ({ default: m.DecimoTerceiroCalc })));
+const FeriasCLTCalc = lazy(() => import('./components/FeriasCLTCalc').then(m => ({ default: m.FeriasCLTCalc })));
+const HorasExtrasCalc = lazy(() => import('./components/HorasExtrasCalc').then(m => ({ default: m.HorasExtrasCalc })));
+const AposentadoriaINSSCalc = lazy(() => import('./components/AposentadoriaINSSCalc').then(m => ({ default: m.AposentadoriaINSSCalc })));
+const GenericDynamicCalc = lazy(() => import('./components/GenericDynamicCalc').then(m => ({ default: m.GenericDynamicCalc })));
+const SimplePercentageCalc = lazy(() => import('./components/SimplePercentageCalc').then(m => ({ default: m.SimplePercentageCalc })));
+const CarFinanceCalc = lazy(() => import('./components/CarFinanceCalc').then(m => ({ default: m.CarFinanceCalc })));
+const AdSenseEarningsCalc = lazy(() => import('./components/AdSenseEarningsCalc').then(m => ({ default: m.AdSenseEarningsCalc })));
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
-import { handleExportPDF } from './utils/exportPDF';
 import { 
   getSeoContentForCalculator, 
   getCategoryHubContent, 
@@ -301,7 +299,7 @@ export default function App() {
     const centralSupaKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const siteId = import.meta.env.VITE_SITE_ID || 'sc-domain:brasilcalculadoras.com.br';
     
-    if (!centralSupaUrl || !centralSupaKey) {
+    if (!centralSupaUrl || !centralSupaKey || centralSupaUrl.includes('tezwamjdetiigwigvayt.supabase.co')) {
       return;
     }
 
@@ -927,8 +925,9 @@ export default function App() {
   };
 
   // Export Results back as a clean, styled, and ready-to-print official PDF report using standard PDF canvas library
-  const exportToPDF = () => {
-    handleExportPDF(getStatePayload());
+  const exportToPDF = async () => {
+    const { handleExportPDF } = await import('./utils/exportPDF');
+    await handleExportPDF(getStatePayload());
     setAdImpressions(prev => prev + 1);
     setAdRefreshTrigger(prev => prev + 1);
     triggerToast('📥 Relatório PDF Gerado e Exportado com Sucesso!');
@@ -1111,19 +1110,16 @@ export default function App() {
       </a>
       
       {/* Toast Notification */}
-      <AnimatePresence>
-        {toastMsg && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white font-medium text-xs py-3 px-6 rounded-xl shadow-xl flex items-center gap-2 border border-slate-800"
-          >
-            <Sparkles className="w-4.5 h-4.5 text-yellow-400 animate-spin" />
-            <span>{toastMsg}</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {toastMsg && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white font-medium text-xs py-3 px-6 rounded-xl shadow-xl flex items-center gap-2 border border-slate-800"
+        >
+          <Sparkles className="w-4.5 h-4.5 text-yellow-400 animate-spin" aria-hidden="true" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
 
       {/* Top Utility Promotional Ribbon / Custom Header - Only displayed for Admin/Owner */}
       {isAdmin && (
@@ -1178,7 +1174,7 @@ export default function App() {
                 <span className="block text-md font-display font-bold text-slate-800 tracking-tight leading-none group-hover:text-blue-600 transition-colors">
                   Brasil Calculadoras
                 </span>
-                <span className="text-[10px] font-semibold text-gray-400 font-mono tracking-wider">FERRAMENTAS DE EXCELÊNCIA</span>
+                <span className="text-[10px] font-semibold text-slate-600 font-mono tracking-wider">FERRAMENTAS DE EXCELÊNCIA</span>
               </div>
             </button>
             
@@ -1186,8 +1182,8 @@ export default function App() {
 
           {/* Core Hub Quick Search Input bar - Desktop */}
           <div className="hidden md:flex flex-1 max-w-md relative">
-            <span className="absolute left-3.5 top-3 text-slate-400">
-              <Search className="w-4.5 h-4.5" />
+            <span className="absolute left-3.5 top-3 text-slate-500">
+              <Search className="w-4.5 h-4.5" aria-hidden="true" />
             </span>
             <input 
               type="text"
@@ -1230,9 +1226,9 @@ export default function App() {
         {searchQuery.trim() !== '' && (
           <div className="absolute top-18 left-0 right-0 bg-white border-b border-slate-200 shadow-xl z-50 py-3">
             <div className="max-w-3xl mx-auto px-4 max-h-[300px] overflow-y-auto flex flex-col gap-1">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2.5 mb-1.5 block">Resultados Rápidos da Busca</span>
+              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest px-2.5 mb-1.5 block">Resultados Rápidos da Busca</span>
               {filteredCalculators.length === 0 ? (
-                <p className="text-center py-6 text-xs text-gray-400 select-none">Nenhuma ferramenta coincide com "{searchQuery}". Tente outros termos.</p>
+                <p className="text-center py-6 text-xs text-slate-600 select-none">Nenhuma ferramenta coincide com "{searchQuery}". Tente outros termos.</p>
               ) : (
                 filteredCalculators.map(c => (
                   <button
@@ -1242,10 +1238,10 @@ export default function App() {
                     className="w-full text-left flex justify-between items-center p-2.5 hover:bg-slate-50 cursor-pointer rounded-lg transition-colors"
                   >
                     <div>
-                      <h4 className="text-xs font-semibold text-slate-900">{c.name}</h4>
-                      <p className="text-[11px] text-gray-405 truncate max-w-sm sm:max-w-xl">{c.description}</p>
+                      <span className="block text-xs font-semibold text-slate-900">{c.name}</span>
+                      <p className="text-[11px] text-slate-600 truncate max-w-sm sm:max-w-xl">{c.description}</p>
                     </div>
-                    <span className="text-[9px] bg-slate-100 font-mono font-bold text-slate-600 px-2 py-0.5 rounded uppercase">
+                    <span className="text-[9px] bg-slate-100 font-mono font-bold text-slate-700 px-2 py-0.5 rounded uppercase">
                       {CATEGORY_MAP_RAW[c.category] || c.category}
                     </span>
                   </button>
@@ -1258,7 +1254,11 @@ export default function App() {
 
       {/* Main content grid view */}
       <main id="conteudo-principal" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
-        
+        <Suspense fallback={
+          <div className="min-h-[40vh] flex items-center justify-center text-sm font-medium text-slate-600">
+            Carregando ferramenta...
+          </div>
+        }>
         {normalizedLocation === '/politica-de-privacidade' ? (
           <LegalPage type="privacy" onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/termos-de-uso' ? (
@@ -1362,12 +1362,13 @@ export default function App() {
 
             {/* List of active filtered calculators */}
             <div className="flex flex-col gap-1.5 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex-1">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 px-2 select-none">Catálogo de Ferramentas</span>
+              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5 px-2 select-none">Catálogo de Ferramentas</span>
               <div className="flex flex-col gap-1 max-h-[300px] lg:max-h-[500px] overflow-y-auto pr-1">
                 {filteredCalculators.map(c => {
                   const isActive = c.id === activeCalculator;
                   return (
                     <button
+                      type="button"
                       key={c.id}
                       onClick={() => selectCalculator(c.id)}
                       className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer ${
@@ -1376,14 +1377,14 @@ export default function App() {
                           : 'bg-white border-transparent hover:bg-slate-50 text-slate-700'
                       }`}
                     >
-                      <h4 className="text-xs font-bold text-slate-800 truncate">{c.name}</h4>
-                      <p className="text-[10px] text-slate-400 line-clamp-1 mt-0.5 leading-snug">{c.description}</p>
+                      <span className="block text-xs font-bold text-slate-800 truncate">{c.name}</span>
+                      <p className="text-[10px] text-slate-600 line-clamp-1 mt-0.5 leading-snug">{c.description}</p>
                     </button>
                   );
                 })}
 
                 {filteredCalculators.length === 0 && (
-                  <p className="text-[11px] text-slate-400 text-center py-4 font-mono select-none">Nenhuma ferramenta encontrada.</p>
+                  <p className="text-[11px] text-slate-600 text-center py-4 font-mono select-none">Nenhuma ferramenta encontrada.</p>
                 )}
               </div>
             </div>
@@ -1486,29 +1487,20 @@ export default function App() {
                               className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
                             >
                               <span className="text-xs font-semibold text-slate-700">{q.q}</span>
-                              <motion.div
-                                animate={{ rotate: isOpen ? 180 : 0 }}
-                                transition={{ duration: 0.15 }}
-                                className="text-blue-500 shrink-0 ml-2"
+                              <span
+                                className={`text-blue-600 shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
+                                aria-hidden="true"
                               >
                                 <ChevronDown className="w-4 h-4" />
-                              </motion.div>
+                              </span>
                             </button>
-                            <AnimatePresence initial={false}>
-                              {isOpen && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                                  animate={{ height: "auto", opacity: 1, marginTop: 8 }}
-                                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                                  transition={{ duration: 0.15 }}
-                                  className="overflow-hidden"
-                                >
-                                  <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
-                                    {q.a}
-                                  </p>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                            {isOpen && (
+                              <div className="mt-2 overflow-hidden">
+                                <p className="text-[11px] text-slate-600 font-sans font-normal leading-relaxed">
+                                  {q.a}
+                                </p>
+                              </div>
+                            )}
                           </div>
                         );
                       })}
@@ -1658,11 +1650,7 @@ export default function App() {
                   
                   {/* Box 1: Sharing & Viral referrals (If results are generated) */}
                   {hasActiveResult && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white border border-blue-150 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4"
-                    >
+                    <div className="bg-white border border-blue-150 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
                           <Share2 className="w-5 h-5 animate-pulse" />
@@ -1694,14 +1682,14 @@ export default function App() {
                         </button>
                         <button
                           onClick={handleShareWhatsApp}
-                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm"
+                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm"
                           title="Enviar pelo WhatsApp corporativo ou pessoal"
                         >
                           <span className="text-sm font-bold leading-none">💬</span>
                           <span>Enviar no WhatsApp</span>
                         </button>
                       </div>
-                    </motion.div>
+                    </div>
                   )}
 
                   {/* Quick-Switch Bar entre Ferramentas Irmãs */}
@@ -1926,29 +1914,20 @@ export default function App() {
                                     className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
                                   >
                                     <span className="text-xs font-semibold text-slate-700">{q.q}</span>
-                                    <motion.div
-                                      animate={{ rotate: isOpen ? 180 : 0 }}
-                                      transition={{ duration: 0.15 }}
-                                      className="text-blue-500 shrink-0 ml-2"
+                                    <span
+                                      className={`text-blue-600 shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
+                                      aria-hidden="true"
                                     >
                                       <ChevronDown className="w-4 h-4" />
-                                    </motion.div>
+                                    </span>
                                   </button>
-                                  <AnimatePresence initial={false}>
-                                    {isOpen && (
-                                      <motion.div
-                                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                                        animate={{ height: "auto", opacity: 1, marginTop: 8 }}
-                                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                                        transition={{ duration: 0.15 }}
-                                        className="overflow-hidden"
-                                      >
-                                        <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
-                                          {q.a}
-                                        </p>
-                                      </motion.div>
-                                    )}
-                                  </AnimatePresence>
+                                  {isOpen && (
+                                    <div className="mt-2 overflow-hidden">
+                                      <p className="text-[11px] text-slate-600 font-sans font-normal leading-relaxed">
+                                        {q.a}
+                                      </p>
+                                    </div>
+                                  )}
                                 </div>
                               );
                             })}
@@ -2066,6 +2045,7 @@ export default function App() {
           </section>
         </div>
         )}
+        </Suspense>
       </main>
 
       {/* Advanced AdSense and LGPD Compliant Footer with Modals */}

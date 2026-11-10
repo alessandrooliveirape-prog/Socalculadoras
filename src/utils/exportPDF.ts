@@ -1,7 +1,7 @@
-import { jsPDF } from 'jspdf';
 import { CalcStatePayload } from '../App';
 
-export const handleExportPDF = (payload: CalcStatePayload) => {
+export const handleExportPDF = async (payload: CalcStatePayload) => {
+  const { jsPDF } = await import('jspdf');
   const { activeCalculator, activeCalcDef, compoundInterestResults, cltVsPjResults, profitMarginResults, healthResults, timeSheetResults, rescisaoCLTResults, decimoTerceiroResults, feriasCLTResults, horasExtrasResults, aposentadoriaINSSResults, dynamicCalcInputs, dynamicCalcOutputs, adsenseEarningsResults } = payload;
     const doc = new jsPDF({
       orientation: 'portrait',

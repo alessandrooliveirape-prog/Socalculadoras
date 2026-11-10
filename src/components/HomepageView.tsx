@@ -17,7 +17,6 @@ import {
   Briefcase,
   FileText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from '../data/calculatorsCatalog';
 import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW } from '../utils/seoContentGenerator';
 
@@ -161,13 +160,13 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
           <h1 className="text-3xl md:text-5xl font-display font-black tracking-tight leading-tight max-w-2xl bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
             Calculadoras online gratuitas para finanças, trabalho, saúde, estudos, veículos e muito mais.
           </h1>
-          <p className="text-slate-350 text-xs md:text-sm max-w-lg leading-relaxed text-slate-300 font-normal">
+          <p className="text-xs md:text-sm max-w-lg leading-relaxed text-slate-300 font-normal">
             Facilite sua rotina com cálculos exatos e relatórios profissionais. Ferramentas sem burocracias, sem cadastro e 100% atualizadas com a legislação nacional.
           </p>
 
           {/* Central Hero Search Bar */}
           <div className="w-full max-w-lg mt-4 relative">
-            <span className="absolute left-4 top-3.5 text-slate-400">
+            <span className="absolute left-4 top-3.5 text-slate-300">
               <Search className="w-5 h-5" aria-hidden="true" />
             </span>
             <input 
@@ -177,50 +176,44 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Pesquise calculadoras: juros, rescisão, CLT, IMC, regra de 3..."
-              className="w-full pl-12 pr-4 py-3.5 text-xs bg-slate-800/80 hover:bg-slate-800 focus:bg-white text-slate-300 focus:text-slate-900 border border-slate-700/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-full outline-none transition-all font-medium placeholder-slate-500"
+              className="w-full pl-12 pr-4 py-3.5 text-xs bg-slate-800/80 hover:bg-slate-800 focus:bg-white text-slate-200 focus:text-slate-900 border border-slate-700/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-full outline-none transition-all font-medium placeholder-slate-400 focus:placeholder-slate-500"
             />
             
             {/* Search Results dropdown overlay */}
-            <AnimatePresence>
-              {searchQuery.trim() !== '' && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute left-0 right-0 mt-2 bg-white text-slate-900 rounded-2xl shadow-2xl border border-slate-200 z-50 py-3 overflow-hidden text-left"
-                >
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-4 mb-2 block select-none">
-                    Resultados Correspondentes
-                  </span>
-                  <div className="max-h-[280px] overflow-y-auto flex flex-col px-2">
-                    {searchResults.length === 0 ? (
-                      <p className="text-center py-6 text-xs text-gray-400 font-medium select-none">
-                        Nenhuma ferramenta localizada para "{searchQuery}".
-                      </p>
-                    ) : (
-                      searchResults.map(c => (
-                        <div
-                          key={c.id}
-                          onClick={() => onSelectCalculator(c.id)}
-                          className="flex justify-between items-center p-2.5 hover:bg-blue-50/50 cursor-pointer rounded-xl transition-all"
-                        >
-                          <div className="truncate pr-4">
-                            <h4 className="text-xs font-bold text-slate-900">{c.name}</h4>
-                            <p className="text-[10px] text-gray-400 truncate mt-0.5 font-normal">{c.description}</p>
-                          </div>
-                          <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
+            {searchQuery.trim() !== '' && (
+              <div className="absolute left-0 right-0 mt-2 bg-white text-slate-900 rounded-2xl shadow-2xl border border-slate-200 z-50 py-3 overflow-hidden text-left">
+                <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest px-4 mb-2 block select-none">
+                  Resultados Correspondentes
+                </span>
+                <div className="max-h-[280px] overflow-y-auto flex flex-col px-2">
+                  {searchResults.length === 0 ? (
+                    <p className="text-center py-6 text-xs text-slate-600 font-medium select-none">
+                      Nenhuma ferramenta localizada para "{searchQuery}".
+                    </p>
+                  ) : (
+                    searchResults.map(c => (
+                      <button
+                        type="button"
+                        key={c.id}
+                        onClick={() => onSelectCalculator(c.id)}
+                        className="w-full text-left flex justify-between items-center p-2.5 hover:bg-blue-50/50 cursor-pointer rounded-xl transition-all"
+                      >
+                        <div className="truncate pr-4">
+                          <span className="block text-xs font-bold text-slate-900">{c.name}</span>
+                          <p className="text-[10px] text-slate-600 truncate mt-0.5 font-normal">{c.description}</p>
                         </div>
-                      ))
-                    )}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                        <ChevronRight className="w-4 h-4 text-slate-500 shrink-0" aria-hidden="true" />
+                      </button>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Calculadoras Acessadas Recentemente */}
             {recentTools.length > 0 && searchQuery.trim() === '' && (
               <div className="flex flex-wrap items-center justify-center gap-1.5 mt-3 select-none">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
                   <Clock className="w-3 h-3 text-blue-400" />
                   <span>Recentes:</span>
                 </span>
@@ -247,9 +240,9 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
           <span className="h-5 w-1 bg-blue-600 rounded-full" />
-          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
+          <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
             Calculadoras mais acessadas
-          </h3>
+          </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {popularCalculators.map(c => {
@@ -262,17 +255,17 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                 className="group bg-white border border-slate-200 hover:border-blue-200 hover:shadow-md p-5 rounded-2xl cursor-pointer transition-all flex items-start gap-4 hover:bg-slate-50/30"
               >
                 <div className={`p-3 rounded-xl border shrink-0 transition-transform group-hover:scale-105 ${toolMeta?.color || 'bg-slate-50 text-slate-600'}`}>
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-xs font-bold text-slate-850 group-hover:text-blue-600 transition-colors truncate">
+                  <h3 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate">
                     {c.name}
-                  </h4>
-                  <p className="text-[10px] text-slate-400 mt-1 line-clamp-2 leading-relaxed font-normal">
+                  </h3>
+                  <p className="text-[10px] text-slate-600 mt-1 line-clamp-2 leading-relaxed font-normal">
                     {c.description}
                   </p>
-                  <span className="text-[9px] font-mono font-bold text-blue-600 uppercase tracking-wide inline-flex items-center gap-0.5 mt-3 select-none">
-                    Calcular agora <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  <span className="text-[9px] font-mono font-bold text-blue-700 uppercase tracking-wide inline-flex items-center gap-0.5 mt-3 select-none">
+                    Calcular agora <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                   </span>
                 </div>
               </div>
@@ -285,9 +278,9 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
           <span className="h-5 w-1 bg-blue-600 rounded-full" />
-          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
+          <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
             Categorias em destaque
-          </h3>
+          </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {Object.entries(CATEGORY_MAP).slice(0, 6).map(([key, label]) => {
@@ -305,20 +298,20 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-2xl">{emoji}</span>
-                    <span className="bg-slate-100 text-slate-500 font-mono text-[9px] font-bold px-2 py-0.5 rounded-md group-hover:bg-blue-50 group-hover:text-blue-700 transition-colors">
+                    <span className="text-2xl" aria-hidden="true">{emoji}</span>
+                    <span className="bg-slate-100 text-slate-600 font-mono text-[9px] font-bold px-2 py-0.5 rounded-md group-hover:bg-blue-50 group-hover:text-blue-700 transition-colors">
                       {count} {count === 1 ? 'ferramenta' : 'ferramentas'}
                     </span>
                   </div>
-                  <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
+                  <h3 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
                     {rawLabel}
-                  </h4>
-                  <p className="text-[10px] text-slate-400 mt-2 line-clamp-3 leading-relaxed font-normal">
+                  </h3>
+                  <p className="text-[10px] text-slate-600 mt-2 line-clamp-3 leading-relaxed font-normal">
                     {desc}
                   </p>
                 </div>
-                <span className="text-[9px] font-mono font-bold text-blue-600 uppercase tracking-wide inline-flex items-center gap-0.5 mt-4 select-none">
-                  Acessar Hub <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                <span className="text-[9px] font-mono font-bold text-blue-700 uppercase tracking-wide inline-flex items-center gap-0.5 mt-4 select-none">
+                  Acessar Hub <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                 </span>
               </div>
             );
@@ -330,9 +323,9 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       <section className="flex flex-col gap-5">
         <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
           <span className="h-5 w-1 bg-blue-600 rounded-full" />
-          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
+          <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
             Calculadoras por Objetivo
-          </h3>
+          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {intentGroups.map((group, gIdx) => (
@@ -341,10 +334,10 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col justify-between"
             >
               <div>
-                <h4 className="text-xs font-bold text-slate-800 font-display border-b border-slate-100 pb-2.5">
+                <h3 className="text-xs font-bold text-slate-800 font-display border-b border-slate-100 pb-2.5">
                   {group.title}
-                </h4>
-                <p className="text-[10px] text-slate-400 mt-2 leading-relaxed font-normal">
+                </h3>
+                <p className="text-[10px] text-slate-600 mt-2 leading-relaxed font-normal">
                   {group.desc}
                 </p>
                 <div className="flex flex-col gap-2 mt-4">
@@ -355,7 +348,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                       className="text-left text-xs font-medium text-slate-700 hover:text-blue-600 transition-colors flex items-center justify-between cursor-pointer py-1 px-1.5 hover:bg-slate-50 rounded-lg group"
                     >
                       <span className="truncate">{tool.name}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-350 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-500 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-0.5 shrink-0" aria-hidden="true" />
                     </button>
                   ))}
                 </div>
@@ -366,7 +359,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                   const targetCat = gIdx === 0 ? 'profissoes' : gIdx === 1 ? 'financas' : 'matematica';
                   onSelectCategory(targetCat);
                 }}
-                className="w-full text-center py-2 bg-slate-50 hover:bg-slate-100 text-[10px] text-slate-600 font-bold rounded-xl mt-6 border border-slate-150 transition-colors cursor-pointer select-none"
+                className="w-full text-center py-2 bg-slate-50 hover:bg-slate-100 text-[10px] text-slate-700 font-bold rounded-xl mt-6 border border-slate-200 transition-colors cursor-pointer select-none"
               >
                 Ver todos os simuladores
               </button>
@@ -378,61 +371,58 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       {/* Bloco Institucional de Confiança */}
       <section className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 deferred-section">
         <div className="max-w-2xl mx-auto text-center mb-8 flex flex-col gap-2">
-          <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest font-mono">
+          <h2 className="text-sm font-bold text-slate-800 uppercase tracking-widest font-mono">
             Sua Central de Planos e Simulações
-          </h3>
-          <h4 className="text-lg font-bold text-slate-800 tracking-tight font-display">
+          </h2>
+          <h3 className="text-lg font-bold text-slate-800 tracking-tight font-display">
             Por que o Brasil Calculadoras é a escolha número um?
-          </h4>
+          </h3>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="flex flex-col items-center text-center gap-2">
-            <div className="p-3 bg-blue-50 text-blue-600 rounded-xl border border-blue-100">
-              <ShieldCheck className="w-5 h-5" />
+            <div className="p-3 bg-blue-50 text-blue-700 rounded-xl border border-blue-100">
+              <ShieldCheck className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h5 className="text-xs font-bold text-slate-800">100% Gratuito</h5>
-            <p className="text-[10px] text-slate-400 font-normal leading-normal">
+            <h4 className="text-xs font-bold text-slate-800">100% Gratuito</h4>
+            <p className="text-[10px] text-slate-600 font-normal leading-normal">
               Acesso total e imediato a todas as ferramentas sem assinaturas ou cobranças.
             </p>
           </div>
           <div className="flex flex-col items-center text-center gap-2">
-            <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl border border-emerald-100">
-              <Zap className="w-5 h-5" />
+            <div className="p-3 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100">
+              <Zap className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h5 className="text-xs font-bold text-slate-800">Instantâneo</h5>
-            <p className="text-[10px] text-slate-400 font-normal leading-normal">
+            <h4 className="text-xs font-bold text-slate-800">Instantâneo</h4>
+            <p className="text-[10px] text-slate-600 font-normal leading-normal">
               Sem downloads, cadastros ou instalações. Calcule tudo online no navegador.
             </p>
           </div>
           <div className="flex flex-col items-center text-center gap-2">
-            <div className="p-3 bg-rose-50 text-rose-600 rounded-xl border border-rose-100">
-              <Lock className="w-5 h-5" />
+            <div className="p-3 bg-rose-50 text-rose-700 rounded-xl border border-rose-100">
+              <Lock className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h5 className="text-xs font-bold text-slate-800">Sem Cadastro</h5>
-            <p className="text-[10px] text-slate-400 font-normal leading-normal">
+            <h4 className="text-xs font-bold text-slate-800">Sem Cadastro</h4>
+            <p className="text-[10px] text-slate-600 font-normal leading-normal">
               Privacidade em primeiro lugar. Não coletamos dados pessoais como e-mail ou telefone.
             </p>
           </div>
           <div className="flex flex-col items-center text-center gap-2">
-            <div className="p-3 bg-violet-50 text-violet-600 rounded-xl border border-violet-100">
-              <Globe2 className="w-5 h-5" />
+            <div className="p-3 bg-violet-50 text-violet-700 rounded-xl border border-violet-100">
+              <Globe2 className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h5 className="text-xs font-bold text-slate-800">Feito para o Brasil</h5>
-            <p className="text-[10px] text-slate-400 font-normal leading-normal">
+            <h4 className="text-xs font-bold text-slate-800">Feito para o Brasil</h4>
+            <p className="text-[10px] text-slate-600 font-normal leading-normal">
               Fórmulas adaptadas com rigor à CLT, tributos federais e índices econômicos nacionais.
             </p>
           </div>
         </div>
       </section>
 
-            <section>
-      </section>
-
       {/* FAQ curta institucional */}
       <section className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-6 shadow-xs deferred-section">
         <div className="flex items-center gap-2.5 border-b border-slate-100 pb-4">
-          <HelpCircle className="w-5 h-5 text-blue-500" />
-          <h3 className="text-sm font-bold text-slate-800 font-display">Perguntas frequentes (FAQ)</h3>
+          <HelpCircle className="w-5 h-5 text-blue-600" aria-hidden="true" />
+          <h2 className="text-sm font-bold text-slate-800 font-display">Perguntas frequentes (FAQ)</h2>
         </div>
         <div className="flex flex-col gap-3">
           {homepageFaqs.map((faq, idx) => {
@@ -443,33 +433,26 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                 className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3.5 transition-all"
               >
                 <button
+                  type="button"
+                  aria-expanded={isOpen}
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
                 >
                   <span className="text-xs font-semibold text-slate-700">{faq.q}</span>
-                  <motion.div
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="text-blue-500 shrink-0 ml-2"
+                  <span
+                    className={`text-blue-600 shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
                   >
                     <ChevronDown className="w-4 h-4" />
-                  </motion.div>
+                  </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                      animate={{ height: "auto", opacity: 1, marginTop: 8 }}
-                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-[11px] text-gray-500 font-sans font-normal leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {isOpen && (
+                  <div className="mt-2 overflow-hidden">
+                    <p className="text-[11px] text-slate-600 font-sans font-normal leading-relaxed">
+                      {faq.a}
+                    </p>
+                  </div>
+                )}
               </div>
             );
           })}

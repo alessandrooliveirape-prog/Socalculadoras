@@ -39,9 +39,9 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           <div className="md:col-span-4 flex flex-col gap-4 select-none">
             <div className="flex items-center gap-2">
               <img src="/logo.svg" alt="Brasil Calculadoras" width="32" height="32" loading="lazy" className="h-8 w-8 rounded-lg shadow-sm" />
-              <h3 className="text-md font-display font-extrabold text-white">Brasil Calculadoras</h3>
+              <h2 className="text-md font-display font-extrabold text-white">Brasil Calculadoras</h2>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               Plataforma profissional de ferramentas matemáticas, simulações trabalhistas, diagnósticos de saúde, logística e agronegócio do Brasil. Projetamos utilitários 100% gratuitos, rápidos e práticos para ajudar você a poupar tempo e tomar as melhores decisões no dia a dia.
             </p>
             <button 
@@ -55,7 +55,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
 
           {/* Quick Categories Col */}
           <div className="md:col-span-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Segmentos Clave</h4>
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Segmentos Clave</h2>
             <div className="flex flex-col gap-2.5">
               {Object.entries(categories).slice(0, 5).map(([key, label]) => {
                 const slug = CATEGORY_KEY_TO_SLUG[key] || key;
@@ -68,7 +68,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
                       setLocation('/' + slug);
                       onCategoryClick(key);
                     }}
-                    className="text-left text-xs text-slate-400 hover:text-blue-400 transition-colors cursor-pointer font-medium"
+                    className="text-left text-xs text-slate-300 hover:text-blue-400 transition-colors cursor-pointer font-medium"
                   >
                     {label}
                   </a>
@@ -79,7 +79,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
 
           {/* Institutional & Legal Requirements Col */}
           <div className="md:col-span-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Institucional & Legal</h4>
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Institucional & Legal</h2>
             <div className="flex flex-col gap-2.5">
               <a
                 href="/politica-de-privacidade"
@@ -87,7 +87,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
                   e.preventDefault();
                   setLocation('/politica-de-privacidade');
                 }}
-                className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
+                className="text-left text-xs text-slate-300 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
               >
                 <Shield className="w-3.5 h-3.5 text-blue-400" />
                 <span>Política de Privacidade</span>
@@ -174,11 +174,11 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
 
           {/* Editorial Disclaimer Col */}
           <div className="md:col-span-2">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Isenção</h4>
-            <p className="text-[10px] text-slate-400 leading-normal mb-2">
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Isenção</h2>
+            <p className="text-[10px] text-slate-300 leading-normal mb-2">
               Os resultados emitidos por esta central têm caráter de projeção técnica provisória e educativa. Consulte profissionais regulados (contadores, nutricionistas ou advogados) antes de celebrar decisões definitivas comerciais.
             </p>
-            <p className="text-[9.5px] text-slate-500 leading-normal font-sans">
+            <p className="text-[9.5px] text-slate-400 leading-normal font-sans">
               Portal mantido 100% gratuito e financiado através de anúncios programáticos do Google AdSense.
             </p>
           </div>
@@ -186,11 +186,11 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
 
         {/* Outer bottom copyright credits */}
         <div className="max-w-7xl mx-auto px-4 md:px-6 border-t border-slate-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center select-none">
-          <p className="text-[10.5px] text-slate-500 font-mono">
+          <p className="text-[10.5px] text-slate-400 font-mono">
             &copy; 2026 Brasil Calculadoras. Todos os direitos reservados.
           </p>
           <div className="flex gap-4 text-[10.5px]">
-            <span className="text-slate-500 font-sans text-[11px]">Plataforma Independente de Ferramentas de Utilidade Pública</span>
+            <span className="text-slate-400 font-sans text-[11px]">Plataforma Independente de Ferramentas de Utilidade Pública</span>
           </div>
         </div>
       </footer>
@@ -200,11 +200,11 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
         <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md bg-white border border-slate-200 rounded-2xl shadow-2xl p-5 z-100 flex flex-col gap-3 font-sans animate-bounce-short">
           <div className="flex items-start gap-3">
             <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
-              <Shield className="w-5 h-5" />
+              <Shield className="w-5 h-5" aria-hidden="true" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-slate-800 leading-tight">Consentimento de Cookies e Anúncios</h4>
-              <p className="text-[10px] text-gray-500 leading-relaxed mt-1">
+              <h3 className="text-xs font-bold text-slate-800 leading-tight">Consentimento de Cookies e Anúncios</h3>
+              <p className="text-[10px] text-slate-600 leading-relaxed mt-1">
                 Nós usamos cookies e identificadores de dispositivos para personalizar anúncios do Google AdSense, fornecer recursos de mídias e analisar o fluxo de de tráfego do site em conformidade com a LGPD.
               </p>
             </div>
@@ -212,7 +212,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           <div className="flex items-center justify-end gap-2 border-t pt-3">
             <button
               onClick={() => setShowPrivacy(true)}
-              className="px-3 py-1.5 text-[10px] font-bold text-gray-500 hover:text-slate-700 cursor-pointer"
+              className="px-3 py-1.5 text-[10px] font-bold text-slate-600 hover:text-slate-900 cursor-pointer"
             >
               Ver Detalhes
             </button>
