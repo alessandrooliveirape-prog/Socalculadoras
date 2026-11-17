@@ -1,6 +1,6 @@
 {
   "site": "https://www.brasilcalculadoras.com.br",
-  "timestamp": "2026-11-16T21:15:55.933Z",
+  "timestamp": "2026-11-17T20:02:22.355Z",
   "overallScore": 94,
   "overallStatus": "HEALTHY",
   "subagents": [
@@ -44,10 +44,10 @@
       "status": "HEALTHY",
       "score": 15,
       "maxScore": 15,
-      "summary": "Infraestrutura Vercel Edge operando com SLA normal (317ms).",
+      "summary": "Infraestrutura Vercel Edge operando com SLA normal (373ms).",
       "details": {
         "vercelJsonValid": true,
-        "latencyMs": 317,
+        "latencyMs": 373,
         "status": 200
       },
       "issues": [],
@@ -126,5 +126,5 @@
     "Endpoints JSON atualizados via generateApiData().",
     "Submissão IndexNow concluída com 2 respostas válidas."
   ],
-  "executionTimeMs": 1815
+  "executionTimeMs": 1477
 }
