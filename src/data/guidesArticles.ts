@@ -857,6 +857,402 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
         a: 'Sempre que cada nota ou indicador possuir importância distinta (como as áreas do conhecimento no SISU/ENEM ou o peso maior da prova final frente aos trabalhos bimestrais na faculdade).'
       }
     ]
+  },
+  {
+    slug: 'guia-completo-programa-move-brasil-2026-financiamento-veiculos',
+    title: 'Guia Completo do Programa Move Brasil 2026 e Financiamento de Veículos CDC',
+    metaDescription: 'Entenda como funciona o financiamento pelo Programa Move Brasil 2026 (BB, Caixa e BNDES) vs CDC tradicional, calcule custo por quilômetro rodado e provisione o IPVA anual.',
+    excerpt: 'Compare taxas subsidiadas do Move Brasil para motoristas profissionais contra o CDC tradicional pela Tabela Price, calcule o impacto da entrada, custo real por km rodado e IPVA estadual.',
+    categoryKey: 'veiculos',
+    categoryLabel: 'Veículos & Combustível',
+    categorySlug: 'veiculos-combustivel',
+    author: 'Equipe Editorial Brasil Calculadoras',
+    authorRole: 'Mobilidade, Crédito Bancário & Custos Veiculares',
+    publishedAt: '2026-12-02',
+    updatedAt: '2026-12-02',
+    readingTime: '10 min de leitura',
+    relatedCalculators: [
+      {
+        id: 'move-brasil',
+        name: 'Simulador Move Brasil 2026: Carros, Motos e Caminhões (BB, Caixa e BNDES)',
+        description: 'Simule parcelas com juros reduzidos do Move Brasil e compare a economia total frente ao mercado.'
+      },
+      {
+        id: 'financiamento-veiculo',
+        name: 'Simulador de Financiamento de Veículos e CDC 2026: Carros e Motos',
+        description: 'Calcule prestações fixas pela Tabela Price no CDC com diferentes percentuais de entrada.'
+      },
+      {
+        id: 'custo-km-rodado',
+        name: 'Reembolso por Km Rodado',
+        description: 'Apure o custo ou reembolso justo por quilômetro incluindo combustível, desgaste e depreciação.'
+      },
+      {
+        id: 'ipva-estimado',
+        name: 'IPVA Estimado de Veículo',
+        description: 'Projete o imposto estadual anual conforme o valor venal FIPE e a alíquota do seu estado.'
+      }
+    ],
+    sections: [
+      {
+        heading: 'O que é o Programa Move Brasil 2026 e como funcionam as linhas subsidiadas',
+        paragraphs: [
+          'A aquisição financiada de automóveis, motocicletas e utilitários de carga no Brasil sempre enfrentou um obstáculo estrutural pesado: enquanto o comprador precisa do veículo para trabalhar — como motoristas de aplicativos de mobilidade, taxistas, motofretistas e transportadores autônomos —, as taxas bancárias convencionais do Crédito Direto ao Consumidor (CDC) frequentemente alcançam entre 1,55% e 2,35% ao mês em períodos de Selic restritiva. Em financiamentos de 48 a 60 meses, esses juros elevam o custo final do bem em até 60% ou 75% acima do preço à vista na concessionária.',
+          'Nesse contexto, o Programa Move Brasil reúne linhas de crédito com taxas reduzidas e condições diferenciadas lastreadas em recursos públicos e operadas por grandes instituições como Banco do Brasil, Caixa Econômica Federal e BNDES. Voltado prioritariamente à renovação da frota de profissionais com atividade remunerada no transporte e veículos mais eficientes (flex modernos, híbridos, elétricos ou modelos com menor emissão), o programa trabalha com taxas referenciais próximas de 0,85% a 0,99% ao mês — incluindo condições ainda mais favoráveis para mulheres motoristas — e prazos estendidos que reduzem drasticamente o comprometimento mensal do fluxo de caixa.'
+        ],
+        bullets: [
+          'Documentação básica exigida: CNH válida com observação EAR (Exerce Atividade Remunerada) e comprovação cadastral ativa nas plataformas de transporte ou registro profissional regular.',
+          'Diferença entre bancos operadores: pequenas variações entre as linhas de Banco do Brasil, Caixa e BNDES produzem diferenças acumuladas relevantes em prazos de 48 a 84 meses.',
+          'Comparativo com CDC tradicional: enquanto o CDC comum opera em torno de 1,67% a.m. na média de mercado, linhas incentivadas abaixo de 1,00% ao mês podem cortar pela metade o total pago apenas em juros.',
+          'Alienação fiduciária e gravame: o veículo permanece alienado ao banco financiador até a quitação integral do saldo devedor ou liquidação antecipada.'
+        ]
+      },
+      {
+        heading: 'Matemática da Tabela Price: por que a entrada e a taxa de juros mandam no custo total',
+        paragraphs: [
+          'Tanto o financiamento subsidiado pelo Move Brasil quanto o CDC tradicional de concessionárias operam pela Tabela Price (Sistema Francês de Amortização), no qual todas as parcelas nominais mantêm exatamente o mesmo valor do início ao término do contrato. A fórmula matemática que define a prestação fixa é PMT = Saldo Financiado × [i × (1 + i)^n] / [(1 + i)^n - 1], em que i representa a taxa mensal efetiva em formato decimal e n corresponde ao número total de meses contratados.',
+          'Embora muita gente olhe apenas se a prestação mensal "cabe no bolso", essa abordagem ignora dois efeitos financeiros silenciosos. Primeiro, nos primeiros meses do contrato pela Tabela Price, a maior fatia da parcela paga juros ao banco e uma parcela menor amortiza o principal da dívida. Segundo, carros e motos sofrem depreciação contínua de mercado entre 8% e 15% ao ano: contratar 60 parcelas com entrada zero aumenta o risco de ficar por mais de dois anos com um saldo devedor maior que o valor de revenda do próprio carro na Tabela FIPE.'
+        ],
+        highlightBox: {
+          title: 'Regra de ouro ao negociar na concessionária',
+          text: 'Nunca feche financiamento negociando apenas o valor da parcela mensal com o vendedor! Peça sempre o Custo Efetivo Total (CET) anual por escrito, compare com a simulação do Move Brasil no aplicativo do seu banco e priorize entradas mínimas de 20% a 30% somadas a prazos até 48 meses.'
+        }
+      },
+      {
+        heading: 'Simulação numérica comparada: Move Brasil a 0,89% a.m. vs CDC a 1,69% a.m.',
+        paragraphs: [
+          'Considere um motorista profissional que precisa financiar um sedã compacto avaliado em R$ 85.000,00 dando uma entrada à vista de R$ 25.000,00 — resultando em um saldo líquido a financiar de R$ 60.000,00 pelo prazo de 48 meses. Vamos comparar exatamente os mesmos R$ 60.000,00 em duas linhas distintas: o CDC convencional de mercado a 1,69% ao mês contra uma linha incentivada nos moldes do Move Brasil a 0,89% ao mês.',
+          'No CDC convencional a 1,69% ao mês por 48 vezes, a aplicação direta da Tabela Price gera uma prestação mensal fixa de R$ 1.835,45. Multiplicando por 48 meses, o comprador pagará R$ 88.101,60 apenas pelas parcelas financiadas (somando R$ 28.101,60 somente de juros compostos bancários, sem contar eventuais tarifas de cadastro e IOF adicional). Somados aos R$ 25.000,00 da entrada, o automóvel terá custado R$ 113.101,60 ao fim dos quatro anos.',
+          'Já na simulação com taxa reduzida de 0,89% ao mês pelos mesmos 48 meses, a parcela cai imediatamente para R$ 1.543,09 — liberando R$ 292,36 de fôlego financeiro todos os meses no caixa do trabalhador! Ao término dos 48 meses, o somatório das prestações fecha em R$ 74.068,32, gerando R$ 14.068,32 de juros — uma economia direta de R$ 14.033,28 apenas pela diferença na taxa contratada, que equivale a quase dez prestações inteiras poupadas ao longo do contrato.'
+        ]
+      },
+      {
+        heading: 'Orçamento completo de posse: IPVA anual, custo por km rodado e amortização antecipada',
+        paragraphs: [
+          'Antes de assinar o contrato de financiamento do carro ou moto de trabalho, lembre-se de que a parcela bancária representa apenas parte da despesa fixa mensal de rodar. Todo janeiro incide o IPVA estadual calculado sobre a Tabela FIPE (tipicamente entre 2% e 4% do valor venal do veículo para carros de passeio conforme o estado de emplacamento, podendo haver isenções ou descontos regionais para veículos elétricos e táxis), além da taxa anual de licenciamento do DETRAN, seguro contra terceiros ou compreensivo e fundo mensal para manutenção preventiva (pneus, óleo, pastilhas de freio e correias).',
+          'Para profissionais e autônomos que rodam comercialmente ou recebem ressarcimento da empresa, apurar corretamente o Custo Real por Quilômetro Rodado impede trabalhar no prejuízo: se o veículo consome 11 km/L com gasolina a R$ 6,05 (R$ 0,55 por km apenas em combustível), somar depreciação, revisões, seguro e IPVA proporcionais facilmente eleva o custo real de rodagem para R$ 1,05 a R$ 1,40 por quilômetro. Sempre que acumular sobra de caixa, lembre-se ainda de exercer o direito previsto no artigo 52, parágrafo 2º do CDC de antecipar as últimas parcelas do financiamento com abatimento proporcional integral dos juros futuros.'
+        ]
+      }
+    ],
+    faq: [
+      {
+        q: 'Quem pode solicitar financiamento pelas condições do Programa Move Brasil 2026?',
+        a: 'O foco principal abrange profissionais do transporte cadastrados e regulares — incluindo motoristas de aplicativo, taxistas, motoboys e caminhoneiros autônomos — com CNH contemplando a observação Exerce Atividade Remunerada (EAR), além de regras específicas para renovação de frota conforme cada banco operador.'
+      },
+      {
+        q: 'Mulheres motoristas realmente pagam taxas menores no Move Brasil?',
+        a: 'Sim. As diretrizes divulgadas do programa preveem faixas de juros ainda mais competitivas para mulheres motoristas profissionais dentro das linhas operadas por bancos públicos como Banco do Brasil, Caixa e repasses BNDES.'
+      },
+      {
+        q: 'Qual é a vantagem financeira de dar 30% de entrada no CDC de veículos?',
+        a: 'Entradas a partir de 30% diminuem consideravelmente o risco de inadimplência na análise de crédito bancária, destravam taxas de juros menores na mesa de crédito, encurtam a dívida e reduzem drasticamente os juros acumulados ao longo de 36 ou 48 meses.'
+      },
+      {
+        q: 'No reembolso por km rodado, devo cobrar apenas o gasto com combustível?',
+        a: 'Não! Cobrar apenas gasolina ou etanol significa transferir gratuitamente a desvalorização da Tabela FIPE, troca de pneus, revisões mecânicas, IPVA e seguro para o contratante. Em frotas e contratos comerciais, a tarifa por quilômetro costuma corresponder a cerca de duas vezes o custo direto do combustível.'
+      },
+      {
+        q: 'Como reduzir o valor do IPVA estimado no planejamento financeiro anual?',
+        a: 'Verifique na SEFAZ do seu estado se há desconto para pagamento em cota única em janeiro (muitas vezes entre 3% e 10%), créditos de programas de nota fiscal estadual, alíquota reduzida para etanol/GNV ou isenção por tempo de fabricação do veículo.'
+      }
+    ]
+  },
+  {
+    slug: 'como-calcular-materiais-de-construcao-e-acabamento-sem-desperdicio',
+    title: 'Como Calcular Materiais de Construção, Pisos, Tintas e Climatização sem Desperdício',
+    metaDescription: 'Aprenda a dimensionar corretamente tijolos por m², caixas de porcelanato e argamassa, latas de tinta com desconto de vãos e BTUs do ar-condicionado para economizar na reforma.',
+    excerpt: 'Evite sobras paradas no quintal e compras de emergência fora de lote na sua obra: veja passo a passo as fórmulas técnicas de alvenaria, pisos, pintura e carga térmica residencial.',
+    categoryKey: 'construcao',
+    categoryLabel: 'Construção & Reformas',
+    categorySlug: 'construcao-reformas',
+    author: 'Equipe Editorial Brasil Calculadoras',
+    authorRole: 'Engenharia Civil, Orçamentação & Utilidades',
+    publishedAt: '2026-12-09',
+    updatedAt: '2026-12-09',
+    readingTime: '10 min de leitura',
+    relatedCalculators: [
+      {
+        id: 'const-tijolos',
+        name: 'Calculadora de Tijolos por m²',
+        description: 'Calcule tijolos ou blocos necessários por área de parede descontando vãos e considerando perdas.'
+      },
+      {
+        id: 'const-piso',
+        name: 'Calculadora de Pisos e Porcelanato',
+        description: 'Estime metros quadrados com margem de corte, caixas exatas, rodapés e sacos de argamassa.'
+      },
+      {
+        id: 'const-tinta',
+        name: 'Calculadora de Tinta Predial',
+        description: 'Converta área líquida e número de demãos na combinação ideal de latas de 18L e galões de 3,6L.'
+      },
+      {
+        id: 'ar-condicionado',
+        name: 'Ar Condicionado ideal (BTUs)',
+        description: 'Dimensione a capacidade térmica em BTUs ideal para o cômodo conforme área, sol e ocupantes.'
+      }
+    ],
+    sections: [
+      {
+        heading: 'Por que erros de quantitativo encarecem reformas e geram atrasos de entrega',
+        paragraphs: [
+          'Quem já construiu ou reformou um imóvel conhece o prejuízo silencioso causado por orçamentos feitos "no olho": ou faltam quatro caixas de porcelanato no penúltimo dia de assentamento — obrigando a esperar semanas por um novo lote que muitas vezes chega com tonalidade ligeiramente diferente da original — ou sobram centenas de tijolos, sacos de argamassa vencendo no quintal e latas inteiras de tinta acrílica fechadas sem devolução possível na loja.',
+          'Em obras residenciais e comerciais bem planejadas, levantar cada material por meio de quantitativos geométricos padronizados reduz em 10% a 20% o desperdício direto no depósito, melhora o poder de negociação para fechar compras à vista em lote único de fabricação e permite auditar o orçamento de pedreiros e empreiteiros com critério técnico. Da alvenaria estrutural ou de vedação ao acabamento final com climatização dimensionada, cada etapa possui fatores práticos simples e altamente confiáveis.'
+        ],
+        bullets: [
+          'Alvenaria sem excessos: meça sempre largura × altura de cada parede e subtraia exatamente as áreas de portas e janelas antes de multiplicar pelo rendimento por m² do bloco escolhido.',
+          'Pisos e porcelanatos em lote único: caixas cerâmicas variam de calibre e tonalidade entre lotes industriais; calcule de uma só vez a área total + rodapés + margem técnica de quebra (10% reto ou 15% diagonal).',
+          'Pintura inteligente por embalagem: calcular em litros líquidos evita comprar duas latas de 18 litros quando 1 lata de 18L somada a 1 galão de 3,6L entrega o rendimento exato com metade da sobra.',
+          'Climatização alinhada ao ambiente: comprar ar-condicionado subdimensionado força o compressor a trabalhar sem desligar (explodindo a conta de luz); superdimensionar sem necessidade encarece o aparelho e prejudica o controle de umidade.'
+        ]
+      },
+      {
+        heading: 'Fórmulas práticas de alvenaria, revestimentos cerâmicos, pintura e BTUs',
+        paragraphs: [
+          'Na alvenaria convencional de vedação, um tijolo cerâmico padrão de 6 furos (9×14×19 cm assentado "em pé" na espessura de 9 cm, considerando junta de argamassa de 1,5 cm) consome cerca de 25 a 27 peças por metro quadrado de parede, ao passo que o assentamento "deitado" (parede dobrada ou bloco menor de 6 furos) exige cerca de 38 a 40 peças por m². Sobre a área líquida já descontando vãos, adiciona-se tradicionalmente 5% a 10% de reserva técnica para recortes em vergas, caixas elétricas e quebras no descarregamento.',
+          'Para pisos e porcelanatos, soma-se a área do piso (Largura × Comprimento) à faixa linear desenvolvida de rodapés (perímetro útil × altura do rodapé em metros) e aplica-se 10% de sobra para paginação reta ou 15% para paginação diagonal/espinha de peixe, dividindo então pelo rendimento em m² impresso na embalagem da caixa (arredondado para cima). Na argamassa colante (ACII interna ou ACIII externa/porcelanato de grandes formatos), estima-se consumo médio de 4 a 6 kg/m² quando aplicada com desempenadeira dentada simples ou dupla colagem. Na pintura, calcula-se (Área Líquida × Demãos) / Rendimento por Litro do fabricante, enquanto nos ambientes climatizados adota-se 600 BTUs por m² (ambiente sombreado) ou 800 BTUs/m² (sol intenso da tarde), acrescidos de 600 BTUs por pessoa adicional e por equipamento eletrônico emissor de calor.'
+        ],
+        highlightBox: {
+          title: 'Não esqueça da dupla colagem em porcelanatos grandes',
+          text: 'Peças de porcelanato acima de 60×60 cm exigem obrigatoriamente dupla colagem (passar argamassa ACIII dentada tanto no contrapiso quanto no verso da placa), elevando o consumo de argamassa de ~4,5 kg/m² para cerca de 6,5 a 8 kg/m² por metro quadrado assentado!'
+        }
+      },
+      {
+        heading: 'Exemplo numérico completo: reformando uma sala integrada de 24 m²',
+        paragraphs: [
+          'Imagine a reforma de uma sala retangular medindo 6,00 metros de comprimento por 4,00 metros de largura (área de piso de 24,00 m²), com pé-direito de 2,80 metros, possuindo uma porta de acesso de 0,90×2,10 m (1,89 m²) e uma janela ampla voltada ao poente de 2,00×1,40 m (2,80 m²). Vamos dimensionar sucessivamente uma parede divisória nova de 4×2,80 m, o porcelanato completo, a pintura das paredes e o ar-condicionado Split Inverter.',
+          'Primeiro, para levantar a parede nova de 11,20 m² usando tijolo cerâmico tradicional com consumo aproximado de 39 peças/m² (parede reforçada) e margem de 8% de quebra: 11,20 × 39 = 437 peças base, chegando a cerca de 472 tijolos com a perda. Segundo, para revestir os 24,00 m² de piso somados a aproximadamente 19 metros lineares de rodapé de 10 cm (1,90 m²) em paginação reta com 10% de folga: (24,00 + 1,90) × 1,10 = 28,49 m² totais; dividindo por caixas de porcelanato que cobrem 1,44 m² cada, são necessárias exatas 20 caixas fechadas (28,80 m²) do mesmo lote, mais cerca de 6 a 8 sacos de 20 kg de argamassa ACIII em dupla colagem.',
+          'Terceiro, as quatro paredes somam perímetro de 20 metros × 2,80 m de altura = 56,00 m² brutos; descontando 4,69 m² da porta e janela restam 51,31 m² líquidos. Aplicando 3 demãos de tinta acrílica premium com rendimento prático de 10 m²/L por demão, demandam-se (51,31 × 3) / 10 = 15,39 litros — perfeitamente atendidos com apenas 1 lata padrão de 18 litros, sem desperdício de galão extra! Quarto, como a sala de 24 m² recebe sol forte à tarde (fator 800 BTUs/m²), costuma reunir até 3 pessoas (2 adicionais = +1.200 BTUs) e abriga TV e notebook (+1.200 BTUs): (24 × 800) + 1.200 + 1.200 = 21.600 BTUs, indicando comercialmente um equipamento Inverter de 24.000 BTUs para garantir conforto térmico silencioso no verão.'
+        ]
+      },
+      {
+        heading: 'Boas práticas de armazenamento, recebimento e conferência no canteiro de obras',
+        paragraphs: [
+          'Mesmo após acertar milimetricamente as quantidades nas calculadoras, erros logísticos na entrega podem comprometer o orçamento. Ao receber porcelanatos e revestimentos cerâmicos na obra, confira imediatamente na etiqueta lateral de todas as caixas se o código de tonalidade ("Ton") e calibre ("Cal") são idênticos — abrir uma única caixa de lote distinto no meio do salão gera diferença visível de nuance após o rejuntamento. Sacos de cimento e argamassa devem ser empilhados sobre estrados de madeira secos, afastados pelo menos 15 cm das paredes úmidas e protegidos com lona plástica.',
+          'No caso da pintura, respeite o tempo de cura do reboco novo (mínimo de 28 dias corridos conforme recomendação dos fabricantes antes de selar e pintar) e aplique selador acrílico ou fundo preparador adequado para alcançar o rendimento teórico informado na lata: paredes novas sem selador absorvem até o dobro de tinta na primeira demão, derrubando drasticamente a estimativa inicial.'
+        ]
+      }
+    ],
+    faq: [
+      {
+        q: 'Qual porcentagem de perda devo sempre somar ao comprar pisos e porcelanatos?',
+        a: 'Adote no mínimo 10% de sobra técnica para assentamento reto tradicional em ambientes quadrados ou retangulares, e eleve para 15% a 20% quando o assentamento for diagonal, espinha de peixe ou em cômodos com muitos recortes e quinas.'
+      },
+      {
+        q: 'Quantos tijolos baianos entram por metro quadrado de parede?',
+        a: 'Depende da posição de assentamento e do tamanho do bloco: tijolo de 6 ou 8 furos padrão 9×14×19 cm ou 9×19×19 cm assentado em pé ("cutelo") usa cerca de 25 a 26 unidades/m², enquanto assentado deitado sobe para ~38 a 40 unidades/m².'
+      },
+      {
+        q: 'Preciso mesmo comprar a tinta para teto junto com a conta das paredes?',
+        a: 'O teto costuma utilizar tinta acrílica fosca branca específica (ou tinta gesso), calculada multiplicando apenas a largura pelo comprimento do ambiente vezes o número de demãos, mantendo-a separada da cor das paredes.'
+      },
+      {
+        q: 'O cálculo de BTUs do ar-condicionado muda para apartamento de cobertura ou telhado sem laje?',
+        a: 'Sim! Ambientes diretamente sob telhados de fibrocimento sem manta térmica ou último andar com forte insolação na laje exigem o fator de 800 BTUs/m² ou até 900 BTUs/m² com acréscimo de segurança na escolha da capacidade Inverter.'
+      },
+      {
+        q: 'Como calcular a quantidade de rejunte além das caixas de porcelanato?',
+        a: 'O consumo de rejunte varia conforme a dimensão da placa cerâmica e a largura da junta em milímetros: placas maiores (80×80 cm com junta de 2 mm) gastam cerca de 0,25 kg/m², enquanto pisos pequenos (30×30 cm com junta de 4 mm) consomem cerca de 0,6 a 0,8 kg/m².'
+      }
+    ]
+  },
+  {
+    slug: 'como-funciona-nota-enem-media-ponderada-pesos-sisu-e-faculdade',
+    title: 'Como Funciona a Nota do ENEM, Média Ponderada com Pesos do SiSU e Média Universitária',
+    metaDescription: 'Entenda a diferença entre média aritmética e média ponderada no SiSU/ENEM, descubra como calcular a nota necessária na prova final da faculdade e estime seu ritmo de leitura.',
+    excerpt: 'Descubra por que dois candidatos com os mesmos pontos no ENEM têm classificações opostas no SiSU conforme os pesos do curso e aprenda a planejar notas semestrais e cronogramas de leitura.',
+    categoryKey: 'educacao',
+    categoryLabel: 'Educação & ENEM',
+    categorySlug: 'educacao-enem',
+    author: 'Equipe Editorial Brasil Calculadoras',
+    authorRole: 'Educação, Estatística Escolar & Produtividade',
+    publishedAt: '2026-12-16',
+    updatedAt: '2026-12-16',
+    readingTime: '10 min de leitura',
+    relatedCalculators: [
+      {
+        id: 'simulador-nota-enem',
+        name: 'Simulador de Nota ENEM para SiSU',
+        description: 'Insira suas 5 notas do ENEM e teste os pesos oficiais de qualquer curso e universidade do SiSU.'
+      },
+      {
+        id: 'edu-sisu',
+        name: 'Simulador de Nota SISU com Pesos',
+        description: 'Compare imediatamente sua média ponderada frente à média simples e identifique onde sua nota rende mais.'
+      },
+      {
+        id: 'edu-ponderada',
+        name: 'Média Semestral Universitária',
+        description: 'Descubra quanto falta tirar na prova final ou substitutiva para ser aprovado sem reprovar.'
+      },
+      {
+        id: 'edu-leitura',
+        name: 'Tempo de Leitura de Textos',
+        description: 'Estime em minutos ou horas o tempo líquido para ler apostilas, obras literárias e editais.'
+      }
+    ],
+    sections: [
+      {
+        heading: 'Média simples versus média ponderada: a estratégia invisível do SiSU',
+        paragraphs: [
+          'Todos os anos, milhões de estudantes consultam suas cinco pontuações individuais do Exame Nacional do Ensino Médio — Linguagens (LC), Ciências Humanas (CH), Ciências da Natureza (CN), Matemática (MT) e Redação (RED) — e cometem um erro estratégico logo na primeira etapa do Sistema de Seleção Unificada (SiSU): somar as cinco notas e dividir por cinco para comparar com as notas de corte divulgadas pelas universidades federais e estaduais.',
+          'Embora algumas instituições adotem pesos iguais (1,0 para todas as provas), grande parte das universidades brasileiras atribui pesos distintos por curso através do Termo de Adesão do SiSU. Assim, um curso de Medicina costuma atribuir peso 3 ou 4 para Ciências da Natureza e Redação (e peso 1 para Matemática), enquanto cursos de Engenharia e Ciência da Computação aplicam peso 3 ou 4 em Matemática e Natureza com peso menor em Humanas e Linguagens. Saber exatamente como a média ponderada transforma seu resultado permite escolher com inteligência cursos onde seus pontos fortes valem mais.'
+        ],
+        bullets: [
+          'Fórmula da Média Aritmética Simples: soma das 5 notas dividida por 5, usada apenas quando todos os pesos do edital são iguais a 1.',
+          'Fórmula da Média Ponderada no SiSU: Σ(Nota_i × Peso_i) / Σ(Pesos) = [(LC×P1) + (CH×P2) + (CN×P3) + (MT×P4) + (RED×P5)] / (P1 + P2 + P3 + P4 + P5).',
+          'Nota mínima de corte por área: além da média final ponderada, diversas universidades exigem pontuação mínima específica (por exemplo, não zerar a Redação ou atingir 450 pontos mínimos em Natureza).',
+          'Estratégia de duas opções no SiSU: testar combinações de pesos em diferentes universidades estaduais e federais pode gerar ganhos de +25 a +60 pontos equivalentes na nota final sem refazer a prova!'
+        ]
+      },
+      {
+        heading: 'Por que a TRI impede prever a nota apenas pelo número de acertos',
+        paragraphs: [
+          'Antes de lançar suas notas nos simuladores, vale compreender por que dois candidatos que acertam exatamente 30 questões em Matemática no ENEM podem receber pontuações finais muito diferentes — por exemplo, 710 pontos contra 795 pontos. Diferentemente de vestibulares tradicionais baseados na soma direta de acertos, o ENEM utiliza a Teoria de Resposta ao Item (TRI), um modelo estatístico psicométrico que avalia três parâmetros de cada questão: poder de discriminação, nível de dificuldade e probabilidade de acerto ao acaso ("chute").',
+          'Se um candidato acerta as questões difíceis de matemática avançada, mas erra várias questões consideradas fáceis pelo algoritmo da TRI, o modelo interpreta estatisticamente que houve inconsistência pedagógica (provável chute em itens difíceis) e reduz a proficiência estimada. Em contrapartida, manter coerência — garantindo primeiramente acertos sólidos em questões fáceis e médias antes de avançar às mais difíceis — maximiza a nota oficial na TRI. Somente a Redação utiliza correção humana direta por duas bancas independentes em cinco competências de 0 a 200 pontos (totalizando 0 a 1.000).'
+        ],
+        highlightBox: {
+          title: 'Por que a Redação tem impacto desproporcional na média final?',
+          text: 'Enquanto Linguagens e Humanas raramente ultrapassam 750–800 pontos mesmo com altíssimo índice de acertos pela escala da TRI, a Redação permite alcançar entre 920 e 980 pontos reais! Em um curso com peso 3 para Redação, saltar de 720 para 940 pontos eleva sua média ponderada final em até +50 pontos diretos.'
+        }
+      },
+      {
+        heading: 'Simulação numérica comparada: mesmas 5 notas do ENEM em dois cursos distintos',
+        paragraphs: [
+          'Considere um estudante que obteve no ENEM as seguintes notas oficiais: Linguagens = 620 pontos, Humanas = 640 pontos, Ciências da Natureza = 650 pontos, Matemática = 810 pontos e Redação = 900 pontos. Pela média aritmética simples (soma dividida por 5): (620 + 640 + 650 + 810 + 900) / 5 = 3.620 / 5 = 724,00 pontos.',
+          'Observe agora como esse mesmo boletim se comporta em dois cursos diferentes da mesma universidade: no Curso A (Engenharia Civil com pesos LC=1, CH=1, CN=3, MT=4, RED=2 — soma dos pesos igual a 11), calculam-se os produtos ponderados: (620×1) + (640×1) + (650×3) + (810×4) + (900×2) = 620 + 640 + 1.950 + 3.240 + 1.800 = 8.250 pontos. Dividindo por 11, sua nota oficial de classificação salta para 750,00 pontos — um bônus de +26 pontos acima da média simples!',
+          'Já no Curso B (Direito com pesos LC=3, CH=3, CN=1, MT=1, RED=3 — soma igual a 11), sua força em Matemática perde peso enquanto Linguagens e Humanas pesam 3 vezes mais: (620×3) + (640×3) + (650×1) + (810×1) + (900×3) = 1.860 + 1.920 + 650 + 810 + 2.700 = 7.940 / 11 = 721,82 pontos. Testar os pesos no Simulador de Nota SiSU antes do encerramento das inscrições revela exatamente onde a pontuação tem maior competitividade.'
+        ]
+      },
+      {
+        heading: 'Planejamento semestral na faculdade e ritmo de leitura em palavras por minuto',
+        paragraphs: [
+          'Depois de conquistar a vaga na universidade (ou ainda durante o Ensino Médio e cursos técnicos), a mesma lógica de pesos reaparece no cálculo da Média Semestral Universitária. Em grande parte das faculdades brasileiras, a P1/AV1 vale 40% (peso 4) e a P2/AV2 vale 60% (peso 6), exigindo média mínima 7,0 para aprovação direta ou 5,0 para exame final. Se um universitário tirou 5,5 na P1 (peso 4 = 22 pontos acumulados), basta resolver a equação (22 + 6×P2) / 10 = 7,0 para descobrir que precisa exatamente de P2 = 48 / 6 = 8,00 pontos para passar direto sem prova final!',
+          'Para organizar cronogramas realistas de preparação tanto para o ENEM e concursos quanto para as provas finais da graduação, o controle do Tempo de Leitura de Textos baseado na taxa média em Palavras por Minuto (WPM — tipicamente 200 a 250 WPM em leitura atenta de material técnico ou 150 WPM para estudo aprofundado com fichamento) evita subestimar capítulos extensos: um PDF acadêmico de 12.000 palavras exige cerca de 60 minutos contínuos de estudo focado, permitindo distribuir metas diárias possíveis durante o semestre.'
+        ]
+      }
+    ],
+    faq: [
+      {
+        q: 'Qual nota no ENEM garante vaga pelo SiSU em universidades públicas?',
+        a: 'Não existe nota única nacional: cursos com alta demanda como Medicina costumam exigir médias acima de 780 a 820+ pontos na ampla concorrência, enquanto Engenharias, Direito e Administração variam amplamente entre 650 e 760+ dependendo da universidade, cidade e modalidade de cota.'
+      },
+      {
+        q: 'Bônus regional ainda existe na nota ponderada do SiSU?',
+        a: 'Diversas decisões judiciais recentes restringiram ou suspenderam políticas de bônus regionais em universidades federais; consulte sempre o Termo de Adesão oficial publicado no semestre vigente pela instituição pretendida.'
+      },
+      {
+        q: 'Posso simular notas do ENEM de edições anteriores na calculadora do SiSU?',
+        a: 'O SiSU tradicionalmente aceita apenas a edição mais recente do ENEM realizada pelo candidato; porém PROUNI e editais próprios de ingresso podem aceitar notas de anos recentes — verifique o edital de cada programa.'
+      },
+      {
+        q: 'Se os pesos do meu curso somarem 10, 11 ou 15, o denominador da fórmula muda?',
+        a: 'Sim! Na média ponderada você divide sempre pela soma exata de todos os pesos atribuídos às 5 áreas de conhecimento naquele curso e instituição específicos.'
+      },
+      {
+        q: 'Qual velocidade de leitura em WPM devo usar para apostilas de estudo técnico?',
+        a: 'Embora a leitura rápida de notícias alcance 250–300 palavras por minuto, para estudo ativo de textos densos com compreensão e grifos utilize entre 150 e 200 WPM no planejador de leitura.'
+      }
+    ]
+  },
+  {
+    slug: 'guia-transportador-autonomo-calculo-frete-cubagem-estadia-jornada',
+    title: 'Guia do Transportador Autônomo: Cálculo de Frete, Cubagem, Lei da Estadia e Jornada',
+    metaDescription: 'Domine a formação profissional de frete por km rodado e margem líquida, cálculo de cubagem rodoviária (300 kg/m³), indenização da Lei da Estadia e regras da Lei do Motorista.',
+    excerpt: 'Aprenda a nunca aceitar frete no prejuízo: calcule o custo real por quilômetro do caminhão, descubra quando o peso cubado supera o peso na balança e conheça seus direitos na espera e jornada.',
+    categoryKey: 'logistica',
+    categoryLabel: 'Logística & Fretes',
+    categorySlug: 'logistica-fretes',
+    author: 'Equipe Editorial Brasil Calculadoras',
+    authorRole: 'Logística Rodoviária & Economia de Transportes',
+    publishedAt: '2026-12-23',
+    updatedAt: '2026-12-23',
+    readingTime: '11 min de leitura',
+    relatedCalculators: [
+      {
+        id: 'log-calculo-frete',
+        name: 'Cálculo de Frete e Margem de Lucro',
+        description: 'Forme o preço ideal do frete somando diesel, pedágios, manutenção por km, comissões e margem.'
+      },
+      {
+        id: 'log-cubagem-carga',
+        name: 'Cálculo de Cubagem e Peso Taxável',
+        description: 'Calcule o volume em m³ e o peso cubado (fator 300 kg/m³) para evitar perdas em cargas leves.'
+      },
+      {
+        id: 'log-lei-estadia',
+        name: 'Diária de Espera e Descarga (Lei 11.442)',
+        description: 'Apure o valor legal devido por horas paradas além das 5 horas de franquia na carga/descarga.'
+      },
+      {
+        id: 'log-jornada-motorista',
+        name: 'Jornada e Descansos (Lei do Motorista)',
+        description: 'Controle blocos de condução, intervalos de repouso e interjornada previstos na Lei 13.103.'
+      }
+    ],
+    sections: [
+      {
+        heading: 'Por que fechar frete apenas olhando o valor total da carta frete quebra o autônomo',
+        paragraphs: [
+          'Um dos cenários mais comuns nas rodovias brasileiras ocorre quando um Transportador Autônomo de Cargas (TAC) ou pequena transportadora recebe proposta para rodar 1.200 quilômetros recebendo R$ 6.800,00 brutos e aceita de imediato achando o valor atraente — descobrindo apenas dias depois, ao somar diesel S10, ARLA 32, pedágio de volta ou por eixo suspenso, chapa/descarga, taxa de agenciamento e troca próxima de pneus, que sobraram menos de R$ 600,00 livres pelo esforço de uma semana inteira e pelo desgaste mecânico de um caminhão de meio milhão de reais.',
+          'Profissionalizar a precificação rodoviária exige distinguir claramente os Custos Diretos de Viagem (combustível na ida e eventual retorno vazio, pedágios, manutenção variável por km rodado com pneus e lubrificantes) das Despesas Fixas Mensais diluídas (IPVA, seguro do cavalo e carreta, rastreador, parcelas/depreciação e pró-labore do motorista) somadas à Margem de Lucro desejada por meio de markup divisor correto sobre o preço final do frete.'
+        ],
+        bullets: [
+          'Piso Mínimo de Frete (ANTT): antes de negociar comercialmente qualquer carga lotação, verifique sempre a tabela oficial de pisos mínimos por quilômetro rodado conforme número de eixos e tipo de carga.',
+          'Custos ocultos de retorno: quando não há carga de retorno garantida na região de destino, parte significativa do deslocamento vazio até o próximo embarque deve compor o preço do frete de ida.',
+          'Fórmula do Preço de Frete com Markup: Preço Ideal = Custo Total da Viagem / (1 - Margem Líquida Desejada%), evitando o erro clássico de somar percentual direto sobre o custo e obter margem real menor.',
+          'Conferência de pedágio e eixos: eixos suspensos sem carga contam isenção conforme regulamentação específica de cada praça, mas caminhões carregados pagam integralmente por todos os eixos em contato com o solo.'
+        ]
+      },
+      {
+        heading: 'Peso Cubado vs Peso Real: não transporte ar de graça no baú',
+        paragraphs: [
+          'Se um caminhão baú ou sider possui capacidade útil de 14 toneladas, mas é contratado para transportar 1.000 caixas gigantes de papelão contendo colchões de espuma, peças plásticas sopradas ou embalagens leves pesando juntas apenas 3,5 toneladas — e ocupando 100% dos 60 metros cúbicos disponíveis da carroceria —, cobrar o frete exclusivamente pelo peso real da balança significa transportar ar ocupando todo o espaço produtivo do veículo pelo preço de um quarto de carga.',
+          'Para corrigir essa distorção econômica, o transporte rodoviário brasileiro aplica amplamente o Fator de Cubagem padrão de 300 kg por metro cúbico (enquanto o modal aéreo fracionado usa 166,7 kg/m³). A regra matemática determina: calcula-se o Volume Total em m³ = Comprimento (m) × Largura (m) × Altura (m) × Quantidade de Volumes, e multiplica-se por 300. Compara-se então o Peso Cubado obtido com o Peso Bruto de Balança: o faturamento comercial utiliza sempre o MAIOR valor entre os dois — denominado Peso Taxável ou Peso Cubado de Faturamento.'
+        ],
+        highlightBox: {
+          title: 'Fórmula da Indenização por Estadia (Lei nº 11.442/2007)',
+          text: 'Ultrapassado o prazo máximo legal de 5 horas corridas contadas da chegada do veículo ao endereço de origem ou destino para carga e descarga, passa a ser devida ao transportador indenização por hora parada proporcional à capacidade de carga do caminhão (Toneladas × Horas Excedentes × Tarifa legal atualizada pelo INPC)!'
+        }
+      },
+      {
+        heading: 'Exemplo prático completo: viagem de 900 km + carga cubada + 9 horas de fila na descarga',
+        paragraphs: [
+          'Acompanhe um exemplo realista de operação em carreta fechada de 6 eixos com capacidade de carga líquida de 27 toneladas contratada para um trecho de 900 quilômetros entre São Paulo e Belo Horizonte (considerando cálculo completo da perna e cobertura de custos). Suponha rendimento médio de 2,4 km/L com diesel a R$ 6,00/L: serão consumidos 375 litros (R$ 2.250,00 de combustível). Acrescente R$ 580,00 em pedágios, R$ 1,10/km para fundo técnico de pneus/óleo/manutenção + custos fixos proporcionais (R$ 990,00) e R$ 180,00 em alimentação/extras, totalizando R$ 4.000,00 de custo operacional direto no trajeto.',
+          'Se o transportador deseja preservar 20% de margem líquida livre sobre o valor faturado (ou 25% considerando comissão/impostos operacionais de 5% em cima do frete), não deve apenas multiplicar R$ 4.000 por 1,20 (= R$ 4.800, o que entregaria só 16,6% de margem). Aplicando o divisor correto: R$ 4.000,00 / (1 - 0,20) = R$ 5.000,00! Agora imagine que essa carga fracionada consiste em 40 paletes medindo 1,20 m × 1,00 m × 1,50 m (1,80 m³ por palete = 72 m³ totais), pesando apenas 12.000 kg em balança: aplicando o fator rodoviário de 300 kg/m³, o Peso Cubado resulta em 72 × 300 = 21.600 kg (21,6 toneladas) — logo a cobrança justa por peso taxável sobe de 12 para 21,6 toneladas!',
+          'Por fim, chegando ao centro de distribuição no destino, o veículo aguarda exatamente 9 horas corridas desde a apresentação documental no portão até a liberação da doca após a descarga. Como a Lei nº 11.442/2007 concede franquia inicial de 5 horas para todo o processo (carga ou descarga conforme registro de chegada), geraram-se 4 horas excedentes indenizáveis multiplicadas pelas 27 toneladas de capacidade do caminhão — totalizando 108 toneladas-hora de estadia a serem faturadas adicionalmente sobre o conhecimento de transporte (CT-e).'
+        ]
+      },
+      {
+        heading: 'Jornada de direção, intervalos de descanso e segurança pela Lei do Motorista',
+        paragraphs: [
+          'Além de precificar o frete com exatidão, cumprir rigorosamente os períodos de descanso previstos na Lei nº 13.103/2015 (Lei do Motorista), com as atualizações do STF na ADI 5322, protege tanto a vida nas rodovias quanto o transportador contra multas graves de fiscalização da Polícia Rodoviária Federal e autuações trabalhistas ou previdenciárias. A regra operacional estabelece limite de condução contínua sem paradas de no máximo 5 horas e 30 minutos para transporte de cargas, exigindo intervalo mínimo de 30 minutos de descanso a cada período de direção contínua (podendo ser fracionado dentro da janela legal conforme o caso, mantendo o descanso mínimo obrigatório) e 1 hora de intervalo para refeição.',
+          'Entre duas jornadas diárias de trabalho, é obrigatório observar o repouso mínimo ininterrupto de 11 horas (com as vedações consolidadas pelo STF quanto ao fracionamento dessa interjornada e ao tempo de espera tratado fora da jornada normal quando aplicável). Manter registros digitais claros de chegada no pátio, tacógrafo aferido e simulador de jornada auxilia transportadores autônomos e gestores de frota a planejarem escalas viáveis e seguras antes de aceitar prazos apertados de entrega.'
+        ]
+      }
+    ],
+    faq: [
+      {
+        q: 'Qual é o fator padrão de cubagem no transporte rodoviário brasileiro?',
+        a: 'O fator padrão consolidado para cargas rodoviárias fracionadas no Brasil é de 300 kg por metro cúbico (300 kg/m³). Já no transporte aéreo doméstico utiliza-se geralmente 166,7 kg/m³ e no marítimo internacional 1.000 kg/m³.'
+      },
+      {
+        q: 'Como comprovar o horário de chegada para cobrar a estadia da Lei 11.442/2007?',
+        a: 'Exija sempre o registro formal (com carimbo, protocolo eletrônico de portaria, ticket com data e hora ou confirmação por rastreamento/WhatsApp corporativo) no momento exato da chegada no cliente e na saída após a descarga.'
+      },
+      {
+        q: 'O valor por tonelada-hora da Lei da Estadia sofre reajuste anual?',
+        a: 'Sim. O artigo 11, parágrafo 5º da Lei nº 11.442/2007 determinou o valor base legal reajustado anualmente pelo INPC apurado pelo IBGE.'
+      },
+      {
+        q: 'Por quanto tempo seguido um caminhoneiro pode dirigir sem parar?',
+        a: 'Pela Lei nº 13.103/2015, é vedado ao motorista de carga dirigir por mais de 5 horas e meia ininterruptas, devendo descansar pelo menos 30 minutos a cada 6 horas na condução de veículo de transporte de carga.'
+      },
+      {
+        q: 'Devo incluir desgaste de pneus e troca de óleo no custo do quilômetro rodado?',
+        a: 'Sem dúvida! Embora não saiam do caixa no posto de combustível a cada viagem, pneus, filtros, óleo, pastilhas, lonas e depreciação representam parcelas enormes do custo real por km e quebram quem os ignora ao fechar frete.'
+      }
+    ]
   }
 ];
 

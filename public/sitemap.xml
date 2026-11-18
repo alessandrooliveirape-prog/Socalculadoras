@@ -1443,6 +1443,34 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- Guia: Guia Completo do Programa Move Brasil 2026 e Financiamento de Veículos CDC -->
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/guias/guia-completo-programa-move-brasil-2026-financiamento-veiculos</loc>
+    <lastmod>2026-12-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Guia: Como Calcular Materiais de Construção, Pisos, Tintas e Climatização sem Desperdício -->
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/guias/como-calcular-materiais-de-construcao-e-acabamento-sem-desperdicio</loc>
+    <lastmod>2026-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Guia: Como Funciona a Nota do ENEM, Média Ponderada com Pesos do SiSU e Média Universitária -->
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/guias/como-funciona-nota-enem-media-ponderada-pesos-sisu-e-faculdade</loc>
+    <lastmod>2026-12-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Guia: Guia do Transportador Autônomo: Cálculo de Frete, Cubagem, Lei da Estadia e Jornada -->
+  <url>
+    <loc>https://www.brasilcalculadoras.com.br/guias/guia-transportador-autonomo-calculo-frete-cubagem-estadia-jornada</loc>
+    <lastmod>2026-12-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
   <url>
     <loc>https://www.brasilcalculadoras.com.br/politica-de-privacidade</loc>
     <lastmod>2026-11-18</lastmod>

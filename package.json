@@ -12,7 +12,8 @@
     "indexnow": "node --max-old-space-size=4096 ./node_modules/tsx/dist/cli.mjs scripts/submit-indexnow.ts",
     "orchestrator": "node --max-old-space-size=4096 ./node_modules/tsx/dist/cli.mjs scripts/master_orchestrator.ts",
     "orchestrator:dry": "node --max-old-space-size=4096 ./node_modules/tsx/dist/cli.mjs scripts/master_orchestrator.ts --dry-run",
-    "gsc:audit": "node --max-old-space-size=4096 ./node_modules/tsx/dist/cli.mjs scripts/gscAutoInspector.ts"
+    "gsc:audit": "node --max-old-space-size=4096 ./node_modules/tsx/dist/cli.mjs scripts/gscAutoInspector.ts",
+    "agent:health": "node --max-old-space-size=2048 ./node_modules/tsx/dist/cli.mjs scripts/autonomousHealthAgent.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

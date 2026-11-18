@@ -1,0 +1,52 @@
+name: Brasil Calculadoras Autonomous Health & Self-Healing Agent
+
+on:
+  schedule:
+    # Roda automaticamente 2x por semana: segunda e quinta-feira às 08:00 UTC (05:00 BRT)
+    - cron: '0 8 * * 1,4'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  autonomous-health-agent:
+    name: Auditoria Autônoma, Auto-Correção & Telegram Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar Dependências
+        run: npm ci
+
+      - name: Executar Agente Autônomo de Saúde e Auto-Correção
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL || 'alessandrooliveirape@gmail.com' }}
+        run: npm run agent:health
+
+      - name: Commit e Push Automático (Dispara Deploy na Vercel)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore(agent): auto-heal, content review & sitemap update"
+            git pull --rebase -X theirs origin main
+            git push origin main
+          else
+            echo "Nenhuma alteração pendente para commit."
+          fi

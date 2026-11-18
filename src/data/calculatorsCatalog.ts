@@ -8034,14 +8034,14 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         }
       }
       else if (raw.type === 'est_margem_erro') {
-        const n = parseFloat(valInputs['tamanho_amostra'] || 1);
-        const pop = parseFloat(valInputs['populacao'] || 0);
+        const n = Math.max(1, parseFloat(valInputs['tamanho_amostra'] || 1));
+        const pop = Math.max(0, parseFloat(valInputs['populacao'] || 0));
         const conf = parseFloat(valInputs['nivel_confianca'] || 95);
 
         const Z = conf === 90 ? 1.645 : conf === 99 ? 2.576 : 1.96;
         const p = 0.5;
         const se = Math.sqrt((p * (1 - p)) / n);
-        const fpc = pop > 0 ? Math.sqrt((pop - n) / (pop - 1)) : 1;
+        const fpc = pop > 1 ? Math.sqrt(Math.max(0, (pop - n) / (pop - 1))) : (pop === 1 ? 0 : 1);
         const err = Z * se * fpc * 100;
         results['margem_erro'] = parseFloat(err.toFixed(2));
       }
