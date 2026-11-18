@@ -5040,46 +5040,6 @@ const RAW_DYNAMIC_METADATA: {
     ]
   },
   {
-    id: 'simulador-inss-salario',
-    name: 'Desconto Progressivo de INSS',
-    description: 'Estime a dedução de INSS incidente sobre o salário bruto sob as alíquotas vigentes do regime geral.',
-    category: 'financas',
-    icon: 'Percentage',
-    tags: ['inss', 'salário', 'desconto', 'folha de pagamento'],
-    type: 'simple_tax',
-    inputs: [
-      { id: 'salario', label: 'Salário Bruto', def: 3500, type: 'number', pref: 'R$' }
-    ],
-    outputs: [
-      { id: 'desconto', label: 'Desconto Estimado do INSS', pref: 'R$', isPrimary: true },
-      { id: 'aliquota_efetiva', label: 'Alíquota Efetiva do Imposto', suff: '%' },
-      { id: 'liquido', label: 'Salário Líquido de INSS', pref: 'R$' }
-    ],
-    faq: [
-      { q: 'O que são alíquotas progressivas?', a: 'Significa que o imposto é calculado em fatias do salário bruto, variando de 7.5% a 14% de acordo com as faixas de rendimento, até o teto de contribuição previdenciária estabelecido.' }
-    ]
-  },
-  {
-    id: 'simulador-irrf-salario',
-    name: 'Desconto IRRF Mensal',
-    description: 'Simulador de desconto de Imposto de Renda Retido na Fonte (IRRF) com base no salário líquido de INSS.',
-    category: 'financas',
-    icon: 'Coins',
-    tags: ['irrf', 'imposto', 'salário', 'receita federal'],
-    type: 'percentage',
-    inputs: [
-      { id: 'salario_base', label: 'Salário Base (após INSS)', def: 3100, type: 'number', pref: 'R$' },
-      { id: 'dependentes', label: 'Quantidade de Dependentes', def: 1, type: 'number', suff: 'membros' }
-    ],
-    outputs: [
-      { id: 'desconto_irrf', label: 'Imposto Retido na Fonte', pref: 'R$', isPrimary: true },
-      { id: 'aliquota_media', label: 'Alíquota Média Calculada', suff: '%' }
-    ],
-    faq: [
-      { q: 'Qual a dedução por dependente no imposto de renda?', a: 'No acerto mensal, cada dependente legal declarado confere um abatimento fixo legal sobre a base de cálculo tributária do rendimento do trabalhador.' }
-    ]
-  },
-  {
     id: 'rendimento-poupanca',
     name: 'Rendimento de Poupança',
     description: 'Estime o rendimento de um saldo depositado na caderneta de poupança em relação às regras da Taxa Selic.',

@@ -15,10 +15,13 @@ import {
   Clock,
   Sliders,
   Briefcase,
-  FileText
+  FileText,
+  BookOpen,
+  Calendar
 } from 'lucide-react';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from '../data/calculatorsCatalog';
 import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW } from '../utils/seoContentGenerator';
+import { GUIDES_ARTICLES } from '../data/guidesArticles';
 
 function normalizeSearchText(text: string): string {
   return (text || '')
@@ -37,12 +40,14 @@ function matchesSearchTokens(target: string, queryTokens: string[]): boolean {
 interface HomepageViewProps {
   onSelectCalculator: (id: string) => void;
   onSelectCategory: (key: string) => void;
+  onNavigate?: (path: string) => void;
   categoryCounts: Record<string, number>;
 }
 
 export const HomepageView: React.FC<HomepageViewProps> = ({ 
   onSelectCalculator, 
   onSelectCategory,
+  onNavigate,
   categoryCounts 
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -418,7 +423,111 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
         </div>
       </section>
 
-      {/* FAQ curta institucional */}
+      {/* Featured Curated Guides Section (E-E-A-T & Continual Editorial Curation) */}
+      <section className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-6 shadow-xs deferred-section">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-blue-600 uppercase tracking-widest mb-1">
+              <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
+              Curadoria Editorial Contínua
+            </span>
+            <h2 className="text-lg md:text-xl font-bold text-slate-900 font-display">
+              Guias Práticos e Artigos Educativos
+            </h2>
+            <p className="text-xs text-slate-600 mt-1">
+              Aprenda a fundo as regras da CLT, juros compostos, precificação empresarial, financiamentos e indicadores de saúde com exemplos comentados.
+            </p>
+          </div>
+          <a
+            href="/guias"
+            onClick={(e) => {
+              if (onNavigate) {
+                e.preventDefault();
+                onNavigate('/guias');
+              }
+            }}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors shrink-0 w-fit"
+          >
+            <span>Explorar Todos os Guias ({GUIDES_ARTICLES.length})</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {GUIDES_ARTICLES.slice(0, 4).map((article) => (
+            <a
+              key={article.slug}
+              href={`/guias/${article.slug}`}
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate(`/guias/${article.slug}`);
+                }
+              }}
+              className="group p-5 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50/20 transition-all flex flex-col justify-between bg-slate-50/40"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">
+                    {article.categoryLabel}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-medium">{article.readingTime}</span>
+                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-700 leading-snug mb-2">
+                  {article.title}
+                </h3>
+                <p className="text-[11px] text-slate-600 leading-relaxed line-clamp-3">
+                  {article.excerpt}
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-200/70 flex items-center justify-between text-[11px] font-bold text-blue-600">
+                <span className="inline-flex items-center gap-1 text-slate-500 font-normal">
+                  <Calendar className="w-3 h-3" />
+                  {article.updatedAt}
+                </span>
+                <span className="inline-flex items-center gap-1 group-hover:underline">
+                  Ler Guia <ChevronRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Rich Editorial Portal Introduction (<article>) for Helpful Content & E-E-A-T */}
+      <article className="bg-white border border-slate-200 rounded-2xl p-6 md:p-10 flex flex-col gap-5 shadow-xs deferred-section text-slate-700">
+        <div className="border-b border-slate-100 pb-4">
+          <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest block mb-1">
+            Sobre a Plataforma &amp; Padrão Editorial
+          </span>
+          <h2 className="text-lg md:text-2xl font-bold text-slate-900 font-display">
+            Por que o Brasil Calculadoras combina simuladores interativos com guias técnicos aprofundados
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm leading-relaxed text-slate-600">
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-slate-900">Metodologia Transparente e Alinhada às Regras Brasileiras de 2026</h3>
+            <p>
+              Tomar decisões financeiras, trabalhistas ou patrimoniais no Brasil exige mais do que fórmulas genéricas importadas de planilhas estrangeiras. O holerite brasileiro segue fatiamento progressivo oficial para INSS e Imposto de Renda Retido na Fonte (IRRF), projeção do aviso prévio proporcional (Lei nº 12.506/2011), reflexos no Descanso Semanal Remunerado (DSR), regras próprias de amortização habitacional (SAC vs Tabela Price) e tributação diferenciada entre MEI, Simples Nacional (Anexos III e V pelo Fator R) e Lucro Presumido.
+            </p>
+            <p>
+              Cada uma das nossas 175 calculadoras distribuídas em 21 categorias temáticas passa por curadoria contínua para entregar resultados transparentes acompanhados de passo a passo prático, demonstração matemática da equação aplicada, exemplos numéricos com simulação de sensibilidade e perguntas frequentes respondidas com linguagem objetiva.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-slate-900">Privacidade Client-Side e Responsabilidade Informativa</h3>
+            <p>
+              Todos os cálculos inseridos no Brasil Calculadoras — sejam rendimentos financeiros, dados salariais, parcelas de financiamento de veículos e imóveis ou parâmetros nutricionais e clínicos — são executados integralmente no navegador do usuário sem envio ou armazenamento de informações pessoais sensíveis em servidores terceiros. O histórico rápido opcional fica gravado apenas localmente no dispositivo.
+            </p>
+            <p>
+              Reforçamos ainda nosso compromisso com a clareza informativa (E-E-A-T): nossos simuladores e guias educativos oferecem apoio técnico preliminar para educação financeira, conferência escolar e planejamento doméstico ou empresarial, devendo ser validados junto a contadores, advogados trabalhistas, médicos ou profissionais regulados antes da formalização definitiva de contratos, acordos judiciais ou condutas clínicas.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      {/* FAQ institucional (Always visible in DOM) */}
       <section className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-6 shadow-xs deferred-section">
         <div className="flex items-center gap-2.5 border-b border-slate-100 pb-4">
           <HelpCircle className="w-5 h-5 text-blue-600" aria-hidden="true" />
@@ -430,29 +539,15 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             return (
               <div
                 key={idx}
-                className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3.5 transition-all"
+                onClick={() => toggleFaq(idx)}
+                className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${
+                  isOpen ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100/80 bg-slate-50/40 hover:bg-slate-50'
+                }`}
               >
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  onClick={() => toggleFaq(idx)}
-                  className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
-                >
-                  <span className="text-xs font-semibold text-slate-700">{faq.q}</span>
-                  <span
-                    className={`text-blue-600 shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
-                    aria-hidden="true"
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="mt-2 overflow-hidden">
-                    <p className="text-[11px] text-slate-600 font-sans font-normal leading-relaxed">
-                      {faq.a}
-                    </p>
-                  </div>
-                )}
+                <h3 className="text-xs font-bold text-slate-800 mb-1.5">{faq.q}</h3>
+                <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
+                  {faq.a}
+                </p>
               </div>
             );
           })}

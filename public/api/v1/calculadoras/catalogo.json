@@ -3,8 +3,8 @@
     "fonte": "Brasil Calculadoras",
     "url": "https://www.brasilcalculadoras.com.br",
     "titulo": "Catálogo de Calculadoras e Simuladores Online",
-    "total_ferramentas": 177,
-    "atualizado_em": "2026-11-18T19:37:31.474Z",
+    "total_ferramentas": 175,
+    "atualizado_em": "2026-11-18T19:36:27.189Z",
     "licenca": "Uso público e livre com atribuição de fonte obrigatória"
   },
   "calculadoras": [
@@ -693,20 +693,6 @@
       "descricao": "Calcule o desconto de faltas no salário, perda do DSR (Lei 605/49) e reflexo nos dias de férias (Art. 130 CLT) e 13º salário.",
       "categoria": "profissoes",
       "url": "https://www.brasilcalculadoras.com.br/falta-injustificada"
-    },
-    {
-      "id": "simulador-inss-salario",
-      "nome": "Desconto Progressivo de INSS",
-      "descricao": "Estime a dedução de INSS incidente sobre o salário bruto sob as alíquotas vigentes do regime geral.",
-      "categoria": "financas",
-      "url": "https://www.brasilcalculadoras.com.br/simulador-inss-salario"
-    },
-    {
-      "id": "simulador-irrf-salario",
-      "nome": "Desconto IRRF Mensal",
-      "descricao": "Simulador de desconto de Imposto de Renda Retido na Fonte (IRRF) com base no salário líquido de INSS.",
-      "categoria": "financas",
-      "url": "https://www.brasilcalculadoras.com.br/simulador-irrf-salario"
     },
     {
       "id": "rendimento-poupanca",

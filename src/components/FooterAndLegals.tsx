@@ -79,8 +79,19 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
 
           {/* Institutional & Legal Requirements Col */}
           <div className="md:col-span-3">
-            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Institucional & Legal</h2>
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Institucional &amp; Editorial</h2>
             <div className="flex flex-col gap-2.5">
+              <a
+                href="/guias"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/guias');
+                }}
+                className="text-left text-xs text-blue-300 hover:text-blue-200 transition-all flex items-center gap-1.5 cursor-pointer font-bold"
+              >
+                <FileText className="w-3.5 h-3.5 text-blue-400" />
+                <span>Guias &amp; Artigos Educativos</span>
+              </a>
               <a
                 href="/politica-de-privacidade"
                 onClick={(e) => {

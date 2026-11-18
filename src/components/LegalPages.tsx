@@ -108,50 +108,50 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               <Shield className="w-8 h-8" />
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Política de Privacidade</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Última atualização e revisão geral: 2026 | Conformidade Integral com LGPD e GDPR</p>
+            <p className="text-xs text-slate-400 m-0">Última atualização e revisão geral: 2026 | Conformidade Integral com LGPD (Lei nº 13.709/2018) e GDPR</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              A sua privacidade é de extrema importância para o <strong>Brasil Calculadoras</strong> (acessível via <a href="https://www.brasilcalculadoras.com.br" className="text-blue-600 underline font-semibold">www.brasilcalculadoras.com.br</a>). Esta Política de Privacidade descreve de forma clara e transparente quais informações pessoais são coletadas, como são utilizadas, armazenadas e protegidas, em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018) e o Regulamento Geral de Proteção de Dados (GDPR).
+              A sua privacidade e a segurança dos seus dados são prioridades absolutas para o portal <strong>Brasil Calculadoras</strong> (acessível em <a href="https://www.brasilcalculadoras.com.br" className="text-blue-600 underline font-semibold">https://www.brasilcalculadoras.com.br</a>). Esta Política de Privacidade descreve de maneira transparente e detalhada como eventuais informações técnicas de navegação são tratadas, quais cookies publicitários e analíticos podem operar em nossas páginas e como garantimos a confidencialidade dos valores simulados em nossas ferramentas.
             </p>
 
             <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2 flex items-center gap-2">
-              <Lock className="w-5 h-5 text-blue-600" /> 1. Arquivos de Log e Coleta Automática
+              <Lock className="w-5 h-5 text-blue-600" /> 1. Processamento Client-Side nas Calculadoras (Sigilo de Dados Inseridos)
             </h2>
             <p>
-              Como a maioria dos sites e plataformas web profissionais, o Brasil Calculadoras utiliza arquivos de log e ferramentas analíticas padrão. As informações contidas nos arquivos de log incluem: endereços de Protocolo de Internet (IP), tipo de navegador, Provedor de Serviços de Internet (ISP), carimbo de data/hora, páginas de referência/saída e número de cliques. Esses dados não estão vinculados a nenhuma informação que seja pessoalmente identificável e são utilizados exclusivamente para analisar tendências, administrar o site, rastrear o movimento dos usuários e reunir informações demográficas agregadas.
+              Todas as simulações realizadas em nossas 175 calculadoras — incluindo salários brutos, cálculos de rescisão trabalhista CLT, rendimentos de investimentos financeiros, simulações de financiamento habitacional ou veicular, peso, altura e indicadores clínicos de saúde — são processadas <strong>integralmente de forma local no navegador do usuário (Client-Side)</strong>. O Brasil Calculadoras não transmite, não armazena em servidores remotos, não indexa e não compartilha os valores numéricos digitados nos campos de simulação com terceiros. Caso você utilize recursos opcionais de histórico recente na página inicial, essas referências ficam restritas exclusivamente ao armazenamento local (<code>localStorage</code>) do seu próprio dispositivo e podem ser apagadas a qualquer instante.
             </p>
 
             <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2 flex items-center gap-2">
-              <Server className="w-5 h-5 text-blue-600" /> 2. Cookies e Web Beacons (Google AdSense e Parceiros)
+              <Server className="w-5 h-5 text-blue-600" /> 2. Registros Técnicos de Acesso (Logs) e Telemetria Anônima
             </h2>
             <p>
-              O Brasil Calculadoras utiliza cookies para armazenar informações sobre as preferências dos visitantes e otimizar a experiência do usuário.
+              Assim como a generalidade dos portais web modernos hospedados em nuvem, nossos servidores e provedores de CDN registram logs técnicos estritamente voltados à segurança cibernética, prevenção de ataques automatizados e medição agregada de desempenho. Esses registros técnicos contemplam endereço IP anonimizado ou temporário, tipo de navegador, sistema operacional, carimbo de data e hora, página de origem e tempo de carregamento. Adicionalmente, utilizamos o Google Analytics 4 (GA4) para compreender de forma agregada e estatística quais ferramentas e guias educativos despertam maior interesse, ajudando nossa equipe a priorizar atualizações editoriais.
+            </p>
+
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Cookies do Google AdSense e Publicidade Personalizada (Cookie DART)</h2>
+            <p>
+              Para sustentar a gratuidade integral de todas as calculadoras e guias sem cobrança de assinatura ou cadastro, o Brasil Calculadoras exibe anúncios operados pela rede oficial do <strong>Google AdSense</strong>. O emprego de tecnologias de publicidade programática segue rigorosamente as políticas de editor do Google e o tratamento transparente de cookies:
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 my-2 flex flex-col gap-3">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Declaração Obrigatória Google AdSense:</h3>
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Cláusula Específica Google AdSense &amp; Cookies de Terceiros:</h3>
               <ul className="list-disc pl-5 text-xs text-slate-600 flex flex-col gap-2 m-0">
-                <li>Terceiros, incluindo o <strong>Google</strong>, usam cookies para veicular anúncios com base em visitas anteriores do usuário a este ou a outros sites.</li>
-                <li>Com o uso de cookies de publicidade (incluindo o cookie DART), o Google e seus parceiros podem veicular anúncios para os usuários com base nas visitas feitas aos seus sites e/ou a outros sites na Internet.</li>
-                <li>Os usuários podem desativar a publicidade personalizada acessando as <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de anúncios do Google</a>.</li>
-                <li>Alternativamente, você pode desativar o uso de cookies de terceiros para publicidade personalizada acessando o site <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">aboutads.info</a>.</li>
+                <li>Fornecedores terceiros, incluindo o <strong>Google</strong>, utilizam cookies (incluindo o cookie DART e identificadores modernos de publicidade) para veicular anúncios relevantes com base em visitas anteriores do usuário a este portal ou a outros sites da Internet.</li>
+                <li>Com o uso de cookies de publicidade, o Google e seus parceiros certificados exibem recomendações comerciais compatíveis com os interesses gerais do visitante sem vincular esses anúncios aos números digitados dentro das calculadoras.</li>
+                <li>Você pode gerenciar, restringir ou desativar a publicidade personalizada a qualquer momento diretamente nas <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a>.</li>
+                <li>Para controle amplo de múltiplos fornecedores de mídia digital participantes da Digital Advertising Alliance, também é possível exercer opção de saída em <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">aboutads.info/choices</a>.</li>
               </ul>
             </div>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Processamento de Dados das Calculadoras (Client-Side First)</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Dados Enviados Voluntariamente no Formulário de Contato</h2>
             <p>
-              Todas as simulações e cálculos efetuados em nossas ferramentas (como salários, rescisões trabalhistas, IMC e juros compostos) são processados <strong>localmente e de forma 100% confidencial no seu próprio navegador</strong>. O Brasil Calculadoras não armazena, transmite ou compartilha os números financeiros ou dados pessoais digitados nos formulários com servidores externos.
+              Quando o usuário opta livremente por preencher o formulário da página <a href="/contato" className="text-blue-600 underline font-semibold">Fale Conosco</a> para reportar sugestões, dúvidas de fórmula ou solicitações institucionais, nome, endereço de e-mail e conteúdo da mensagem são processados exclusivamente para responder ao atendimento solicitado. Não comercializamos, alugamos nem cedemos listas de e-mails para terceiros ou disparo de marketing não solicitado.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Links para Sites de Terceiros e Fontes Oficiais</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">5. Direitos do Titular pela LGPD e Canal de Atendimento</h2>
             <p>
-              Nosso site contém links de referência para portais oficiais e fontes governamentais (como Caixa Econômica Federal, Receita Federal e Banco Central). Não nos responsabilizamos pelas políticas de privacidade ou conteúdos praticados por esses sites externos. Recomendamos a leitura das políticas individuais de cada portal visitado.
-            </p>
-
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">5. Direitos do Titular de Dados (LGPD)</h2>
-            <p>
-              Você tem o direito de solicitar a confirmação da existência de tratamento de dados, acesso aos dados, correção de dados incompletos e revogação do consentimento de cookies a qualquer momento através do nosso canal de atendimento pelo e-mail: <a href="mailto:contato@brasilcalculadoras.com.br" className="text-blue-600 font-bold underline">contato@brasilcalculadoras.com.br</a>.
+              Em total alinhamento ao artigo 18 da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), asseguramos ao titular o direito de confirmar a existência de tratamento, solicitar acesso ou correção de eventuais dados enviados em atendimento, requerer exclusão de mensagens de suporte e revogar consentimento de cookies a qualquer momento pelo navegador ou por meio do e-mail institucional de privacidade e DPO: <a href="mailto:contato@brasilcalculadoras.com.br" className="text-blue-600 font-bold underline">contato@brasilcalculadoras.com.br</a>.
             </p>
           </section>
         </article>
@@ -165,35 +165,35 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               <FileText className="w-8 h-8" />
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Termos e Condições de Uso</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Vigência a partir de: 2026</p>
+            <p className="text-xs text-slate-400 m-0">Versão revisada e vigente em 2026 | Regras de Acesso, Responsabilidade e Propriedade</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              Ao acessar e utilizar a plataforma <strong>Brasil Calculadoras</strong>, você concorda expressamente em cumprir e respeitar os seguintes Termos e Condições de Uso. Caso não concorde com qualquer disposição aqui estabelecida, solicitamos que não continue utilizando nossas ferramentas.
+              Bem-vindo ao <strong>Brasil Calculadoras</strong>. Ao acessar, navegar ou utilizar qualquer calculadora interativa, guia educativo, artigo técnico ou documentação pública disponível no domínio <code>brasilcalculadoras.com.br</code>, você declara ciência e concordância integral com estes Termos e Condições de Uso. Caso discorde de qualquer cláusula, recomenda-se interromper imediatamente a utilização da plataforma.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">1. Natureza Informativa e Isenção de Responsabilidade</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">1. Caráter Exclusivamente Informativo e Educacional (Não Substitui Conferência Oficial)</h2>
             <p>
-              Todas as calculadoras, simuladores e ferramentas disponibilizadas neste site foram desenvolvidas com elevado padrão técnico para fins exclusivamente <strong>educativos, pedagógicos e de planejamento informativo preliminar</strong>.
+              Todas as calculadoras, tabelas referenciais, exemplos matemáticos e artigos explicativos publicados neste portal possuem finalidade estritamente <strong>informativa, educativa e de apoio preliminar ao planejamento financeiro, trabalhista, tributário, acadêmico e de bem-estar</strong>. Embora nossa equipe editorial revise periodicamente faixas progressivas de INSS, IRRF, Simples Nacional, normas da CLT e equações científicas segundo fontes públicas oficiais, os simuladores não emitem certidões, laudos contábeis, prescrições médicas nem pareceres jurídicos vinculantes.
             </p>
             <div className="bg-amber-50 border border-amber-200 text-amber-900 rounded-2xl p-4 my-2 text-xs font-medium leading-relaxed">
-              <strong>Atenção Profissional:</strong> Os resultados emitidos pelas nossas calculadoras não constituem pareceres jurídicos, contábeis, financeiros ou médicos definitivos. Variações em convenções coletivas de trabalho, atualizações repentinas de alíquotas tributárias ou especificidades individuais podem alterar valores reais. Sempre consulte um profissional habilitado (advogado trabalhista, contador credenciado pelo CRC ou médico/nutricionista) antes de tomar decisões contratuais ou financeiras definitivas.
+              <strong>Aviso Legal Importante:</strong> Os resultados simulados dependem integralmente das premissas digitadas pelo usuário e não contemplam especificidades de convenções coletivas sindicais regionais, decisões judiciais individuais, alterações legislativas supervenientes publicadas entre ciclos de atualização ou quadros clínicos particulares. Antes de assinar termos de rescisão trabalhista, contratos de financiamento, declarações fiscais ou iniciar dietas restritivas, efetue conferência oficial junto a contador registrado no CRC, advogado habilitado, instituição bancária ou médico/nutricionista.
             </div>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">2. Propriedade Intelectual</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">2. Ausência de Garantia e Limitação de Responsabilidade</h2>
             <p>
-              Todo o código-fonte, layout visual, marca, banco de dados e conteúdos explicativos presentes no site são de propriedade exclusiva do Brasil Calculadoras. É proibida a reprodução parcial ou total, cópia de scripts ou engenharia reversa das ferramentas sem autorização prévia por escrito.
+              Empregamos boas práticas de engenharia de software e testes contínuos de precisão numérica para evitar falhas de arredondamento ou inconsistências de lógica. Todavia, o serviço é disponibilizado no estado em que se encontra ("as is"), sem garantia de disponibilidade ininterrupta diante de manutenções programadas ou eventuais instabilidades de rede. O Brasil Calculadoras e seus mantenedores não se responsabilizam por prejuízos diretos ou indiretos decorrentes de decisões patrimoniais, comerciais, tributárias ou pessoais baseadas isoladamente em projeções estimadas neste site.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Disponibilidade e Modificações</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Propriedade Intelectual e Uso Permitido da API Pública</h2>
             <p>
-              Buscamos manter o serviço ativo 24 horas por dia, 7 dias por semana. No entanto, reservamo-nos o direito de suspender, atualizar, modificar ou descontinuar qualquer funcionalidade ou ferramenta a qualquer momento, sem aviso prévio, para realizar melhorias técnicas ou adequações legislativas.
+              Todo o conteúdo editorial original — incluindo textos dos guias educativos, estrutura das páginas, design de interface, código-fonte das calculadoras e logotipos — é protegido pela legislação brasileira de direitos autorais e propriedade intelectual. É autorizado o compartilhamento livre de links para nossas páginas e a impressão ou exportação pessoal dos resultados simulados para conferência própria. É vedada a cópia automatizada em massa (scraping abusivo), a clonagem integral da base editorial para sites espelho ou o uso comercial indevido da marca sem consentimento prévio por escrito. Endpoints listados em <a href="/desenvolvedores" className="text-blue-600 underline font-semibold">/desenvolvedores</a> seguem os termos específicos de uso responsável documentados naquela seção.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Publicidade Google AdSense e Modelo de Sustentação Gratuita</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Publicidade Google AdSense e Atualizações dos Termos</h2>
             <p>
-              O portal Brasil Calculadoras é mantido 100% gratuito para o público através de publicidade programática qualificada do Google AdSense. Não exigimos cadastro de cartão de crédito nem cobrança de taxas de assinatura para o uso dos simuladores.
+              A plataforma mantém-se gratuita ao público sem barreiras de cadastro graças à exibição de anúncios gerenciados pelo programa Google AdSense e links informativos transparentes. Reservamo-nos o direito de atualizar estes Termos de Uso e ampliar ou refatorar ferramentas a qualquer momento para acompanhar mudanças tributárias, melhorias de usabilidade ou exigências regulatórias aplicáveis no Brasil.
             </p>
           </section>
         </article>
@@ -207,42 +207,50 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               <Info className="w-8 h-8" />
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Sobre o Brasil Calculadoras</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Conheça nossa missão, compromisso editorial e equipe técnica</p>
+            <p className="text-xs text-slate-400 m-0">Nossa missão editorial, metodologia de revisão matemática e padrão de transparência (E-E-A-T)</p>
           </header>
 
           <section className="flex flex-col gap-5 text-sm leading-relaxed">
             <p className="text-base text-slate-800 font-medium">
-              O <strong>Brasil Calculadoras</strong> nasceu com um propósito claro: democratizar o acesso a ferramentas matemáticas exatas, cálculos trabalhistas complexos e simulações financeiras de alto nível para todos os cidadãos brasileiros, de forma 100% gratuita e sem burocracias.
+              O <strong>Brasil Calculadoras</strong> nasceu com o compromisso de tornar o cálculo técnico acessível, verificável e compreensível para trabalhadores, estudantes, famílias e empreendedores brasileiros. Reunimos 175 simuladores especializados em 21 áreas práticas e guias educativos aprofundados — 100% gratuitos, sem exigência de login e executados diretamente no seu navegador.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-2">
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col gap-2">
                 <Users className="w-6 h-6 text-blue-600" />
-                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Foco no Usuário</h3>
-                <p className="text-xs text-slate-600 m-0">Interfaces limpas, ultra-rápidas e otimizadas para celulares e computadores.</p>
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Foco na Experiência</h3>
+                <p className="text-xs text-slate-600 m-0">Interfaces responsivas de carregamento instantâneo, leitura confortável no celular e buscas inteligentes sem dependência de acentuação.</p>
               </div>
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col gap-2">
                 <CheckCircle className="w-6 h-6 text-blue-600" />
-                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Rigor Técnico</h3>
-                <p className="text-xs text-slate-600 m-0">Algoritmos constantemente atualizados com a legislação e tabelas vigentes.</p>
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Metodologia Auditável</h3>
+                <p className="text-xs text-slate-600 m-0">Cada ferramenta explicita a fórmula matemática utilizada, exemplos práticos comentados e faixas oficiais de referência de 2026.</p>
               </div>
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col gap-2">
                 <Award className="w-6 h-6 text-blue-600" />
-                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Transparência E-E-A-T</h3>
-                <p className="text-xs text-slate-600 m-0">Fontes oficiais citadas abertamente e revisões periódicas por especialistas.</p>
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Curadoria E-E-A-T</h3>
+                <p className="text-xs text-slate-600 m-0">Guias originais sem texto genérico, com citação direta a normas da Receita Federal, CLT, Banco Central, IBGE, OMS e INMETRO.</p>
               </div>
             </div>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Compromisso com a Qualidade Editorial</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Como Revisamos Nossos Cálculos e Conteúdos</h2>
             <p>
-              Diferente de simuladores genéricos que apenas exibem campos vazios, nossa equipe editorial desenvolve guias passo a passo minuciosos para cada calculadora. Explicamos a fundamentação legal (CLT, alíquotas progressivas do INSS/IRRF, tabelas do Simples Nacional), trazemos exemplos práticos do cotidiano e respondemos às principais dúvidas dos trabalhadores e empreendedores.
+              Diferente de diretórios automatizados que publicam formulários isolados sem explicação, adotamos uma metodologia editorial em três camadas. Primeiro, os modelos matemáticos são construídos com foco na legislação e nos padrões brasileiros — contemplando fatiamento progressivo de INSS e IRRF, aviso prévio proporcional, sistemas SAC e Tabela Price, alíquotas estaduais e métricas empresariais como Markup vs Margem e Fator R do Simples Nacional.
+            </p>
+            <p>
+              Segundo, cada calculadora e hub de categoria conta com guia técnico próprio estruturado em seções didáticas, passo a passo de preenchimento, simulação numérica comentada e perguntas frequentes reais. Terceiro, mantemos na seção <a href="/guias" className="text-blue-600 underline font-semibold">Guias &amp; Artigos</a> publicações longas periodicamente atualizadas para conectar ferramentas individuais a uma visão completa de educação financeira e cidadania trabalhista.
+            </p>
+
+            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Independência Editorial e Canal de Melhoria Contínua</h2>
+            <p>
+              O portal opera de forma independente, financiado exclusivamente por publicidade programática transparente via Google AdSense e livre de cobranças ou vendas casadas. Sugestões de novas ferramentas, apontamentos sobre mudanças legais recentes ou dúvidas conceituais enviadas pelos visitantes em <a href="/contato" className="text-blue-600 underline font-semibold">Contato</a> alimentam diretamente nosso ciclo contínuo de manutenção estrutural.
             </p>
 
             <div className="bg-blue-50 border border-blue-150 rounded-2xl p-5 mt-2 flex flex-col gap-2">
-              <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Contato Editorial:</h3>
+              <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Identidade &amp; Contato Editorial:</h3>
               <p className="text-xs text-blue-800 m-0">
-                Brasil Calculadoras<br />
-                E-mail: contato@brasilcalculadoras.com.br
+                Portal: Brasil Calculadoras (<code>https://www.brasilcalculadoras.com.br</code>)<br />
+                E-mail Institucional e DPO: <strong>contato@brasilcalculadoras.com.br</strong>
               </p>
             </div>
           </section>
@@ -255,33 +263,33 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
           <header className="border-b border-slate-150 pb-6">
             <div className="flex items-center gap-3 text-blue-600 mb-2">
               <Mail className="w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Fale Conosco & Suporte</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Fale Conosco &amp; Suporte Editorial</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Estamos à disposição para sugestões, dúvidas técnicas ou parcerias</p>
+            <p className="text-xs text-slate-400 m-0">Canal aberto para sugestões de ferramentas, revisões de fórmulas, suporte técnico e privacidade</p>
           </header>
 
           <section className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-relaxed">
             <div className="flex flex-col gap-4">
               <p>
-                Tem alguma dúvida sobre os cálculos, encontrou algum ponto de melhoria ou deseja sugerir uma nova calculadora para a nossa central? Nossa equipe responde a todas as mensagens com agilidade.
+                A evolução contínua do <strong>Brasil Calculadoras</strong> depende diretamente do diálogo com nossos leitores, profissionais de contabilidade, estudantes, professores e usuários cotidianos. Utilize este canal sempre que quiser sugerir uma nova calculadora, solicitar atualização normativa de alguma tabela, reportar eventual comportamento inesperado em algum navegador ou esclarecer dúvidas sobre nossa política de privacidade (LGPD).
               </p>
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col gap-3">
                 <div className="flex items-center gap-3 text-slate-800 font-bold text-xs">
                   <Mail className="w-4 h-4 text-blue-600" />
-                  <span>E-mail Direto:</span>
+                  <span>E-mail Direto de Atendimento:</span>
                 </div>
                 <a href="mailto:contato@brasilcalculadoras.com.br" className="text-blue-600 font-mono font-bold text-sm underline select-all">
                   contato@brasilcalculadoras.com.br
                 </a>
-                <p className="text-xs text-slate-400 m-0">Atendimento de Segunda a Sexta, das 09h às 18h (Horário de Brasília).</p>
+                <p className="text-xs text-slate-500 m-0">Horário padrão de triagem e resposta: Segunda a Sexta, das 09h às 18h (Horário de Brasília), com prazo médio de retorno de até 48 horas úteis.</p>
               </div>
 
               <div className="bg-blue-50/60 border border-blue-200/60 rounded-2xl p-5 flex flex-col gap-2 text-xs text-blue-900">
                 <h4 className="font-bold text-blue-950 m-0 flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-blue-600" /> Despacho em Tempo Real
+                  <CheckCircle className="w-4 h-4 text-blue-600" /> Roteamento Imediato &amp; Privacidade
                 </h4>
                 <p className="m-0 leading-relaxed text-blue-800">
-                  Ao enviar o formulário, sua mensagem é encaminhada de forma segura e imediata aos canais da nossa equipe de engenharia e suporte.
+                  Ao enviar sua mensagem pelo formulário ao lado, o protocolo é entregue instantaneamente à nossa equipe editorial e de engenharia via servidor seguro. Não compartilhamos seu endereço de e-mail nem os dados informados com terceiros.
                 </p>
               </div>
             </div>
@@ -461,24 +469,24 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               <Server className="w-8 h-8" />
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Política de Cookies e Gestão de Consentimento</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Saiba como tratamos cookies técnicos, analíticos e de publicidade</p>
+            <p className="text-xs text-slate-400 m-0">Transparência completa sobre cookies técnicos, medições analíticas (GA4) e anúncios Google AdSense</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              O portal <strong>Brasil Calculadoras</strong> utiliza cookies estritamente necessários para permitir a navegação ágil e guardar preferências locais do usuário (como cálculos recentes e tema de exibição), além de cookies de terceiros para fins estatísticos e publicidade Google AdSense.
+              O portal <strong>Brasil Calculadoras</strong> utiliza cookies estritamente necessários e identificadores locais do navegador para preservar preferências operacionais, além de cookies estatísticos e publicitários gerenciados em parceria com o Google, sempre em conformidade com a Lei Geral de Proteção de Dados (LGPD). Nenhum cookie comercial ou publicitário é utilizado para capturar os valores numéricos que você digita dentro de nossas calculadoras interativas.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Tipos de Cookies Utilizados:</h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Cookies Essenciais:</strong> Gravados no seu navegador para manter o estado dos cálculos e navegação entre categorias.</li>
-              <li><strong>Cookies Analíticos (Google Analytics 4):</strong> Permitem entender quais calculadoras são mais úteis e mensurar a performance do servidor.</li>
-              <li><strong>Cookies de Publicidade (Google AdSense):</strong> Permitem ao Google exibir anúncios contextuais relevantes, auxiliando na manutenção da infraestrutura gratuita do site.</li>
+            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Categorias de Cookies e Armazenamento Local</h2>
+            <ul className="list-disc pl-5 space-y-2.5">
+              <li><strong>Cookies Essenciais e LocalStorage Funcional:</strong> Guardam no próprio dispositivo suas escolhas de consentimento de privacidade (<code>cc_adsense_consent</code>), o histórico rápido das últimas calculadoras acessadas (<code>brasilcalculadoras_recent_tools_v1</code>) e preferências visuais de navegação, garantindo fluidez sem exigir criação de conta.</li>
+              <li><strong>Cookies Analíticos Agregados (Google Analytics 4):</strong> Mensuram métricas agregadas de audiência, páginas mais consultadas e desempenho técnico de carregamento para orientar melhorias contínuas nas calculadoras e nos guias editoriais.</li>
+              <li><strong>Cookies de Publicidade Programática (Google AdSense / DART):</strong> Permitem ao Google veicular anúncios contextuais ou personalizados alinhados aos interesses de navegação, evitando repetição excessiva do mesmo anúncio e mantendo o portal integralmente gratuito ao público.</li>
             </ul>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Como Gerenciar ou Desativar Cookies</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Como Gerenciar, Revogar ou Bloquear Cookies</h2>
             <p>
-              Você pode desativar o uso de cookies a qualquer momento nas opções de privacidade do seu navegador (Google Chrome, Mozilla Firefox, Safari ou Microsoft Edge) ou através da página oficial de <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a>.
+              O visitante mantém controle total sobre o armazenamento de cookies no próprio navegador. É possível limpar dados do site ou bloquear cookies de terceiros nas configurações de privacidade do Google Chrome, Mozilla Firefox, Apple Safari ou Microsoft Edge. Para controlar especificamente a personalização de anúncios da rede Google, acesse a página oficial de <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a> ou consulte orientações complementares em nossa <a href="/politica-de-privacidade" className="text-blue-600 underline font-semibold">Política de Privacidade</a>.
             </p>
           </section>
         </article>
@@ -490,24 +498,24 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
           <header className="border-b border-slate-150 pb-6">
             <div className="flex items-center gap-3 text-blue-600 mb-2">
               <Award className="w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Transparência Google AdSense</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Transparência Google AdSense &amp; Modelo Editorial</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Nosso compromisso com a clareza publicitária e políticas do Google</p>
+            <p className="text-xs text-slate-400 m-0">Compromisso público com pureza publicitária, ausência de scripts invasivos e sustentação gratuita</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              No <strong>Brasil Calculadoras</strong>, acreditamos na transparência absoluta com nossos leitores e usuários. Todas as nossas dezenas de ferramentas são oferecidas gratuitamente para o público em geral.
+              No <strong>Brasil Calculadoras</strong>, todas as 175 calculadoras especializadas, os 21 hubs de categoria e os guias aprofundados da seção editorial estão disponíveis de forma irrestrita e sem assinatura paga (zero paywall). Nossa infraestrutura de servidores em nuvem, auditoria periódica das tabelas de INSS, IRRF e CLT e criação contínua de artigos educativos são financiadas de forma transparente pela rede oficial do <strong>Google AdSense</strong>.
             </p>
             <p>
-              Para viabilizar financeiramente a contratação de servidores, auditoria constante de fórmulas matemáticas e suporte técnico, veiculamos anúncios fornecidos pela plataforma oficial do <strong>Google AdSense</strong>.
+              Acreditamos que publicidade digital saudável e experiência do usuário devem caminhar juntas. Por essa razão, mantemos padrões rígidos de qualidade de página e pureza de inventário verificáveis publicamente no código e no arquivo raiz <code>/ads.txt</code>.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 my-2 flex flex-col gap-2">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Diretrizes Seguidas Rigorosamente:</h3>
-              <ul className="list-disc pl-5 text-xs text-slate-600 space-y-1.5 m-0">
-                <li><strong>Identificação Clara:</strong> Todos os blocos de publicidade são claramente delimitados e rotulados como anúncios.</li>
-                <li><strong>Zero Scripts Invasivos:</strong> Não utilizamos pop-ups, pop-unders, redirecionamentos forçados ou anúncios que impeçam o uso das calculadoras.</li>
-                <li><strong>ads.txt Verificado:</strong> Nosso arquivo <code>ads.txt</code> é mantido estritamente conforme as diretrizes do Google AdSense para proteger anunciantes e leitores contra fraudes.</li>
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Diretrizes de Qualidade Publicitária e UX:</h3>
+              <ul className="list-disc pl-5 text-xs text-slate-600 space-y-2 m-0">
+                <li><strong>Pureza Estrita no ads.txt:</strong> Nosso arquivo público <a href="/ads.txt" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">/ads.txt</a> autoriza exclusivamente o identificador oficial do Google AdSense, assegurando autenticidade e confiança para anunciantes.</li>
+                <li><strong>Zero Pop-ups ou Redirecionamentos Intrusivos:</strong> Banimos completamente pop-unders, anúncios que bloqueiam botões das calculadoras ou scripts de terceiros incompatíveis com o bem-estar do visitante.</li>
+                <li><strong>Separação Editorial Clara:</strong> Conteúdos educativos, fórmulas e resultados simulados permanecem estritamente independentes dos blocos de anúncios identificados na interface.</li>
               </ul>
             </div>
           </section>
@@ -520,28 +528,31 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
           <header className="border-b border-slate-150 pb-6">
             <div className="flex items-center gap-3 text-blue-600 mb-2">
               <Megaphone className="w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Mídia & Parcerias Comerciais</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Mídia &amp; Parcerias Institucionais</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Conecte sua marca a milhares de usuários qualificados que tomam decisões financeiras diárias</p>
+            <p className="text-xs text-slate-400 m-0">Alcance audiências com alta intenção prática em finanças pessoais, carreira CLT/PJ e planejamento patrimonial</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              O <strong>Brasil Calculadoras</strong> recebe diariamente milhares de profissionais, empresários, contadores e cidadãos em busca de respostas práticas para cálculos de rescisão CLT, investimentos em juros compostos, financiamentos e planejamento financeiro.
+              O <strong>Brasil Calculadoras</strong> atende diariamente leitores brasileiros em momentos concretos de decisão financeira, profissional e familiar: trabalhadores conferindo verbas de rescisão CLT e décimo terceiro, investidores comparando juros compostos e IPCA, compradores simulando financiamentos imobiliários e de veículos, estudantes revisando fórmulas matemáticas e empreendedores calculando precificação e Simples Nacional.
+            </p>
+            <p>
+              Toda exibição publicitária no domínio respeita regras rigorosas de navegabilidade (Core Web Vitals estáveis, baixa latência e layout responsivo limpo), favorecendo visibilidade qualificada sem comprometer a usabilidade das ferramentas.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 my-2 flex flex-col gap-3">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Formatos Disponíveis:</h3>
-              <ul className="list-disc pl-5 text-xs text-slate-600 space-y-1.5 m-0">
-                <li>Campanhas programáticas através do inventário do Google AdSense e Google Ad Manager.</li>
-                <li>Parcerias institucionais e de utilidade pública em categorias específicas.</li>
-                <li>Acesso institucional a endpoints da nossa API Pública de cálculos.</li>
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Canais de Veiculação &amp; Integração Técnica:</h3>
+              <ul className="list-disc pl-5 text-xs text-slate-600 space-y-2 m-0">
+                <li><strong>Inventário Programático Google AdSense / Google Ads:</strong> Participação direta nos leilões contextuais por categoria de conteúdo dentro da rede oficial Google.</li>
+                <li><strong>Integração via API Pública &amp; Widgets Educativos:</strong> Portais jornalísticos, blogs financeiros e instituições de ensino podem consultar nossos endpoints abertos documentados em <a href="/desenvolvedores" className="text-blue-600 underline font-semibold">/desenvolvedores</a>.</li>
+                <li><strong>Parcerias de Conteúdo Técnico:</strong> Sugestões de tabelas referenciais atualizadas e cooperação informativa com instituições setoriais.</li>
               </ul>
             </div>
             <div className="bg-blue-50 border border-blue-150 rounded-2xl p-5 mt-2 flex flex-col gap-2">
               <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Contato com a Área de Parcerias:</h3>
               <p className="text-xs text-blue-800 m-0">
-                Para propostas e mídia kit:<br />
-                E-mail: <strong>comercial@brasilcalculadoras.com.br</strong> ou através da nossa página de <a href="/contato" className="underline font-bold">Contato</a>.
+                Para consultas editoriais e parcerias institucionais:<br />
+                E-mail: <strong>contato@brasilcalculadoras.com.br</strong> ou através do formulário oficial na página de <a href="/contato" className="underline font-bold">Contato</a>.
               </p>
             </div>
           </section>

@@ -21,7 +21,8 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronRight,
-  Zap
+  Zap,
+  BookOpen
 } from 'lucide-react';
 import { useLocation } from 'wouter';
 
@@ -31,6 +32,7 @@ import { AdSenseBanner } from './components/AdSenseBanner';
 import { FooterAndLegals } from './components/FooterAndLegals';
 import { HomepageView } from './components/HomepageView';
 
+const GuidesView = lazy(() => import('./components/GuidesView').then(m => ({ default: m.GuidesView })));
 const LegalPage = lazy(() => import('./components/LegalPages').then(m => ({ default: m.LegalPage })));
 const DesenvolvedoresView = lazy(() => import('./components/DesenvolvedoresView').then(m => ({ default: m.DesenvolvedoresView })));
 const CompoundInterestCalc = lazy(() => import('./components/CompoundInterestCalc').then(m => ({ default: m.CompoundInterestCalc })));
@@ -59,6 +61,7 @@ import {
   CATEGORY_KEY_TO_SLUG, 
   CATEGORY_MAP_RAW 
 } from './utils/seoContentGenerator';
+import { GUIDES_ARTICLES, getRelatedGuidesForCalculator } from './data/guidesArticles';
 import { logSeoInteraction } from './utils/seoMonitor';
 
 
@@ -126,6 +129,37 @@ export function matchesSearchTokens(target: string, queryTokens: string[]): bool
   if (queryTokens.length === 0) return true;
   const normalizedTarget = normalizeSearchText(target);
   return queryTokens.every(tok => normalizedTarget.includes(tok));
+}
+
+const CANONICAL_LEGAL_SLUGS = [
+  'politica-de-privacidade',
+  'termos-de-uso',
+  'sobre',
+  'contato',
+  'cookies',
+  'transparencia-adsense',
+  'anunciantes',
+  'desenvolvedores'
+];
+
+const LOTTERY_CONTEST_PATTERN = /(concurso|resultado|sorteio|loteria|mega-sena|lotofacil|quina|lotomania|timemania|dupla-sena|federal|dia-de-sorte|super-sete|mais-milionaria)[-/]\d+/i;
+
+export function shouldNoIndexRoute(pathname: string, search: string): boolean {
+  const cleanPath = (pathname || '').replace(/^\//, '').replace(/\/$/, '');
+  if (LOTTERY_CONTEST_PATTERN.test(pathname)) return true;
+  if (search && /[?&](q|admin|utm_|ref|page|sort|filter)=/i.test(search)) return true;
+  if (cleanPath === '') return false; // Home is indexable
+  if (cleanPath === 'api' || cleanPath === 'quimica-fizica-ciencia') return true; // Non-canonical aliases
+  if (cleanPath === 'guias') return false;
+  if (cleanPath.startsWith('guias/')) {
+    const slug = cleanPath.slice('guias/'.length);
+    return !GUIDES_ARTICLES.some(g => g.slug === slug);
+  }
+  if (CANONICAL_LEGAL_SLUGS.includes(cleanPath)) return false;
+  if (Object.values(CATEGORY_KEY_TO_SLUG).includes(cleanPath)) return false;
+  if (CALCULATORS_CATALOG.some(c => c.id === cleanPath)) return false;
+  // Any unknown / Soft-404 route must be noindex, follow
+  return true;
 }
 
 export default function App() {
@@ -256,7 +290,10 @@ export default function App() {
 
     const path = location.replace(/^\//, '').replace(/\/$/, '');
     if (path) {
-      if (['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato', 'cookies', 'transparencia-adsense', 'anunciantes', 'desenvolvedores', 'api'].includes(path)) {
+      if (
+        ['politica-de-privacidade', 'termos-de-uso', 'sobre', 'contato', 'cookies', 'transparencia-adsense', 'anunciantes', 'desenvolvedores', 'api', 'guias'].includes(path) ||
+        path.startsWith('guias/')
+      ) {
         setActiveCategoryHub(null);
         return;
       }
@@ -440,6 +477,15 @@ export default function App() {
 
   // Dynamic Page Title & SEO Meta Updates on calculator or category change
   useEffect(() => {
+    const isNoIndex = shouldNoIndexRoute(window.location.pathname, window.location.search);
+    updateMetaTag(
+      'name',
+      'robots',
+      isNoIndex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    );
+
     const normalizedPath = (location || '').replace(/\/$/, '') || '/';
     if (['/politica-de-privacidade', '/termos-de-uso', '/sobre', '/contato', '/cookies', '/transparencia-adsense', '/anunciantes', '/desenvolvedores', '/api'].includes(normalizedPath)) {
       const legalTitles: Record<string, { title: string; desc: string }> = {
@@ -497,11 +543,12 @@ export default function App() {
           canonicalLink.setAttribute('rel', 'canonical');
           document.head.appendChild(canonicalLink);
         }
-        canonicalLink.setAttribute('href', 'https://www.brasilcalculadoras.com.br' + normalizedPath);
+        const canonicalPath = normalizedPath === '/api' ? '/desenvolvedores' : normalizedPath;
+        canonicalLink.setAttribute('href', 'https://www.brasilcalculadoras.com.br' + canonicalPath);
 
         updateMetaTag('property', 'og:title', current.title);
         updateMetaTag('property', 'og:description', current.desc);
-        updateMetaTag('property', 'og:url', 'https://www.brasilcalculadoras.com.br' + normalizedPath);
+        updateMetaTag('property', 'og:url', 'https://www.brasilcalculadoras.com.br' + canonicalPath);
         updateMetaTag('property', 'og:type', 'website');
         updateMetaTag('name', 'twitter:title', current.title);
         updateMetaTag('name', 'twitter:description', current.desc);
@@ -534,6 +581,112 @@ export default function App() {
 
         checkSeoOverrides('https://www.brasilcalculadoras.com.br' + normalizedPath);
       }
+      return;
+    }
+
+    if (normalizedPath === '/guias' || normalizedPath.startsWith('/guias/')) {
+      const slug = normalizedPath === '/guias' ? null : normalizedPath.slice('/guias/'.length);
+      const article = slug ? GUIDES_ARTICLES.find(g => g.slug === slug) : undefined;
+      const guideTitle = article
+        ? `${article.title} | Brasil Calculadoras`
+        : 'Guias Educativos, Manuais Técnicos & Tutoriais | Brasil Calculadoras';
+      const guideDesc = article
+        ? article.metaDescription
+        : 'Artigos aprofundados e guias completos sobre finanças, direitos trabalhistas CLT vs PJ, juros compostos, financiamento imobiliário e saúde quantitativa.';
+      const canonicalUrl = article
+        ? `https://www.brasilcalculadoras.com.br/guias/${article.slug}`
+        : 'https://www.brasilcalculadoras.com.br/guias';
+
+      document.title = guideTitle;
+
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', guideDesc);
+
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonicalUrl);
+
+      updateMetaTag('property', 'og:title', guideTitle);
+      updateMetaTag('property', 'og:description', guideDesc);
+      updateMetaTag('property', 'og:url', canonicalUrl);
+      updateMetaTag('property', 'og:type', article ? 'article' : 'website');
+      updateMetaTag('name', 'twitter:card', 'summary_large_image');
+      updateMetaTag('name', 'twitter:title', guideTitle);
+      updateMetaTag('name', 'twitter:description', guideDesc);
+
+      try {
+        let script = document.getElementById('jsonld-seo') as HTMLScriptElement;
+        if (!script) {
+          script = document.createElement('script');
+          script.id = 'jsonld-seo';
+          script.type = 'application/ld+json';
+          document.head.appendChild(script);
+        }
+        const schemas: any[] = [];
+        if (article) {
+          schemas.push({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": article.title,
+            "description": article.metaDescription,
+            "datePublished": article.publishedAt,
+            "dateModified": article.updatedAt,
+            "author": { "@type": "Organization", "name": article.author },
+            "publisher": { "@type": "Organization", "name": "Brasil Calculadoras", "url": "https://www.brasilcalculadoras.com.br" },
+            "mainEntityOfPage": canonicalUrl
+          });
+          if (article.faq.length > 0) {
+            schemas.push({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": article.faq.map(f => ({
+                "@type": "Question",
+                "name": f.q,
+                "acceptedAnswer": { "@type": "Answer", "text": f.a }
+              }))
+            });
+          }
+          schemas.push({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.brasilcalculadoras.com.br/" },
+              { "@type": "ListItem", "position": 2, "name": "Guias & Artigos", "item": "https://www.brasilcalculadoras.com.br/guias" },
+              { "@type": "ListItem", "position": 3, "name": article.title, "item": canonicalUrl }
+            ]
+          });
+        } else {
+          schemas.push({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": guideTitle,
+            "description": guideDesc,
+            "url": canonicalUrl
+          });
+          schemas.push({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.brasilcalculadoras.com.br/" },
+              { "@type": "ListItem", "position": 2, "name": "Guias & Artigos", "item": canonicalUrl }
+            ]
+          });
+        }
+        script.textContent = JSON.stringify(schemas);
+      } catch (e) {}
+
+      logSeoInteraction(normalizedPath, 'view');
+      setAdRefreshTrigger(prev => prev + 1);
+      checkSeoOverrides(canonicalUrl);
       return;
     }
 
@@ -677,7 +830,7 @@ export default function App() {
 
     setAdRefreshTrigger(prev => prev + 1);
     checkSeoOverrides(canonicalUrl);
-  }, [activeCalculator, activeCategoryHub]);
+  }, [activeCalculator, activeCategoryHub, location]);
 
   const triggerToast = (msg: string) => {
     setToastMsg(msg);
@@ -1207,6 +1360,17 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2.5">
+            <a
+              href="/guias"
+              onClick={(e) => {
+                e.preventDefault();
+                setLocation('/guias');
+              }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 text-xs font-bold transition-colors whitespace-nowrap"
+            >
+              <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Guias &amp; Artigos</span>
+            </a>
             <button
               type="button"
               onClick={() => {
@@ -1275,6 +1439,12 @@ export default function App() {
           <LegalPage type="advertisers" onNavigateHome={() => setLocation('/')} />
         ) : normalizedLocation === '/desenvolvedores' || normalizedLocation === '/api' ? (
           <DesenvolvedoresView onNavigateHome={() => setLocation('/')} />
+        ) : normalizedLocation === '/guias' || normalizedLocation.startsWith('/guias/') ? (
+          <GuidesView
+            activeSlug={normalizedLocation === '/guias' ? null : normalizedLocation.slice('/guias/'.length)}
+            onNavigate={(path) => setLocation(path)}
+            onSelectCalculator={(id) => selectCalculator(id as CalculatorId)}
+          />
         ) : normalizedLocation === '/' ? (
           <HomepageView 
             onSelectCalculator={selectCalculator}
@@ -1286,6 +1456,7 @@ export default function App() {
                 setActiveCategory(catKey);
               }
             }}
+            onNavigate={(path) => setLocation(path)}
             categoryCounts={categoryCounts}
           />
         ) : (
@@ -1325,6 +1496,21 @@ export default function App() {
                 <span>🚀 Todas as Ferramentas</span>
                 <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${activeCategory === 'todos' && !activeCategoryHub ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>{categoryCounts.todos}</span>
               </button>
+
+              <a
+                href="/guias"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLocation('/guias');
+                  setMenuOpen(false);
+                }}
+                className="w-full text-left py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-between transition-all text-blue-700 bg-blue-50/70 hover:bg-blue-100 border border-blue-200/60"
+              >
+                <span>📖 Guias &amp; Artigos</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-white text-blue-700">
+                  {GUIDES_ARTICLES.length}
+                </span>
+              </a>
 
               {Object.entries(CATEGORY_MAP).map(([key, label]) => {
                 const isSelected = activeCategory === key;
@@ -1416,8 +1602,8 @@ export default function App() {
                 {/* Breadcrumbs for Category Hub */}
                 <Breadcrumbs catKey={activeCategoryHub} />
 
-                {/* Hub Header Card */}
-                <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden">
+                {/* Hub Header Card & Semantic Editorial Guide */}
+                <article className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 md:p-8 flex flex-col gap-5 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 -z-10 blur-xl opacity-50" />
                   <div className="flex items-center gap-2">
                     <span className="text-2xl">
@@ -1433,20 +1619,44 @@ export default function App() {
                   <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
                     {getCategoryHubContent(activeCategoryHub).introduction}
                   </p>
-                  <div className="border-t border-slate-100 pt-4 mt-2">
-                    <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Por que planejar nesta categoria?</h3>
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                  <div className="border-t border-slate-100 pt-4">
+                    <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                      Por que planejar nesta categoria?
+                    </h2>
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
                       {getCategoryHubContent(activeCategoryHub).importance}
                     </p>
                   </div>
-                </div>
+                  {getCategoryHubContent(activeCategoryHub).methodology && (
+                    <div className="border-t border-slate-100 pt-4">
+                      <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                        Metodologia e Rigor Matemático dos Cálculos
+                      </h2>
+                      <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                        {getCategoryHubContent(activeCategoryHub).methodology}
+                      </p>
+                    </div>
+                  )}
+                  {getCategoryHubContent(activeCategoryHub).practicalApplications && getCategoryHubContent(activeCategoryHub).practicalApplications!.length > 0 && (
+                    <div className="border-t border-slate-100 pt-4">
+                      <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                        Principais Aplicações Práticas
+                      </h2>
+                      <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                        {getCategoryHubContent(activeCategoryHub).practicalApplications!.map((appItem, aIdx) => (
+                          <li key={aIdx}>{appItem}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </article>
 
                 {/* Tools Grid */}
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 px-1">
+                  <h2 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 px-1">
                     <span className="h-5 w-1 bg-blue-600 rounded-full" />
                     Simuladores de {CATEGORY_MAP_RAW[activeCategoryHub] || activeCategoryHub}
-                  </h3>
+                  </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {CALCULATORS_CATALOG.filter(c => c.category === activeCategoryHub).map(c => (
                       <div
@@ -1455,7 +1665,7 @@ export default function App() {
                         className="group bg-white border border-slate-200 hover:border-blue-200 hover:bg-blue-50/10 p-5 rounded-2xl cursor-pointer transition-all hover:shadow-md flex flex-col justify-between min-h-[140px]"
                       >
                         <div>
-                          <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">{c.name}</h4>
+                          <h3 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">{c.name}</h3>
                           <p className="text-[10px] text-slate-500 mt-2 line-clamp-3 leading-relaxed font-normal">{c.description}</p>
                         </div>
                         <span className="text-[9px] font-mono font-bold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-4">
@@ -1466,46 +1676,79 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Category FAQs */}
+                {/* Guias Editoriais desta Categoria */}
+                {(() => {
+                  const catGuides = GUIDES_ARTICLES.filter(g => g.categoryKey === activeCategoryHub);
+                  const displayGuides = catGuides.length > 0 ? catGuides : GUIDES_ARTICLES.slice(0, 2);
+                  return (
+                    <section className="bg-blue-50/50 border border-blue-200/70 rounded-2xl p-6 flex flex-col gap-4">
+                      <div className="flex items-center justify-between gap-2">
+                        <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                          <BookOpen className="w-4.5 h-4.5 text-blue-600" />
+                          Guias Editoriais de Aprofundamento
+                        </h2>
+                        <a
+                          href="/guias"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setLocation('/guias');
+                          }}
+                          className="text-xs font-bold text-blue-600 hover:underline"
+                        >
+                          Todos os Guias →
+                        </a>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {displayGuides.map(guide => (
+                          <a
+                            key={guide.slug}
+                            href={`/guias/${guide.slug}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setLocation(`/guias/${guide.slug}`);
+                            }}
+                            className="p-4 rounded-xl bg-white border border-blue-100 hover:border-blue-400 transition-all block"
+                          >
+                            <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">{guide.categoryLabel}</span>
+                            <h3 className="text-xs font-bold text-slate-900 mt-1 leading-snug">{guide.title}</h3>
+                            <p className="text-[11px] text-slate-600 mt-1 line-clamp-2">{guide.excerpt}</p>
+                          </a>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })()}
+
+                {/* Category FAQs (Always visible in DOM for SEO & Helpful Content) */}
                 {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (
-                  <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                    <h3 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 border-b border-slate-100 pb-3">
+                  <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                    <h2 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 border-b border-slate-100 pb-3">
                       <HelpCircle className="w-4.5 h-4.5 text-blue-500" />
                       Perguntas Frequentes da Categoria
-                    </h3>
+                    </h2>
                     <div className="flex flex-col gap-3">
                       {getCategoryHubContent(activeCategoryHub).faq.map((q, idx) => {
                         const faqKey = `cat-${activeCategoryHub}-faq-${idx}`;
-                        const isOpen = activeAppFaqIdx === idx + 100;
+                        const isSelected = activeAppFaqIdx === idx + 100;
                         return (
                           <div
                             key={faqKey}
-                            className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3 transition-all"
+                            onClick={() => setActiveAppFaqIdx(isSelected ? null : idx + 100)}
+                            className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${
+                              isSelected ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'
+                            }`}
                           >
-                            <button
-                              onClick={() => setActiveAppFaqIdx(isOpen ? null : idx + 100)}
-                              className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
-                            >
-                              <span className="text-xs font-semibold text-slate-700">{q.q}</span>
-                              <span
-                                className={`text-blue-600 shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
-                                aria-hidden="true"
-                              >
-                                <ChevronDown className="w-4 h-4" />
-                              </span>
-                            </button>
-                            {isOpen && (
-                              <div className="mt-2 overflow-hidden">
-                                <p className="text-[11px] text-slate-600 font-sans font-normal leading-relaxed">
-                                  {q.a}
-                                </p>
-                              </div>
-                            )}
+                            <h3 className="text-xs font-bold text-slate-800 mb-1.5">
+                              {q.q}
+                            </h3>
+                            <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
+                              {q.a}
+                            </p>
                           </div>
                         );
                       })}
                     </div>
-                  </div>
+                  </section>
                 )}
 
                 {/* Other Categories list navigation */}
@@ -1815,127 +2058,185 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* Box 2: SEO Exhaustive Technical Guide & Accordion FAQ */}
-                  {activeCalc && (
-                    <div className="deferred-section bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
-                      
-                      {/* Detailed semantic sections */}
-                      <div className="flex flex-col gap-5">
-                        <div>
-                          <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
-                            O que é e para que serve
-                          </span>
-                          <h3 className="text-xs font-bold text-slate-800 mt-2.5 mb-1.5">Entenda o Conceito</h3>
-                          <p className="text-[11.5px] text-slate-600 leading-relaxed font-normal">
-                            {getSeoContentForCalculator(activeCalc).whatIs}
-                          </p>
+                  {/* Box 2: Semantic Editorial Technical Guide & Visible FAQs */}
+                  {activeCalc && (() => {
+                    const calcSeo = getSeoContentForCalculator(activeCalc);
+                    const relatedGuides = getRelatedGuidesForCalculator(activeCalc.id, activeCalc.category);
+                    return (
+                      <article className="deferred-section bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                        {/* Detailed semantic sections */}
+                        <div className="flex flex-col gap-5">
+                          <section>
+                            <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                              Guia Técnico Completo
+                            </span>
+                            <h2 className="text-sm sm:text-base font-bold text-slate-900 mt-2.5 mb-2">
+                              O que é e para que serve: {activeCalc.name}
+                            </h2>
+                            <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
+                              {calcSeo.whatIs}
+                            </p>
+                          </section>
+
+                          {calcSeo.stepByStep && calcSeo.stepByStep.length > 0 && (
+                            <section className="border-t border-slate-100 pt-4">
+                              <h2 className="text-sm font-bold text-slate-900 mb-2.5">
+                                Como usar esta calculadora passo a passo
+                              </h2>
+                              <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                                {calcSeo.stepByStep.map((step, sIdx) => (
+                                  <li key={sIdx}>{step}</li>
+                                ))}
+                              </ul>
+                            </section>
+                          )}
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                            <section>
+                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                Fórmula e Lógica do Cálculo
+                              </h3>
+                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                {calcSeo.howItWorks}
+                              </p>
+                            </section>
+                            <section>
+                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                Exemplo Prático Numérico
+                              </h3>
+                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                {calcSeo.practicalExample}
+                              </p>
+                            </section>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                            <section>
+                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                Quando Utilizar esta Ferramenta
+                              </h3>
+                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                {calcSeo.whenToUse}
+                              </p>
+                            </section>
+                            <section>
+                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                Dicas, Limites e Recomendações
+                              </h3>
+                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                {calcSeo.importantTips}
+                              </p>
+                            </section>
+                          </div>
+
+                          {calcSeo.methodologyNote && (
+                            <section className="border-t border-slate-100 pt-4">
+                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                Metodologia, Precisão e Atualização 2026
+                              </h3>
+                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                {calcSeo.methodologyNote}
+                              </p>
+                            </section>
+                          )}
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
-                          <div>
-                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
-                              Como Calcular na Prática
-                            </span>
-                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
-                              {getSeoContentForCalculator(activeCalc).howItWorks}
-                            </p>
-                          </div>
-                          <div>
-                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
-                              Exemplo de Aplicação
-                            </span>
-                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
-                              {getSeoContentForCalculator(activeCalc).practicalExample}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
-                          <div>
-                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
-                              Quando Utilizar esta Ferramenta
-                            </span>
-                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
-                              {getSeoContentForCalculator(activeCalc).whenToUse}
-                            </p>
-                          </div>
-                          <div>
-                            <span className="text-[9px] font-extrabold text-slate-400 font-mono uppercase tracking-wider block mb-1">
-                              Dicas e Recomendações
-                            </span>
-                            <p className="text-[10.5px] text-slate-500 leading-relaxed font-normal">
-                              {getSeoContentForCalculator(activeCalc).importantTips}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* EEAT Block: Fontes Oficiais e Data de Revisão */}
-                      {getSeoContentForCalculator(activeCalc).sources.length > 0 && (
-                        <div className="border-t border-slate-150 pt-4 mt-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-slate-50/50 p-4 rounded-xl border border-slate-200/50">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-bold text-slate-400 font-mono uppercase">Revisado Cientificamente por Fontes Governamentais</span>
-                          </div>
-                          <div className="flex flex-wrap gap-3">
-                            {getSeoContentForCalculator(activeCalc).sources.map((src, sIdx) => (
+                        {/* Contextual Internal Links to Curated Guides */}
+                        {relatedGuides.length > 0 && (
+                          <section className="border-t border-slate-100 pt-4 bg-blue-50/40 rounded-xl p-4 border border-blue-100/80">
+                            <div className="flex items-center justify-between gap-2 mb-3">
+                              <h3 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                                <BookOpen className="w-4 h-4 text-blue-600" />
+                                Guias Editoriais Relacionados
+                              </h3>
                               <a
-                                key={sIdx}
-                                href={src.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-[10px] text-blue-600 hover:text-blue-800 font-bold inline-flex items-center gap-1 transition-colors hover:underline"
+                                href="/guias"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setLocation('/guias');
+                                }}
+                                className="text-[11px] font-bold text-blue-600 hover:underline"
                               >
-                                {src.name} <ExternalLink className="w-2.5 h-2.5" />
+                                Central de Guias →
                               </a>
-                            ))}
-                            <span className="text-[10px] text-slate-400 flex items-center gap-1 font-mono">
-                              ⏱️ Atualizado em: {getSeoContentForCalculator(activeCalc).lastUpdated}
-                            </span>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* FAQ Accordion for calculators */}
-                      {getSeoContentForCalculator(activeCalc).faq.length > 0 && (
-                        <div className="flex flex-col gap-3 border-t border-slate-100 pt-5">
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider select-none">
-                            Perguntas Frequentes do Canal (F.A.Q.)
-                          </span>
-                          <div className="flex flex-col gap-2">
-                            {getSeoContentForCalculator(activeCalc).faq.map((q, idx) => {
-                              const isOpen = activeAppFaqIdx === idx;
-                              return (
-                                <div 
-                                  key={idx} 
-                                  className="border border-slate-100/60 rounded-xl bg-slate-50/40 hover:bg-slate-50 px-4 py-3 transition-all"
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                              {relatedGuides.map((guide) => (
+                                <a
+                                  key={guide.slug}
+                                  href={`/guias/${guide.slug}`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setLocation(`/guias/${guide.slug}`);
+                                  }}
+                                  className="p-3 rounded-lg bg-white border border-blue-100 hover:border-blue-400 transition-all block"
                                 >
-                                  <button
-                                    onClick={() => setActiveAppFaqIdx(isOpen ? null : idx)}
-                                    className="w-full flex justify-between items-center text-left font-bold text-slate-800 cursor-pointer focus:outline-none"
-                                  >
-                                    <span className="text-xs font-semibold text-slate-700">{q.q}</span>
-                                    <span
-                                      className={`text-blue-600 shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
-                                      aria-hidden="true"
-                                    >
-                                      <ChevronDown className="w-4 h-4" />
-                                    </span>
-                                  </button>
-                                  {isOpen && (
-                                    <div className="mt-2 overflow-hidden">
-                                      <p className="text-[11px] text-slate-600 font-sans font-normal leading-relaxed">
-                                        {q.a}
-                                      </p>
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
+                                  <span className="text-[9px] font-bold text-blue-700 uppercase">{guide.categoryLabel}</span>
+                                  <p className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2 leading-snug">
+                                    {guide.title}
+                                  </p>
+                                </a>
+                              ))}
+                            </div>
+                          </section>
+                        )}
+
+                        {/* EEAT Block: Fontes Oficiais e Data de Revisão */}
+                        {calcSeo.sources.length > 0 && (
+                          <div className="border-t border-slate-150 pt-4 mt-1 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-slate-50/60 p-4 rounded-xl border border-slate-200/60">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-bold text-slate-500 font-mono uppercase">Fontes e Referências Oficiais</span>
+                            </div>
+                            <div className="flex flex-wrap gap-3">
+                              {calcSeo.sources.map((src, sIdx) => (
+                                <a
+                                  key={sIdx}
+                                  href={src.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-[10px] text-blue-600 hover:text-blue-800 font-bold inline-flex items-center gap-1 transition-colors hover:underline"
+                                >
+                                  {src.name} <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
+                              ))}
+                              <span className="text-[10px] text-slate-500 flex items-center gap-1 font-mono">
+                                Atualizado em: {calcSeo.lastUpdated}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                        )}
+
+                        {/* FAQ Section (Always visible in DOM for Helpful Content & SEO) */}
+                        {calcSeo.faq.length > 0 && (
+                          <section className="flex flex-col gap-3 border-t border-slate-100 pt-5">
+                            <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                              <HelpCircle className="w-4 h-4 text-blue-600" />
+                              Perguntas Frequentes (FAQ) — {activeCalc.name}
+                            </h2>
+                            <div className="flex flex-col gap-2.5">
+                              {calcSeo.faq.map((q, idx) => {
+                                const isSelected = activeAppFaqIdx === idx;
+                                return (
+                                  <div
+                                    key={idx}
+                                    onClick={() => setActiveAppFaqIdx(isSelected ? null : idx)}
+                                    className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${
+                                      isSelected ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'
+                                    }`}
+                                  >
+                                    <h3 className="text-xs font-bold text-slate-800 mb-1.5">{q.q}</h3>
+                                    <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
+                                      {q.a}
+                                    </p>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </section>
+                        )}
+                      </article>
+                    );
+                  })()}
 
                   {/* Box 3: Advanced Internal Linking grids (3 categories: Related, Complementary, Popular) */}
                   {activeCalc && (
