@@ -868,8 +868,8 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
     categorySlug: 'veiculos-combustivel',
     author: 'Equipe Editorial Brasil Calculadoras',
     authorRole: 'Mobilidade, Crédito Bancário & Custos Veiculares',
-    publishedAt: '2026-12-02',
-    updatedAt: '2026-12-02',
+    publishedAt: '2026-11-18',
+    updatedAt: '2026-11-18',
     readingTime: '10 min de leitura',
     relatedCalculators: [
       {
@@ -967,8 +967,8 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
     categorySlug: 'construcao-reformas',
     author: 'Equipe Editorial Brasil Calculadoras',
     authorRole: 'Engenharia Civil, Orçamentação & Utilidades',
-    publishedAt: '2026-12-09',
-    updatedAt: '2026-12-09',
+    publishedAt: '2026-11-18',
+    updatedAt: '2026-11-18',
     readingTime: '10 min de leitura',
     relatedCalculators: [
       {
@@ -1066,8 +1066,8 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
     categorySlug: 'educacao-enem',
     author: 'Equipe Editorial Brasil Calculadoras',
     authorRole: 'Educação, Estatística Escolar & Produtividade',
-    publishedAt: '2026-12-16',
-    updatedAt: '2026-12-16',
+    publishedAt: '2026-11-18',
+    updatedAt: '2026-11-18',
     readingTime: '10 min de leitura',
     relatedCalculators: [
       {
@@ -1165,8 +1165,8 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
     categorySlug: 'logistica-fretes',
     author: 'Equipe Editorial Brasil Calculadoras',
     authorRole: 'Logística Rodoviária & Economia de Transportes',
-    publishedAt: '2026-12-23',
-    updatedAt: '2026-12-23',
+    publishedAt: '2026-11-18',
+    updatedAt: '2026-11-18',
     readingTime: '11 min de leitura',
     relatedCalculators: [
       {
