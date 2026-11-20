@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ShieldCheck, Wallet, Landmark, HelpCircle, RotateCcw, ArrowRight } from 'lucide-react';
+import { calculateInss2026, calculateIrrf2026 } from '../utils/tax2026';
 
 interface CltVsPjCalcProps {
   onCalculate: (results: {
@@ -30,35 +31,12 @@ export const CltVsPjCalc: React.FC<CltVsPjCalcProps> = ({ onCalculate }) => {
     const health = Number(cltHealth) || 0;
     const others = Number(cltOthers) || 0;
 
-    // INSS 2026 Table Approximation
-    let inss = 0;
-    if (gross <= 1621.0) {
-      inss = gross * 0.075;
-    } else if (gross <= 2902.84) {
-      inss = 1621 * 0.075 + (gross - 1621) * 0.09;
-    } else if (gross <= 4354.27) {
-      inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (gross - 2902.84) * 0.12;
-    } else if (gross <= 8475.55) {
-      inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (4354.27 - 2902.84) * 0.12 + (gross - 4354.27) * 0.14;
-    } else {
-      inss = 988.09; // Teto INSS 2026/2025 max cap
-    }
-
-    // IRRF Table Approximation
-    const baseIrrf = Math.max(0, gross - inss);
-    let irrf = 0;
-    if (baseIrrf <= 2259.2) {
-      irrf = 0;
-    } else if (baseIrrf <= 2826.65) {
-      irrf = baseIrrf * 0.075 - 169.44;
-    } else if (baseIrrf <= 3751.05) {
-      irrf = baseIrrf * 0.15 - 381.44;
-    } else if (baseIrrf <= 4664.68) {
-      irrf = baseIrrf * 0.225 - 662.77;
-    } else {
-      irrf = baseIrrf * 0.275 - 896.0;
-    }
-    irrf = Math.max(0, irrf);
+    // INSS 2026 (Portaria MPS/MF nº 13/2026) e IRRF 2026 (Lei nº 15.270/2025 + simplificado R$ 607,20)
+    const inss = calculateInss2026(gross);
+    const { irrfFinal: irrf } = calculateIrrf2026({
+      rendaTributavel: gross,
+      inss,
+    });
 
     const cltNetDirect = gross - inss - irrf;
 

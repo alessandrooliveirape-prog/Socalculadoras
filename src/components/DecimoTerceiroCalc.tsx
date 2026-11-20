@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Briefcase, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, Clipboard, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { calculateInss2026, calculateIrrf2026 } from '../utils/tax2026';
 
 interface DecimoTerceiroCalcProps {
   onCalculate: (results: any) => void;
@@ -30,36 +31,11 @@ export const DecimoTerceiroCalc: React.FC<DecimoTerceiroCalcProps> = ({ onCalcul
     // 2. Primeiro Passo: Primeira Parcela (50% bruto sem descontos)
     const firstParcelValue = parseFloat((grossThirteenth * 0.5).toFixed(2));
 
-    // 3. Segundo Passo: Descontos Tributários (aplicados sobre o valor total do 13o)
-    let inss = 0;
-    const baseInss = grossThirteenth;
-
-    if (baseInss <= 1412) {
-      inss = baseInss * 0.075;
-    } else if (baseInss <= 2666.68) {
-      inss = (1412 * 0.075) + ((baseInss - 1412) * 0.09);
-    } else if (baseInss <= 4000.03) {
-      inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((baseInss - 2666.68) * 0.12);
-    } else {
-      const maxInss = Math.min(baseInss, 7786.02); // Teto do INSS aproximado
-      inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((4000.03 - 2666.68) * 0.12) + ((maxInss - 4000.03) * 0.14);
-    }
-    inss = parseFloat(inss.toFixed(2));
-
-    let irrf = 0;
-    const baseIrrf = grossThirteenth - inss;
-    if (baseIrrf <= 2259.20) {
-      irrf = 0;
-    } else if (baseIrrf <= 2828.65) {
-      irrf = (baseIrrf * 0.075) - 169.44;
-    } else if (baseIrrf <= 3751.05) {
-      irrf = (baseIrrf * 0.15) - 381.44;
-    } else if (baseIrrf <= 4664.68) {
-      irrf = (baseIrrf * 0.225) - 662.77;
-    } else {
-      irrf = (baseIrrf * 0.275) - 896.00;
-    }
-    irrf = Math.max(0, parseFloat(irrf.toFixed(2)));
+    // 3. Segundo Passo: Descontos Tributários 2026 (INSS + IRRF Lei nº 15.270/2025 aplicados sobre o 13º)
+    const inss = parseFloat(calculateInss2026(grossThirteenth).toFixed(2));
+    const irrf = parseFloat(
+      calculateIrrf2026({ rendaTributavel: grossThirteenth, inss }).irrfFinal.toFixed(2)
+    );
 
     // Segunda parcela é: 50% do bruto subtraído dos descontos totais de INSS e IRRF
     const secondParcelValue = parseFloat((firstParcelValue - (inss + irrf)).toFixed(2));

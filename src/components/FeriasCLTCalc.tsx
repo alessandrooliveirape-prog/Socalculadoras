@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, HelpCircle as HelpIcon, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { calculateInss2026, calculateIrrf2026 } from '../utils/tax2026';
 
 interface FeriasCLTCalcProps {
   onCalculate: (results: any) => void;
@@ -51,36 +52,13 @@ export const FeriasCLTCalc: React.FC<FeriasCLTCalcProps> = ({ onCalculate }) => 
 
     const grossVacationAmount = parseFloat((vacationValue + vacationOneThird + abonoValue + abonoOneThird).toFixed(2));
 
-    // 3. Tributação: somente sobre as férias gozadas e seu terço constitucional
+    // 3. Tributação 2026: somente sobre as férias gozadas e seu terço constitucional (INSS + IRRF Lei nº 15.270/2025)
     const baseTaxable = vacationValue + vacationOneThird;
 
-    let inss = 0;
-    if (baseTaxable <= 1412) {
-      inss = baseTaxable * 0.075;
-    } else if (baseTaxable <= 2666.68) {
-      inss = (1412 * 0.075) + ((baseTaxable - 1412) * 0.09);
-    } else if (baseTaxable <= 4000.03) {
-      inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((baseTaxable - 2666.68) * 0.12);
-    } else {
-      const maxInss = Math.min(baseTaxable, 7786.02);
-      inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((4000.03 - 2666.68) * 0.12) + ((maxInss - 4000.03) * 0.14);
-    }
-    inss = parseFloat(inss.toFixed(2));
-
-    let irrf = 0;
-    const baseIrrf = baseTaxable - inss;
-    if (baseIrrf <= 2259.20) {
-      irrf = 0;
-    } else if (baseIrrf <= 2828.65) {
-      irrf = (baseIrrf * 0.075) - 169.44;
-    } else if (baseIrrf <= 3751.05) {
-      irrf = (baseIrrf * 0.15) - 381.44;
-    } else if (baseIrrf <= 4664.68) {
-      irrf = (baseIrrf * 0.225) - 662.77;
-    } else {
-      irrf = (baseIrrf * 0.275) - 896.00;
-    }
-    irrf = Math.max(0, parseFloat(irrf.toFixed(2)));
+    const inss = parseFloat(calculateInss2026(baseTaxable).toFixed(2));
+    const irrf = parseFloat(
+      calculateIrrf2026({ rendaTributavel: baseTaxable, inss }).irrfFinal.toFixed(2)
+    );
 
     const totalDeductions = parseFloat((inss + irrf).toFixed(2));
     const netVacationAmount = parseFloat((grossVacationAmount - totalDeductions).toFixed(2));

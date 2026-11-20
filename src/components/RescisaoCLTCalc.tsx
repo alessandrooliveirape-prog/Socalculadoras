@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Download, DollarSign, HelpCircle, ArrowRight, ShieldCheck, Trash2, Calendar, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { calculateInss2026 } from '../utils/tax2026';
 
 interface RescisaoCLTCalcProps {
   onCalculate: (results: any) => void;
@@ -102,20 +103,9 @@ export const RescisaoCLTCalc: React.FC<RescisaoCLTCalcProps> = ({ onCalculate })
       fgtsFine = parseFloat((fgtsBalance * 0.20).toFixed(2));
     }
 
-    // 7. Descontos aproximados sobre saldo de salário e 13º (INSS e IRRF)
-    // Para simplificar a simulação no simulador CLT:
+    // 7. Descontos previdenciários 2026 sobre saldo de salário e 13º proporcional (INSS progressivo)
     const baseInssEarnings = salaryBalance + (proportionateThirteenth > 0 ? proportionateThirteenth : 0);
-    let estimatedInssDeduction = 0;
-    if (baseInssEarnings <= 1412) {
-      estimatedInssDeduction = baseInssEarnings * 0.075;
-    } else if (baseInssEarnings <= 2666.68) {
-      estimatedInssDeduction = baseInssEarnings * 0.09;
-    } else if (baseInssEarnings <= 4000.03) {
-      estimatedInssDeduction = baseInssEarnings * 0.12;
-    } else {
-      estimatedInssDeduction = baseInssEarnings * 0.14;
-    }
-    estimatedInssDeduction = parseFloat(estimatedInssDeduction.toFixed(2));
+    const estimatedInssDeduction = parseFloat(calculateInss2026(baseInssEarnings).toFixed(2));
 
     // Desconto de aviso prévio se for descontado no pedido de demissão
     const noticeDeduction = noticeAmount < 0 ? Math.abs(noticeAmount) : 0;

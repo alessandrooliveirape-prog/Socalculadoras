@@ -1,4 +1,5 @@
 import { CalculatorDef, DynamicInputDef, DynamicOutputDef, DynamicFAQDef } from '../types';
+import { calculateInss2026, calculateIrrf2026 } from '../utils/tax2026';
 
 // Standard categories catalog
 export const CATEGORY_MAP: Record<string, string> = {
@@ -6612,7 +6613,7 @@ const RAW_DYNAMIC_METADATA: {
       { "id": "liquido_estimado", "label": "Salário Líquido Estimado", "pref": "R$ " }
     ],
     "faq": [
-      { "q": "Quem é isento do IRRF em 2026?", "a": "Em 2026, estão isentos do Imposto de Renda Retido na Fonte os trabalhadores cuja base de cálculo mensal (salário bruto menos INSS e deduções legais) seja de até R$ 2.259,20. Isso equivale a um salário bruto de aproximadamente R$ 2.824,00 para quem não possui dependentes." },
+      { "q": "Quem é isento do IRRF em 2026?", "a": "Pela Lei nº 15.270/2025, a partir de janeiro de 2026 quem recebe rendimentos tributáveis mensais de até R$ 5.000,00 tem isenção total do IRRF (por meio da redução mensal de até R$ 312,89), além de redução gradual para rendas entre R$ 5.000,01 e R$ 7.350,00 e opção pelo desconto simplificado mensal de R$ 607,20." },
       { "q": "Quanto vale a dedução por dependente?", "a": "Cada dependente (filhos menores de 21 anos, cônjuge sem renda, pais idosos sob sua guarda, entre outros) gera uma dedução fixa de R$ 189,59 por mês na base de cálculo do IRRF." }
     ]
   },
@@ -8634,29 +8635,19 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       }
       else if (raw.type === 'trab_salario_liquido') {
         const bruto = parseFloat(valInputs['salario_bruto'] || 0);
-        const dependentes = parseInt(valInputs['dependentes'] || 0);
+        const dependentes = parseInt(valInputs['dependentes'] || 0, 10);
         const vtPercent = parseFloat(valInputs['desconto_vt'] || 0);
         const outrosDesc = parseFloat(valInputs['outros_descontos'] || 0);
 
-        let inss = 0;
-        if (bruto <= 1412) inss = bruto * 0.075;
-        else if (bruto <= 2666.68) inss = (1412 * 0.075) + ((bruto - 1412) * 0.09);
-        else if (bruto <= 4000.03) inss = (1412 * 0.075) + (1254.68 * 0.09) + ((bruto - 2666.68) * 0.12);
-        else if (bruto <= 7786.02) inss = (1412 * 0.075) + (1254.68 * 0.09) + (1333.35 * 0.12) + ((bruto - 4000.03) * 0.14);
-        else inss = 908.85;
-
-        const deducaoDep = dependentes * 189.59;
-        const baseIrrf = bruto - inss - deducaoDep;
-        let irrf = 0;
-        if (baseIrrf > 4664.68) irrf = (baseIrrf * 0.275) - 884.96;
-        else if (baseIrrf > 3751.05) irrf = (baseIrrf * 0.225) - 651.73;
-        else if (baseIrrf > 2826.65) irrf = (baseIrrf * 0.15) - 370.40;
-        else if (baseIrrf > 2112.00) irrf = (baseIrrf * 0.075) - 158.40;
-        
-        irrf = Math.max(0, irrf);
-        const descontoVtReais = (bruto * (vtPercent / 100));
+        const inss = calculateInss2026(bruto);
+        const { irrfFinal: irrf } = calculateIrrf2026({
+          rendaTributavel: bruto,
+          inss,
+          dependentes,
+        });
+        const descontoVtReais = bruto * (vtPercent / 100);
         const totalDescontos = inss + irrf + descontoVtReais + outrosDesc;
-        const liquido = bruto - totalDescontos;
+        const liquido = Math.max(0, bruto - totalDescontos);
 
         results['salario_liquido'] = parseFloat(liquido.toFixed(2));
         results['desc_inss'] = parseFloat(inss.toFixed(2));
@@ -8748,25 +8739,13 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         const valorDsr = incluirDsr ? subtotal / 6 : 0;
         const bruto = subtotal + valorDsr;
 
-        // Tabela progressiva INSS 2026 (Portaria MPS/MF nº 13/2026: R$ 1.621 / teto R$ 8.475,55 / max R$ 988,09)
-        let inss = 0;
-        if (bruto <= 1621) inss = bruto * 0.075;
-        else if (bruto <= 2902.84) inss = (1621 * 0.075) + ((bruto - 1621) * 0.09);
-        else if (bruto <= 4354.27) inss = (1621 * 0.075) + (1281.84 * 0.09) + ((bruto - 2902.84) * 0.12);
-        else if (bruto <= 8475.55) inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + ((bruto - 4354.27) * 0.14);
-        else inss = 988.09;
-
-        // IRRF 2026: aplica automaticamente o menor imposto entre deduções legais e desconto simplificado mensal (R$ 564,80)
-        const calcIrrf = (base: number): number => {
-          if (base > 4664.68) return Math.max(0, (base * 0.275) - 896.00);
-          if (base > 3751.05) return Math.max(0, (base * 0.225) - 662.77);
-          if (base > 2826.65) return Math.max(0, (base * 0.15) - 381.44);
-          if (base > 2259.20) return Math.max(0, (base * 0.075) - 169.44);
-          return 0;
-        };
-        const baseLegal = Math.max(0, bruto - inss - (deps * 189.59));
-        const baseSimplificada = Math.max(0, bruto - 564.80);
-        const irrf = Math.min(calcIrrf(baseLegal), calcIrrf(baseSimplificada));
+        // Tabela progressiva INSS 2026 + IRRF 2026 (desconto simplificado R$ 607,20 + Lei nº 15.270/2025)
+        const inss = calculateInss2026(bruto);
+        const { irrfFinal: irrf } = calculateIrrf2026({
+          rendaTributavel: bruto,
+          inss,
+          dependentes: deps,
+        });
         const liquido = Math.max(0, bruto - inss - irrf);
 
         results['salario_liquido'] = parseFloat(liquido.toFixed(2));
@@ -8780,13 +8759,13 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       else if (raw.type === 'trab_inss') {
         const bruto = parseFloat(valInputs['salario_bruto'] || 0);
         // Tabela progressiva INSS 2026
-        let inss = 0;
+        const inss = calculateInss2026(bruto);
         let faixa = '';
-        if (bruto <= 1621) { inss = bruto * 0.075; faixa = '1ª Faixa (7,5%)'; }
-        else if (bruto <= 2902.84) { inss = (1621 * 0.075) + ((bruto - 1621) * 0.09); faixa = '2ª Faixa (até 9%)'; }
-        else if (bruto <= 4354.27) { inss = (1621 * 0.075) + (1281.84 * 0.09) + ((bruto - 2902.84) * 0.12); faixa = '3ª Faixa (até 12%)'; }
-        else if (bruto <= 8475.55) { inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + ((bruto - 4354.27) * 0.14); faixa = '4ª Faixa (até 14%)'; }
-        else { inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + (4121.28 * 0.14); faixa = 'Teto Máximo'; }
+        if (bruto <= 1621) faixa = '1ª Faixa (7,5%)';
+        else if (bruto <= 2902.84) faixa = '2ª Faixa (até 9%)';
+        else if (bruto <= 4354.27) faixa = '3ª Faixa (até 12%)';
+        else if (bruto <= 8475.55) faixa = '4ª Faixa (até 14%)';
+        else faixa = 'Teto Máximo';
         const aliqEfetiva = bruto > 0 ? (inss / bruto) * 100 : 0;
         results['desconto_inss'] = parseFloat(inss.toFixed(2));
         results['aliquota_efetiva'] = parseFloat(aliqEfetiva.toFixed(2));
@@ -8795,28 +8774,21 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       }
       else if (raw.type === 'trab_irrf') {
         const bruto = parseFloat(valInputs['salario_bruto'] || 0);
-        const deps = parseInt(valInputs['dependentes'] || 0);
+        const deps = parseInt(valInputs['dependentes'] || 0, 10);
         const outDesc = parseFloat(valInputs['outros_descontos'] || 0);
-        // Primeiro calcula INSS progressivo
-        let inss = 0;
-        if (bruto <= 1621) inss = bruto * 0.075;
-        else if (bruto <= 2902.84) inss = (1621 * 0.075) + ((bruto - 1621) * 0.09);
-        else if (bruto <= 4354.27) inss = (1621 * 0.075) + (1281.84 * 0.09) + ((bruto - 2902.84) * 0.12);
-        else if (bruto <= 8475.55) inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + ((bruto - 4354.27) * 0.14);
-        else inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + (4121.28 * 0.14);
-        const deducaoDep = deps * 189.59;
-        const baseIr = bruto - inss - deducaoDep - outDesc;
-        let irrf = 0; let aliq = 0;
-        if (baseIr > 4664.68) { irrf = (baseIr * 0.275) - 896.00; aliq = 27.5; }
-        else if (baseIr > 3751.05) { irrf = (baseIr * 0.225) - 662.77; aliq = 22.5; }
-        else if (baseIr > 2826.65) { irrf = (baseIr * 0.15) - 381.44; aliq = 15; }
-        else if (baseIr > 2259.20) { irrf = (baseIr * 0.075) - 169.44; aliq = 7.5; }
-        irrf = Math.max(0, irrf);
-        results['valor_irrf'] = parseFloat(irrf.toFixed(2));
+        // INSS 2026 + IRRF 2026 (deduções legais vs simplificado R$ 607,20 + redutor Lei nº 15.270/2025)
+        const inss = calculateInss2026(bruto);
+        const irrfCalc = calculateIrrf2026({
+          rendaTributavel: bruto,
+          inss,
+          dependentes: deps,
+          outrosDescontos: outDesc,
+        });
+        results['valor_irrf'] = parseFloat(irrfCalc.irrfFinal.toFixed(2));
         results['desc_inss_calc'] = parseFloat(inss.toFixed(2));
-        results['base_calculo'] = parseFloat(Math.max(0, baseIr).toFixed(2));
-        results['aliquota_ir'] = aliq;
-        results['liquido_estimado'] = parseFloat((bruto - inss - irrf - outDesc).toFixed(2));
+        results['base_calculo'] = parseFloat(irrfCalc.baseCalculo.toFixed(2));
+        results['aliquota_ir'] = irrfCalc.aliquota;
+        results['liquido_estimado'] = parseFloat(Math.max(0, bruto - inss - irrfCalc.irrfFinal - outDesc).toFixed(2));
       }
       else if (raw.type === 'trab_salario_hora') {
         const salario = parseFloat(valInputs['salario_mensal'] || 0);

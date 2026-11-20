@@ -66,26 +66,38 @@ const ENDPOINTS: EndpointDef[] = [
     category: 'Fiscal & Imposto de Renda',
     method: 'GET',
     path: '/api/v1/tabelas/irrf.json',
-    description: 'Faixas mensais de incidência do Imposto de Renda Retido na Fonte, alíquotas (7,5% a 27,5%) e parcelas oficiais a deduzir.',
+    description: 'Faixas mensais do IRRF 2026 (Lei nº 15.270/2025), desconto simplificado de R$ 607,20, isenção até R$ 5.000,00 e redução gradual até R$ 7.350,00.',
     fullUrl: 'https://www.brasilcalculadoras.com.br/api/v1/tabelas/irrf.json',
     sampleResponse: {
       "meta": {
         "fonte": "Brasil Calculadoras",
         "url": "https://www.brasilcalculadoras.com.br",
-        "titulo": "Tabela Progressiva Mensal do IRRF",
+        "titulo": "Tabela Progressiva Mensal e Redução do Imposto de Renda Retido na Fonte (IRRF)",
+        "lei": "Lei nº 15.270/2025",
         "vigencia": "2026"
       },
       "dados": {
-        "faixa_isencao_ate": 2259.20,
+        "lei": "Lei nº 15.270/2025",
+        "faixa_isencao_ate": 2428.80,
+        "faixa_isencao_efetiva_ate": 5000.00,
         "deducao_por_dependente": 189.59,
-        "desconto_simplificado_mensal": 564.80,
+        "desconto_simplificado_mensal": 607.20,
+        "desconto_simplificado": 607.20,
         "faixas": [
-          { "faixa": 1, "base_calculo_ate": 2259.20, "aliquota_percentual": 0.0, "parcela_a_deduzir": 0.00 },
-          { "faixa": 2, "base_calculo_ate": 2826.65, "aliquota_percentual": 7.5, "parcela_a_deduzir": 169.44 },
-          { "faixa": 3, "base_calculo_ate": 3751.05, "aliquota_percentual": 15.0, "parcela_a_deduzir": 381.44 },
-          { "faixa": 4, "base_calculo_ate": 4664.68, "aliquota_percentual": 22.5, "parcela_a_deduzir": 662.77 },
-          { "faixa": 5, "base_calculo_ate": null, "aliquota_percentual": 27.5, "parcela_a_deduzir": 896.00 }
-        ]
+          { "faixa": 1, "base_calculo_ate": 2428.80, "aliquota_percentual": 0.0, "parcela_a_deduzir": 0.00 },
+          { "faixa": 2, "base_calculo_ate": 2826.65, "aliquota_percentual": 7.5, "parcela_a_deduzir": 182.16 },
+          { "faixa": 3, "base_calculo_ate": 3751.05, "aliquota_percentual": 15.0, "parcela_a_deduzir": 394.16 },
+          { "faixa": 4, "base_calculo_ate": 4664.68, "aliquota_percentual": 22.5, "parcela_a_deduzir": 675.49 },
+          { "faixa": 5, "base_calculo_ate": null, "aliquota_percentual": 27.5, "parcela_a_deduzir": 908.73 }
+        ],
+        "reducao_mensal_2026": {
+          "lei": "Lei nº 15.270/2025",
+          "faixas": [
+            { "renda_tributavel_ate": 5000.00, "tipo": "isento", "redutor_maximo": 312.89 },
+            { "renda_tributavel_de": 5000.01, "renda_tributavel_ate": 7350.00, "tipo": "reducao_gradual", "formula": "978.62 - (0.133145 * renda_tributavel)" },
+            { "renda_tributavel_de": 7350.01, "renda_tributavel_ate": null, "tipo": "sem_reducao", "redutor": 0.00 }
+          ]
+        }
       }
     }
   },

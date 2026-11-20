@@ -72,36 +72,40 @@ export function generateApiData() {
     }
   };
 
-  // 2. Tabela IRRF 2026
+  // 2. Tabela IRRF 2026 (Lei nº 15.270/2025)
   const irrfData = {
     meta: {
       fonte: "Brasil Calculadoras",
       url: "https://www.brasilcalculadoras.com.br",
-      titulo: "Tabela Progressiva Mensal do Imposto de Renda Retido na Fonte (IRRF)",
+      titulo: "Tabela Progressiva Mensal e Redução do Imposto de Renda Retido na Fonte (IRRF)",
+      lei: "Lei nº 15.270/2025",
       vigencia: `${currentYear}`,
       atualizado_em: now,
       licenca: "Uso público e livre com atribuição de fonte obrigatória"
     },
     dados: {
-      faixa_isencao_ate: 2259.20,
+      lei: "Lei nº 15.270/2025",
+      faixa_isencao_ate: 2428.80,
+      faixa_isencao_efetiva_ate: 5000.00,
       deducao_por_dependente: 189.59,
-      desconto_simplificado_mensal: 564.80,
+      desconto_simplificado_mensal: 607.20,
+      desconto_simplificado: 607.20,
       faixas: [
         {
           faixa: 1,
           base_calculo_de: 0.00,
-          base_calculo_ate: 2259.20,
+          base_calculo_ate: 2428.80,
           aliquota_percentual: 0.0,
           aliquota_decimal: 0.0,
           parcela_a_deduzir: 0.00
         },
         {
           faixa: 2,
-          base_calculo_de: 2259.21,
+          base_calculo_de: 2428.81,
           base_calculo_ate: 2826.65,
           aliquota_percentual: 7.5,
           aliquota_decimal: 0.075,
-          parcela_a_deduzir: 169.44
+          parcela_a_deduzir: 182.16
         },
         {
           faixa: 3,
@@ -109,7 +113,7 @@ export function generateApiData() {
           base_calculo_ate: 3751.05,
           aliquota_percentual: 15.0,
           aliquota_decimal: 0.150,
-          parcela_a_deduzir: 381.44
+          parcela_a_deduzir: 394.16
         },
         {
           faixa: 4,
@@ -117,7 +121,7 @@ export function generateApiData() {
           base_calculo_ate: 4664.68,
           aliquota_percentual: 22.5,
           aliquota_decimal: 0.225,
-          parcela_a_deduzir: 662.77
+          parcela_a_deduzir: 675.49
         },
         {
           faixa: 5,
@@ -125,10 +129,37 @@ export function generateApiData() {
           base_calculo_ate: null,
           aliquota_percentual: 27.5,
           aliquota_decimal: 0.275,
-          parcela_a_deduzir: 896.00
+          parcela_a_deduzir: 908.73
         }
       ],
-      observacoes: "O contribuinte pode optar pelo desconto simplificado caso seja mais benéfico que as deduções legais (INSS, dependentes e pensão alimentícia)."
+      reducao_mensal_2026: {
+        lei: "Lei nº 15.270/2025",
+        vigencia_a_partir_de: "2026-01-01",
+        faixas: [
+          {
+            renda_tributavel_de: 0.00,
+            renda_tributavel_ate: 5000.00,
+            tipo: "isento",
+            redutor_maximo: 312.89,
+            descricao: "Isenção efetiva mensal: redução de até R$ 312,89 limitada ao imposto apurado, zerando o IRRF."
+          },
+          {
+            renda_tributavel_de: 5000.01,
+            renda_tributavel_ate: 7350.00,
+            tipo: "reducao_gradual",
+            formula: "978.62 - (0.133145 * renda_tributavel)",
+            descricao: "Redução linear decrescente aplicada sobre o IRRF apurado na tabela progressiva."
+          },
+          {
+            renda_tributavel_de: 7350.01,
+            renda_tributavel_ate: null,
+            tipo: "sem_reducao",
+            redutor: 0.00,
+            descricao: "Sem redução adicional; aplica-se integralmente a tabela progressiva."
+          }
+        ]
+      },
+      observacoes: "Em 2026 (Lei nº 15.270/2025), compara-se primeiro o IRRF pela tabela progressiva usando deduções legais (INSS, dependentes e pensão) ou desconto simplificado mensal (R$ 607,20), aplicando em seguida a redução mensal sobre rendas tributáveis até R$ 5.000,00 (isenção total) e a redução gradual entre R$ 5.000,01 e R$ 7.350,00."
     }
   };
 
