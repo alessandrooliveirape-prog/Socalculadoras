@@ -32,16 +32,16 @@ export const CltVsPjCalc: React.FC<CltVsPjCalcProps> = ({ onCalculate }) => {
 
     // INSS 2026 Table Approximation
     let inss = 0;
-    if (gross <= 1518.0) {
+    if (gross <= 1621.0) {
       inss = gross * 0.075;
-    } else if (gross <= 2793.88) {
-      inss = 1518 * 0.075 + (gross - 1518) * 0.09;
-    } else if (gross <= 4190.83) {
-      inss = 1518 * 0.075 + (2793.88 - 1518) * 0.09 + (gross - 2793.88) * 0.12;
-    } else if (gross <= 8157.41) {
-      inss = 1518 * 0.075 + (2793.88 - 1518) * 0.09 + (4190.83 - 2793.88) * 0.12 + (gross - 4190.83) * 0.14;
+    } else if (gross <= 2902.84) {
+      inss = 1621 * 0.075 + (gross - 1621) * 0.09;
+    } else if (gross <= 4354.27) {
+      inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (gross - 2902.84) * 0.12;
+    } else if (gross <= 8475.55) {
+      inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (4354.27 - 2902.84) * 0.12 + (gross - 4354.27) * 0.14;
     } else {
-      inss = 952.12; // Teto INSS 2026/2025 max cap
+      inss = 988.09; // Teto INSS 2026/2025 max cap
     }
 
     // IRRF Table Approximation
