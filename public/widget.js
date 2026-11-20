@@ -342,10 +342,10 @@
 
           // INSS aproximado sobre o valor integral
           var inss = 0;
-          if (grossThirteenth <= 1518) inss = grossThirteenth * 0.075;
-          else if (grossThirteenth <= 2793.88) inss = 1518 * 0.075 + (grossThirteenth - 1518) * 0.09;
-          else if (grossThirteenth <= 4190.83) inss = 113.85 + 114.83 + (grossThirteenth - 2793.88) * 0.12;
-          else inss = 113.85 + 114.83 + 167.63 + Math.min(grossThirteenth - 4190.83, 3966.58) * 0.14;
+          if (grossThirteenth <= 1621) inss = grossThirteenth * 0.075;
+          else if (grossThirteenth <= 2902.84) inss = 1621 * 0.075 + (grossThirteenth - 1621) * 0.09;
+          else if (grossThirteenth <= 4354.27) inss = 121.575 + 115.3656 + (grossThirteenth - 2902.84) * 0.12;
+          else inss = 121.575 + 115.3656 + 174.1716 + Math.min(grossThirteenth - 4354.27, 4121.28) * 0.14;
 
           var secondParcel = Math.max(0, grossThirteenth - firstParcel - inss);
 
