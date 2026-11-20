@@ -55,7 +55,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
 
           {/* Quick Categories Col */}
           <div className="md:col-span-3">
-            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Segmentos Clave</h2>
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Principais Categorias</h2>
             <div className="flex flex-col gap-2.5">
               {Object.entries(categories).slice(0, 5).map(([key, label]) => {
                 const slug = CATEGORY_KEY_TO_SLUG[key] || key;
@@ -216,7 +216,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             <div>
               <h3 className="text-xs font-bold text-slate-800 leading-tight">Consentimento de Cookies e Anúncios</h3>
               <p className="text-[10px] text-slate-600 leading-relaxed mt-1">
-                Nós usamos cookies e identificadores de dispositivos para personalizar anúncios do Google AdSense, fornecer recursos de mídias e analisar o fluxo de de tráfego do site em conformidade com a LGPD.
+                Nós usamos cookies e identificadores de dispositivos para personalizar anúncios do Google AdSense, fornecer recursos de mídias e analisar o fluxo de tráfego do site em conformidade com a LGPD.
               </p>
             </div>
           </div>
