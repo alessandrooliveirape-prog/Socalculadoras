@@ -8,38 +8,38 @@
     "licenca": "Uso público e livre com atribuição de fonte obrigatória"
   },
   "dados": {
-    "salario_minimo": 1518,
-    "teto_inss": 8157.41,
-    "teto_desconto_maximo": 952.12,
+    "salario_minimo": 1621,
+    "teto_inss": 8475.55,
+    "teto_desconto_maximo": 988.09,
     "faixas": [
       {
         "faixa": 1,
         "limite_inferior": 0,
-        "limite_superior": 1518,
+        "limite_superior": 1621,
         "aliquota_percentual": 7.5,
         "aliquota_decimal": 0.075,
-        "desconto_maximo_faixa": 113.85
+        "desconto_maximo_faixa": 121.58
       },
       {
         "faixa": 2,
-        "limite_inferior": 1518.01,
-        "limite_superior": 2793.88,
+        "limite_inferior": 1621.01,
+        "limite_superior": 2902.84,
         "aliquota_percentual": 9,
         "aliquota_decimal": 0.09,
-        "desconto_maximo_faixa": 114.83
+        "desconto_maximo_faixa": 115.37
       },
       {
         "faixa": 3,
-        "limite_inferior": 2793.89,
-        "limite_superior": 4190.83,
+        "limite_inferior": 2902.85,
+        "limite_superior": 4354.27,
         "aliquota_percentual": 12,
         "aliquota_decimal": 0.12,
-        "desconto_maximo_faixa": 167.63
+        "desconto_maximo_faixa": 174.17
       },
       {
         "faixa": 4,
-        "limite_inferior": 4190.84,
-        "limite_superior": 8157.41,
+        "limite_inferior": 4354.28,
+        "limite_superior": 8475.55,
         "aliquota_percentual": 14,
         "aliquota_decimal": 0.14,
         "desconto_maximo_faixa": 555.32
