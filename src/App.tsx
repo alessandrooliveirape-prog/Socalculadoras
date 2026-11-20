@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { 
-  Calculator, 
-  Search, 
-  DollarSign, 
-  HeartPulse, 
-  Clock, 
-  Download, 
-  HelpCircle, 
-  Menu, 
-  X, 
-  Share2, 
-  TrendingUp, 
-  Sparkles, 
-  History, 
-  Coins, 
+import {
+  Calculator,
+  Search,
+  DollarSign,
+  HeartPulse,
+  Clock,
+  Download,
+  HelpCircle,
+  Menu,
+  X,
+  Share2,
+  TrendingUp,
+  Sparkles,
+  History,
+  Coins,
   MonitorPlay,
   CheckCircle,
   FileDown,
@@ -29,6 +29,7 @@ import { useLocation } from 'wouter';
 // Custom imports
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
 import { AdSenseBanner } from './components/AdSenseBanner';
+import { SiteHeader } from './components/SiteHeader';
 import { FooterAndLegals } from './components/FooterAndLegals';
 import { HomepageView } from './components/HomepageView';
 
@@ -54,12 +55,12 @@ const AdSenseEarningsCalc = lazy(() => import('./components/AdSenseEarningsCalc'
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from './data/calculatorsCatalog';
 import { buildHistorySummary } from './utils/historyManager';
 import { handleExportCSV } from './utils/exportCSV';
-import { 
-  getSeoContentForCalculator, 
-  getCategoryHubContent, 
-  CATEGORY_SLUG_MAP, 
-  CATEGORY_KEY_TO_SLUG, 
-  CATEGORY_MAP_RAW 
+import {
+  getSeoContentForCalculator,
+  getCategoryHubContent,
+  CATEGORY_SLUG_MAP,
+  CATEGORY_KEY_TO_SLUG,
+  CATEGORY_MAP_RAW
 } from './utils/seoContentGenerator';
 import { GUIDES_ARTICLES, getRelatedGuidesForCalculator } from './data/guidesArticles';
 import { logSeoInteraction } from './utils/seoMonitor';
@@ -335,7 +336,7 @@ export default function App() {
     const centralSupaUrl = import.meta.env.VITE_SUPABASE_URL;
     const centralSupaKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const siteId = import.meta.env.VITE_SITE_ID || 'sc-domain:brasilcalculadoras.com.br';
-    
+
     if (!centralSupaUrl || !centralSupaKey || centralSupaUrl.includes('tezwamjdetiigwigvayt.supabase.co')) {
       return;
     }
@@ -348,26 +349,26 @@ export default function App() {
         'Authorization': `Bearer ${centralSupaKey}`
       }
     })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error();
-    })
-    .then(data => {
-      const override = data?.[0];
-      if (override) {
-        console.log(`[SEO Central] Aplicando override REST para: ${canonicalUrl}`);
-        document.title = override.optimized_title;
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) {
-          metaDesc.setAttribute('content', override.optimized_meta);
+      .then(res => {
+        if (res.ok) return res.json();
+        throw new Error();
+      })
+      .then(data => {
+        const override = data?.[0];
+        if (override) {
+          console.log(`[SEO Central] Aplicando override REST para: ${canonicalUrl}`);
+          document.title = override.optimized_title;
+          const metaDesc = document.querySelector('meta[name="description"]');
+          if (metaDesc) {
+            metaDesc.setAttribute('content', override.optimized_meta);
+          }
+          updateMetaTag('property', 'og:title', override.optimized_title);
+          updateMetaTag('property', 'og:description', override.optimized_meta);
+          updateMetaTag('name', 'twitter:title', override.optimized_title);
+          updateMetaTag('name', 'twitter:description', override.optimized_meta);
         }
-        updateMetaTag('property', 'og:title', override.optimized_title);
-        updateMetaTag('property', 'og:description', override.optimized_meta);
-        updateMetaTag('name', 'twitter:title', override.optimized_title);
-        updateMetaTag('name', 'twitter:description', override.optimized_meta);
-      }
-    })
-    .catch(() => {});
+      })
+      .catch(() => { });
   };
 
   const injectCalculatorSchema = (calc: any, seoData: any, canonicalUrl: string) => {
@@ -576,7 +577,7 @@ export default function App() {
               }
             };
             script.textContent = JSON.stringify(apiSchema);
-          } catch (e) {}
+          } catch (e) { }
         }
 
         checkSeoOverrides('https://www.brasilcalculadoras.com.br' + normalizedPath);
@@ -682,7 +683,7 @@ export default function App() {
           });
         }
         script.textContent = JSON.stringify(schemas);
-      } catch (e) {}
+      } catch (e) { }
 
       logSeoInteraction(normalizedPath, 'view');
       setAdRefreshTrigger(prev => prev + 1);
@@ -745,7 +746,7 @@ export default function App() {
           }
         };
         script.textContent = JSON.stringify(homepageSchema);
-      } catch (e) {}
+      } catch (e) { }
 
       logSeoInteraction('/', 'view');
       setAdRefreshTrigger(prev => prev + 1);
@@ -756,7 +757,7 @@ export default function App() {
     if (activeCategoryHub) {
       const hubData = getCategoryHubContent(activeCategoryHub);
       const canonicalUrl = `https://www.brasilcalculadoras.com.br/${CATEGORY_KEY_TO_SLUG[activeCategoryHub]}`;
-      
+
       document.title = hubData.title;
 
       let metaDesc = document.querySelector('meta[name="description"]');
@@ -855,7 +856,7 @@ export default function App() {
               setShowPublisherDashboard(false);
               triggerToast('✨ Modo Admin Desativado! Painel Ocultado.');
             }
-          } catch (e) {}
+          } catch (e) { }
           return updated;
         });
         return 0;
@@ -877,7 +878,7 @@ export default function App() {
       const list = raw ? JSON.parse(raw) : [];
       const updated = [id, ...list.filter((x: string) => x !== id)].slice(0, 8);
       localStorage.setItem(key, JSON.stringify(updated));
-    } catch {}
+    } catch { }
 
     // Increment Ad stats (loading ads is a visual monetisation feature)
     setAdImpressions(prev => prev + 2);
@@ -1020,7 +1021,7 @@ export default function App() {
   const handleSaveToHistory = () => {
     const payload = getStatePayload();
     if (!payload.activeCalcDef) return;
-    
+
     const res = buildHistorySummary(payload);
     if (!res.summaryText) {
       triggerToast('Nenhum resultado de cálculo ativo pronto ou alterado para salvar.');
@@ -1040,7 +1041,7 @@ export default function App() {
     const newHistory = [logEntry, ...history].slice(0, 10);
     setHistory(newHistory);
     localStorage.setItem('calc_history', JSON.stringify(newHistory));
-    
+
     setAdImpressions(prev => prev + 1);
     setAdRefreshTrigger(prev => prev + 1);
     triggerToast('✅ Operação gravada com sucesso no histórico local da sessão!');
@@ -1129,11 +1130,11 @@ export default function App() {
 
   const getShareableText = () => {
     if (!activeCalc) return '';
-    
+
     let text = `*${activeCalc.name}* - Brasil Calculadoras\n`;
     text += `🔗 ${window.location.origin}/${activeCalculator}\n\n`;
     text += `*Resultados Simulados:*\n`;
-    
+
     if (activeCalculator === 'juros-compostos' && compoundInterestResults) {
       text += `• Montante Final: R$ ${compoundInterestResults.finalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
       text += `• Total Investido: R$ ${compoundInterestResults.totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n`;
@@ -1191,7 +1192,7 @@ export default function App() {
     } else if (activeCalc?.isDynamic && dynamicCalcOutputs) {
       activeCalc.outputs?.forEach(out => {
         const val = dynamicCalcOutputs[out.id];
-        const displayVal = typeof val === 'number' 
+        const displayVal = typeof val === 'number'
           ? `${out.prefix || ''}${val.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}${out.suffix || ''}`
           : val || '0,00';
         text += `• ${out.label}: ${displayVal}\n`;
@@ -1199,7 +1200,7 @@ export default function App() {
     } else {
       text += `• Cálculo realizado com sucesso.\n`;
     }
-    
+
     text += `\nCalcule o seu gratuitamente em: ${window.location.origin}/${activeCalculator}`;
     return text;
   };
@@ -1223,14 +1224,14 @@ export default function App() {
 
   const relatedCalculators = React.useMemo(() => {
     if (!activeCalc) return [];
-    
+
     // Try to find up to 3 other calculators from the SAME category first
     const sameCategory = CALCULATORS_CATALOG.filter(c => c.id !== activeCalculator && c.category === activeCalc.category);
-    
+
     if (sameCategory.length >= 3) {
       return sameCategory.slice(0, 3);
     }
-    
+
     // If less than 3, fill with other popular calculators from other categories
     const others = CALCULATORS_CATALOG.filter(c => c.id !== activeCalculator && c.category !== activeCalc.category);
     return [...sameCategory, ...others].slice(0, 3);
@@ -1261,7 +1262,7 @@ export default function App() {
       <a href="#conteudo-principal" className="visually-hidden skip-link no-underline">
         Pular para o conteúdo principal
       </a>
-      
+
       {/* Toast Notification */}
       {toastMsg && (
         <div
@@ -1297,124 +1298,29 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Header navigation and Search box */}
-      <header className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 z-40 transition-shadow">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-18 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label={menuOpen ? 'Fechar menu de categorias' : 'Abrir menu de categorias'}
-              aria-expanded={menuOpen}
-              className="lg:hidden p-2 text-slate-600 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 rounded-lg cursor-pointer transition-all"
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-            <button
-              type="button"
-              onClick={handleLogoClick}
-              className="flex items-center gap-2.5 cursor-pointer select-none group text-left"
-              title="Clique 5 vezes aqui para ativar/desativar as métricas de simulação do AdSense"
-            >
-              <img 
-                src="/logo.svg" 
-                alt="Brasil Calculadoras"
-                width="36"
-                height="36"
-                className="h-9 w-9 rounded-xl shadow-md shadow-blue-100/40 group-hover:scale-105 transition-transform duration-200" 
-              />
-              <div>
-                <span className="block text-md font-display font-bold text-slate-800 tracking-tight leading-none group-hover:text-blue-600 transition-colors">
-                  Brasil Calculadoras
-                </span>
-                <span className="text-[10px] font-semibold text-slate-600 font-mono tracking-wider">FERRAMENTAS DE EXCELÊNCIA</span>
-              </div>
-            </button>
-            
-          </div>
-
-          {/* Core Hub Quick Search Input bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-md relative">
-            <span className="absolute left-3.5 top-3 text-slate-500">
-              <Search className="w-4.5 h-4.5" aria-hidden="true" />
-            </span>
-            <input 
-              type="text"
-              aria-label="Pesquisar calculadoras"
-              enterKeyHint="search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Digite para pesquisar: juros, CLT, IMC, texto, matemática..."
-              className="w-full pl-10 pr-4 py-2.5 text-xs bg-slate-100 hover:bg-slate-200/50 focus:bg-white border-none focus:ring-2 focus:ring-blue-500 rounded-full outline-none transition-all font-sans font-medium text-slate-800"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                aria-label="Limpar busca"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-3 text-gray-400 hover:text-slate-650 cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2.5">
-            <a
-              href="/guias"
-              onClick={(e) => {
-                e.preventDefault();
-                setLocation('/guias');
-              }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 text-xs font-bold transition-colors whitespace-nowrap"
-            >
-              <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Guias &amp; Artigos</span>
-            </a>
-            <button
-              type="button"
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                triggerToast('🔗 Link da Central Copiado! Compartilhe o site com seus amigos.');
-              }}
-              aria-label="Compartilhar link da central"
-              className="p-2 text-slate-600 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 rounded-xl transition-all cursor-pointer active:scale-95"
-              title="Compartilhar Link"
-            >
-              <Share2 className="w-4.5 h-4.5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Search Results Dropdown Overlay */}
-        {searchQuery.trim() !== '' && (
-          <div className="absolute top-18 left-0 right-0 bg-white border-b border-slate-200 shadow-xl z-50 py-3">
-            <div className="max-w-3xl mx-auto px-4 max-h-[300px] overflow-y-auto flex flex-col gap-1">
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest px-2.5 mb-1.5 block">Resultados Rápidos da Busca</span>
-              {filteredCalculators.length === 0 ? (
-                <p className="text-center py-6 text-xs text-slate-600 select-none">Nenhuma ferramenta coincide com "{searchQuery}". Tente outros termos.</p>
-              ) : (
-                filteredCalculators.map(c => (
-                  <button
-                    type="button"
-                    key={c.id}
-                    onClick={() => selectCalculator(c.id)}
-                    className="w-full text-left flex justify-between items-center p-2.5 hover:bg-slate-50 cursor-pointer rounded-lg transition-colors"
-                  >
-                    <div>
-                      <span className="block text-xs font-semibold text-slate-900">{c.name}</span>
-                      <p className="text-[11px] text-slate-600 truncate max-w-sm sm:max-w-xl">{c.description}</p>
-                    </div>
-                    <span className="text-[9px] bg-slate-100 font-mono font-bold text-slate-700 px-2 py-0.5 rounded uppercase">
-                      {CATEGORY_MAP_RAW[c.category] || c.category}
-                    </span>
-                  </button>
-                ))
-              )}
-            </div>
-          </div>
-        )}
-      </header>
+      {/* Unified Shared Site Header across all routes */}
+      <SiteHeader
+        menuOpen={menuOpen}
+        onToggleMenu={() => setMenuOpen(!menuOpen)}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        filteredCalculators={filteredCalculators}
+        onSelectCalculator={selectCalculator}
+        onNavigate={(path) => {
+          setMenuOpen(false);
+          setSearchQuery('');
+          if (path === '/') {
+            setActiveCategory('todos');
+            setActiveCategoryHub(null);
+          }
+          setLocation(path);
+        }}
+        onShare={() => {
+          navigator.clipboard.writeText(window.location.href);
+          triggerToast('🔗 Link da Central Copiado! Compartilhe o site com seus amigos.');
+        }}
+        activePath={normalizedLocation}
+      />
 
       {/* Main content grid view */}
       <main id="conteudo-principal" tabIndex={-1} className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
@@ -1423,937 +1329,932 @@ export default function App() {
             Carregando ferramenta...
           </div>
         }>
-        {normalizedLocation === '/politica-de-privacidade' ? (
-          <LegalPage type="privacy" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/termos-de-uso' ? (
-          <LegalPage type="terms" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/sobre' ? (
-          <LegalPage type="about" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/contato' ? (
-          <LegalPage type="contact" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/cookies' ? (
-          <LegalPage type="cookies" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/transparencia-adsense' ? (
-          <LegalPage type="transparency" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/anunciantes' ? (
-          <LegalPage type="advertisers" onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/desenvolvedores' || normalizedLocation === '/api' ? (
-          <DesenvolvedoresView onNavigateHome={() => setLocation('/')} />
-        ) : normalizedLocation === '/guias' || normalizedLocation.startsWith('/guias/') ? (
-          <GuidesView
-            activeSlug={normalizedLocation === '/guias' ? null : normalizedLocation.slice('/guias/'.length)}
-            onNavigate={(path) => setLocation(path)}
-            onSelectCalculator={(id) => selectCalculator(id as CalculatorId)}
-          />
-        ) : normalizedLocation === '/' ? (
-          <HomepageView 
-            onSelectCalculator={selectCalculator}
-            onSelectCategory={(catKey) => {
-              const slug = CATEGORY_KEY_TO_SLUG[catKey];
-              if (slug) {
-                setLocation('/' + slug);
-              } else {
-                setActiveCategory(catKey);
-              }
-            }}
-            onNavigate={(path) => setLocation(path)}
-            categoryCounts={categoryCounts}
-          />
-        ) : (
-          /* Central Core Workstation split layout */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
-          {/* Side Drawer menu - Categories selector list */}
-          <aside className={`lg:col-span-3 flex-col gap-5 ${menuOpen ? 'flex fixed inset-y-0 left-0 bg-white w-72 p-6 z-50 border-r shadow-2xl overflow-y-auto' : 'hidden lg:flex'}`}>
-            
-            {/* Draw heading for mobile */}
-            <div className="flex lg:hidden items-center justify-between border-b pb-3 mb-1">
-              <span className="text-xs font-bold text-slate-800 uppercase tracking-widest">Navegação Principal</span>
-              <button 
-                onClick={() => setMenuOpen(false)}
-                className="p-1 text-gray-400 hover:bg-slate-50 hover:text-slate-900 border rounded cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-             {/* In-app Category filter pills list */}
-            <div className="flex flex-col gap-1 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2 select-none">Filtrar Segmentos</span>
-              <button
-                onClick={() => {
-                  setActiveCategory('todos');
-                  setActiveCategoryHub(null);
-                  setLocation('/');
-                  setMenuOpen(false);
-                }}
-                className={`w-full text-left py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-between transition-all cursor-pointer ${
-                  activeCategory === 'todos' && !activeCategoryHub
-                    ? 'bg-blue-50 text-blue-700 font-medium shadow-xs' 
-                    : 'text-slate-600 hover:bg-slate-50'
-                }`}
-              >
-                <span>🚀 Todas as Ferramentas</span>
-                <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${activeCategory === 'todos' && !activeCategoryHub ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>{categoryCounts.todos}</span>
-              </button>
-
-              <a
-                href="/guias"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setLocation('/guias');
-                  setMenuOpen(false);
-                }}
-                className="w-full text-left py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-between transition-all text-blue-700 bg-blue-50/70 hover:bg-blue-100 border border-blue-200/60"
-              >
-                <span>📖 Guias &amp; Artigos</span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-white text-blue-700">
-                  {GUIDES_ARTICLES.length}
-                </span>
-              </a>
-
-              {Object.entries(CATEGORY_MAP).map(([key, label]) => {
-                const isSelected = activeCategory === key;
-                return (
-                  <button
-                    key={key}
-                    onClick={() => {
-                      const slug = CATEGORY_KEY_TO_SLUG[key];
-                      if (slug) {
-                        setLocation('/' + slug);
-                      } else {
-                        setActiveCategory(key);
-                      }
-                      setMenuOpen(false);
-                    }}
-                    className={`w-full text-left py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-between transition-all cursor-pointer ${
-                      isSelected 
-                        ? 'bg-blue-50 text-blue-700 font-medium shadow-xs' 
-                        : 'text-slate-600 hover:bg-slate-50'
-                    }`}
-                  >
-                    <div className="flex items-center gap-1.5 truncate">
-                      <span className="shrink-0 text-xs">
-                        {key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : key === 'pets' ? '🐾' : '⏱️'}
-                      </span>
-                      <span className="truncate">{CATEGORY_MAP_RAW[key] || label}</span>
-                    </div>
-                    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold shrink-0 ${isSelected ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>
-                      {categoryCounts[key] || 0}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* List of active filtered calculators */}
-            <div className="flex flex-col gap-1.5 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex-1">
-              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5 px-2 select-none">Catálogo de Ferramentas</span>
-              <div className="flex flex-col gap-1 max-h-[300px] lg:max-h-[500px] overflow-y-auto pr-1">
-                {filteredCalculators.map(c => {
-                  const isActive = c.id === activeCalculator;
-                  return (
-                    <button
-                      type="button"
-                      key={c.id}
-                      onClick={() => selectCalculator(c.id)}
-                      className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer ${
-                        isActive 
-                          ? 'bg-blue-50/40 border-blue-200/50 text-blue-700 font-medium shadow-xs' 
-                          : 'bg-white border-transparent hover:bg-slate-50 text-slate-700'
-                      }`}
-                    >
-                      <span className="block text-xs font-bold text-slate-800 truncate">{c.name}</span>
-                      <p className="text-[10px] text-slate-600 line-clamp-1 mt-0.5 leading-snug">{c.description}</p>
-                    </button>
-                  );
-                })}
-
-                {filteredCalculators.length === 0 && (
-                  <p className="text-[11px] text-slate-600 text-center py-4 font-mono select-none">Nenhuma ferramenta encontrada.</p>
-                )}
-              </div>
-            </div>
-
-            {/* Embed Sessions History Component directly in the sidebar for desktop */}
-            <CalculatorHistory
-              history={history}
-              onClearHistory={handleClearHistory}
-              onSelectEntry={handleSelectHistoryEntry}
+          {normalizedLocation === '/politica-de-privacidade' ? (
+            <LegalPage type="privacy" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/termos-de-uso' ? (
+            <LegalPage type="terms" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/sobre' ? (
+            <LegalPage type="about" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/contato' ? (
+            <LegalPage type="contact" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/cookies' ? (
+            <LegalPage type="cookies" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/transparencia-adsense' ? (
+            <LegalPage type="transparency" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/anunciantes' ? (
+            <LegalPage type="advertisers" onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/desenvolvedores' || normalizedLocation === '/api' ? (
+            <DesenvolvedoresView onNavigateHome={() => setLocation('/')} />
+          ) : normalizedLocation === '/guias' || normalizedLocation.startsWith('/guias/') ? (
+            <GuidesView
+              activeSlug={normalizedLocation === '/guias' ? null : normalizedLocation.slice('/guias/'.length)}
+              onNavigate={(path) => setLocation(path)}
+              onSelectCalculator={(id) => selectCalculator(id as CalculatorId)}
             />
+          ) : normalizedLocation === '/' ? (
+            <HomepageView
+              onSelectCalculator={selectCalculator}
+              onSelectCategory={(catKey) => {
+                const slug = CATEGORY_KEY_TO_SLUG[catKey];
+                if (slug) {
+                  setLocation('/' + slug);
+                } else {
+                  setActiveCategory(catKey);
+                }
+              }}
+              onNavigate={(path) => setLocation(path)}
+              categoryCounts={categoryCounts}
+            />
+          ) : (
+            /* Central Core Workstation split layout */
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-            {/* AdSense Vertical Banner in the sidebar (Visible only on Desktop) */}
-            <div className="hidden lg:block w-full mt-2">
-              <AdSenseBanner 
-                category={activeCalc?.category || 'financas'}
-                layout="vertical"
-                onAdClicked={handleAdClicked}
-                refreshTrigger={adRefreshTrigger + 20}
-              />
-            </div>
-          </aside>
+              {/* Side Drawer menu - Categories selector list */}
+              <aside className={`lg:col-span-3 flex-col gap-5 ${menuOpen ? 'flex fixed inset-y-0 left-0 bg-white w-72 p-6 z-50 border-r shadow-2xl overflow-y-auto' : 'hidden lg:flex'}`}>
 
-          {/* Active Calculator Workstation Space */}
-          {/* Active Calculator Workstation Space */}
-          <section className="lg:col-span-9 flex flex-col gap-6">
-            {activeCategoryHub ? (
-              // Category Hub View
-              <div className="flex flex-col gap-6 animate-fadeIn">
-                {/* Breadcrumbs for Category Hub */}
-                <Breadcrumbs catKey={activeCategoryHub} />
-
-                {/* Hub Header Card & Semantic Editorial Guide */}
-                <article className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 md:p-8 flex flex-col gap-5 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 -z-10 blur-xl opacity-50" />
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">
-                      {activeCategoryHub === 'financas' ? '📊' : activeCategoryHub === 'saude' ? '🍎' : activeCategoryHub === 'profissoes' ? '⚖️' : activeCategoryHub === 'matematica' ? '🧮' : '⚙️'}
-                    </span>
-                    <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
-                      Categoria Principal
-                    </span>
-                  </div>
-                  <h1 className="text-xl md:text-2xl font-display font-black text-slate-800 tracking-tight">
-                    {getCategoryHubContent(activeCategoryHub).title}
-                  </h1>
-                  <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
-                    {getCategoryHubContent(activeCategoryHub).introduction}
-                  </p>
-                  <div className="border-t border-slate-100 pt-4">
-                    <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
-                      Por que planejar nesta categoria?
-                    </h2>
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                      {getCategoryHubContent(activeCategoryHub).importance}
-                    </p>
-                  </div>
-                  {getCategoryHubContent(activeCategoryHub).methodology && (
-                    <div className="border-t border-slate-100 pt-4">
-                      <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
-                        Metodologia e Rigor Matemático dos Cálculos
-                      </h2>
-                      <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                        {getCategoryHubContent(activeCategoryHub).methodology}
-                      </p>
-                    </div>
-                  )}
-                  {getCategoryHubContent(activeCategoryHub).practicalApplications && getCategoryHubContent(activeCategoryHub).practicalApplications!.length > 0 && (
-                    <div className="border-t border-slate-100 pt-4">
-                      <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
-                        Principais Aplicações Práticas
-                      </h2>
-                      <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed">
-                        {getCategoryHubContent(activeCategoryHub).practicalApplications!.map((appItem, aIdx) => (
-                          <li key={aIdx}>{appItem}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </article>
-
-                {/* Tools Grid */}
-                <div className="flex flex-col gap-4">
-                  <h2 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 px-1">
-                    <span className="h-5 w-1 bg-blue-600 rounded-full" />
-                    Simuladores de {CATEGORY_MAP_RAW[activeCategoryHub] || activeCategoryHub}
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {CALCULATORS_CATALOG.filter(c => c.category === activeCategoryHub).map(c => (
-                      <div
-                        key={c.id}
-                        onClick={() => selectCalculator(c.id)}
-                        className="group bg-white border border-slate-200 hover:border-blue-200 hover:bg-blue-50/10 p-5 rounded-2xl cursor-pointer transition-all hover:shadow-md flex flex-col justify-between min-h-[140px]"
-                      >
-                        <div>
-                          <h3 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">{c.name}</h3>
-                          <p className="text-[10px] text-slate-500 mt-2 line-clamp-3 leading-relaxed font-normal">{c.description}</p>
-                        </div>
-                        <span className="text-[9px] font-mono font-bold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-4">
-                          Abrir Calculadora <ExternalLink className="w-2.5 h-2.5" />
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                {/* Draw heading for mobile */}
+                <div className="flex lg:hidden items-center justify-between border-b pb-3 mb-1">
+                  <span className="text-xs font-bold text-slate-800 uppercase tracking-widest">Navegação Principal</span>
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    className="p-1 text-gray-400 hover:bg-slate-50 hover:text-slate-900 border rounded cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
 
-                {/* Guias Editoriais desta Categoria */}
-                {(() => {
-                  const catGuides = GUIDES_ARTICLES.filter(g => g.categoryKey === activeCategoryHub);
-                  const displayGuides = catGuides.length > 0 ? catGuides : GUIDES_ARTICLES.slice(0, 2);
-                  return (
-                    <section className="bg-blue-50/50 border border-blue-200/70 rounded-2xl p-6 flex flex-col gap-4">
-                      <div className="flex items-center justify-between gap-2">
-                        <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                          <BookOpen className="w-4.5 h-4.5 text-blue-600" />
-                          Guias Editoriais de Aprofundamento
-                        </h2>
-                        <a
-                          href="/guias"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setLocation('/guias');
-                          }}
-                          className="text-xs font-bold text-blue-600 hover:underline"
-                        >
-                          Todos os Guias →
-                        </a>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {displayGuides.map(guide => (
-                          <a
-                            key={guide.slug}
-                            href={`/guias/${guide.slug}`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setLocation(`/guias/${guide.slug}`);
-                            }}
-                            className="p-4 rounded-xl bg-white border border-blue-100 hover:border-blue-400 transition-all block"
-                          >
-                            <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">{guide.categoryLabel}</span>
-                            <h3 className="text-xs font-bold text-slate-900 mt-1 leading-snug">{guide.title}</h3>
-                            <p className="text-[11px] text-slate-600 mt-1 line-clamp-2">{guide.excerpt}</p>
-                          </a>
-                        ))}
-                      </div>
-                    </section>
-                  );
-                })()}
+                {/* In-app Category filter pills list */}
+                <div className="flex flex-col gap-1 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2 select-none">Filtrar Segmentos</span>
+                  <button
+                    onClick={() => {
+                      setActiveCategory('todos');
+                      setActiveCategoryHub(null);
+                      setLocation('/');
+                      setMenuOpen(false);
+                    }}
+                    className={`w-full text-left py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-between transition-all cursor-pointer ${activeCategory === 'todos' && !activeCategoryHub
+                        ? 'bg-blue-50 text-blue-700 font-medium shadow-xs'
+                        : 'text-slate-600 hover:bg-slate-50'
+                      }`}
+                  >
+                    <span>🚀 Todas as Ferramentas</span>
+                    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${activeCategory === 'todos' && !activeCategoryHub ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>{categoryCounts.todos}</span>
+                  </button>
 
-                {/* Category FAQs (Always visible in DOM for SEO & Helpful Content) */}
-                {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (
-                  <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                    <h2 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 border-b border-slate-100 pb-3">
-                      <HelpCircle className="w-4.5 h-4.5 text-blue-500" />
-                      Perguntas Frequentes da Categoria
-                    </h2>
-                    <div className="flex flex-col gap-3">
-                      {getCategoryHubContent(activeCategoryHub).faq.map((q, idx) => {
-                        const faqKey = `cat-${activeCategoryHub}-faq-${idx}`;
-                        const isSelected = activeAppFaqIdx === idx + 100;
-                        return (
-                          <div
-                            key={faqKey}
-                            onClick={() => setActiveAppFaqIdx(isSelected ? null : idx + 100)}
-                            className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${
-                              isSelected ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'
-                            }`}
-                          >
-                            <h3 className="text-xs font-bold text-slate-800 mb-1.5">
-                              {q.q}
-                            </h3>
-                            <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
-                              {q.a}
-                            </p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </section>
-                )}
+                  <a
+                    href="/guias"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setLocation('/guias');
+                      setMenuOpen(false);
+                    }}
+                    className="w-full text-left py-2 px-3 text-xs font-bold rounded-lg flex items-center justify-between transition-all text-blue-700 bg-blue-50/70 hover:bg-blue-100 border border-blue-200/60"
+                  >
+                    <span>📖 Guias &amp; Artigos</span>
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-white text-blue-700">
+                      {GUIDES_ARTICLES.length}
+                    </span>
+                  </a>
 
-                {/* Other Categories list navigation */}
-                <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                  <h3 className="text-sm font-bold text-slate-800 font-display">Navegar por Outros Segmentos</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {Object.entries(CATEGORY_MAP).filter(([key]) => key !== activeCategoryHub).map(([key, label]) => {
-                      const slug = CATEGORY_KEY_TO_SLUG[key];
+                  {Object.entries(CATEGORY_MAP).map(([key, label]) => {
+                    const isSelected = activeCategory === key;
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => {
+                          const slug = CATEGORY_KEY_TO_SLUG[key];
+                          if (slug) {
+                            setLocation('/' + slug);
+                          } else {
+                            setActiveCategory(key);
+                          }
+                          setMenuOpen(false);
+                        }}
+                        className={`w-full text-left py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-between transition-all cursor-pointer ${isSelected
+                            ? 'bg-blue-50 text-blue-700 font-medium shadow-xs'
+                            : 'text-slate-600 hover:bg-slate-50'
+                          }`}
+                      >
+                        <div className="flex items-center gap-1.5 truncate">
+                          <span className="shrink-0 text-xs">
+                            {key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : key === 'pets' ? '🐾' : '⏱️'}
+                          </span>
+                          <span className="truncate">{CATEGORY_MAP_RAW[key] || label}</span>
+                        </div>
+                        <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold shrink-0 ${isSelected ? 'bg-blue-101 bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>
+                          {categoryCounts[key] || 0}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* List of active filtered calculators */}
+                <div className="flex flex-col gap-1.5 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex-1">
+                  <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1.5 px-2 select-none">Catálogo de Ferramentas</span>
+                  <div className="flex flex-col gap-1 max-h-[300px] lg:max-h-[500px] overflow-y-auto pr-1">
+                    {filteredCalculators.map(c => {
+                      const isActive = c.id === activeCalculator;
                       return (
                         <button
-                          key={key}
-                          onClick={() => {
-                            if (slug) {
-                              setLocation('/' + slug);
-                            } else {
-                              setActiveCategoryHub(key);
-                            }
-                          }}
-                          className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                          type="button"
+                          key={c.id}
+                          onClick={() => selectCalculator(c.id)}
+                          className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer ${isActive
+                              ? 'bg-blue-50/40 border-blue-200/50 text-blue-700 font-medium shadow-xs'
+                              : 'bg-white border-transparent hover:bg-slate-50 text-slate-700'
+                            }`}
                         >
-                          {label}
+                          <span className="block text-xs font-bold text-slate-800 truncate">{c.name}</span>
+                          <p className="text-[10px] text-slate-600 line-clamp-1 mt-0.5 leading-snug">{c.description}</p>
                         </button>
                       );
                     })}
+
+                    {filteredCalculators.length === 0 && (
+                      <p className="text-[11px] text-slate-600 text-center py-4 font-mono select-none">Nenhuma ferramenta encontrada.</p>
+                    )}
                   </div>
                 </div>
-              </div>
-            ) : (
-              // Normal Calculator view
-              <>
-                {/* Breadcrumbs at the top of content area */}
-                {activeCalc && (
-                  <Breadcrumbs
-                    catKey={activeCalc.category}
-                    calcName={activeCalc.name}
-                    catSlug={CATEGORY_KEY_TO_SLUG[activeCalc.category]}
+
+                {/* Embed Sessions History Component directly in the sidebar for desktop */}
+                <CalculatorHistory
+                  history={history}
+                  onClearHistory={handleClearHistory}
+                  onSelectEntry={handleSelectHistoryEntry}
+                />
+
+                {/* AdSense Vertical Banner in the sidebar (Visible only on Desktop) */}
+                <div className="hidden lg:block w-full mt-2">
+                  <AdSenseBanner
+                    category={activeCalc?.category || 'financas'}
+                    layout="vertical"
+                    onAdClicked={handleAdClicked}
+                    refreshTrigger={adRefreshTrigger + 20}
                   />
-                )}
-                
-                {/* Header Title with instant Export Actions */}
-                <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sticky top-18 z-25">
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[9px] uppercase font-bold text-slate-400 font-mono tracking-wider">
-                        ESTADO ATIVO DA CENTRAL
-                      </span>
-                      <span className="text-[8px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded select-none">ATIVO</span>
-                    </div>
-                    <h1 className="text-lg font-display font-bold text-slate-800 mt-1">
-                      {activeCalc?.name}
-                    </h1>
-                  </div>
-
-                  {/* Action operations export links */}
-                  <div className="flex flex-wrap gap-2 pt-1 sm:pt-0">
-                    <button
-                      onClick={handleSaveToHistory}
-                      className="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
-                      title="Salva na lista local para reuso"
-                    >
-                      <History className="w-3.5 h-3.5" />
-                      <span>Salvar Operação</span>
-                    </button>
-
-                    <button
-                      onClick={exportToCSV}
-                      className="px-3.5 py-2 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100/80 border border-blue-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs shrink-0"
-                      title="Gera um arquivo de planilha .csv pronto para Excel"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span>Planilha Excel</span>
-                    </button>
-
-                    <button
-                      onClick={exportToPDF}
-                      className="px-3.5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm shrink-0"
-                      title="Imprime um documento A4 certificado em PDF"
-                    >
-                      <FileDown className="w-3.5 h-3.5" />
-                      <span>Gerar PDF</span>
-                    </button>
-                  </div>
                 </div>
+              </aside>
 
-                {/* Primary content component view portal */}
-                <div className="transition-all duration-300">
-                  {activeCalculator === 'juros-compostos' && (
-                    <CompoundInterestCalc onCalculate={handleCompoundInterestCalc} />
-                  )}
-                  {activeCalculator === 'clt-pj' && (
-                    <CltVsPjCalc onCalculate={handleCltVsPjCalc} />
-                  )}
-                  {activeCalculator === 'margem-lucro' && (
-                    <ProfitMarginCalc onCalculate={handleProfitMarginCalc} />
-                  )}
-                  {activeCalculator === 'imc' && (
-                    <IbcCaloricoTracker onCalculate={handleIbcCaloricoTracker} />
-                  )}
-                  {activeCalculator === 'registro-horas' && (
-                    <TimeSheetHoursCalc onCalculate={handleTimeSheetHoursCalc} />
-                  )}
-                  {activeCalculator === 'regra-tres' && (
-                    <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
-                  )}
-                  {activeCalculator === 'contador-texto' && (
-                    <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
-                  )}
-                  {activeCalculator === 'calculadora-de-rescisao-clt' && (
-                    <RescisaoCLTCalc onCalculate={handleRescisaoCLTCalc} />
-                  )}
-                  {activeCalculator === 'calculadora-de-decimo-terceiro' && (
-                    <DecimoTerceiroCalc onCalculate={handleDecimoTerceiroCalc} />
-                  )}
-                  {activeCalculator === 'calculadora-de-ferias-clt' && (
-                    <FeriasCLTCalc onCalculate={handleFeriasCLTCalc} />
-                  )}
-                  {activeCalculator === 'calculadora-de-horas-extras' && (
-                    <HorasExtrasCalc onCalculate={handleHorasExtrasCalc} />
-                  )}
-                  {activeCalculator === 'simulador-de-aposentadoria-inss' && (
-                    <AposentadoriaINSSCalc onCalculate={handleAposentadoriaINSSCalc} />
-                  )}
-                  {activeCalculator === 'porcentagem-simples' && (
-                    <SimplePercentageCalc onCalculate={handlePorcentagemSimplesCalc} />
-                  )}
-                  {activeCalculator === 'financiamento-veiculo' && (
-                    <CarFinanceCalc onCalculate={handleFinanciamentoVeiculoCalc} />
-                  )}
-                  {activeCalculator === 'calculadora-ganhos-adsense' && (
-                    <AdSenseEarningsCalc onCalculate={handleAdSenseEarningsCalc} />
-                  )}
-                  {activeCalc?.isDynamic && activeCalculator !== 'porcentagem-simples' && activeCalculator !== 'financiamento-veiculo' && activeCalculator !== 'calculadora-ganhos-adsense' && (
-                    <GenericDynamicCalc 
-                      calculator={activeCalc}
-                      onCalculate={handleDynamicCalc}
-                    />
-                  )}
-                </div>
+              {/* Active Calculator Workstation Space */}
+              {/* Active Calculator Workstation Space */}
+              <section className="lg:col-span-9 flex flex-col gap-6">
+                {activeCategoryHub ? (
+                  // Category Hub View
+                  <div className="flex flex-col gap-6 animate-fadeIn">
+                    {/* Breadcrumbs for Category Hub */}
+                    <Breadcrumbs catKey={activeCategoryHub} />
 
-                {/* SEO and Sharing Retention Enhancers */}
-                <div className="flex flex-col gap-6 mt-6">
-                  
-                  {/* Box 1: Sharing & Viral referrals (If results are generated) */}
-                  {hasActiveResult && (
-                    <div className="bg-white border border-blue-150 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-                          <Share2 className="w-5 h-5 animate-pulse" />
-                        </div>
-                        <div>
-                          <h3 className="text-xs font-bold text-slate-800">Gostou do Resultado?</h3>
-                          <p className="text-[11px] text-slate-500 mt-0.5 font-sans leading-tight">
-                            Copie os resultados formatados no padrão de relatório ou envie diretamente no WhatsApp de clientes e parceiros!
+                    {/* Hub Header Card & Semantic Editorial Guide */}
+                    <article className="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 md:p-8 flex flex-col gap-5 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 -z-10 blur-xl opacity-50" />
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">
+                          {activeCategoryHub === 'financas' ? '📊' : activeCategoryHub === 'saude' ? '🍎' : activeCategoryHub === 'profissoes' ? '⚖️' : activeCategoryHub === 'matematica' ? '🧮' : '⚙️'}
+                        </span>
+                        <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                          Categoria Principal
+                        </span>
+                      </div>
+                      <h1 className="text-xl md:text-2xl font-display font-black text-slate-800 tracking-tight">
+                        {getCategoryHubContent(activeCategoryHub).title}
+                      </h1>
+                      <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
+                        {getCategoryHubContent(activeCategoryHub).introduction}
+                      </p>
+                      <div className="border-t border-slate-100 pt-4">
+                        <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                          Por que planejar nesta categoria?
+                        </h2>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          {getCategoryHubContent(activeCategoryHub).importance}
+                        </p>
+                      </div>
+                      {getCategoryHubContent(activeCategoryHub).methodology && (
+                        <div className="border-t border-slate-100 pt-4">
+                          <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                            Metodologia e Rigor Matemático dos Cálculos
+                          </h2>
+                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                            {getCategoryHubContent(activeCategoryHub).methodology}
                           </p>
                         </div>
-                      </div>
+                      )}
+                      {getCategoryHubContent(activeCategoryHub).practicalApplications && getCategoryHubContent(activeCategoryHub).practicalApplications!.length > 0 && (
+                        <div className="border-t border-slate-100 pt-4">
+                          <h2 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                            Principais Aplicações Práticas
+                          </h2>
+                          <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                            {getCategoryHubContent(activeCategoryHub).practicalApplications!.map((appItem, aIdx) => (
+                              <li key={aIdx}>{appItem}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </article>
 
-                      <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0 justify-end">
-                        <button
-                          onClick={handleCopyShortLink}
-                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
-                          title="Copiar link direto para esta calculadora"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          <span>Copiar Link</span>
-                        </button>
-                        <button
-                          onClick={handleCopyResults}
-                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
-                          title="Copiar text formatado pronto"
-                        >
-                          <Copy className="w-3.5 h-3.5" />
-                          <span>Copiar Resultados</span>
-                        </button>
-                        <button
-                          onClick={handleShareWhatsApp}
-                          className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm"
-                          title="Enviar pelo WhatsApp corporativo ou pessoal"
-                        >
-                          <span className="text-sm font-bold leading-none">💬</span>
-                          <span>Enviar no WhatsApp</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Quick-Switch Bar entre Ferramentas Irmãs */}
-                  {activeCalc && (
-                    <div id="tool-quick-switch-bar" className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 shadow-xs">
-                      <div className="flex items-center justify-between mb-2.5">
-                        <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
-                          <Zap className="w-3.5 h-3.5 text-blue-600" />
-                          <span>Outras Ferramentas em {CATEGORY_MAP_RAW[activeCalc.category] || activeCalc.category}</span>
-                        </span>
-                        <a
-                          href={`/${CATEGORY_KEY_TO_SLUG[activeCalc.category] || activeCalc.category}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setLocation('/' + (CATEGORY_KEY_TO_SLUG[activeCalc.category] || activeCalc.category));
-                          }}
-                          className="text-[10px] font-bold text-blue-600 hover:underline"
-                        >
-                          Ver todas →
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-2 overflow-x-auto pb-1">
-                        {CALCULATORS_CATALOG.filter(c => c.category === activeCalc.category && c.id !== activeCalc.id).slice(0, 8).map(sibling => (
-                          <button
-                            key={sibling.id}
-                            onClick={() => selectCalculator(sibling.id as any)}
-                            className="px-3 py-1.5 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-[11px] font-bold text-slate-700 hover:text-blue-700 whitespace-nowrap transition-all shadow-2xs shrink-0 cursor-pointer"
+                    {/* Tools Grid */}
+                    <div className="flex flex-col gap-4">
+                      <h2 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 px-1">
+                        <span className="h-5 w-1 bg-blue-600 rounded-full" />
+                        Simuladores de {CATEGORY_MAP_RAW[activeCategoryHub] || activeCategoryHub}
+                      </h2>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {CALCULATORS_CATALOG.filter(c => c.category === activeCategoryHub).map(c => (
+                          <div
+                            key={c.id}
+                            onClick={() => selectCalculator(c.id)}
+                            className="group bg-white border border-slate-200 hover:border-blue-200 hover:bg-blue-50/10 p-5 rounded-2xl cursor-pointer transition-all hover:shadow-md flex flex-col justify-between min-h-[140px]"
                           >
-                            {sibling.name}
-                          </button>
+                            <div>
+                              <h3 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">{c.name}</h3>
+                              <p className="text-[10px] text-slate-500 mt-2 line-clamp-3 leading-relaxed font-normal">{c.description}</p>
+                            </div>
+                            <span className="text-[9px] font-mono font-bold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-4">
+                              Abrir Calculadora <ExternalLink className="w-2.5 h-2.5" />
+                            </span>
+                          </div>
                         ))}
                       </div>
                     </div>
-                  )}
 
-                  {/* Homepage Category Hub Portal Directory (Only shown on the root path) */}
-                  {(location === '/' || location === '') && (
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
-                      <div className="border-b border-slate-100 pb-4">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
-                            Central de Simuladores
-                          </span>
-                          <span className="text-[8px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded font-mono select-none">
-                            18 SEGMENTOS
-                          </span>
+                    {/* Guias Editoriais desta Categoria */}
+                    {(() => {
+                      const catGuides = GUIDES_ARTICLES.filter(g => g.categoryKey === activeCategoryHub);
+                      const displayGuides = catGuides.length > 0 ? catGuides : GUIDES_ARTICLES.slice(0, 2);
+                      return (
+                        <section className="bg-blue-50/50 border border-blue-200/70 rounded-2xl p-6 flex flex-col gap-4">
+                          <div className="flex items-center justify-between gap-2">
+                            <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                              <BookOpen className="w-4.5 h-4.5 text-blue-600" />
+                              Guias Editoriais de Aprofundamento
+                            </h2>
+                            <a
+                              href="/guias"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setLocation('/guias');
+                              }}
+                              className="text-xs font-bold text-blue-600 hover:underline"
+                            >
+                              Todos os Guias →
+                            </a>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {displayGuides.map(guide => (
+                              <a
+                                key={guide.slug}
+                                href={`/guias/${guide.slug}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setLocation(`/guias/${guide.slug}`);
+                                }}
+                                className="p-4 rounded-xl bg-white border border-blue-100 hover:border-blue-400 transition-all block"
+                              >
+                                <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">{guide.categoryLabel}</span>
+                                <h3 className="text-xs font-bold text-slate-900 mt-1 leading-snug">{guide.title}</h3>
+                                <p className="text-[11px] text-slate-600 mt-1 line-clamp-2">{guide.excerpt}</p>
+                              </a>
+                            ))}
+                          </div>
+                        </section>
+                      );
+                    })()}
+
+                    {/* Category FAQs (Always visible in DOM for SEO & Helpful Content) */}
+                    {getCategoryHubContent(activeCategoryHub).faq.length > 0 && (
+                      <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                        <h2 className="text-sm font-bold text-slate-800 font-display flex items-center gap-2 border-b border-slate-100 pb-3">
+                          <HelpCircle className="w-4.5 h-4.5 text-blue-500" />
+                          Perguntas Frequentes da Categoria
+                        </h2>
+                        <div className="flex flex-col gap-3">
+                          {getCategoryHubContent(activeCategoryHub).faq.map((q, idx) => {
+                            const faqKey = `cat-${activeCategoryHub}-faq-${idx}`;
+                            const isSelected = activeAppFaqIdx === idx + 100;
+                            return (
+                              <div
+                                key={faqKey}
+                                onClick={() => setActiveAppFaqIdx(isSelected ? null : idx + 100)}
+                                className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${isSelected ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'
+                                  }`}
+                              >
+                                <h3 className="text-xs font-bold text-slate-800 mb-1.5">
+                                  {q.q}
+                                </h3>
+                                <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
+                                  {q.a}
+                                </p>
+                              </div>
+                            );
+                          })}
                         </div>
-                        <h3 className="text-base font-display font-bold text-slate-800 mt-3 mb-1">
-                          Explore Mais de 160 Calculadoras Gratuitas
-                        </h3>
-                        <p className="text-[11.5px] text-slate-500 leading-relaxed font-normal">
-                          O Brasil Calculadoras é um ecossistema completo de ferramentas matemáticas, financeiras e de utilidade pública. Selecione uma categoria abaixo para navegar por simuladores adicionais dedicados a cada necessidade:
-                        </p>
-                      </div>
+                      </section>
+                    )}
 
-                      {/* Premium Grid showing all categories */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {Object.entries(CATEGORY_MAP).map(([key, label]) => {
+                    {/* Other Categories list navigation */}
+                    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                      <h3 className="text-sm font-bold text-slate-800 font-display">Navegar por Outros Segmentos</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {Object.entries(CATEGORY_MAP).filter(([key]) => key !== activeCategoryHub).map(([key, label]) => {
                           const slug = CATEGORY_KEY_TO_SLUG[key];
-                          const emoji = key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : key === 'pets' ? '🐾' : '⏱️';
-                          const rawLabel = CATEGORY_MAP_RAW[key] || label;
-                          const count = categoryCounts[key] || 0;
-
-                          // Short description for each category to look rich and premium
-                          const categoryDescriptions: Record<string, string> = {
-                            financas: 'Juros, investimentos, empréstimos, taxas e rentabilidade financeira.',
-                            saude: 'Cálculos nutricionais, IMC, metabolismo e bem-estar corporal.',
-                            profissoes: 'Rescisão CLT, horas extras, 13º salário e tributação profissional.',
-                            matematica: 'Regra de três, frações, estatísticas escolares e equações.',
-                            imobiliario: 'Financiamento, aluguel, amortização SAC/Price e valorização.',
-                            veiculos: 'Consumo de combustível, IPVA, depreciação FIPE e viagens.',
-                            estatistica: 'Médias ponderadas, desvio padrão, probabilidade e combinatória.',
-                            juridico: 'Imposto de renda, taxas de cartório, multas e honorários.',
-                            utilitarios: 'Medições domésticas, conversão de unidades e consumo diário.',
-                            aposentadoria: 'Simulação de INSS, previdência privada e idade mínima.',
-                            agronegocio: 'Cálculos de sementes, fertilizantes, gado e produtividade agrícola.',
-                            logistica: 'Cálculo de frete, cubagem de carga, rotas e pedágios.',
-                            construcao: 'Materiais de construção, tijolos, cimento e área de pintura.',
-                            eventos: 'Quantidade de comida e bebida por pessoa para festas e churrascos.',
-                            energia: 'Dimensionamento solar fotovoltaico, consumo KWh e economia.',
-                            educacao: 'Média do ENEM, nota de corte de vestibulares e histórico escolar.',
-                            quimica_fisica: 'Velocidade, densidade, conversor de temperatura e gases.',
-                            tecnologia: 'Conversão de bases, tempo de download, aspect ratio e lucros do AdSense.',
-                            pets: 'Metas de ração diária, hidratação e idade humana de cães e gatos.'
-                          };
-
-                          const desc = categoryDescriptions[key] || 'Ferramentas de precisão matemática para o dia a dia.';
-
                           return (
-                            <div
+                            <button
                               key={key}
                               onClick={() => {
                                 if (slug) {
                                   setLocation('/' + slug);
                                 } else {
-                                  setActiveCategory(key);
+                                  setActiveCategoryHub(key);
                                 }
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
                               }}
-                              className="group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                             >
-                              <div>
-                                <div className="flex items-center justify-between mb-1.5">
-                                  <span className="text-lg">{emoji}</span>
-                                  <span className="bg-slate-100 text-slate-500 font-mono text-[9px] font-bold px-1.5 py-0.5 rounded-md group-hover:bg-blue-50 group-hover:text-blue-700 transition-colors">
-                                    {count} {count === 1 ? 'ferramenta' : 'ferramentas'}
-                                  </span>
-                                </div>
-                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
-                                  {rawLabel}
-                                </h4>
-                                <p className="text-[10.2px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                                  {desc}
-                                </p>
-                              </div>
-                              <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
-                                Acessar Segmento <ChevronRight className="w-3.5 h-3.5" />
-                              </span>
-                            </div>
+                              {label}
+                            </button>
                           );
                         })}
                       </div>
                     </div>
-                  )}
+                  </div>
+                ) : (
+                  // Normal Calculator view
+                  <>
+                    {/* Breadcrumbs at the top of content area */}
+                    {activeCalc && (
+                      <Breadcrumbs
+                        catKey={activeCalc.category}
+                        calcName={activeCalc.name}
+                        catSlug={CATEGORY_KEY_TO_SLUG[activeCalc.category]}
+                      />
+                    )}
 
-                  {/* Box 2: Semantic Editorial Technical Guide & Visible FAQs */}
-                  {activeCalc && (() => {
-                    const calcSeo = getSeoContentForCalculator(activeCalc);
-                    const relatedGuides = getRelatedGuidesForCalculator(activeCalc.id, activeCalc.category);
-                    return (
-                      <article className="deferred-section bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
-                        {/* Detailed semantic sections */}
-                        <div className="flex flex-col gap-5">
-                          <section>
-                            <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
-                              Guia Técnico Completo
-                            </span>
-                            <h2 className="text-sm sm:text-base font-bold text-slate-900 mt-2.5 mb-2">
-                              O que é e para que serve: {activeCalc.name}
-                            </h2>
-                            <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                              {calcSeo.whatIs}
-                            </p>
-                          </section>
-
-                          {calcSeo.stepByStep && calcSeo.stepByStep.length > 0 && (
-                            <section className="border-t border-slate-100 pt-4">
-                              <h2 className="text-sm font-bold text-slate-900 mb-2.5">
-                                Como usar esta calculadora passo a passo
-                              </h2>
-                              <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed">
-                                {calcSeo.stepByStep.map((step, sIdx) => (
-                                  <li key={sIdx}>{step}</li>
-                                ))}
-                              </ul>
-                            </section>
-                          )}
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
-                            <section>
-                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
-                                Fórmula e Lógica do Cálculo
-                              </h3>
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                                {calcSeo.howItWorks}
-                              </p>
-                            </section>
-                            <section>
-                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
-                                Exemplo Prático Numérico
-                              </h3>
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                                {calcSeo.practicalExample}
-                              </p>
-                            </section>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
-                            <section>
-                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
-                                Quando Utilizar esta Ferramenta
-                              </h3>
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                                {calcSeo.whenToUse}
-                              </p>
-                            </section>
-                            <section>
-                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
-                                Dicas, Limites e Recomendações
-                              </h3>
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                                {calcSeo.importantTips}
-                              </p>
-                            </section>
-                          </div>
-
-                          {calcSeo.methodologyNote && (
-                            <section className="border-t border-slate-100 pt-4">
-                              <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
-                                Metodologia, Precisão e Atualização 2026
-                              </h3>
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                                {calcSeo.methodologyNote}
-                              </p>
-                            </section>
-                          )}
+                    {/* Header Title with instant Export Actions */}
+                    <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sticky top-18 z-25">
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[9px] uppercase font-bold text-slate-400 font-mono tracking-wider">
+                            ESTADO ATIVO DA CENTRAL
+                          </span>
+                          <span className="text-[8px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded select-none">ATIVO</span>
                         </div>
+                        <h1 className="text-lg font-display font-bold text-slate-800 mt-1">
+                          {activeCalc?.name}
+                        </h1>
+                      </div>
 
-                        {/* Contextual Internal Links to Curated Guides */}
-                        {relatedGuides.length > 0 && (
-                          <section className="border-t border-slate-100 pt-4 bg-blue-50/40 rounded-xl p-4 border border-blue-100/80">
-                            <div className="flex items-center justify-between gap-2 mb-3">
-                              <h3 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                                <BookOpen className="w-4 h-4 text-blue-600" />
-                                Guias Editoriais Relacionados
-                              </h3>
-                              <a
-                                href="/guias"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setLocation('/guias');
-                                }}
-                                className="text-[11px] font-bold text-blue-600 hover:underline"
+                      {/* Action operations export links */}
+                      <div className="flex flex-wrap gap-2 pt-1 sm:pt-0">
+                        <button
+                          onClick={handleSaveToHistory}
+                          className="px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                          title="Salva na lista local para reuso"
+                        >
+                          <History className="w-3.5 h-3.5" />
+                          <span>Salvar Operação</span>
+                        </button>
+
+                        <button
+                          onClick={exportToCSV}
+                          className="px-3.5 py-2 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100/80 border border-blue-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs shrink-0"
+                          title="Gera um arquivo de planilha .csv pronto para Excel"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                          <span>Planilha Excel</span>
+                        </button>
+
+                        <button
+                          onClick={exportToPDF}
+                          className="px-3.5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm shrink-0"
+                          title="Imprime um documento A4 certificado em PDF"
+                        >
+                          <FileDown className="w-3.5 h-3.5" />
+                          <span>Gerar PDF</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Primary content component view portal */}
+                    <div className="transition-all duration-300">
+                      {activeCalculator === 'juros-compostos' && (
+                        <CompoundInterestCalc onCalculate={handleCompoundInterestCalc} />
+                      )}
+                      {activeCalculator === 'clt-pj' && (
+                        <CltVsPjCalc onCalculate={handleCltVsPjCalc} />
+                      )}
+                      {activeCalculator === 'margem-lucro' && (
+                        <ProfitMarginCalc onCalculate={handleProfitMarginCalc} />
+                      )}
+                      {activeCalculator === 'imc' && (
+                        <IbcCaloricoTracker onCalculate={handleIbcCaloricoTracker} />
+                      )}
+                      {activeCalculator === 'registro-horas' && (
+                        <TimeSheetHoursCalc onCalculate={handleTimeSheetHoursCalc} />
+                      )}
+                      {activeCalculator === 'regra-tres' && (
+                        <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
+                      )}
+                      {activeCalculator === 'contador-texto' && (
+                        <RuleOf3AndTextTools onCalculate={handleRuleOf3AndTextTools} />
+                      )}
+                      {activeCalculator === 'calculadora-de-rescisao-clt' && (
+                        <RescisaoCLTCalc onCalculate={handleRescisaoCLTCalc} />
+                      )}
+                      {activeCalculator === 'calculadora-de-decimo-terceiro' && (
+                        <DecimoTerceiroCalc onCalculate={handleDecimoTerceiroCalc} />
+                      )}
+                      {activeCalculator === 'calculadora-de-ferias-clt' && (
+                        <FeriasCLTCalc onCalculate={handleFeriasCLTCalc} />
+                      )}
+                      {activeCalculator === 'calculadora-de-horas-extras' && (
+                        <HorasExtrasCalc onCalculate={handleHorasExtrasCalc} />
+                      )}
+                      {activeCalculator === 'simulador-de-aposentadoria-inss' && (
+                        <AposentadoriaINSSCalc onCalculate={handleAposentadoriaINSSCalc} />
+                      )}
+                      {activeCalculator === 'porcentagem-simples' && (
+                        <SimplePercentageCalc onCalculate={handlePorcentagemSimplesCalc} />
+                      )}
+                      {activeCalculator === 'financiamento-veiculo' && (
+                        <CarFinanceCalc onCalculate={handleFinanciamentoVeiculoCalc} />
+                      )}
+                      {activeCalculator === 'calculadora-ganhos-adsense' && (
+                        <AdSenseEarningsCalc onCalculate={handleAdSenseEarningsCalc} />
+                      )}
+                      {activeCalc?.isDynamic && activeCalculator !== 'porcentagem-simples' && activeCalculator !== 'financiamento-veiculo' && activeCalculator !== 'calculadora-ganhos-adsense' && (
+                        <GenericDynamicCalc
+                          calculator={activeCalc}
+                          onCalculate={handleDynamicCalc}
+                        />
+                      )}
+                    </div>
+
+                    {/* SEO and Sharing Retention Enhancers */}
+                    <div className="flex flex-col gap-6 mt-6">
+
+                      {/* Box 1: Sharing & Viral referrals (If results are generated) */}
+                      {hasActiveResult && (
+                        <div className="bg-white border border-blue-150 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+                              <Share2 className="w-5 h-5 animate-pulse" />
+                            </div>
+                            <div>
+                              <h3 className="text-xs font-bold text-slate-800">Gostou do Resultado?</h3>
+                              <p className="text-[11px] text-slate-500 mt-0.5 font-sans leading-tight">
+                                Copie os resultados formatados no padrão de relatório ou envie diretamente no WhatsApp de clientes e parceiros!
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0 justify-end">
+                            <button
+                              onClick={handleCopyShortLink}
+                              className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                              title="Copiar link direto para esta calculadora"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                              <span>Copiar Link</span>
+                            </button>
+                            <button
+                              onClick={handleCopyResults}
+                              className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-xs"
+                              title="Copiar text formatado pronto"
+                            >
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>Copiar Resultados</span>
+                            </button>
+                            <button
+                              onClick={handleShareWhatsApp}
+                              className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 active:scale-95 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-sm"
+                              title="Enviar pelo WhatsApp corporativo ou pessoal"
+                            >
+                              <span className="text-sm font-bold leading-none">💬</span>
+                              <span>Enviar no WhatsApp</span>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Quick-Switch Bar entre Ferramentas Irmãs */}
+                      {activeCalc && (
+                        <div id="tool-quick-switch-bar" className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+                          <div className="flex items-center justify-between mb-2.5">
+                            <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                              <Zap className="w-3.5 h-3.5 text-blue-600" />
+                              <span>Outras Ferramentas em {CATEGORY_MAP_RAW[activeCalc.category] || activeCalc.category}</span>
+                            </span>
+                            <a
+                              href={`/${CATEGORY_KEY_TO_SLUG[activeCalc.category] || activeCalc.category}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setLocation('/' + (CATEGORY_KEY_TO_SLUG[activeCalc.category] || activeCalc.category));
+                              }}
+                              className="text-[10px] font-bold text-blue-600 hover:underline"
+                            >
+                              Ver todas →
+                            </a>
+                          </div>
+                          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                            {CALCULATORS_CATALOG.filter(c => c.category === activeCalc.category && c.id !== activeCalc.id).slice(0, 8).map(sibling => (
+                              <button
+                                key={sibling.id}
+                                onClick={() => selectCalculator(sibling.id as any)}
+                                className="px-3 py-1.5 rounded-xl bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-[11px] font-bold text-slate-700 hover:text-blue-700 whitespace-nowrap transition-all shadow-2xs shrink-0 cursor-pointer"
                               >
-                                Central de Guias →
-                              </a>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
-                              {relatedGuides.map((guide) => (
-                                <a
-                                  key={guide.slug}
-                                  href={`/guias/${guide.slug}`}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    setLocation(`/guias/${guide.slug}`);
-                                  }}
-                                  className="p-3 rounded-lg bg-white border border-blue-100 hover:border-blue-400 transition-all block"
-                                >
-                                  <span className="text-[9px] font-bold text-blue-700 uppercase">{guide.categoryLabel}</span>
-                                  <p className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2 leading-snug">
-                                    {guide.title}
-                                  </p>
-                                </a>
-                              ))}
-                            </div>
-                          </section>
-                        )}
+                                {sibling.name}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
-                        {/* EEAT Block: Fontes Oficiais e Data de Revisão */}
-                        {calcSeo.sources.length > 0 && (
-                          <div className="border-t border-slate-150 pt-4 mt-1 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-slate-50/60 p-4 rounded-xl border border-slate-200/60">
+                      {/* Homepage Category Hub Portal Directory (Only shown on the root path) */}
+                      {(location === '/' || location === '') && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                          <div className="border-b border-slate-100 pb-4">
                             <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-bold text-slate-500 font-mono uppercase">Fontes e Referências Oficiais</span>
-                            </div>
-                            <div className="flex flex-wrap gap-3">
-                              {calcSeo.sources.map((src, sIdx) => (
-                                <a
-                                  key={sIdx}
-                                  href={src.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-[10px] text-blue-600 hover:text-blue-800 font-bold inline-flex items-center gap-1 transition-colors hover:underline"
-                                >
-                                  {src.name} <ExternalLink className="w-2.5 h-2.5" />
-                                </a>
-                              ))}
-                              <span className="text-[10px] text-slate-500 flex items-center gap-1 font-mono">
-                                Atualizado em: {calcSeo.lastUpdated}
+                              <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                                Central de Simuladores
+                              </span>
+                              <span className="text-[8px] bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded font-mono select-none">
+                                18 SEGMENTOS
                               </span>
                             </div>
+                            <h3 className="text-base font-display font-bold text-slate-800 mt-3 mb-1">
+                              Explore Mais de 160 Calculadoras Gratuitas
+                            </h3>
+                            <p className="text-[11.5px] text-slate-500 leading-relaxed font-normal">
+                              O Brasil Calculadoras é um ecossistema completo de ferramentas matemáticas, financeiras e de utilidade pública. Selecione uma categoria abaixo para navegar por simuladores adicionais dedicados a cada necessidade:
+                            </p>
                           </div>
-                        )}
 
-                        {/* FAQ Section (Always visible in DOM for Helpful Content & SEO) */}
-                        {calcSeo.faq.length > 0 && (
-                          <section className="flex flex-col gap-3 border-t border-slate-100 pt-5">
-                            <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                              <HelpCircle className="w-4 h-4 text-blue-600" />
-                              Perguntas Frequentes (FAQ) — {activeCalc.name}
-                            </h2>
-                            <div className="flex flex-col gap-2.5">
-                              {calcSeo.faq.map((q, idx) => {
-                                const isSelected = activeAppFaqIdx === idx;
-                                return (
-                                  <div
-                                    key={idx}
-                                    onClick={() => setActiveAppFaqIdx(isSelected ? null : idx)}
-                                    className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${
-                                      isSelected ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'
-                                    }`}
-                                  >
-                                    <h3 className="text-xs font-bold text-slate-800 mb-1.5">{q.q}</h3>
-                                    <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
-                                      {q.a}
+                          {/* Premium Grid showing all categories */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            {Object.entries(CATEGORY_MAP).map(([key, label]) => {
+                              const slug = CATEGORY_KEY_TO_SLUG[key];
+                              const emoji = key === 'financas' ? '📊' : key === 'saude' ? '🍎' : key === 'profissoes' ? '👔' : key === 'matematica' ? '📐' : key === 'imobiliario' ? '🏠' : key === 'veiculos' ? '🚗' : key === 'estatistica' ? '📈' : key === 'juridico' ? '⚖️' : key === 'utilitarios' ? '💡' : key === 'aposentadoria' ? '⏳' : key === 'agronegocio' ? '🚜' : key === 'logistica' ? '🚚' : key === 'construcao' ? '🧱' : key === 'eventos' ? '🥩' : key === 'energia' ? '☀️' : key === 'educacao' ? '📚' : key === 'quimica_fisica' ? '🧪' : key === 'tecnologia' ? '💻' : key === 'pets' ? '🐾' : '⏱️';
+                              const rawLabel = CATEGORY_MAP_RAW[key] || label;
+                              const count = categoryCounts[key] || 0;
+
+                              // Short description for each category to look rich and premium
+                              const categoryDescriptions: Record<string, string> = {
+                                financas: 'Juros, investimentos, empréstimos, taxas e rentabilidade financeira.',
+                                saude: 'Cálculos nutricionais, IMC, metabolismo e bem-estar corporal.',
+                                profissoes: 'Rescisão CLT, horas extras, 13º salário e tributação profissional.',
+                                matematica: 'Regra de três, frações, estatísticas escolares e equações.',
+                                imobiliario: 'Financiamento, aluguel, amortização SAC/Price e valorização.',
+                                veiculos: 'Consumo de combustível, IPVA, depreciação FIPE e viagens.',
+                                estatistica: 'Médias ponderadas, desvio padrão, probabilidade e combinatória.',
+                                juridico: 'Imposto de renda, taxas de cartório, multas e honorários.',
+                                utilitarios: 'Medições domésticas, conversão de unidades e consumo diário.',
+                                aposentadoria: 'Simulação de INSS, previdência privada e idade mínima.',
+                                agronegocio: 'Cálculos de sementes, fertilizantes, gado e produtividade agrícola.',
+                                logistica: 'Cálculo de frete, cubagem de carga, rotas e pedágios.',
+                                construcao: 'Materiais de construção, tijolos, cimento e área de pintura.',
+                                eventos: 'Quantidade de comida e bebida por pessoa para festas e churrascos.',
+                                energia: 'Dimensionamento solar fotovoltaico, consumo KWh e economia.',
+                                educacao: 'Média do ENEM, nota de corte de vestibulares e histórico escolar.',
+                                quimica_fisica: 'Velocidade, densidade, conversor de temperatura e gases.',
+                                tecnologia: 'Conversão de bases, tempo de download, aspect ratio e lucros do AdSense.',
+                                pets: 'Metas de ração diária, hidratação e idade humana de cães e gatos.'
+                              };
+
+                              const desc = categoryDescriptions[key] || 'Ferramentas de precisão matemática para o dia a dia.';
+
+                              return (
+                                <div
+                                  key={key}
+                                  onClick={() => {
+                                    if (slug) {
+                                      setLocation('/' + slug);
+                                    } else {
+                                      setActiveCategory(key);
+                                    }
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  }}
+                                  className="group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                                >
+                                  <div>
+                                    <div className="flex items-center justify-between mb-1.5">
+                                      <span className="text-lg">{emoji}</span>
+                                      <span className="bg-slate-100 text-slate-500 font-mono text-[9px] font-bold px-1.5 py-0.5 rounded-md group-hover:bg-blue-50 group-hover:text-blue-700 transition-colors">
+                                        {count} {count === 1 ? 'ferramenta' : 'ferramentas'}
+                                      </span>
+                                    </div>
+                                    <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                      {rawLabel}
+                                    </h4>
+                                    <p className="text-[10.2px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
+                                      {desc}
                                     </p>
                                   </div>
-                                );
-                              })}
+                                  <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                    Acessar Segmento <ChevronRight className="w-3.5 h-3.5" />
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Box 2: Semantic Editorial Technical Guide & Visible FAQs */}
+                      {activeCalc && (() => {
+                        const calcSeo = getSeoContentForCalculator(activeCalc);
+                        const relatedGuides = getRelatedGuidesForCalculator(activeCalc.id, activeCalc.category);
+                        return (
+                          <article className="deferred-section bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                            {/* Detailed semantic sections */}
+                            <div className="flex flex-col gap-5">
+                              <section>
+                                <span className="text-[10px] font-extrabold text-blue-600 tracking-wider font-mono uppercase bg-blue-50 px-2.5 py-1 rounded-md">
+                                  Guia Técnico Completo
+                                </span>
+                                <h2 className="text-sm sm:text-base font-bold text-slate-900 mt-2.5 mb-2">
+                                  O que é e para que serve: {activeCalc.name}
+                                </h2>
+                                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
+                                  {calcSeo.whatIs}
+                                </p>
+                              </section>
+
+                              {calcSeo.stepByStep && calcSeo.stepByStep.length > 0 && (
+                                <section className="border-t border-slate-100 pt-4">
+                                  <h2 className="text-sm font-bold text-slate-900 mb-2.5">
+                                    Como usar esta calculadora passo a passo
+                                  </h2>
+                                  <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed">
+                                    {calcSeo.stepByStep.map((step, sIdx) => (
+                                      <li key={sIdx}>{step}</li>
+                                    ))}
+                                  </ul>
+                                </section>
+                              )}
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                                <section>
+                                  <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                    Fórmula e Lógica do Cálculo
+                                  </h3>
+                                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                    {calcSeo.howItWorks}
+                                  </p>
+                                </section>
+                                <section>
+                                  <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                    Exemplo Prático Numérico
+                                  </h3>
+                                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                    {calcSeo.practicalExample}
+                                  </p>
+                                </section>
+                              </div>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                                <section>
+                                  <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                    Quando Utilizar esta Ferramenta
+                                  </h3>
+                                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                    {calcSeo.whenToUse}
+                                  </p>
+                                </section>
+                                <section>
+                                  <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                    Dicas, Limites e Recomendações
+                                  </h3>
+                                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                    {calcSeo.importantTips}
+                                  </p>
+                                </section>
+                              </div>
+
+                              {calcSeo.methodologyNote && (
+                                <section className="border-t border-slate-100 pt-4">
+                                  <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
+                                    Metodologia, Precisão e Atualização 2026
+                                  </h3>
+                                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                                    {calcSeo.methodologyNote}
+                                  </p>
+                                </section>
+                              )}
                             </div>
-                          </section>
-                        )}
-                      </article>
-                    );
-                  })()}
 
-                  {/* Box 3: Advanced Internal Linking grids (3 categories: Related, Complementary, Popular) */}
-                  {activeCalc && (
-                    <div className="deferred-section flex flex-col gap-6">
-                      
-                      {/* Grid 1: Calculadoras da mesma Categoria */}
-                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                          <div className="h-4 w-1 bg-blue-600 rounded-full" />
-                          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
-                            Calculadoras da mesma Categoria ({CATEGORY_MAP_RAW[activeCalc.category] || activeCalc.category})
-                          </h3>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                          {relatedCalculators.map(c => (
-                            <button
-                              type="button"
-                              key={c.id}
-                              onClick={() => selectCalculator(c.id as any)}
-                              className="w-full text-left group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
-                            >
-                              <div>
-                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">{c.name}</h4>
-                                <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
-                              </div>
-                              <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
-                                Calcular Agora <ExternalLink className="w-2.5 h-2.5" />
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                            {/* Contextual Internal Links to Curated Guides */}
+                            {relatedGuides.length > 0 && (
+                              <section className="border-t border-slate-100 pt-4 bg-blue-50/40 rounded-xl p-4 border border-blue-100/80">
+                                <div className="flex items-center justify-between gap-2 mb-3">
+                                  <h3 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                                    <BookOpen className="w-4 h-4 text-blue-600" />
+                                    Guias Editoriais Relacionados
+                                  </h3>
+                                  <a
+                                    href="/guias"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      setLocation('/guias');
+                                    }}
+                                    className="text-[11px] font-bold text-blue-600 hover:underline"
+                                  >
+                                    Central de Guias →
+                                  </a>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                                  {relatedGuides.map((guide) => (
+                                    <a
+                                      key={guide.slug}
+                                      href={`/guias/${guide.slug}`}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setLocation(`/guias/${guide.slug}`);
+                                      }}
+                                      className="p-3 rounded-lg bg-white border border-blue-100 hover:border-blue-400 transition-all block"
+                                    >
+                                      <span className="text-[9px] font-bold text-blue-700 uppercase">{guide.categoryLabel}</span>
+                                      <p className="text-[11px] font-bold text-slate-900 mt-0.5 line-clamp-2 leading-snug">
+                                        {guide.title}
+                                      </p>
+                                    </a>
+                                  ))}
+                                </div>
+                              </section>
+                            )}
 
-                      {/* Grid 2: Você também pode precisar (Ferramentas Complementares) */}
-                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                          <div className="h-4 w-1 bg-amber-500 rounded-full" />
-                          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
-                            Você também pode precisar (Ferramentas Complementares)
-                          </h3>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                          {getComplementaryCalculators(activeCalculator, activeCalc.category).map(c => (
-                            <button
-                              type="button"
-                              key={c.id}
-                              onClick={() => selectCalculator(c.id as any)}
-                              className="w-full text-left group border border-slate-150 hover:border-amber-200 hover:bg-amber-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
-                            >
-                              <div>
-                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-amber-600 transition-colors line-clamp-1">{c.name}</h4>
-                                <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                            {/* EEAT Block: Fontes Oficiais e Data de Revisão */}
+                            {calcSeo.sources.length > 0 && (
+                              <div className="border-t border-slate-150 pt-4 mt-1 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 bg-slate-50/60 p-4 rounded-xl border border-slate-200/60">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[10px] font-bold text-slate-500 font-mono uppercase">Fontes e Referências Oficiais</span>
+                                </div>
+                                <div className="flex flex-wrap gap-3">
+                                  {calcSeo.sources.map((src, sIdx) => (
+                                    <a
+                                      key={sIdx}
+                                      href={src.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-[10px] text-blue-600 hover:text-blue-800 font-bold inline-flex items-center gap-1 transition-colors hover:underline"
+                                    >
+                                      {src.name} <ExternalLink className="w-2.5 h-2.5" />
+                                    </a>
+                                  ))}
+                                  <span className="text-[10px] text-slate-500 flex items-center gap-1 font-mono">
+                                    Atualizado em: {calcSeo.lastUpdated}
+                                  </span>
+                                </div>
                               </div>
-                              <span className="text-[9px] font-mono font-semibold text-amber-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
-                                Acessar Ferramenta <ExternalLink className="w-2.5 h-2.5" />
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                            )}
 
-                      {/* Grid 3: Mais Utilizadas (Popular Global Links) */}
-                      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
-                        <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                          <div className="h-4 w-1 bg-emerald-500 rounded-full" />
-                          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
-                            Mais Utilizadas da Central (Mais Acessadas)
-                          </h3>
+                            {/* FAQ Section (Always visible in DOM for Helpful Content & SEO) */}
+                            {calcSeo.faq.length > 0 && (
+                              <section className="flex flex-col gap-3 border-t border-slate-100 pt-5">
+                                <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                                  <HelpCircle className="w-4 h-4 text-blue-600" />
+                                  Perguntas Frequentes (FAQ) — {activeCalc.name}
+                                </h2>
+                                <div className="flex flex-col gap-2.5">
+                                  {calcSeo.faq.map((q, idx) => {
+                                    const isSelected = activeAppFaqIdx === idx;
+                                    return (
+                                      <div
+                                        key={idx}
+                                        onClick={() => setActiveAppFaqIdx(isSelected ? null : idx)}
+                                        className={`border rounded-xl px-4 py-3.5 transition-all cursor-pointer ${isSelected ? 'bg-blue-50/40 border-blue-200' : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50'
+                                          }`}
+                                      >
+                                        <h3 className="text-xs font-bold text-slate-800 mb-1.5">{q.q}</h3>
+                                        <p className="text-[11.5px] text-slate-600 font-sans font-normal leading-relaxed">
+                                          {q.a}
+                                        </p>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </section>
+                            )}
+                          </article>
+                        );
+                      })()}
+
+                      {/* Box 3: Advanced Internal Linking grids (3 categories: Related, Complementary, Popular) */}
+                      {activeCalc && (
+                        <div className="deferred-section flex flex-col gap-6">
+
+                          {/* Grid 1: Calculadoras da mesma Categoria */}
+                          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                            <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+                              <div className="h-4 w-1 bg-blue-600 rounded-full" />
+                              <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
+                                Calculadoras da mesma Categoria ({CATEGORY_MAP_RAW[activeCalc.category] || activeCalc.category})
+                              </h3>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                              {relatedCalculators.map(c => (
+                                <button
+                                  type="button"
+                                  key={c.id}
+                                  onClick={() => selectCalculator(c.id as any)}
+                                  className="w-full text-left group border border-slate-150 hover:border-blue-200 hover:bg-blue-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                                >
+                                  <div>
+                                    <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1">{c.name}</h4>
+                                    <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                                  </div>
+                                  <span className="text-[9px] font-mono font-semibold text-blue-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                    Calcular Agora <ExternalLink className="w-2.5 h-2.5" />
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Grid 2: Você também pode precisar (Ferramentas Complementares) */}
+                          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                            <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+                              <div className="h-4 w-1 bg-amber-500 rounded-full" />
+                              <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
+                                Você também pode precisar (Ferramentas Complementares)
+                              </h3>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                              {getComplementaryCalculators(activeCalculator, activeCalc.category).map(c => (
+                                <button
+                                  type="button"
+                                  key={c.id}
+                                  onClick={() => selectCalculator(c.id as any)}
+                                  className="w-full text-left group border border-slate-150 hover:border-amber-200 hover:bg-amber-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                                >
+                                  <div>
+                                    <h4 className="text-xs font-bold text-slate-800 group-hover:text-amber-600 transition-colors line-clamp-1">{c.name}</h4>
+                                    <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                                  </div>
+                                  <span className="text-[9px] font-mono font-semibold text-amber-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                    Acessar Ferramenta <ExternalLink className="w-2.5 h-2.5" />
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Grid 3: Mais Utilizadas (Popular Global Links) */}
+                          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+                            <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
+                              <div className="h-4 w-1 bg-emerald-500 rounded-full" />
+                              <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 font-display">
+                                Mais Utilizadas da Central (Mais Acessadas)
+                              </h3>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                              {getPopularCalculators(activeCalculator).map(c => (
+                                <button
+                                  type="button"
+                                  key={c.id}
+                                  onClick={() => selectCalculator(c.id as any)}
+                                  className="w-full text-left group border border-slate-150 hover:border-emerald-200 hover:bg-emerald-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
+                                >
+                                  <div>
+                                    <h4 className="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition-colors line-clamp-1">{c.name}</h4>
+                                    <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
+                                  </div>
+                                  <span className="text-[9px] font-mono font-semibold text-emerald-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
+                                    Simular Agora <ExternalLink className="w-2.5 h-2.5" />
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                          {getPopularCalculators(activeCalculator).map(c => (
-                            <button
-                              type="button"
-                              key={c.id}
-                              onClick={() => selectCalculator(c.id as any)}
-                              className="w-full text-left group border border-slate-150 hover:border-emerald-200 hover:bg-emerald-50/10 p-4 rounded-xl cursor-pointer transition-all hover:shadow-xs flex flex-col justify-between h-32"
-                            >
-                              <div>
-                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition-colors line-clamp-1">{c.name}</h4>
-                                <p className="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">{c.description}</p>
-                              </div>
-                              <span className="text-[9px] font-mono font-semibold text-emerald-600 uppercase inline-flex items-center gap-1 group-hover:underline mt-2">
-                                Simular Agora <ExternalLink className="w-2.5 h-2.5" />
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                      )}
 
                     </div>
-                  )}
+                  </>
+                )}
 
+                {/* AdSense Secondary banner footer container */}
+                <div className="w-full mt-4">
+                  <AdSenseBanner
+                    category={activeCalc?.category || 'financas'}
+                    layout="horizontal"
+                    onAdClicked={handleAdClicked}
+                    refreshTrigger={adRefreshTrigger + 10} // different trigger to alternate ads
+                  />
                 </div>
-              </>
-            )}
 
-            {/* AdSense Secondary banner footer container */}
-            <div className="w-full mt-4">
-              <AdSenseBanner 
-                category={activeCalc?.category || 'financas'}
-                layout="horizontal"
-                onAdClicked={handleAdClicked}
-                refreshTrigger={adRefreshTrigger + 10} // different trigger to alternate ads
-              />
+              </section>
             </div>
-
-          </section>
-        </div>
-        )}
+          )}
         </Suspense>
       </main>
 
       {/* Advanced AdSense and LGPD Compliant Footer with Modals */}
-      <FooterAndLegals 
-        onCategoryClick={setActiveCategory} 
-        onCalculatorClick={selectCalculator} 
-        categories={CATEGORY_MAP} 
+      <FooterAndLegals
+        onCategoryClick={setActiveCategory}
+        onCalculatorClick={selectCalculator}
+        categories={CATEGORY_MAP}
       />
     </div>
   );

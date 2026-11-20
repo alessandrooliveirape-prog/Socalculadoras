@@ -4,7 +4,7 @@
     "url": "https://www.brasilcalculadoras.com.br",
     "titulo": "Tabela Progressiva de Contribuição do INSS",
     "vigencia": "2026",
-    "atualizado_em": "2026-11-19T19:38:23.519Z",
+    "atualizado_em": "2026-11-20T14:49:16.267Z",
     "licenca": "Uso público e livre com atribuição de fonte obrigatória"
   },
   "dados": {
@@ -42,7 +42,7 @@
         "limite_superior": 8475.55,
         "aliquota_percentual": 14,
         "aliquota_decimal": 0.14,
-        "desconto_maximo_faixa": 555.32
+        "desconto_maximo_faixa": 576.98
       }
     ],
     "observacoes": "O cálculo incide de forma progressiva sobre cada parcela do salário de contribuição."

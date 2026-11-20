@@ -95,6 +95,30 @@ export const CATEGORY_MAP_RAW: Record<string, string> = {
   maternidade: 'Maternidade & Bebê'
 };
 
+export const CATEGORY_HOME_DESCRIPTIONS: Record<string, string> = {
+  financas: 'Simule Juros Compostos, compare CLT vs PJ e calcule Margem de Lucro & Markup com precisão.',
+  saude: 'Acompanhe Metabolismo e IMC Tracker, Ingestão de Água Diária e Percentual de Gordura Estimado.',
+  profissoes: 'Calcule Rescisão CLT, 13º Salário, Férias Proporcionais e Horas Extras com regras de 2026.',
+  matematica: 'Resolva Regra de Três Rápida, Porcentagem Rápida, Média Ponderada Escolar e Teorema de Pitágoras.',
+  imobiliario: 'Compare Financiamento Price vs SAC, Reajuste Anual de Contrato e Custos de ITBI e Registro.',
+  veiculos: 'Compare Álcool ou Gasolina, Carro Elétrico vs Combustão, IPVA Estimado e Consumo de Combustível.',
+  estatistica: 'Calcule Desvio Padrão e Variância, Margem de Erro de Pesquisas e Métrica de Churn.',
+  juridico: 'Simule Correção Monetária de Valores, Mora e Multas de Contratos e Imposto sobre Criptomoedas (GCAP).',
+  utilitarios: 'Use o Conversor de Câmbio Moedas, Divisor de Conta do Bar e Ar Condicionado ideal (BTUs).',
+  aposentadoria: 'Planeje o futuro com o Simulador INSS / Aposentadoria, Previdência Privada e Capital de Viver de Renda.',
+  agronegocio: 'Projete Produtividade de Grãos (Milho/Soja), Necessidade de Calagem e Viabilidade de Gado de Corte.',
+  logistica: 'Calcule Frete e Margem de Lucro, Cubagem e Peso Taxável e Custo de Km Rodado.',
+  construcao: 'Estime materiais com a Calculadora de Tijolos por m², Tinta Predial e Pisos e Porcelanato.',
+  eventos: 'Organize compras com a Calculadora de Churrasco, Bebidas para Festas e Ficha Técnica de Receitas.',
+  energia: 'Avalie Custo de Energia Elétrica, Dimensionamento de Energia Solar e Pegada de Carbono.',
+  educacao: 'Simule Nota SISU com Pesos, Nota ENEM para SiSU e Média Semestral Universitária.',
+  quimica_fisica: 'Calcule Velocidade Média, Conversor de Temperatura e Calculadora de Densidade para estudos.',
+  tecnologia: 'Estime Tempo de Download de Arquivo, Proporção de Tela & Aspect Ratio e Conversor de Bases Numéricas.',
+  pets: 'Descubra a Idade Humana de Cão e Gato, Porção Diária de Ração e Água Recomendada para Pets.',
+  datas: 'Calcule Diferença entre Datas, Contagem de Dias Úteis e Conversor de Horas para Decimal.',
+  maternidade: 'Acompanhe a Data Provável do Parto (DPP) e o Custo Mensal com Bebê no planejamento familiar.'
+};
+
 const ALL_CALC_SEO_DETAILS: Record<string, CalcSeoDetail> = {
   ...FINANCAS_TRABALHISTA_SEO,
   ...IMOBILIARIO_VEICULOS_SAUDE_SEO,
@@ -309,22 +333,21 @@ function buildDynamicStepByStep(calc: CalculatorDef): string[] {
   inputs.forEach((inp, idx) => {
     const numStep = idx + 1;
     if (inp.type === 'select' && inp.options && inp.options.length > 0) {
-      const opts = inp.options.map(o => `"${o.label}"`).join(', ');
       const defOpt = inp.options.find(o => String(o.value) === String(inp.defaultValue))?.label || String(inp.defaultValue);
       steps.push(
-        `Passo ${numStep} — Selecione "${inp.label}": escolha no menu suspenso a opção que representa seu cenário atual entre ${opts} (padrão inicial: "${defOpt}").`
+        `Passo ${numStep} — Selecione "${inp.label}": escolha no menu a opção correspondente ao seu caso (valor inicial: "${defOpt}").`
       );
     } else if (inp.type === 'text') {
       steps.push(
-        `Passo ${numStep} — Preencha "${inp.label}": digite a série ou dado correspondente seguindo o formato de exemplo "${inp.defaultValue}" para que o algoritmo interprete corretamente todos os termos.`
+        `Passo ${numStep} — Preencha "${inp.label}": insira os dados seguindo o formato de exemplo "${inp.defaultValue}".`
       );
     } else {
       const rangeHint = inp.min !== undefined && inp.max !== undefined
-        ? ` (faixa aceita de ${inp.min} a ${inp.max})`
+        ? ` (faixa de ${inp.min} a ${inp.max})`
         : '';
       const valStr = formatInputValue(inp, inp.defaultValue);
       steps.push(
-        `Passo ${numStep} — Informe "${inp.label}": digite o valor numérico desejado${rangeHint}; a ferramenta inicia preenchida com a referência ${valStr} para demonstração imediata.`
+        `Passo ${numStep} — Informe "${inp.label}": digite o valor desejado${rangeHint}; o campo inicia com ${valStr} como referência.`
       );
     }
   });
@@ -335,15 +358,15 @@ function buildDynamicStepByStep(calc: CalculatorDef): string[] {
 
   if (primaryOut) {
     const secText = secondaryOuts.length > 0
-      ? ` Abaixo do painel principal, consulte também os indicadores complementares (${secondaryOuts.map(o => `"${o.label}"`).join(', ')}) para ter visão completa da simulação.`
+      ? ' Consulte também os indicadores complementares exibidos logo abaixo para uma leitura completa.'
       : '';
     steps.push(
-      `Passo ${nextStep} — Leia o resultado principal em "${primaryOut.label}": o cálculo é atualizado em tempo real conforme você altera qualquer campo no navegador, sem necessidade de recarregar a página.${secText}`
+      `Passo ${nextStep} — Confira o resultado em "${primaryOut.label}": os valores são atualizados instantaneamente conforme você altera os campos.${secText}`
     );
   }
 
   steps.push(
-    `Passo ${nextStep + 1} — Registre ou compartilhe os números: caso deseje guardar a simulação de ${calc.name}, utilize os botões de salvar no histórico local, copiar resumo formatado, enviar via WhatsApp ou exportar em PDF/CSV.`
+    `Passo ${nextStep + 1} — Salve ou exporte o demonstrativo: se precisar arquivar ou enviar os números da ${calc.name}, utilize os botões de histórico local, WhatsApp, PDF ou CSV.`
   );
 
   return steps;
@@ -444,7 +467,7 @@ function buildDynamicPracticalExample(calc: CalculatorDef): string {
     sensitivitySentence += `, demonstrando como a alteração de uma única variável impacta o diagnóstico final.`;
   }
 
-  return `Cenário de Referência: considerando os parâmetros padrão de entrada (${inputSummary}), o motor de cálculo de ${calc.name} apura como resultado principal "${primaryOut.label}" igual a ${primaryStr}${secondaryStr ? `, além dos seguintes indicadores complementares: ${secondaryStr}` : ''}. ${sensitivitySentence}`;
+  return `Por exemplo, preenchendo ${inputSummary}, a ${calc.name} resulta em "${primaryOut.label}" de ${primaryStr}${secondaryStr ? ` (${secondaryStr})` : ''}. ${sensitivitySentence}`;
 }
 
 export const getCategoryHubContent = (categoryKey: string): CategoryHubSeoContent => {
@@ -473,27 +496,19 @@ export const getCategoryHubContent = (categoryKey: string): CategoryHubSeoConten
 export const getSeoContentForCalculator = (calc: CalculatorDef): CalculatorSeoContent => {
   const detail = ALL_CALC_SEO_DETAILS[calc.id];
   const catLabel = CATEGORY_MAP_RAW[calc.category] || calc.category;
-  const inputs = calc.inputs || [];
   const outputs = calc.outputs || [];
 
-  const inputListText = inputs.length > 0
-    ? inputs.map(i => i.label).join(', ')
-    : 'parâmetros específicos inseridos no painel interativo';
-  const outputListText = outputs.length > 0
-    ? outputs.map(o => o.label).join(', ')
-    : 'indicadores consolidados e demonstrativos de resultado';
-
   const whatIs = detail
-    ? `${detail.domainConcept} Integrada à área de ${catLabel} do Brasil Calculadoras, a ferramenta "${calc.name}" (${calc.description.replace(/\.$/, '')}) processa entradas estruturadas (${inputListText}) para calcular automaticamente ${outputListText} diretamente no navegador, sem cadastro e com total privacidade.`
-    : `${calc.name}: ${calc.description} Ferramenta gratuita da categoria ${catLabel} que processa ${inputListText} para gerar ${outputListText} localmente no navegador.`;
+    ? `${detail.domainConcept} Parte da área de ${catLabel} do Brasil Calculadoras, a ferramenta ${calc.name} executa a simulação diretamente no navegador, gratuitamente e sem cadastro.`
+    : `${calc.name}: ${calc.description} Disponível na categoria ${catLabel} do Brasil Calculadoras, permite simular diferentes cenários diretamente no navegador, sem cadastro.`;
 
   const stepByStep = CORE_STEP_BY_STEP[calc.id]
     ? CORE_STEP_BY_STEP[calc.id]
     : buildDynamicStepByStep(calc);
 
   const howItWorks = detail
-    ? `${detail.formulaText} Em termos operacionais, o algoritmo lê em tempo real as entradas informadas (${inputListText}), aplica validações numéricas de consistência e calcula simultaneamente todos os indicadores de saída (${outputListText}) com precisão decimal padrão para conferência imediata.`
-    : `O algoritmo processa os valores inseridos em ${inputListText} aplicando equações padronizadas para devolver ${outputListText}.`;
+    ? detail.formulaText
+    : `A ferramenta aplica as equações de referência de ${catLabel} sobre os valores informados no simulador, recalculando automaticamente o resultado principal e os indicadores complementares.`;
 
   const practicalExample = detail?.workedExample
     ? detail.workedExample
@@ -505,7 +520,7 @@ export const getSeoContentForCalculator = (calc: CalculatorDef): CalculatorSeoCo
   const importantTips = detail?.importantTips
     || `Confira cuidadosamente as unidades de medida de cada campo antes de exportar os resultados e valide casos específicos com profissional habilitado.`;
 
-  const methodologyNote = `Metodologia e Limite Educativo: a simulação de ${calc.name} utiliza processamento 100% client-side com fórmulas matemáticas e parâmetros vigentes em 2026 para fins educativos e de planejamento preliminar, não substituindo laudos técnicos, contábeis, jurídicos ou médicos oficiais.`;
+  const methodologyNote = `Os cálculos de ${calc.name} são processados localmente no navegador com parâmetros atualizados para 2026, com caráter educativo e de planejamento preliminar, não substituindo laudos técnicos, contábeis, jurídicos ou médicos oficiais.`;
 
   const sources = detail?.sources && detail.sources.length > 0
     ? detail.sources
@@ -538,7 +553,7 @@ export const getSeoContentForCalculator = (calc: CalculatorDef): CalculatorSeoCo
     if (combinedFaq.length < 5) {
       pushFaq(
         `Quais variáveis mais influenciam o cálculo de "${primaryOutLabel}" nesta ferramenta?`,
-        `O valor final de "${primaryOutLabel}" responde diretamente às variações inseridas nos campos de entrada (${inputListText}). Recomendamos alterar um parâmetro por vez em +10% ou +25% para observar a sensibilidade do resultado antes de decidir.`
+        `O valor final de "${primaryOutLabel}" responde diretamente às variações inseridas nos campos do simulador. Alterar um parâmetro por vez ajuda a comparar cenários e medir o impacto de cada variável antes de decidir.`
       );
     }
   }

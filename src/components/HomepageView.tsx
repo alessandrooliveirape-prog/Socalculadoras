@@ -20,7 +20,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from '../data/calculatorsCatalog';
-import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW } from '../utils/seoContentGenerator';
+import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW, CATEGORY_HOME_DESCRIPTIONS } from '../utils/seoContentGenerator';
 import { GUIDES_ARTICLES } from '../data/guidesArticles';
 
 function normalizeSearchText(text: string): string {
@@ -90,17 +90,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
         }).slice(0, 10);
       })();
 
-  const categoryDescriptions: Record<string, string> = {
-    financas: 'Planejamento de juros compostos, markup de vendas, poupança, amortização e ROI de investimentos.',
-    saude: 'Acompanhamento do IMC, metabolismo basal BMR, gasto calórico diário e ingestão ideal de água.',
-    profissoes: 'Cálculo completo de rescisão CLT, décimo terceiro, provisão de férias, horas extras e FGTS.',
-    matematica: 'Regra de três simples, porcentagens rápidas, equações de 2º grau e médias escolares.',
-    imobiliario: 'Simuladores Price vs SAC, reajuste de aluguel, cap rate e estimativas fiscais de ITBI.',
-    veiculos: 'Comparação de álcool vs gasolina, depreciação FIPE, consumo de viagem e IPVA.',
-    pets: 'Meta de ração diária, hidratação e idade em anos humanos para cães e gatos.',
-    datas: 'Diferença entre datas, contagem de dias úteis, conversão de horas e planejamento temporal.',
-    maternidade: 'Data provável do parto, custo mensal com bebê, idade gestacional e planejamento familiar.'
-  };
+  const categoryDescriptions = CATEGORY_HOME_DESCRIPTIONS;
 
   const intentGroups = [
     {
@@ -138,7 +128,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
   const homepageFaqs = [
     {
       q: 'O Brasil Calculadoras é 100% gratuito?',
-      a: 'Sim, absolutamente gratuito. Nosso propósito é democratizar o acesso a ferramentas matemáticas, financeiras e trabalhistas sem cobrar assinaturas, taxas ou exigir cadastros. A plataforma é mantida de forma sustentável através de parcerias e patrocínios digitais transparentes.'
+      a: 'Sim, absolutamente gratuito. Nosso propósito é democratizar o acesso a ferramentas matemáticas, financeiras e trabalhistas sem cobrar assinaturas, taxas ou exigir cadastros.'
     },
     {
       q: 'Como são atualizadas as fórmulas trabalhistas e fiscais?',

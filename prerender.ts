@@ -5,7 +5,8 @@ import {
   getSeoContentForCalculator,
   getCategoryHubContent,
   CATEGORY_KEY_TO_SLUG,
-  CATEGORY_MAP_RAW
+  CATEGORY_MAP_RAW,
+  CATEGORY_HOME_DESCRIPTIONS
 } from './src/utils/seoContentGenerator';
 import { GUIDES_ARTICLES, getRelatedGuidesForCalculator } from './src/data/guidesArticles';
 import { generateApiData } from './scripts/generateApiEndpoints';
@@ -43,10 +44,10 @@ function formatBrDate(isoDate: string): string {
 
 const currentYear = new Date().getFullYear();
 
-function buildHeaderHtml(isHome = false): string {
+function buildHeaderHtml(_isHome = false): string {
   const logoBlock = `
     <div style="display: flex; align-items: center; gap: 10px;">
-      <img src="/logo.svg" alt="Brasil Calculadoras" style="height: 36px; width: 36px;" />
+      <img src="/logo.svg" alt="" aria-hidden="true" width="36" height="36" style="height: 36px; width: 36px;" />
       <div>
         <strong style="font-size: 18px; color: #1e293b;">Brasil Calculadoras</strong><br/>
         <small style="color: #64748b; font-size: 10px; font-weight: bold;">FERRAMENTAS DE EXCELÊNCIA</small>
@@ -56,8 +57,8 @@ function buildHeaderHtml(isHome = false): string {
 
   return `
     <header style="padding: 16px 20px; border-bottom: 1px solid #e2e8f0; background: #ffffff; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-family: sans-serif;">
-      ${isHome ? logoBlock : `<a href="/" style="text-decoration: none; color: inherit;">${logoBlock}</a>`}
-      <nav aria-label="Navegação superior" style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 13px; font-weight: 700;">
+      <a href="/" style="text-decoration: none; color: inherit;">${logoBlock}</a>
+      <nav aria-label="Navegação principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 13px; font-weight: 700;">
         <a href="/" style="color: #334155; text-decoration: none;">Início</a>
         <a href="/guias" style="color: #1d4ed8; background: #eff6ff; padding: 7px 12px; border-radius: 8px; text-decoration: none;">Guias &amp; Artigos</a>
         <a href="/sobre" style="color: #334155; text-decoration: none;">Sobre</a>
@@ -72,7 +73,7 @@ const sharedFooterHtml = `
     <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 35px;">
       <div>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-          <img src="/logo.svg" alt="Brasil Calculadoras" style="height: 32px; width: 32px;" />
+          <img src="/logo.svg" alt="" aria-hidden="true" width="32" height="32" style="height: 32px; width: 32px;" />
           <strong style="color: #ffffff; font-size: 16px;">Brasil Calculadoras</strong>
         </div>
         <p style="font-size: 12.5px; line-height: 1.6; color: #94a3b8; margin: 0 0 15px;">
@@ -89,7 +90,6 @@ const sharedFooterHtml = `
           <li><a href="/termos-de-uso" style="color: #cbd5e1; text-decoration: none;">Termos e Condições de Uso</a></li>
           <li><a href="/sobre" style="color: #cbd5e1; text-decoration: none;">Sobre Nós &amp; Metodologia</a></li>
           <li><a href="/contato" style="color: #cbd5e1; text-decoration: none;">Contato &amp; Suporte</a></li>
-          <li><a href="/transparencia-adsense" style="color: #cbd5e1; text-decoration: none;">Transparência AdSense</a></li>
           <li><a href="/anunciantes" style="color: #cbd5e1; text-decoration: none;">Mídia &amp; Anunciantes</a></li>
           <li><a href="/desenvolvedores" style="color: #cbd5e1; text-decoration: none;">API &amp; Desenvolvedores</a></li>
         </ul>
@@ -281,7 +281,7 @@ const homeHtml = `
         ${Object.entries(CATEGORY_MAP_RAW).map(([key, label]) => `
           <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
             <h3 style="margin-top: 0; font-size: 15px; font-weight: bold;"><a href="/${CATEGORY_KEY_TO_SLUG[key]}" style="color: #1d4ed8; text-decoration: none;">${escapeHtml(label)}</a></h3>
-            <p style="font-size: 12.5px; color: #64748b; line-height: 1.5; margin-bottom: 0;">Acesse nosso catálogo completo de simuladores focados em ${escapeHtml(label.toLowerCase())}.</p>
+            <p style="font-size: 12.5px; color: #64748b; line-height: 1.5; margin-bottom: 0;">${escapeHtml(CATEGORY_HOME_DESCRIPTIONS[key] || `Simuladores especializados de ${label.toLowerCase()}.`)}</p>
           </div>
         `).join('')}
       </div>
@@ -304,7 +304,7 @@ const homeHtml = `
       <h2 style="font-size: 18px; color: #0f172a; margin-top: 0; margin-bottom: 16px; font-weight: 800;">Perguntas Frequentes Sobre o Portal</h2>
       <div style="margin-bottom: 14px;">
         <h3 style="font-size: 14px; color: #1e293b; margin: 0 0 6px; font-weight: 700;">O Brasil Calculadoras é 100% gratuito?</h3>
-        <p style="font-size: 13px; color: #475569; line-height: 1.6; margin: 0;">Sim, absolutamente gratuito. Nosso propósito é democratizar o acesso a ferramentas matemáticas, financeiras e trabalhistas sem cobrar assinaturas ou exigir cadastros, sustentado de forma transparente por publicidade Google AdSense.</p>
+        <p style="font-size: 13px; color: #475569; line-height: 1.6; margin: 0;">Sim, absolutamente gratuito. Nosso propósito é democratizar o acesso a ferramentas matemáticas, financeiras e trabalhistas sem cobrar assinaturas, taxas ou exigir cadastros.</p>
       </div>
       <div style="margin-bottom: 14px;">
         <h3 style="font-size: 14px; color: #1e293b; margin: 0 0 6px; font-weight: 700;">Como são atualizadas as fórmulas trabalhistas e fiscais?</h3>

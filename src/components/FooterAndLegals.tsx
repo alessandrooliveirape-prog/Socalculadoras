@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check, Code, Server, Award } from 'lucide-react';
+import { Shield, Eye, HelpCircle, FileText, Mail, Info, X, Check, Code, Server } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { CATEGORY_KEY_TO_SLUG } from '../utils/seoContentGenerator';
 import { NativeDialog } from './NativeDialog';
@@ -38,13 +38,13 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
           {/* Brand Col */}
           <div className="md:col-span-4 flex flex-col gap-4 select-none">
             <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Brasil Calculadoras" width="32" height="32" loading="lazy" className="h-8 w-8 rounded-lg shadow-sm" />
+              <img src="/logo.svg" alt="" aria-hidden="true" width="32" height="32" loading="lazy" className="h-8 w-8 rounded-lg shadow-sm" />
               <h2 className="text-md font-display font-extrabold text-white">Brasil Calculadoras</h2>
             </div>
             <p className="text-xs text-slate-300 leading-relaxed">
               Plataforma profissional de ferramentas matemáticas, simulações trabalhistas, diagnósticos de saúde, logística e agronegócio do Brasil. Projetamos utilitários 100% gratuitos, rápidos e práticos para ajudar você a poupar tempo e tomar as melhores decisões no dia a dia.
             </p>
-            <button 
+            <button
               onClick={() => setLocation('/contato')}
               className="flex items-center gap-1.5 mt-2 bg-slate-800 hover:bg-slate-750 p-2.5 rounded-xl border border-slate-700/50 w-fit text-left cursor-pointer transition-colors"
             >
@@ -148,17 +148,6 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
                 <span>Política de Cookies</span>
               </a>
               <a
-                href="/transparencia-adsense"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setLocation('/transparencia-adsense');
-                }}
-                className="text-left text-xs text-slate-400 hover:text-blue-400 transition-all flex items-center gap-1.5 cursor-pointer font-semibold"
-              >
-                <Award className="w-3.5 h-3.5 text-blue-400" />
-                <span>Transparência AdSense</span>
-              </a>
-              <a
                 href="/anunciantes"
                 onClick={(e) => {
                   e.preventDefault();
@@ -190,7 +179,7 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               Os resultados emitidos por esta central têm caráter de projeção técnica provisória e educativa. Consulte profissionais regulados (contadores, nutricionistas ou advogados) antes de celebrar decisões definitivas comerciais.
             </p>
             <p className="text-[9.5px] text-slate-400 leading-normal font-sans">
-              Portal mantido 100% gratuito e financiado através de anúncios programáticos do Google AdSense.
+              Portal mantido 100% gratuito, sem cadastro e com processamento local no navegador.
             </p>
           </div>
         </div>
