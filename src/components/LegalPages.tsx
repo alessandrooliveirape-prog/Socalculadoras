@@ -207,7 +207,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               <Info className="w-8 h-8" />
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Sobre o Brasil Calculadoras</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Nossa missão editorial, metodologia de revisão matemática e padrão de transparência (E-E-A-T)</p>
+            <p className="text-xs text-slate-400 m-0">Nossa missão editorial, metodologia de revisão matemática e padrão de transparência editorial</p>
           </header>
 
           <section className="flex flex-col gap-5 text-sm leading-relaxed">
@@ -228,7 +228,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               </div>
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col gap-2">
                 <Award className="w-6 h-6 text-blue-600" />
-                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Curadoria E-E-A-T</h3>
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Fontes Oficiais e Revisão Técnica</h3>
                 <p className="text-xs text-slate-600 m-0">Guias originais sem texto genérico, com citação direta a normas da Receita Federal, CLT, Banco Central, IBGE, OMS e INMETRO.</p>
               </div>
             </div>
