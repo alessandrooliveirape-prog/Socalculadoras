@@ -294,7 +294,7 @@ function formatInputValue(inp: DynamicInputDef, val: any): string {
     if (found) return `"${found.label}"`;
   }
   const pref = inp.prefix ? `${inp.prefix} ` : '';
-  const suff = inp.suffix ? (inp.suffix.startsWith('%') || inp.suffix.startsWith('/') ? inp.suffix : ` ${inp.suffix}`) : '';
+  const isOne = typeof val === 'number' ? val === 1 : String(val).trim() === '1'; const singMap: Record<string, string> = { dias: 'dia', semanas: 'semana', meses: 'mês', faltas: 'falta', parcelas: 'parcela', anos: 'ano', horas: 'hora', minutos: 'minuto', segundos: 'segundo', vezes: 'vez', itens: 'item', unidades: 'unidade', pessoas: 'pessoa', filhos: 'filho', dependentes: 'dependente', 'dias úteis': 'dia útil', reais: 'real' }; const trimmedSuff = inp.suffix ? inp.suffix.trim() : ''; const lowerSuff = trimmedSuff.toLowerCase(); const rawSuff = trimmedSuff ? (isOne ? (singMap[lowerSuff] || (lowerSuff.endsWith('ões') ? trimmedSuff.slice(0, -3) + 'ão' : (lowerSuff.endsWith('s') && !lowerSuff.endsWith('ês') && !lowerSuff.endsWith('us') && !lowerSuff.endsWith('is') && trimmedSuff.length > 2 ? trimmedSuff.slice(0, -1) : trimmedSuff))) : inp.suffix) : ''; const suff = rawSuff ? (rawSuff.startsWith('%') || rawSuff.startsWith('/') ? rawSuff : ` ${rawSuff}`) : '';
   if (typeof val === 'number') {
     return `${pref}${val.toLocaleString('pt-BR', { maximumFractionDigits: 4 })}${suff}`.trim();
   }
