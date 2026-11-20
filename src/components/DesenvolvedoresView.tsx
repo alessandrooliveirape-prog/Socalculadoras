@@ -48,14 +48,14 @@ const ENDPOINTS: EndpointDef[] = [
         "licenca": "Uso público com atribuição obrigatória"
       },
       "dados": {
-        "salario_minimo": 1518.00,
-        "teto_inss": 8157.41,
-        "teto_desconto_maximo": 952.12,
+        "salario_minimo": 1621.00,
+        "teto_inss": 8475.55,
+        "teto_desconto_maximo": 988.09,
         "faixas": [
-          { "faixa": 1, "limite_inferior": 0.00, "limite_superior": 1518.00, "aliquota_percentual": 7.5, "desconto_maximo_faixa": 113.85 },
-          { "faixa": 2, "limite_inferior": 1518.01, "limite_superior": 2793.88, "aliquota_percentual": 9.0, "desconto_maximo_faixa": 114.83 },
-          { "faixa": 3, "limite_inferior": 2793.89, "limite_superior": 4190.83, "aliquota_percentual": 12.0, "desconto_maximo_faixa": 167.63 },
-          { "faixa": 4, "limite_inferior": 4190.84, "limite_superior": 8157.41, "aliquota_percentual": 14.0, "desconto_maximo_faixa": 555.32 }
+          { "faixa": 1, "limite_inferior": 0.00, "limite_superior": 1621.00, "aliquota_percentual": 7.5, "desconto_maximo_faixa": 121.58 },
+          { "faixa": 2, "limite_inferior": 1621.01, "limite_superior": 2902.84, "aliquota_percentual": 9.0, "desconto_maximo_faixa": 115.37 },
+          { "faixa": 3, "limite_inferior": 2902.85, "limite_superior": 4354.27, "aliquota_percentual": 12.0, "desconto_maximo_faixa": 174.17 },
+          { "faixa": 4, "limite_inferior": 4354.28, "limite_superior": 8475.55, "aliquota_percentual": 14.0, "desconto_maximo_faixa": 576.98 }
         ]
       }
     }
@@ -103,7 +103,7 @@ const ENDPOINTS: EndpointDef[] = [
         "vigencia": "2026"
       },
       "dados": {
-        "salario_minimo": 1518.00,
+        "salario_minimo": 1621.00,
         "aliquota_fgts_mensal_percentual": 8.0,
         "multa_rescisoria_fgts_sem_justa_causa_percentual": 40.0,
         "regras_aviso_previo": {
