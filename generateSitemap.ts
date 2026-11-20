@@ -86,7 +86,6 @@ const institutionalEntries = [
   { slug: 'sobre', changefreq: 'monthly', priority: '0.50' },
   { slug: 'contato', changefreq: 'monthly', priority: '0.50' },
   { slug: 'cookies', changefreq: 'monthly', priority: '0.50' },
-  { slug: 'transparencia-adsense', changefreq: 'monthly', priority: '0.50' },
   { slug: 'anunciantes', changefreq: 'monthly', priority: '0.50' },
   { slug: 'desenvolvedores', changefreq: 'weekly', priority: '0.85' }
 ];

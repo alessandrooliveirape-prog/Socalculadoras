@@ -257,6 +257,36 @@ const homeHtml = `
     </section>
 
     <section style="margin-bottom: 45px;">
+      <h2 style="font-size: 20px; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; width: fit-content; margin-bottom: 20px; font-weight: 800; color: #0f172a;">Simuladores em Alta nas Buscas (2026)</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+        <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
+          <h3 style="margin-top: 0; font-size: 15px;"><a href="/move-brasil" style="color: #1d4ed8; text-decoration: none; font-weight: bold;">Simulador Move Brasil 2026 (Moto, Carro, Caixa e BB)</a></h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 0;">Simule parcelas, entrada e prazo para motos, carros e caminhões via Caixa Econômica Federal e Banco do Brasil.</p>
+        </div>
+        <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
+          <h3 style="margin-top: 0; font-size: 15px;"><a href="/falta-injustificada" style="color: #1d4ed8; text-decoration: none; font-weight: bold;">Calculadora de Faltas Injustificadas 2026 (Tabela e DSR)</a></h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 0;">Calcule o desconto em folha, perda do DSR (Lei 605/49) e consulte a tabela oficial de férias do Art. 130 da CLT.</p>
+        </div>
+        <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
+          <h3 style="margin-top: 0; font-size: 15px;"><a href="/salario-professor" style="color: #1d4ed8; text-decoration: none; font-weight: bold;">Calculadora de Salário de Professor 2026 (20h/40h)</a></h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 0;">Simule hora-aula, Piso do Magistério, hora-atividade, DSR e descontos atualizados de INSS e IRRF 2026.</p>
+        </div>
+        <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
+          <h3 style="margin-top: 0; font-size: 15px;"><a href="/log-calculo-frete" style="color: #1d4ed8; text-decoration: none; font-weight: bold;">Cálculo de Frete e Margem de Lucro Rodoviário</a></h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 0;">Forme o valor ideal do frete considerando diesel, pedágios, manutenção por km e margem líquida desejada.</p>
+        </div>
+        <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
+          <h3 style="margin-top: 0; font-size: 15px;"><a href="/financiamento-veiculo" style="color: #1d4ed8; text-decoration: none; font-weight: bold;">Financiamento de Veículos CDC (Carros e Motos)</a></h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 0;">Simule parcelas fixas pela Tabela Price, compare entradas e descubra o total de juros no financiamento CDC.</p>
+        </div>
+        <div style="border: 1px solid #e2e8f0; padding: 18px; border-radius: 16px; background: #fff;">
+          <h3 style="margin-top: 0; font-size: 15px;"><a href="/tempo-viagem" style="color: #1d4ed8; text-decoration: none; font-weight: bold;">Calculadora de Tempo de Viagem Rodoviária</a></h3>
+          <p style="font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 0;">Planeje a duração real do trajeto combinando distância em km, velocidade média efetiva e paradas na estrada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 45px;">
       <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px;">
         <h2 style="font-size: 20px; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; margin: 0; font-weight: 800; color: #0f172a;">Guias Práticos e Artigos Educativos</h2>
         <a href="/guias" style="font-size: 13px; font-weight: 700; color: #1d4ed8; text-decoration: none;">Ver Todos os Guias (${GUIDES_ARTICLES.length}) &rarr;</a>
@@ -559,20 +589,18 @@ CALCULATORS_CATALOG.forEach(calc => {
   const catSlug = CATEGORY_KEY_TO_SLUG[calc.category] || '';
   const relatedGuides = getRelatedGuidesForCalculator(calc.id, calc.category);
 
-  const softwareSchema = {
+  const webAppSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "@id": `${canonicalUrl}#software`,
+    "@type": "WebApplication",
+    "@id": `${canonicalUrl}#webapp`,
     "name": calc.name,
     "operatingSystem": "All",
-    "applicationCategory": "EducationalApplication",
+    "browserRequirements": "Requires JavaScript",
+    "applicationCategory": calc.category === 'financas' || calc.category === 'imobiliario' || calc.category === 'aposentadoria' ? "FinanceApplication" : "UtilitiesApplication",
+    "isAccessibleForFree": true,
+    "inLanguage": "pt-BR",
     "description": seoData.description,
-    "url": canonicalUrl,
-    "offers": {
-      "@type": "Offer",
-      "price": "0.00",
-      "priceCurrency": "BRL"
-    }
+    "url": canonicalUrl
   };
 
   const breadcrumbSchema = {
@@ -648,6 +676,42 @@ CALCULATORS_CATALOG.forEach(calc => {
           ${seoData.methodologyNote ? `<p style="font-size: 13px; color: #475569; line-height: 1.65; margin: 0;">${escapeHtml(seoData.methodologyNote)}</p>` : ''}
         </section>
 
+        ${seoData.referenceTable ? `
+          <section style="margin-bottom: 24px; border-top: 1px solid #f1f5f9; padding-top: 20px;">
+            <h2 style="font-size: 17px; color: #0f172a; margin-top: 0; margin-bottom: 8px; font-weight: 800;">${escapeHtml(seoData.referenceTable.heading)}</h2>
+            ${seoData.referenceTable.caption ? `<p style="font-size: 13px; color: #475569; margin: 0 0 12px; line-height: 1.6;">${escapeHtml(seoData.referenceTable.caption)}</p>` : ''}
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid #e2e8f0;">
+                <thead>
+                  <tr style="background: #f8fafc; text-align: left;">
+                    ${seoData.referenceTable.headers.map(h => `<th scope="col" style="padding: 10px 12px; border-bottom: 1px solid #cbd5e1; color: #0f172a; font-weight: 700;">${escapeHtml(h)}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${seoData.referenceTable.rows.map((row, rIdx) => `
+                    <tr style="background: ${rIdx % 2 === 1 ? '#f8fafc' : '#ffffff'};">
+                      ${row.map((cell, cIdx) => `<td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: ${cIdx === 0 ? '#0f172a' : '#334155'}; font-weight: ${cIdx === 0 ? '600' : '400'};">${escapeHtml(cell)}</td>`).join('')}
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+            ${seoData.referenceTable.note ? `<p style="font-size: 12px; color: #64748b; margin: 10px 0 0; line-height: 1.55;">${escapeHtml(seoData.referenceTable.note)}</p>` : ''}
+          </section>
+        ` : ''}
+
+        ${seoData.extraSections && seoData.extraSections.length > 0 ? seoData.extraSections.map(sec => `
+          <section style="margin-bottom: 24px; border-top: 1px solid #f1f5f9; padding-top: 20px;">
+            <h2 style="font-size: 17px; color: #0f172a; margin-top: 0; margin-bottom: 10px; font-weight: 800;">${escapeHtml(sec.heading)}</h2>
+            ${sec.paragraphs.map(p => `<p style="font-size: 13.5px; color: #475569; line-height: 1.65; margin: 0 0 12px;">${escapeHtml(p)}</p>`).join('')}
+            ${sec.bullets && sec.bullets.length > 0 ? `
+              <ul style="padding-left: 20px; margin: 0; color: #475569; font-size: 13.5px; line-height: 1.7;">
+                ${sec.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+              </ul>
+            ` : ''}
+          </section>
+        `).join('') : ''}
+
         ${relatedGuides.length > 0 ? `
           <section style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 18px; margin-bottom: 24px;">
             <h2 style="font-size: 15px; color: #0f172a; margin-top: 0; margin-bottom: 10px; font-weight: 800;">Guias Editoriais Relacionados</h2>
@@ -683,7 +747,7 @@ CALCULATORS_CATALOG.forEach(calc => {
     ${sharedFooterHtml}
   `;
 
-  const calcSchemas: any[] = [softwareSchema, breadcrumbSchema];
+  const calcSchemas: any[] = [webAppSchema, breadcrumbSchema];
   if (seoData.faq && seoData.faq.length > 0) {
     calcSchemas.push({
       "@context": "https://schema.org",

@@ -2197,8 +2197,8 @@ const RAW_DYNAMIC_METADATA: {
 },
 {
   "id": "move-brasil",
-  "name": "Simulador Move Brasil 2026: Carros, Motos e Caminhões (BB, Caixa e BNDES)",
-  "description": "Simule o financiamento MOVE Brasil para carros, motos e caminhões leves (motoristas de app, taxistas e entregadores) pelo Banco do Brasil, Caixa e BNDES.",
+  "name": "Simulador e Calculadora Move Brasil 2026: Moto, Carro, Caixa e Banco do Brasil",
+  "description": "Simule grátis e online o financiamento Move Brasil 2026 para moto, carro e caminhão via Caixa Econômica Federal, Banco do Brasil e BNDES.",
   "category": "veiculos",
   "icon": "Car",
   "tags": [
@@ -5012,8 +5012,8 @@ const RAW_DYNAMIC_METADATA: {
   },
   {
     id: 'falta-injustificada',
-    name: 'Calculadora de Faltas Injustificadas e DSR (CLT 2026)',
-    description: 'Calcule o desconto de faltas no salário, perda do DSR (Lei 605/49) e reflexo nos dias de férias (Art. 130 CLT) e 13º salário.',
+    name: 'Calculadora de Faltas Injustificadas 2026: Tabela, DSR e Férias (CLT)',
+    description: 'Calcule o desconto de faltas injustificadas no salário (divisor 30), perda do DSR (Lei 605/49) e consulte a tabela do Art. 130 CLT de redução de férias.',
     category: 'profissoes',
     icon: 'Calendar',
     tags: ['falta injustificada', 'desconto falta', 'dsr', 'salário', 'clt', 'férias', '13 salário', 'holerite'],
@@ -5458,21 +5458,39 @@ const RAW_DYNAMIC_METADATA: {
   },
   {
     id: 'salario-professor',
-    name: 'Cálculo de Hora Aula Professor',
-    description: 'Remuneração agregando quantidade de turmas ministradas, hora-atividade e gratificação de classe.',
+    name: 'Calculadora de Salário de Professor 2026 (20h/40h, Hora-Atividade, INSS e IRRF)',
+    description: 'Calcule o salário bruto e líquido de professor em 2026 considerando Piso do Magistério, jornadas de 20h ou 40h, fator de 4,5 semanas (Art. 320 CLT), hora-atividade, DSR, INSS e IRRF.',
     category: 'profissoes',
     icon: 'Briefcase',
-    tags: ['professor', 'escola', 'ensino', 'aula', 'hora-atividade'],
-    type: 'multiply',
+    tags: ['professor', 'salário professor', 'piso do magistério', '20h', '40h', 'escola', 'ensino', 'aula', 'hora-atividade', 'inss 2026', 'irrf 2026'],
+    type: 'trab_professor',
     inputs: [
-      { id: 'horas_semanais', label: 'Total de Horas-Aula na Semana', def: 20, type: 'number', suff: 'horas/semana' },
-      { id: 'valor_hora', label: 'Valor da Hora Aula Praticado', def: 35, type: 'number', pref: 'R$' }
+      { id: 'horas_semanais', label: 'Carga Horária Semanal (ex: 20h ou 40h)', def: 20, type: 'number', suff: 'horas/semana' },
+      { id: 'valor_hora', label: 'Valor da Hora-Aula', def: 35, type: 'number', pref: 'R$' },
+      { id: 'hora_atividade_pct', label: 'Adicional de Hora-Atividade (%)', def: 5, type: 'number', suff: '%' },
+      {
+        id: 'incluir_dsr',
+        label: 'Incluir DSR (1/6 sobre base + hora-atividade)',
+        def: 'sim',
+        type: 'select',
+        op: [
+          { v: 'sim', l: 'Sim — Padrão CLT / Sinpro (+1/6 DSR)' },
+          { v: 'nao', l: 'Não — Apenas Salário Base + Hora-Atividade' }
+        ]
+      },
+      { id: 'dependentes', label: 'Dependentes para IRRF', def: 0, type: 'number', suff: 'dependentes' }
     ],
     outputs: [
-      { id: 'salario_base', label: 'Estimativa de Salário Mensal Base', pref: 'R$', isPrimary: true }
+      { id: 'salario_liquido', label: 'Salário Líquido Estimado (INSS e IRRF 2026)', pref: 'R$', isPrimary: true },
+      { id: 'salario_bruto', label: 'Salário Bruto Mensal Total', pref: 'R$' },
+      { id: 'salario_base', label: 'Salário Base (Art. 320 CLT — 4,5 semanas)', pref: 'R$' },
+      { id: 'valor_hora_atividade', label: 'Adicional de Hora-Atividade', pref: 'R$' },
+      { id: 'valor_dsr', label: 'Descanso Semanal Remunerado (DSR 1/6)', pref: 'R$' },
+      { id: 'desc_inss', label: 'Desconto INSS 2026 (Progressivo)', pref: 'R$' },
+      { id: 'desc_irrf', label: 'Desconto IRRF 2026', pref: 'R$' }
     ],
     faq: [
-      { q: 'O que é a hora-atividade?', a: 'Adicional de cerca de 1/6 a 1/5 do salário base para cobrir o planejamento pedagógico e correções fora de classe.' }
+      { q: 'O que é a hora-atividade no salário do professor?', a: 'É a parcela destinada a remunerar o tempo extraclasse de planejamento pedagógico e correções. Na rede privada costuma ser de 5% conforme convenção coletiva; na rede pública a Lei nº 11.738/2008 garante 1/3 da jornada para atividades extraclasse.' }
     ]
   },
   {
@@ -8717,6 +8735,48 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         results['parcela_ipva'] = parseFloat((ipva / 3).toFixed(2));
       }
       // ========== NEW CALCULATORS (Expansion 2026) ==========
+      else if (raw.type === 'trab_professor') {
+        const horasSemanais = Math.max(0, parseFloat(valInputs['horas_semanais'] || 0));
+        const valorHora = Math.max(0, parseFloat(valInputs['valor_hora'] || 0));
+        const horaAtividadePct = Math.max(0, parseFloat(valInputs['hora_atividade_pct'] || 0));
+        const incluirDsr = String(valInputs['incluir_dsr'] || 'sim') !== 'nao';
+        const deps = Math.max(0, parseInt(valInputs['dependentes'] || 0, 10));
+
+        const salarioBase = horasSemanais * valorHora * 4.5;
+        const valorHoraAtividade = salarioBase * (horaAtividadePct / 100);
+        const subtotal = salarioBase + valorHoraAtividade;
+        const valorDsr = incluirDsr ? subtotal / 6 : 0;
+        const bruto = subtotal + valorDsr;
+
+        // Tabela progressiva INSS 2026 (Portaria MPS/MF nº 13/2026: R$ 1.621 / teto R$ 8.475,55 / max R$ 988,09)
+        let inss = 0;
+        if (bruto <= 1621) inss = bruto * 0.075;
+        else if (bruto <= 2902.84) inss = (1621 * 0.075) + ((bruto - 1621) * 0.09);
+        else if (bruto <= 4354.27) inss = (1621 * 0.075) + (1281.84 * 0.09) + ((bruto - 2902.84) * 0.12);
+        else if (bruto <= 8475.55) inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + ((bruto - 4354.27) * 0.14);
+        else inss = 988.09;
+
+        // IRRF 2026: aplica automaticamente o menor imposto entre deduções legais e desconto simplificado mensal (R$ 564,80)
+        const calcIrrf = (base: number): number => {
+          if (base > 4664.68) return Math.max(0, (base * 0.275) - 896.00);
+          if (base > 3751.05) return Math.max(0, (base * 0.225) - 662.77);
+          if (base > 2826.65) return Math.max(0, (base * 0.15) - 381.44);
+          if (base > 2259.20) return Math.max(0, (base * 0.075) - 169.44);
+          return 0;
+        };
+        const baseLegal = Math.max(0, bruto - inss - (deps * 189.59));
+        const baseSimplificada = Math.max(0, bruto - 564.80);
+        const irrf = Math.min(calcIrrf(baseLegal), calcIrrf(baseSimplificada));
+        const liquido = Math.max(0, bruto - inss - irrf);
+
+        results['salario_liquido'] = parseFloat(liquido.toFixed(2));
+        results['salario_bruto'] = parseFloat(bruto.toFixed(2));
+        results['salario_base'] = parseFloat(salarioBase.toFixed(2));
+        results['valor_hora_atividade'] = parseFloat(valorHoraAtividade.toFixed(2));
+        results['valor_dsr'] = parseFloat(valorDsr.toFixed(2));
+        results['desc_inss'] = parseFloat(inss.toFixed(2));
+        results['desc_irrf'] = parseFloat(irrf.toFixed(2));
+      }
       else if (raw.type === 'trab_inss') {
         const bruto = parseFloat(valInputs['salario_bruto'] || 0);
         // Tabela progressiva INSS 2026

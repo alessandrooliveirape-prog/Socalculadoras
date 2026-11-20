@@ -32,7 +32,6 @@ const INSTITUTIONAL_SLUGS = [
   'sobre',
   'contato',
   'cookies',
-  'transparencia-adsense',
   'anunciantes',
   'desenvolvedores'
 ];

@@ -384,6 +384,16 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
         id: 'simulador-irrf-salario',
         name: 'Simulador de Imposto de Renda (IRRF) 2026',
         description: 'Descubra qual método reduz mais seu IRRF: deduções legais ou desconto simplificado.'
+      },
+      {
+        id: 'falta-injustificada',
+        name: 'Calculadora de Faltas Injustificadas 2026: Tabela, DSR e Férias (CLT)',
+        description: 'Calcule o desconto de faltas no salário, perda do DSR (Lei 605/49) e tabela do Art. 130 da CLT.'
+      },
+      {
+        id: 'salario-professor',
+        name: 'Calculadora de Salário de Professor 2026 (20h/40h, Hora-Atividade, INSS e IRRF)',
+        description: 'Calcule salário bruto e líquido de professor com fator de 4,5 semanas, hora-atividade, DSR, INSS e IRRF 2026.'
       }
     ],
     sections: [
@@ -891,6 +901,11 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
         id: 'ipva-estimado',
         name: 'IPVA Estimado de Veículo',
         description: 'Projete o imposto estadual anual conforme o valor venal FIPE e a alíquota do seu estado.'
+      },
+      {
+        id: 'tempo-viagem',
+        name: 'Calculadora de Tempo de Viagem',
+        description: 'Estime a duração real de viagens rodoviárias considerando distância, velocidade média e paradas.'
       }
     ],
     sections: [
@@ -1188,6 +1203,11 @@ export const GUIDES_ARTICLES: GuideArticle[] = [
         id: 'log-jornada-motorista',
         name: 'Jornada e Descansos (Lei do Motorista)',
         description: 'Controle blocos de condução, intervalos de repouso e interjornada previstos na Lei 13.103.'
+      },
+      {
+        id: 'tempo-viagem',
+        name: 'Calculadora de Tempo de Viagem',
+        description: 'Planeje horários de saída e chegada na estrada combinando distância, velocidade média e paradas.'
       }
     ],
     sections: [

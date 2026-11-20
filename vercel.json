@@ -42,6 +42,19 @@
   ],
   "routes": [
     {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "brasilcalculadoras.com.br"
+        }
+      ],
+      "status": 301,
+      "headers": {
+        "Location": "https://www.brasilcalculadoras.com.br/$1"
+      }
+    },
+    {
       "src": "/quem-somos",
       "status": 301,
       "headers": {

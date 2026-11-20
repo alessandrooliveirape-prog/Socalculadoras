@@ -484,7 +484,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
-  <!-- Simulador Move Brasil 2026: Carros, Motos e Caminhões (BB, Caixa e BNDES) -->
+  <!-- Simulador e Calculadora Move Brasil 2026: Moto, Carro, Caixa e Banco do Brasil -->
   <url>
     <loc>https://www.brasilcalculadoras.com.br/move-brasil</loc>
     <lastmod>2026-11-20</lastmod>
@@ -834,7 +834,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
-  <!-- Calculadora de Faltas Injustificadas e DSR (CLT 2026) -->
+  <!-- Calculadora de Faltas Injustificadas 2026: Tabela, DSR e Férias (CLT) -->
   <url>
     <loc>https://www.brasilcalculadoras.com.br/falta-injustificada</loc>
     <lastmod>2026-11-20</lastmod>
@@ -988,7 +988,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
-  <!-- Cálculo de Hora Aula Professor -->
+  <!-- Calculadora de Salário de Professor 2026 (20h/40h, Hora-Atividade, INSS e IRRF) -->
   <url>
     <loc>https://www.brasilcalculadoras.com.br/salario-professor</loc>
     <lastmod>2026-11-20</lastmod>
@@ -1497,12 +1497,6 @@
   </url>
   <url>
     <loc>https://www.brasilcalculadoras.com.br/cookies</loc>
-    <lastmod>2026-11-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>https://www.brasilcalculadoras.com.br/transparencia-adsense</loc>
     <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>

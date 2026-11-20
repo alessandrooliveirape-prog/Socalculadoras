@@ -90,6 +90,39 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
         }).slice(0, 10);
       })();
 
+  const RISING_TOOLS = [
+    {
+      id: 'move-brasil',
+      label: 'Simulador Move Brasil 2026 (Moto, Carro, Caixa e BB)',
+      desc: 'Compare parcela, entrada e prazo no financiamento de motos, carros e caminhões.'
+    },
+    {
+      id: 'falta-injustificada',
+      label: 'Calculadora de Faltas Injustificadas 2026 (Tabela e DSR)',
+      desc: 'Calcule desconto no holerite, perda do DSR (Lei 605/49) e tabela do Art. 130 da CLT.'
+    },
+    {
+      id: 'salario-professor',
+      label: 'Calculadora de Salário de Professor 2026 (20h/40h)',
+      desc: 'Estime salário bruto e líquido com hora-atividade, DSR, Piso do Magistério, INSS e IRRF.'
+    },
+    {
+      id: 'log-calculo-frete',
+      label: 'Cálculo de Frete e Margem de Lucro',
+      desc: 'Forme o preço do frete rodoviário somando diesel, pedágios, manutenção e lucro.'
+    },
+    {
+      id: 'financiamento-veiculo',
+      label: 'Financiamento de Veículos CDC (Carros e Motos)',
+      desc: 'Simule prestações fixas pela Tabela Price e veja o impacto da entrada nos juros.'
+    },
+    {
+      id: 'tempo-viagem',
+      label: 'Calculadora de Tempo de Viagem',
+      desc: 'Estime o tempo real de percurso rodoviário considerando velocidade média e paradas.'
+    }
+  ];
+
   const categoryDescriptions = CATEGORY_HOME_DESCRIPTIONS;
 
   const intentGroups = [
@@ -266,6 +299,41 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Seção Em Alta nas Buscas (2026) — Links Internos Contextuais */}
+      <section className="flex flex-col gap-5">
+        <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+          <span className="h-5 w-1 bg-emerald-600 rounded-full" />
+          <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider font-display">
+            Simuladores em Alta nas Buscas (2026)
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {RISING_TOOLS.map(item => (
+            <a
+              key={item.id}
+              href={`/${item.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectCalculator(item.id);
+              }}
+              className="group bg-white border border-slate-200 hover:border-emerald-300 hover:shadow-md p-5 rounded-2xl transition-all flex flex-col justify-between hover:bg-emerald-50/15 no-underline"
+            >
+              <div>
+                <h3 className="text-xs font-bold text-slate-900 group-hover:text-emerald-700 transition-colors leading-snug">
+                  {item.label}
+                </h3>
+                <p className="text-[10.5px] text-slate-600 mt-1.5 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
+              </div>
+              <span className="text-[9.5px] font-mono font-bold text-emerald-700 uppercase tracking-wide inline-flex items-center gap-0.5 mt-3 select-none">
+                Acessar simulador <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+              </span>
+            </a>
+          ))}
         </div>
       </section>
 

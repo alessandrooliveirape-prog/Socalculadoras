@@ -251,20 +251,49 @@ export const IMOBILIARIO_VEICULOS_SAUDE_SEO: Record<string, CalcSeoDetail> = {
     ]
   },
   'move-brasil': {
-    title: 'Simulador Programa Move Brasil 2026: Carros, Motos e Caminhões | Brasil Calculadoras',
-    description: 'Simule financiamento subsidiado Move Brasil via Banco do Brasil, Caixa e BNDES para motoristas de aplicativo, taxistas, motoboys e caminhoneiros.',
-    domainConcept: 'O Programa Move Brasil reúne linhas especiais de crédito com juros reduzidos apoiadas pelo BNDES e operadas por bancos públicos como Banco do Brasil e Caixa Econômica Federal para apoiar a renovação da frota de trabalhadores do transporte — motoristas de aplicativo (Uber/99), taxistas, entregadores motociclistas e caminhoneiros autônomos. Ao oferecer taxas subsidiadas diferenciadas (com condições ainda mais favoráveis para mulheres motoristas) e prazos longos de até 84 meses, o programa busca reduzir expressivamente a prestação mensal comparada às taxas de mercado tradicional (~18% a 22% a.a.).',
-    formulaText: 'Aplica-se a Tabela Price sobre (Valor do Veículo - Entrada) com taxas mensais de referência do programa (a partir de 0,85% a.m. BB / 0,89% a.m. Caixa / 0,91% a.m. BNDES para mulheres; 0,93% / 0,97% / 0,99% a.m. demais perfis), comparando com a parcela de mercado a 1,67% a.m. para quantificar a economia total de juros.',
-    whenToUse: 'Use para verificar quanto você economiza por mês e no total do contrato ao financiar carro, moto de entrega ou VUC/caminhão leve pela linha subsidiada versus CDC comum.',
-    importantTips: 'Confira no portal oficial do programa e junto à sua agência do Banco do Brasil ou Caixa os documentos exigidos de comprovação de atividade ativa nas plataformas ou registro profissional (CNH com EAR — Exerce Atividade Remunerada).',
+    title: 'Simulador e Calculadora Move Brasil 2026: Moto, Carro, Caixa e Banco do Brasil | Brasil Calculadoras',
+    description: 'Simulador e calculadora Move Brasil 2026 grátis e online para moto, carro e caminhão via Caixa Econômica Federal e Banco do Brasil. Compare parcela, entrada, prazo e CET.',
+    domainConcept: 'O Programa Move Brasil reúne linhas especiais de crédito voltadas à renovação de frota para trabalhadores do transporte — motoristas de aplicativo (Uber/99), taxistas, entregadores motociclistas e caminhoneiros autônomos — com operação por bancos públicos como Banco do Brasil e Caixa Econômica Federal, além de linhas com lastro do BNDES. Esta calculadora permite simular gratuitamente e online a prestação estimada pela Tabela Price para moto, carro ou caminhão leve, comparando diferentes valores de entrada e prazos em relação a um financiamento tradicional.',
+    formulaText: 'A simulação aplica a fórmula da Tabela Price sobre o saldo financiado (Valor do Veículo menos Entrada) utilizando taxas referenciais educativas para comparar a prestação estimada frente a uma taxa média de mercado tradicional. As condições efetivas de juros e CET variam conforme a análise de crédito e o regulamento vigente em cada banco operador.',
+    whenToUse: 'Use antes de ir à concessionária ou à agência da Caixa ou do Banco do Brasil para testar cenários de financiamento de moto, carro de aplicativo ou utilitário leve, avaliando o peso da parcela no seu faturamento mensal.',
+    importantTips: 'Os percentuais usados na calculadora servem como referência educativa para planejamento. Antes de assinar o contrato, solicite a simulação oficial com o Custo Efetivo Total (CET) no aplicativo ou agência da Caixa Econômica Federal ou do Banco do Brasil e confirme a CNH com observação EAR (Exerce Atividade Remunerada).',
+    extraSections: [
+      {
+        heading: 'Move Brasil para Moto: como funciona a simulação para motociclistas e entregadores',
+        paragraphs: [
+          'Quem busca uma simulação do Move Brasil para moto — especialmente entregadores e motofretistas cadastrados em plataformas de delivery — deve ajustar primeiro a categoria "Moto de Entregador" no simulador e informar o valor real da motocicleta (incluindo emplacamento e documentação, caso entrem no orçamento). Como o ticket médio de motos costuma ser menor do que o de automóveis, pequenos aumentos na entrada reduzem rapidamente o valor financiado e o total de juros pagos.',
+          'Ao simular o financiamento de moto, teste prazos entre 24, 36 e 48 meses para verificar quanto a parcela mensal compromete da sua receita líquida depois de combustível e manutenção. Verifique também junto ao banco se o modelo escolhido (combustão flex ou moto elétrica) atende às regras de enquadramento da linha no momento da contratação.'
+        ],
+        bullets: [
+          'Habilitação e cadastro: confirme CNH categoria A válida com observação EAR e comprovante de atividade remunerada ativa.',
+          'Entrada estratégica: simular entradas de 15%, 20% ou 30% ajuda a visualizar a queda no saldo devedor e nos juros acumulados.',
+          'Custos paralelos da moto: além da prestação, considere seguro ou proteção veicular, IPVA, pneus e revisões mensais no orçamento.'
+        ]
+      },
+      {
+        heading: 'O que conferir ao simular na Caixa Econômica Federal e no Banco do Brasil',
+        paragraphs: [
+          'Tanto na Caixa Econômica Federal quanto no Banco do Brasil, a taxa de juros divulgada na vitrine representa apenas parte do custo do financiamento. A comparação justa entre propostas bancárias depende sempre do CET (Custo Efetivo Total), que consolida juros, IOF, tarifa de cadastro/avaliação de garantia e eventuais seguros vinculados.',
+          'Por isso, após fazer sua simulação preliminar aqui no Brasil Calculadoras, leve os mesmos parâmetros (valor do bem, valor de entrada e número de parcelas) para comparar lado a lado a proposta oficial da Caixa e a do Banco do Brasil, observando se há diferença de exigência de relacionamento bancário, entrada mínima ou prazo máximo para o seu perfil.'
+        ],
+        bullets: [
+          'Taxas e CET: compare sempre o CET anual e mensal oficial informado na ficha-proposta do banco, nunca apenas a taxa nominal.',
+          'Entrada mínima e limite financiado: verifique qual percentual máximo do valor do veículo (LTV) o banco financia para carros e motos.',
+          'Prazo e amortização antecipada: confirme o prazo máximo disponível e a regra de desconto proporcional de juros ao antecipar parcelas (Art. 52, §2º do CDC).',
+          'Seguros e tarifas opcionais: cheque se seguro prestamista ou pacotes adicionais são opcionais e qual o impacto deles na prestação final.'
+        ]
+      }
+    ],
     sources: [
-      { name: 'Gov.br - Programa Move Brasil', url: 'https://www.gov.br/' },
-      { name: 'BNDES - Linhas de Financiamento ao Transporte', url: 'https://www.bndes.gov.br/' }
+      { name: 'Banco Central - Taxas de Financiamento de Veículos', url: 'https://www.bcb.gov.br/estatisticas/txjuros' },
+      { name: 'BNDES - Linhas de Financiamento ao Transporte', url: 'https://www.bndes.gov.br/' },
+      { name: 'Código de Defesa do Consumidor (Lei nº 8.078/1990)', url: 'https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm' }
     ],
     extraFaqs: [
-      { q: 'A CNH precisa ter a observação EAR para acessar linhas de financiamento profissional?', a: 'Sim. Motoristas de aplicativo, taxistas, motofretistas e caminhoneiros precisam possuir na Carteira Nacional de Habilitação a observação "Exerce Atividade Remunerada" (EAR), além de comprovação cadastral ativa.' },
-      { q: 'Qual a economia média de juros em comparação ao CDC convencional?', a: 'Em financiamentos de R$ 60.000 a R$ 80.000 em 48 meses, a redução da taxa de ~1,67% a.m. para ~0,85%–0,95% a.m. costuma gerar economia entre R$ 12.000 e R$ 20.000 em juros.' },
-      { q: 'Veículos usados também entram nas linhas de renovação de frota?', a: 'As linhas incentivadas focam primordialmente veículos novos flex, híbridos ou elétricos com menor emissão, ou seminovos dentro da idade máxima aceita pelo regulamento vigente do BNDES/banco operador.' }
+      { q: 'Como fazer a simulação do Move Brasil para moto?', a: 'Selecione a opção "Moto de Entregador" no campo Categoria do Veículo, informe o preço da motocicleta, o valor de entrada disponível, o banco de referência (Banco do Brasil, Caixa ou BNDES) e o prazo em meses para visualizar a parcela estimada e o comparativo com o financiamento tradicional.' },
+      { q: 'O que devo comparar entre a Caixa Econômica Federal e o Banco do Brasil no Move Brasil?', a: 'Compare sempre o CET (Custo Efetivo Total), o valor mínimo de entrada exigido, o prazo máximo liberado para o seu perfil de crédito, eventuais tarifas administrativas e se o banco exige conta ativa ou comprovação específica de renda/atividade.' },
+      { q: 'A CNH precisa ter a observação EAR para acessar linhas de financiamento profissional?', a: 'Sim. Motoristas de aplicativo, taxistas, motofretistas e caminhoneiros geralmente precisam apresentar CNH válida com a observação "Exerce Atividade Remunerada" (EAR), além de comprovação cadastral ativa conforme as regras do banco operador.' },
+      { q: 'As taxas exibidas no simulador são garantidas pelo banco?', a: 'Não. O simulador utiliza taxas referenciais para fins educativos e de comparação preliminar. A taxa definitiva, o CET e a aprovação dependem da análise de crédito e das condições vigentes no momento da contratação na Caixa, Banco do Brasil ou instituição credenciada.' }
     ]
   },
   'seguro-perfil': {

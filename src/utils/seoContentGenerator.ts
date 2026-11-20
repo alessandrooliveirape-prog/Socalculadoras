@@ -3,9 +3,9 @@ import { CATEGORY_SEO_DATABASE, CategoryHubSeoContent } from '../data/seo/catego
 import { FINANCAS_TRABALHISTA_SEO } from '../data/seo/financasTrabalhistaData';
 import { IMOBILIARIO_VEICULOS_SAUDE_SEO } from '../data/seo/imobiliarioVeiculosSaudeData';
 import { EXATAS_TECH_UTIL_SEO } from '../data/seo/exatasTechUtilData';
-import { CalcSeoDetail } from '../data/seo/types';
+import { CalcSeoDetail, CalcSeoSection, CalcSeoTable } from '../data/seo/types';
 
-export type { CategoryHubSeoContent };
+export type { CategoryHubSeoContent, CalcSeoSection, CalcSeoTable };
 
 export interface CalculatorSeoContent {
   title: string;
@@ -16,6 +16,8 @@ export interface CalculatorSeoContent {
   practicalExample: string;
   whenToUse: string;
   importantTips: string;
+  extraSections?: CalcSeoSection[];
+  referenceTable?: CalcSeoTable;
   methodologyNote: string;
   sources: { name: string; url: string }[];
   lastUpdated: string;
@@ -567,9 +569,11 @@ export const getSeoContentForCalculator = (calc: CalculatorDef): CalculatorSeoCo
     practicalExample,
     whenToUse,
     importantTips,
+    extraSections: detail?.extraSections,
+    referenceTable: detail?.referenceTable,
     methodologyNote,
     sources,
     lastUpdated: 'Novembro de 2026',
-    faq: combinedFaq.slice(0, 6)
+    faq: combinedFaq.slice(0, 8)
   };
 };

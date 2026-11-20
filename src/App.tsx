@@ -381,20 +381,18 @@ export default function App() {
         document.head.appendChild(script);
       }
 
-      const softwareSchema = {
+      const webAppSchema = {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "@id": `${canonicalUrl}#software`,
+        "@type": "WebApplication",
+        "@id": `${canonicalUrl}#webapp`,
         "name": calc.name,
         "operatingSystem": "All",
-        "applicationCategory": "EducationalApplication",
+        "browserRequirements": "Requires JavaScript",
+        "applicationCategory": calc.category === 'financas' || calc.category === 'imobiliario' || calc.category === 'aposentadoria' ? "FinanceApplication" : "UtilitiesApplication",
+        "isAccessibleForFree": true,
+        "inLanguage": "pt-BR",
         "description": seoData.description,
-        "url": canonicalUrl,
-        "offers": {
-          "@type": "Offer",
-          "price": "0.00",
-          "priceCurrency": "BRL"
-        }
+        "url": canonicalUrl
       };
 
       const catLabel = CATEGORY_MAP_RAW[calc.category] || calc.category;
@@ -425,7 +423,24 @@ export default function App() {
         ]
       };
 
-      script.textContent = JSON.stringify([softwareSchema, breadcrumbSchema]);
+      const schemas: any[] = [webAppSchema, breadcrumbSchema];
+      if (seoData.faq && seoData.faq.length > 0) {
+        schemas.push({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${canonicalUrl}#faq`,
+          "mainEntity": seoData.faq.map((q: any) => ({
+            "@type": "Question",
+            "name": q.q,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": q.a
+            }
+          }))
+        });
+      }
+
+      script.textContent = JSON.stringify(schemas);
     } catch (e) {
       console.warn('Failed to inject calculator schema:', e);
     }
@@ -2031,7 +2046,73 @@ export default function App() {
                                 </section>
                               </div>
 
-                              {calcSeo.methodologyNote && (
+                              {calcSeo.referenceTable && (
+                            <section className="border-t border-slate-100 pt-4">
+                              <h2 className="text-sm font-bold text-slate-900 mb-2">
+                                {calcSeo.referenceTable.heading}
+                              </h2>
+                              {calcSeo.referenceTable.caption && (
+                                <p className="text-xs text-slate-600 mb-3 leading-relaxed">
+                                  {calcSeo.referenceTable.caption}
+                                </p>
+                              )}
+                              <div className="overflow-x-auto rounded-xl border border-slate-200">
+                                <table className="w-full text-left border-collapse text-xs">
+                                  <thead className="bg-slate-50 text-slate-800 border-b border-slate-200">
+                                    <tr>
+                                      {calcSeo.referenceTable.headers.map((h, hIdx) => (
+                                        <th key={hIdx} scope="col" className="px-3.5 py-2.5 font-bold whitespace-nowrap">
+                                          {h}
+                                        </th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody className="divide-y divide-slate-100 text-slate-700">
+                                    {calcSeo.referenceTable.rows.map((row, rIdx) => (
+                                      <tr key={rIdx} className={rIdx % 2 === 1 ? 'bg-slate-50/50' : 'bg-white'}>
+                                        {row.map((cell, cIdx) => (
+                                          <td key={cIdx} className={`px-3.5 py-2.5 ${cIdx === 0 ? 'font-semibold text-slate-900' : ''}`}>
+                                            {cell}
+                                          </td>
+                                        ))}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                              {calcSeo.referenceTable.note && (
+                                <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+                                  {calcSeo.referenceTable.note}
+                                </p>
+                              )}
+                            </section>
+                          )}
+
+                          {calcSeo.extraSections && calcSeo.extraSections.length > 0 && (
+                            <div className="flex flex-col gap-5 border-t border-slate-100 pt-4">
+                              {calcSeo.extraSections.map((sec, secIdx) => (
+                                <section key={secIdx} className="flex flex-col gap-2">
+                                  <h2 className="text-sm font-bold text-slate-900">
+                                    {sec.heading}
+                                  </h2>
+                                  {sec.paragraphs.map((p, pIdx) => (
+                                    <p key={pIdx} className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
+                                      {p}
+                                    </p>
+                                  ))}
+                                  {sec.bullets && sec.bullets.length > 0 && (
+                                    <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-600 leading-relaxed mt-1">
+                                      {sec.bullets.map((b, bIdx) => (
+                                        <li key={bIdx}>{b}</li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </section>
+                              ))}
+                            </div>
+                          )}
+
+                          {calcSeo.methodologyNote && (
                                 <section className="border-t border-slate-100 pt-4">
                                   <h3 className="text-xs font-extrabold text-slate-800 font-mono uppercase tracking-wider mb-1.5">
                                     Metodologia, Precisão e Atualização 2026

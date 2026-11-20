@@ -4,7 +4,7 @@
     "url": "https://www.brasilcalculadoras.com.br",
     "titulo": "Catálogo de Calculadoras e Simuladores Online",
     "total_ferramentas": 175,
-    "atualizado_em": "2026-11-20T14:49:16.267Z",
+    "atualizado_em": "2026-11-20T15:32:40.943Z",
     "licenca": "Uso público e livre com atribuição de fonte obrigatória"
   },
   "calculadoras": [
@@ -339,8 +339,8 @@
     },
     {
       "id": "move-brasil",
-      "nome": "Simulador Move Brasil 2026: Carros, Motos e Caminhões (BB, Caixa e BNDES)",
-      "descricao": "Simule o financiamento MOVE Brasil para carros, motos e caminhões leves (motoristas de app, taxistas e entregadores) pelo Banco do Brasil, Caixa e BNDES.",
+      "nome": "Simulador e Calculadora Move Brasil 2026: Moto, Carro, Caixa e Banco do Brasil",
+      "descricao": "Simule grátis e online o financiamento Move Brasil 2026 para moto, carro e caminhão via Caixa Econômica Federal, Banco do Brasil e BNDES.",
       "categoria": "veiculos",
       "url": "https://www.brasilcalculadoras.com.br/move-brasil"
     },
@@ -689,8 +689,8 @@
     },
     {
       "id": "falta-injustificada",
-      "nome": "Calculadora de Faltas Injustificadas e DSR (CLT 2026)",
-      "descricao": "Calcule o desconto de faltas no salário, perda do DSR (Lei 605/49) e reflexo nos dias de férias (Art. 130 CLT) e 13º salário.",
+      "nome": "Calculadora de Faltas Injustificadas 2026: Tabela, DSR e Férias (CLT)",
+      "descricao": "Calcule o desconto de faltas injustificadas no salário (divisor 30), perda do DSR (Lei 605/49) e consulte a tabela do Art. 130 CLT de redução de férias.",
       "categoria": "profissoes",
       "url": "https://www.brasilcalculadoras.com.br/falta-injustificada"
     },
@@ -843,8 +843,8 @@
     },
     {
       "id": "salario-professor",
-      "nome": "Cálculo de Hora Aula Professor",
-      "descricao": "Remuneração agregando quantidade de turmas ministradas, hora-atividade e gratificação de classe.",
+      "nome": "Calculadora de Salário de Professor 2026 (20h/40h, Hora-Atividade, INSS e IRRF)",
+      "descricao": "Calcule o salário bruto e líquido de professor em 2026 considerando Piso do Magistério, jornadas de 20h ou 40h, fator de 4,5 semanas (Art. 320 CLT), hora-atividade, DSR, INSS e IRRF.",
       "categoria": "profissoes",
       "url": "https://www.brasilcalculadoras.com.br/salario-professor"
     },

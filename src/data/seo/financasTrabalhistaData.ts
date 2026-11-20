@@ -389,12 +389,30 @@ export const FINANCAS_TRABALHISTA_SEO: Record<string, CalcSeoDetail> = {
     ]
   },
   'falta-injustificada': {
-    title: 'Calculadora de Faltas Injustificadas, DSR e Férias (CLT 2026) | Brasil Calculadoras',
-    description: 'Calcule o impacto real de faltas injustificadas no salário (divisor 30), perda do Descanso Semanal Remunerado (Lei 605/49), redução de férias (Art. 130 CLT) e 13º.',
+    title: 'Calculadora de Faltas Injustificadas 2026: Tabela, DSR e Férias (CLT) | Brasil Calculadoras',
+    description: 'Calcule grátis o desconto de faltas injustificadas no salário (divisor 30), perda do DSR (Lei 605/49) e consulte a tabela oficial do Art. 130 da CLT de redução de férias.',
     domainConcept: 'Uma única falta injustificada no trabalho gera um efeito financeiro maior do que a perda isolada de um dia de salário. Pela Lei Federal nº 605/1949 (Art. 6º), para fazer jus à remuneração do Descanso Semanal Remunerado (domingo e eventual feriado daquela semana), o empregado deve cumprir integralmente sua jornada semanal sem atrasos excessivos ou ausências sem motivo legal. Além do desconto duplo na folha mensal (o dia faltado + o DSR da semana), o acúmulo de faltas injustificadas ao longo de 12 meses reduz escalonadamente os 30 dias de férias segundo a tabela do Artigo 130 da CLT.',
-    formulaText: 'Salário-Dia = Salário Bruto / 30 (Art. 64 CLT). Desconto em Folha = (Salário-Dia × Faltas no Mês) + (Salário-Dia × Semanas com Falta pelo DSR). A tabela de férias do Art. 130 reduz o descanso de 30 dias para 24 (6 a 14 faltas), 18 (15 a 23 faltas), 12 (24 a 32 faltas) ou 0 dias (acima de 32 faltas).',
-    whenToUse: 'Use para conferir descontos por faltas e DSR no contracheque mensal ou para saber exatamente quantas ausências injustificadas ainda estão dentro da tolerância de até 5 faltas sem perda de dias de férias.',
+    formulaText: 'Salário-Dia = Salário Bruto / 30 (Art. 64 CLT). Desconto em Folha = (Salário-Dia × Faltas no Mês) + (Salário-Dia × Semanas com Falta pelo DSR). A tabela de férias do Art. 130 da CLT reduz o descanso de 30 dias para 24 (6 a 14 faltas), 18 (15 a 23 faltas), 12 (24 a 32 faltas) ou 0 dias (acima de 32 faltas).',
+    whenToUse: 'Use para conferir descontos por faltas e DSR no contracheque mensal ou consultar rapidamente na tabela do Art. 130 da CLT quantos dias de férias você mantém conforme o número de faltas acumuladas no período aquisitivo.',
     importantTips: 'Se o mês possuir um feriado na mesma semana da falta injustificada, alguns departamentos de RH aplicam a perda do descanso semanal correspondente à semana da falta. Apresente sempre atestados médicos dentro do prazo interno da empresa.',
+    referenceTable: {
+      heading: 'Tabela para Calcular Faltas Injustificadas e Redução de Férias (Art. 130 da CLT)',
+      caption: 'Proporção oficial de dias de férias conforme o número de faltas injustificadas acumuladas no período aquisitivo de 12 meses.',
+      headers: [
+        'Faltas Injustificadas no Ano',
+        'Dias de Férias de Direito',
+        'Dias de Férias Perdidos',
+        'Base Legal (CLT)'
+      ],
+      rows: [
+        ['0 a 5 faltas', '30 dias corridos', '0 dias', 'Art. 130, inciso I'],
+        ['6 a 14 faltas', '24 dias corridos', '6 dias', 'Art. 130, inciso II'],
+        ['15 a 23 faltas', '18 dias corridos', '12 dias', 'Art. 130, inciso III'],
+        ['24 a 32 faltas', '12 dias corridos', '18 dias', 'Art. 130, inciso IV'],
+        ['Acima de 32 faltas (> 32)', '0 dias (perda do direito)', '30 dias', 'Art. 130, caput']
+      ],
+      note: 'A tabela aplica-se somente a faltas injustificadas no mesmo período aquisitivo. Faltas abonadas por atestado médico ou previstas no Art. 473 da CLT não reduzem as férias.'
+    },
     sources: [
       { name: 'CLT - Art. 64, Art. 130 e Art. 473 (Faltas Justificadas)', url: 'https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm' },
       { name: 'Lei do Repouso Semanal Remunerado - Lei nº 605/1949', url: 'https://www.planalto.gov.br/ccivil_03/leis/l0605.htm' }
@@ -402,7 +420,7 @@ export const FINANCAS_TRABALHISTA_SEO: Record<string, CalcSeoDetail> = {
     extraFaqs: [
       { q: 'Quais faltas não podem ser descontadas segundo o Artigo 473 da CLT?', a: 'Casamento (3 dias consecutivos), falecimento de cônjuge/pais/filhos/irmãos (2 dias), nascimento de filho/licença-paternidade (5 dias), doação voluntária de sangue (1 dia a cada 12 meses), alistamento eleitoral (até 2 dias), vestibular e acompanhamento médico de filho/esposa gestante nos limites legais.' },
       { q: 'Se eu faltar dois dias na mesma semana, perco dois DSRs?', a: 'Não. A perda do DSR é uma por semana em que houve falta injustificada: faltando 2 dias na mesma semana, descontam-se os 2 dias de falta + 1 dia de DSR daquela semana.' },
-      { q: 'A empresa pode descontar as faltas diretamente dos dias de férias?', a: 'A empresa não pode "compensar" dias de falta um a um, mas aplica a tabela escalonada do Art. 130 da CLT se ultrapassar 5 faltas injustificadas no período aquisitivo.' }
+      { q: 'A empresa pode descontar as faltas diretamente dos dias de férias?', a: 'A empresa não pode "compensar" dias de falta um a um, mas aplica a tabela escalonada do Art. 130 da CLT (0–5, 6–14, 15–23, 24–32 e mais de 32 faltas) se ultrapassar 5 faltas injustificadas no período aquisitivo.' }
     ]
   },
   'honorarios-advogado': {
@@ -490,17 +508,36 @@ export const FINANCAS_TRABALHISTA_SEO: Record<string, CalcSeoDetail> = {
     ]
   },
   'salario-professor': {
-    domainConcept: 'A remuneração de professores da rede privada de ensino segue uma estrutura particular baseada no valor da hora-aula multiplicado pela carga horária semanal contratada e pelo fator mensal de 4,5 semanas previsto na CLT (Art. 320), além de acréscimo de 1/6 de Descanso Semanal Remunerado (DSR) em muitas convenções coletivas. Esta ferramenta estima rapidamente o salário mensal base considerando o cálculo padrão de 4,5 semanas letivas por mês.',
-    formulaText: 'Estima-se o Salário Mensal Base multiplicando o número de horas-aula semanais pelo valor unitário da hora-aula e pelo fator de semanas no mês (4,5 semanas conforme Art. 320 da CLT).',
-    whenToUse: 'Use para estimar a renda bruta ao assumir novas turmas em escolas, cursinhos pré-vestibulares, faculdades privadas ou aulas particulares semanais.',
-    importantTips: 'Verifique a Convenção Coletiva de Trabalho (CCT) do sindicato dos professores (Sinpro) do seu estado: além do valor base (Horas semanais × 4,5 × Hora-aula), a maioria das escolas acrescenta obrigatoriamente 1/6 de DSR e 5% de hora-atividade extraclasse.',
+    title: 'Calculadora de Salário de Professor 2026: Piso do Magistério, 20h/40h, Hora-Atividade, INSS e IRRF | Brasil Calculadoras',
+    description: 'Calcule o salário bruto e líquido de professor em 2026 para jornadas de 20h ou 40h com fator de 4,5 semanas (Art. 320 CLT), hora-atividade, DSR (1/6), Piso do Magistério, INSS e IRRF.',
+    domainConcept: 'A remuneração de professores no Brasil varia conforme o vínculo (rede privada pela CLT ou rede pública sob o Piso Salarial Profissional Nacional do Magistério — Lei nº 11.738/2008). Na rede particular, o cálculo padrão do Art. 320 da CLT multiplica as horas-aula semanais (como jornadas de 20h ou 40h) pelo valor da hora-aula e pelo fator de 4,5 semanas mensais, somando o adicional de hora-atividade previsto em convenção coletiva e 1/6 de Descanso Semanal Remunerado (DSR). Sobre o bruto apurado, incidem as tabelas progressivas de INSS e IRRF vigentes em 2026.',
+    formulaText: 'Salário Base = Horas-Aula Semanais × Valor da Hora-Aula × 4,5 semanas (Art. 320 CLT). Hora-Atividade = Salário Base × (% Hora-Atividade / 100). DSR = (Salário Base + Hora-Atividade) / 6 (quando aplicável). Sobre o Salário Bruto Total incidem o INSS progressivo 2026 (faixas de 7,5% a 14% até o teto de R$ 8.475,55, desconto máximo de R$ 988,09) e o IRRF 2026 (aplicando o método mais vantajoso entre deduções legais com R$ 189,59 por dependente ou desconto simplificado mensal de R$ 564,80).',
+    whenToUse: 'Use para simular o salário bruto e líquido ao assumir turmas de 20h ou 40h semanais em escolas, cursinhos, faculdades ou ao comparar ofertas da rede privada com o Piso do Magistério na rede pública.',
+    importantTips: 'Verifique a Convenção Coletiva de Trabalho (CCT) do Sinpro do seu estado para confirmar o percentual exato de hora-atividade (comumente de 5% na rede privada) e eventuais adicionais por regência, pós-graduação ou quinquênio. Na rede pública, confira também o plano de carreira municipal/estadual e a proporcionalidade do Piso do Magistério para jornadas de 20h ou 40h semanais (com 1/3 da jornada reservado a atividades extraclasse pela Lei nº 11.738/2008).',
+    extraSections: [
+      {
+        heading: 'Jornada de 20h vs 40h, Piso do Magistério e Descontos de INSS e IRRF 2026',
+        paragraphs: [
+          'Ao simular jornadas de 20 horas ou 40 horas semanais, lembre-se de que o Piso Nacional do Magistério Público da Educação Básica (Lei nº 11.738/2008, atualizado anualmente por portaria do MEC) tem como referência a carga horária de 40 horas semanais, sendo proporcional para jornadas de 20 horas (50% do valor integral) e prevendo o limite máximo de 2/3 da carga horária para interação com educandos e mínimo de 1/3 para planejamento e hora-atividade.',
+          'Para calcular o valor líquido real que cai na conta em 2026, a calculadora aplica integralmente a tabela progressiva do INSS 2026 (Portaria MPS/MF nº 13/2026: 7,5% até R$ 1.621,00; 9% até R$ 2.902,84; 12% até R$ 4.354,27; e 14% até o teto de R$ 8.475,55, com contribuição máxima de R$ 988,09) e a tabela mensal do IRRF 2026, escolhendo automaticamente entre as deduções legais (INSS + R$ 189,59 por dependente) e o desconto simplificado mensal de R$ 564,80.'
+        ],
+        bullets: [
+          'Rede privada (CLT): Salário Base (horas/semana × hora-aula × 4,5) + Hora-Atividade + DSR de 1/6.',
+          'Rede pública (Estatutário/Piso): remuneração proporcional à carga horária (20h/40h) acrescida de progressões de titulação e regime previdenciário próprio (RPPS) ou INSS (RGPS).',
+          'Conferência do holerite: compare o INSS progressivo e o IRRF calculados aqui com o seu demonstrativo mensal.'
+        ]
+      }
+    ],
     sources: [
-      { name: 'CLT - Art. 320 (Remuneração dos Professores)', url: 'https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm' }
+      { name: 'CLT - Art. 320 (Remuneração dos Professores)', url: 'https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm' },
+      { name: 'Lei do Piso Nacional do Magistério (Lei nº 11.738/2008)', url: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11738.htm' },
+      { name: 'Receita Federal - Tabela Progressiva Mensal do IRRF', url: 'https://www.gov.br/receitafederal/pt-br' }
     ],
     extraFaqs: [
-      { q: 'Por que o cálculo salarial do professor multiplica por 4,5 semanas e não por 4?', a: 'Porque a maioria dos meses tem 30 ou 31 dias (entre 4,28 e 4,43 semanas), e o Artigo 320 da CLT fixou historicamente o divisor de 4 semanas e meia por mês para uniformizar o salário mensal do docente.' },
-      { q: 'O que é a hora-atividade no contracheque do professor?', a: 'É um adicional (geralmente de 5% a 20% dependendo do sindicato ou rede pública) destinado a remunerar o tempo gasto fora da sala de aula preparando provas, planejando aulas e corrigindo trabalhos.' },
-      { q: 'Professor recebe adicional por número de alunos ou turmas diferentes?', a: 'Na rede particular, algumas convenções estipulam adicional quando há acúmulo de turmas ou classes com número de alunos acima de um limite pactuado.' }
+      { q: 'Por que o cálculo salarial do professor multiplica por 4,5 semanas e não por 4?', a: 'Porque a maioria dos meses tem 30 ou 31 dias (entre 4,28 e 4,43 semanas), e o Artigo 320 da CLT fixou historicamente o divisor de 4,5 semanas por mês para uniformizar o salário mensal do docente.' },
+      { q: 'Como funciona o cálculo para jornada de 20h e 40h semanais?', a: 'Basta informar 20 ou 40 no campo de carga horária semanal junto com o valor da hora-aula (ou dividir o vencimento de referência por 90 ou 180 horas mensais). A calculadora apura automaticamente o bruto, o INSS 2026 e o IRRF 2026.' },
+      { q: 'O que é a hora-atividade no contracheque do professor?', a: 'É a parcela destinada a remunerar o tempo extraclasse de planejamento pedagógico, preparação de aulas e correção de provas. Na rede privada varia conforme a CCT (comumente 5%), enquanto na rede pública a Lei nº 11.738/2008 garante 1/3 da jornada para atividades fora de sala.' },
+      { q: 'Qual tabela de INSS e IRRF é usada no cálculo do salário líquido do professor?', a: 'A calculadora usa a tabela progressiva do INSS 2026 (salário mínimo R$ 1.621,00 e teto de R$ 8.475,55 com desconto máximo de R$ 988,09) e a tabela progressiva do IRRF 2026 com comparação automática entre deduções legais e desconto simplificado de R$ 564,80.' }
     ]
   },
   'comissao-vendedor': {
