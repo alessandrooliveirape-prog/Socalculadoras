@@ -8722,11 +8722,11 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         // Tabela progressiva INSS 2026
         let inss = 0;
         let faixa = '';
-        if (bruto <= 1518) { inss = bruto * 0.075; faixa = '1ª Faixa (7,5%)'; }
-        else if (bruto <= 2793.88) { inss = (1518 * 0.075) + ((bruto - 1518) * 0.09); faixa = '2ª Faixa (até 9%)'; }
-        else if (bruto <= 4190.83) { inss = (1518 * 0.075) + (1275.88 * 0.09) + ((bruto - 2793.88) * 0.12); faixa = '3ª Faixa (até 12%)'; }
-        else if (bruto <= 8157.41) { inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + ((bruto - 4190.83) * 0.14); faixa = '4ª Faixa (até 14%)'; }
-        else { inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + (3966.58 * 0.14); faixa = 'Teto Máximo'; }
+        if (bruto <= 1621) { inss = bruto * 0.075; faixa = '1ª Faixa (7,5%)'; }
+        else if (bruto <= 2902.84) { inss = (1621 * 0.075) + ((bruto - 1621) * 0.09); faixa = '2ª Faixa (até 9%)'; }
+        else if (bruto <= 4354.27) { inss = (1621 * 0.075) + (1281.84 * 0.09) + ((bruto - 2902.84) * 0.12); faixa = '3ª Faixa (até 12%)'; }
+        else if (bruto <= 8475.55) { inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + ((bruto - 4354.27) * 0.14); faixa = '4ª Faixa (até 14%)'; }
+        else { inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + (4121.28 * 0.14); faixa = 'Teto Máximo'; }
         const aliqEfetiva = bruto > 0 ? (inss / bruto) * 100 : 0;
         results['desconto_inss'] = parseFloat(inss.toFixed(2));
         results['aliquota_efetiva'] = parseFloat(aliqEfetiva.toFixed(2));
@@ -8739,11 +8739,11 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
         const outDesc = parseFloat(valInputs['outros_descontos'] || 0);
         // Primeiro calcula INSS progressivo
         let inss = 0;
-        if (bruto <= 1518) inss = bruto * 0.075;
-        else if (bruto <= 2793.88) inss = (1518 * 0.075) + ((bruto - 1518) * 0.09);
-        else if (bruto <= 4190.83) inss = (1518 * 0.075) + (1275.88 * 0.09) + ((bruto - 2793.88) * 0.12);
-        else if (bruto <= 8157.41) inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + ((bruto - 4190.83) * 0.14);
-        else inss = (1518 * 0.075) + (1275.88 * 0.09) + (1396.95 * 0.12) + (3966.58 * 0.14);
+        if (bruto <= 1621) inss = bruto * 0.075;
+        else if (bruto <= 2902.84) inss = (1621 * 0.075) + ((bruto - 1621) * 0.09);
+        else if (bruto <= 4354.27) inss = (1621 * 0.075) + (1281.84 * 0.09) + ((bruto - 2902.84) * 0.12);
+        else if (bruto <= 8475.55) inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + ((bruto - 4354.27) * 0.14);
+        else inss = (1621 * 0.075) + (1281.84 * 0.09) + (1451.43 * 0.12) + (4121.28 * 0.14);
         const deducaoDep = deps * 189.59;
         const baseIr = bruto - inss - deducaoDep - outDesc;
         let irrf = 0; let aliq = 0;
@@ -8787,7 +8787,7 @@ const buildDynamicCalculators = (): CalculatorDef[] => {
       else if (raw.type === 'fin_das_mei') {
         const atividade = parseInt(valInputs['atividade'] || 1);
         const fat = parseFloat(valInputs['faturamento_mensal'] || 0);
-        const salMin = 1518; // Salário mínimo 2026
+        const salMin = 1621; // Salário mínimo 2026
         const inssMei = salMin * 0.05;
         let icms = 0; let iss = 0;
         if (atividade === 1) { icms = 1; iss = 0; }
