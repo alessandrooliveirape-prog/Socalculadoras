@@ -17,11 +17,13 @@ import {
   Briefcase,
   FileText,
   BookOpen,
-  Calendar
+  Calendar,
+  Megaphone
 } from 'lucide-react';
 import { CALCULATORS_CATALOG, CATEGORY_MAP } from '../data/calculatorsCatalog';
 import { CATEGORY_KEY_TO_SLUG, CATEGORY_MAP_RAW, CATEGORY_HOME_DESCRIPTIONS } from '../utils/seoContentGenerator';
 import { GUIDES_ARTICLES } from '../data/guidesArticles';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 function normalizeSearchText(text: string): string {
   return (text || '')
@@ -584,6 +586,42 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
           </div>
         </div>
       </article>
+
+      {/* Recomendações Úteis de Ferramentas e Guias (Afiliados & Patrocínio) */}
+      <section className="bg-slate-50/80 border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-5 shadow-xs deferred-section">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200/80 pb-4">
+          <div>
+            <span className="text-[10px] font-extrabold text-amber-700 uppercase tracking-widest block mb-1">
+              Curadoria de Parceiros &amp; Utilidades
+            </span>
+            <h2 className="text-lg font-bold text-slate-900 font-display">
+              Ferramentas e Leituras Recomendadas para o Dia a Dia
+            </h2>
+            <p className="text-xs text-slate-600 mt-1">
+              Seleção útil por segmento para apoiar finanças pessoais, rotina de trabalho e bem-estar.
+            </p>
+          </div>
+          <a
+            href="/anunciantes"
+            onClick={(e) => {
+              if (onNavigate) {
+                e.preventDefault();
+                onNavigate('/anunciantes');
+              }
+            }}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:underline shrink-0"
+          >
+            <Megaphone className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>Anunciar em nossas 175 calculadoras →</span>
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <AffiliateRecommendationCard category="financas" variant="compact" placement="homepage_grid" />
+          <AffiliateRecommendationCard category="profissoes" variant="compact" placement="homepage_grid" />
+          <AffiliateRecommendationCard category="saude" variant="compact" placement="homepage_grid" />
+        </div>
+      </section>
 
       {/* FAQ institucional (Always visible in DOM) */}
       <section className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col gap-6 shadow-xs deferred-section">

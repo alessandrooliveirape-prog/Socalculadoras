@@ -1,64 +1,33 @@
-import React, { useEffect } from 'react';
-import { Award, BarChart3, Coins, Eye, MousePointerClick, TrendingUp } from 'lucide-react';
+import React from 'react';
 import { CalculatorCategory } from '../types';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface AdSenseBannerProps {
   category: CalculatorCategory;
   layout?: 'horizontal' | 'vertical' | 'square';
   onAdClicked?: () => void;
   refreshTrigger?: number;
-  adSlot?: string; // Optional Google AdSense Slot ID
+  adSlot?: string;
 }
 
-declare global {
-  interface Window {
-    adsbygoogle: any[];
-  }
-}
-
+/**
+ * Wrapper retrocompatível que substitui os antigos blocos vazios do AdSense
+ * por recomendações contextuais multi-rede (Amazon, Shopee, Mercado Livre e Patrocínio).
+ */
 export const AdSenseBanner: React.FC<AdSenseBannerProps> = ({
   category,
-  layout = 'horizontal',
-  onAdClicked,
-  refreshTrigger = 0,
-  adSlot
+  layout = 'horizontal'
 }) => {
-
-  useEffect(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      }
-    } catch (e) {
-      // Ignore adsbygoogle push errors (common with ad blockers)
-      console.warn('AdSense load blocked or failed:', e);
-    }
-  }, [category, refreshTrigger, adSlot]);
-
-  // Styling rules for containers
-  const containerStyle = layout === 'horizontal'
-    ? 'w-full flex justify-center items-center overflow-hidden my-2'
-    : layout === 'vertical'
-    ? 'w-full md:w-[240px] lg:w-[280px] flex justify-center items-center sticky top-6 overflow-hidden my-2'
-    : 'w-full aspect-square flex justify-center items-center overflow-hidden my-2';
+  const variant = layout === 'vertical' ? 'sidebar' : layout === 'square' ? 'compact' : 'horizontal';
+  const placement = layout === 'vertical' ? 'sidebar_slot' : 'bottom_slot';
 
   return (
-    <div 
-      className={containerStyle}
-      
-    >
-      {/* Google AdSense ins tag */}
-      <div className="w-full h-full flex items-center justify-center">
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', width: '100%' }}
-          data-ad-client="ca-pub-8160658026927094"
-          {...(adSlot ? { 'data-ad-slot': adSlot } : {})}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </div>
+    <div className="w-full my-2">
+      <AffiliateRecommendationCard
+        category={category}
+        variant={variant}
+        placement={placement}
+      />
     </div>
   );
 };
-

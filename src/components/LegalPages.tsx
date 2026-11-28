@@ -130,17 +130,16 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               Assim como a generalidade dos portais web modernos hospedados em nuvem, nossos servidores e provedores de CDN registram logs técnicos estritamente voltados à segurança cibernética, prevenção de ataques automatizados e medição agregada de desempenho. Esses registros técnicos contemplam endereço IP anonimizado ou temporário, tipo de navegador, sistema operacional, carimbo de data e hora, página de origem e tempo de carregamento. Adicionalmente, utilizamos o Google Analytics 4 (GA4) para compreender de forma agregada e estatística quais ferramentas e guias educativos despertam maior interesse, ajudando nossa equipe a priorizar atualizações editoriais.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Cookies do Google AdSense e Publicidade Personalizada (Cookie DART)</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">3. Programas de Afiliados, Parceiros Comerciais e Cookies</h2>
             <p>
-              Para sustentar a gratuidade integral de todas as calculadoras e guias sem cobrança de assinatura ou cadastro, o Brasil Calculadoras exibe anúncios operados pela rede oficial do <strong>Google AdSense</strong>. O emprego de tecnologias de publicidade programática segue rigorosamente as políticas de editor do Google e o tratamento transparente de cookies:
+              Para sustentar a gratuidade integral de todas as 175 calculadoras e guias sem cobrança de assinatura ou cadastro, o Brasil Calculadoras participa de programas oficiais de afiliados (<strong>Amazon Associados</strong>, <strong>Shopee Afiliados</strong> e <strong>Mercado Livre Afiliados</strong>) e de parcerias comerciais diretas claramente identificadas. Quando você clica em um botão de recomendação e realiza uma compra qualificada no site parceiro, podemos receber uma comissão sem qualquer acréscimo no valor pago por você.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 my-2 flex flex-col gap-3">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Cláusula Específica Google AdSense &amp; Cookies de Terceiros:</h3>
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Cláusula de Transparência sobre Cookies de Parceiros &amp; Telemetria:</h3>
               <ul className="list-disc pl-5 text-xs text-slate-600 flex flex-col gap-2 m-0">
-                <li>Fornecedores terceiros, incluindo o <strong>Google</strong>, utilizam cookies (incluindo o cookie DART e identificadores modernos de publicidade) para veicular anúncios relevantes com base em visitas anteriores do usuário a este portal ou a outros sites da Internet.</li>
-                <li>Com o uso de cookies de publicidade, o Google e seus parceiros certificados exibem recomendações comerciais compatíveis com os interesses gerais do visitante sem vincular esses anúncios aos números digitados dentro das calculadoras.</li>
-                <li>Você pode gerenciar, restringir ou desativar a publicidade personalizada a qualquer momento diretamente nas <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a>.</li>
-                <li>Para controle amplo de múltiplos fornecedores de mídia digital participantes da Digital Advertising Alliance, também é possível exercer opção de saída em <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">aboutads.info/choices</a>.</li>
+                <li><strong>Atribuição de Afiliados:</strong> Ao acessar links externos marcados com <code>rel="nofollow sponsored"</code>, as plataformas parceiras (Amazon, Shopee ou Mercado Livre) utilizam cookies próprios em seus respectivos domínios para atribuir a indicação comercial.</li>
+                <li><strong>Sigilo Absoluto das Simulações:</strong> Os números digitados nas calculadoras nunca são enviados a parceiros comerciais, lojas afiliadas ou redes de anúncios.</li>
+                <li><strong>Controle de Preferências:</strong> Você pode gerenciar ou bloquear cookies de terceiros diretamente no navegador ou ajustar eventuais preferências nas <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a> e em <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">aboutads.info/choices</a>.</li>
               </ul>
             </div>
 
@@ -191,9 +190,9 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               Todo o conteúdo editorial original — incluindo textos dos guias educativos, estrutura das páginas, design de interface, código-fonte das calculadoras e logotipos — é protegido pela legislação brasileira de direitos autorais e propriedade intelectual. É autorizado o compartilhamento livre de links para nossas páginas e a impressão ou exportação pessoal dos resultados simulados para conferência própria. É vedada a cópia automatizada em massa (scraping abusivo), a clonagem integral da base editorial para sites espelho ou o uso comercial indevido da marca sem consentimento prévio por escrito. Endpoints listados em <a href="/desenvolvedores" className="text-blue-600 underline font-semibold">/desenvolvedores</a> seguem os termos específicos de uso responsável documentados naquela seção.
             </p>
 
-            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Publicidade Google AdSense e Atualizações dos Termos</h2>
+            <h2 className="text-lg font-bold text-slate-900 mt-4 mb-2">4. Sustentação por Afiliados, Patrocínios e Atualizações dos Termos</h2>
             <p>
-              A plataforma mantém-se gratuita ao público sem barreiras de cadastro graças à exibição de anúncios gerenciados pelo programa Google AdSense e links informativos transparentes. Reservamo-nos o direito de atualizar estes Termos de Uso e ampliar ou refatorar ferramentas a qualquer momento para acompanhar mudanças tributárias, melhorias de usabilidade ou exigências regulatórias aplicáveis no Brasil.
+              A plataforma mantém-se gratuita ao público sem barreiras de cadastro graças a recomendações contextuais em programas de afiliados (Amazon, Shopee e Mercado Livre), parcerias diretas com anunciantes e links informativos transparentes. Reservamo-nos o direito de atualizar estes Termos de Uso e ampliar ou refatorar ferramentas a qualquer momento para acompanhar mudanças tributárias, melhorias de usabilidade ou exigências regulatórias aplicáveis no Brasil.
             </p>
           </section>
         </article>
@@ -243,7 +242,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
 
             <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Independência Editorial e Canal de Melhoria Contínua</h2>
             <p>
-              O portal opera de forma independente, financiado exclusivamente por publicidade programática transparente via Google AdSense e livre de cobranças ou vendas casadas. Sugestões de novas ferramentas, apontamentos sobre mudanças legais recentes ou dúvidas conceituais enviadas pelos visitantes em <a href="/contato" className="text-blue-600 underline font-semibold">Contato</a> alimentam diretamente nosso ciclo contínuo de manutenção estrutural.
+              O portal opera de forma independente, financiado de forma transparente por parcerias comerciais diretas e programas de afiliados sinalizados (Amazon Associados, Shopee Afiliados e Mercado Livre Afiliados), mantendo todas as calculadoras livres de paywalls ou vendas casadas. Sugestões de novas ferramentas, apontamentos sobre mudanças legais recentes ou dúvidas conceituais enviadas pelos visitantes em <a href="/contato" className="text-blue-600 underline font-semibold">Contato</a> alimentam diretamente nosso ciclo contínuo de manutenção estrutural.
             </p>
 
             <div className="bg-blue-50 border border-blue-150 rounded-2xl p-5 mt-2 flex flex-col gap-2">
@@ -469,91 +468,116 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type, onNavigateHome }) =>
               <Server className="w-8 h-8" />
               <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Política de Cookies e Gestão de Consentimento</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Transparência completa sobre cookies técnicos, medições analíticas (GA4) e anúncios Google AdSense</p>
+            <p className="text-xs text-slate-400 m-0">Transparência completa sobre cookies técnicos, medições analíticas (GA4) e links de afiliados parceiros</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              O portal <strong>Brasil Calculadoras</strong> utiliza cookies estritamente necessários e identificadores locais do navegador para preservar preferências operacionais, além de cookies estatísticos e publicitários gerenciados em parceria com o Google, sempre em conformidade com a Lei Geral de Proteção de Dados (LGPD). Nenhum cookie comercial ou publicitário é utilizado para capturar os valores numéricos que você digita dentro de nossas calculadoras interativas.
+              O portal <strong>Brasil Calculadoras</strong> utiliza cookies estritamente necessários e identificadores locais do navegador para preservar preferências operacionais, além de cookies estatísticos e rastreamento de atribuição em links externos de afiliados parceiros, sempre em conformidade com a Lei Geral de Proteção de Dados (LGPD). Nenhum cookie comercial é utilizado para capturar os valores numéricos que você digita dentro de nossas calculadoras interativas.
             </p>
 
             <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Categorias de Cookies e Armazenamento Local</h2>
             <ul className="list-disc pl-5 space-y-2.5">
               <li><strong>Cookies Essenciais e LocalStorage Funcional:</strong> Guardam no próprio dispositivo suas escolhas de consentimento de privacidade (<code>cc_adsense_consent</code>), o histórico rápido das últimas calculadoras acessadas (<code>brasilcalculadoras_recent_tools_v1</code>) e preferências visuais de navegação, garantindo fluidez sem exigir criação de conta.</li>
-              <li><strong>Cookies Analíticos Agregados (Google Analytics 4):</strong> Mensuram métricas agregadas de audiência, páginas mais consultadas e desempenho técnico de carregamento para orientar melhorias contínuas nas calculadoras e nos guias editoriais.</li>
-              <li><strong>Cookies de Publicidade Programática (Google AdSense / DART):</strong> Permitem ao Google veicular anúncios contextuais ou personalizados alinhados aos interesses de navegação, evitando repetição excessiva do mesmo anúncio e mantendo o portal integralmente gratuito ao público.</li>
+              <li><strong>Cookies Analíticos Agregados (Google Analytics 4):</strong> Mensuram métricas agregadas de audiência, páginas mais consultadas, cliques em recomendações e desempenho técnico de carregamento para orientar melhorias contínuas nas calculadoras e nos guias editoriais.</li>
+              <li><strong>Cookies de Atribuição de Afiliados (Amazon, Shopee e Mercado Livre):</strong> Quando você clica voluntariamente em um link de recomendação de produto para visitar uma loja parceira, o varejista de destino utiliza cookies próprios em seu domínio para contabilizar eventual comissão de indicação sem alterar o preço final ao consumidor.</li>
             </ul>
 
             <h2 className="text-lg font-bold text-slate-900 mt-2 mb-1">Como Gerenciar, Revogar ou Bloquear Cookies</h2>
             <p>
-              O visitante mantém controle total sobre o armazenamento de cookies no próprio navegador. É possível limpar dados do site ou bloquear cookies de terceiros nas configurações de privacidade do Google Chrome, Mozilla Firefox, Apple Safari ou Microsoft Edge. Para controlar especificamente a personalização de anúncios da rede Google, acesse a página oficial de <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a> ou consulte orientações complementares em nossa <a href="/politica-de-privacidade" className="text-blue-600 underline font-semibold">Política de Privacidade</a>.
+              O visitante mantém controle total sobre o armazenamento de cookies no próprio navegador. É possível limpar dados do site ou bloquear cookies de terceiros nas configurações de privacidade do Google Chrome, Mozilla Firefox, Apple Safari ou Microsoft Edge. Para ajustar especificamente a personalização da rede Google, acesse a página oficial de <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Configurações de Anúncios do Google</a> ou consulte orientações complementares em nossa <a href="/politica-de-privacidade" className="text-blue-600 underline font-semibold">Política de Privacidade</a>.
             </p>
           </section>
         </article>
       )}
 
-      {/* 6. TRANSPARÊNCIA ADSENSE */}
+      {/* 6. TRANSPARÊNCIA, AFILIADOS & MODELO EDITORIAL */}
       {type === 'transparency' && (
         <article className="prose prose-slate max-w-none flex flex-col gap-6 text-slate-700">
           <header className="border-b border-slate-150 pb-6">
             <div className="flex items-center gap-3 text-blue-600 mb-2">
               <Award className="w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Transparência Google AdSense &amp; Modelo Editorial</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Transparência, Afiliados &amp; Modelo Editorial</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Compromisso público com pureza publicitária, ausência de scripts invasivos e sustentação gratuita</p>
+            <p className="text-xs text-slate-400 m-0">Compromisso público com recomendações úteis, ausência de scripts invasivos e sustentação gratuita</p>
           </header>
 
           <section className="flex flex-col gap-4 text-sm leading-relaxed">
             <p>
-              No <strong>Brasil Calculadoras</strong>, todas as 175 calculadoras especializadas, os 21 hubs de categoria e os guias aprofundados da seção editorial estão disponíveis de forma irrestrita e sem assinatura paga (zero paywall). Nossa infraestrutura de servidores em nuvem, auditoria periódica das tabelas de INSS, IRRF e CLT e criação contínua de artigos educativos são financiadas de forma transparente pela rede oficial do <strong>Google AdSense</strong>.
+              No <strong>Brasil Calculadoras</strong>, todas as 175 calculadoras especializadas, os 21 hubs de categoria e os guias aprofundados da seção editorial estão disponíveis de forma irrestrita e sem assinatura paga (zero paywall). Nossa infraestrutura de servidores em nuvem, auditoria periódica das tabelas de INSS, IRRF e CLT e criação contínua de artigos educativos são financiadas de forma transparente por <strong>recomendações contextuais de afiliados</strong> e <strong>patrocínios diretos</strong> em espaço sinalizado.
             </p>
             <p>
-              Acreditamos que publicidade digital saudável e experiência do usuário devem caminhar juntas. Por essa razão, mantemos padrões rígidos de qualidade de página e pureza de inventário verificáveis publicamente no código e no arquivo raiz <code>/ads.txt</code>.
+              Participamos dos programas oficiais da <strong>Amazon Associados</strong>, <strong>Shopee Afiliados</strong> e <strong>Mercado Livre Afiliados</strong>. Selecionamos livros técnicos, equipamentos e utilidades realmente relacionados a cada calculadora, utilizando estritamente a marcação <code>rel="nofollow sponsored"</code> e informando de modo claro ao leitor quando há link comissionado.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 my-2 flex flex-col gap-2">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Diretrizes de Qualidade Publicitária e UX:</h3>
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Diretrizes de Qualidade Comercial e UX:</h3>
               <ul className="list-disc pl-5 text-xs text-slate-600 space-y-2 m-0">
-                <li><strong>Pureza Estrita no ads.txt:</strong> Nosso arquivo público <a href="/ads.txt" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">/ads.txt</a> autoriza exclusivamente o identificador oficial do Google AdSense, assegurando autenticidade e confiança para anunciantes.</li>
                 <li><strong>Zero Pop-ups ou Redirecionamentos Intrusivos:</strong> Banimos completamente pop-unders, anúncios que bloqueiam botões das calculadoras ou scripts de terceiros incompatíveis com o bem-estar do visitante.</li>
-                <li><strong>Separação Editorial Clara:</strong> Conteúdos educativos, fórmulas e resultados simulados permanecem estritamente independentes dos blocos de anúncios identificados na interface.</li>
+                <li><strong>Separação Editorial Clara:</strong> Conteúdos educativos, fórmulas e resultados simulados permanecem estritamente independentes dos blocos de recomendações afiliadas e espaços de parceiros.</li>
+                <li><strong>Sem Custo Extra ao Usuário:</strong> O preço exibido nas lojas parceiras permanece idêntico ao acesso direto; a comissão é paga exclusivamente pela plataforma varejista.</li>
               </ul>
             </div>
           </section>
         </article>
       )}
 
-      {/* 7. MÍDIA & ANUNCIANTES */}
+      {/* 7. MÍDIA KIT & PATROCÍNIO DIRETO */}
       {type === 'advertisers' && (
         <article className="prose prose-slate max-w-none flex flex-col gap-6 text-slate-700">
           <header className="border-b border-slate-150 pb-6">
             <div className="flex items-center gap-3 text-blue-600 mb-2">
               <Megaphone className="w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Mídia &amp; Parcerias Institucionais</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">Mídia Kit &amp; Patrocínio Direto</h1>
             </div>
-            <p className="text-xs text-slate-400 m-0">Alcance audiências com alta intenção prática em finanças pessoais, carreira CLT/PJ e planejamento patrimonial</p>
+            <p className="text-xs text-slate-400 m-0">Alcance audiências brasileiras com alta intenção prática em finanças pessoais, carreira CLT/PJ, imóveis, veículos e saúde</p>
           </header>
 
-          <section className="flex flex-col gap-4 text-sm leading-relaxed">
+          <section className="flex flex-col gap-5 text-sm leading-relaxed">
             <p>
-              O <strong>Brasil Calculadoras</strong> atende diariamente leitores brasileiros em momentos concretos de decisão financeira, profissional e familiar: trabalhadores conferindo verbas de rescisão CLT e décimo terceiro, investidores comparando juros compostos e IPCA, compradores simulando financiamentos imobiliários e de veículos, estudantes revisando fórmulas matemáticas e empreendedores calculando precificação e Simples Nacional.
+              O <strong>Brasil Calculadoras</strong> atende diariamente leitores brasileiros em momentos concretos de decisão financeira, profissional e familiar: trabalhadores conferindo verbas de rescisão CLT e décimo terceiro, investidores comparando juros compostos e IPCA, compradores simulando financiamentos imobiliários e de veículos, estudantes revisando médias do ENEM e empreendedores calculando precificação e Simples Nacional.
             </p>
-            <p>
-              Toda exibição publicitária no domínio respeita regras rigorosas de navegabilidade (Core Web Vitals estáveis, baixa latência e layout responsivo limpo), favorecendo visibilidade qualificada sem comprometer a usabilidade das ferramentas.
-            </p>
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 my-2 flex flex-col gap-3">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0">Canais de Veiculação &amp; Integração Técnica:</h3>
-              <ul className="list-disc pl-5 text-xs text-slate-600 space-y-2 m-0">
-                <li><strong>Inventário Programático Google AdSense / Google Ads:</strong> Participação direta nos leilões contextuais por categoria de conteúdo dentro da rede oficial Google.</li>
-                <li><strong>Integração via API Pública &amp; Widgets Educativos:</strong> Portais jornalísticos, blogs financeiros e instituições de ensino podem consultar nossos endpoints abertos documentados em <a href="/desenvolvedores" className="text-blue-600 underline font-semibold">/desenvolvedores</a>.</li>
-                <li><strong>Parcerias de Conteúdo Técnico:</strong> Sugestões de tabelas referenciais atualizadas e cooperação informativa com instituições setoriais.</li>
-              </ul>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-1">
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0 mb-2">1. Patrocínio de Categoria</h3>
+                <p className="text-xs text-slate-600 m-0 leading-relaxed">
+                  Exclusividade de marca nos hubs e em todas as calculadoras de uma vertical inteira (ex: Finanças, Trabalhista CLT/PJ, Imobiliário ou Veículos).
+                </p>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0 mb-2">2. Destaque Contextual Pós-Cálculo</h3>
+                <p className="text-xs text-slate-600 m-0 leading-relaxed">
+                  Card nativo logo abaixo do resultado simulado, conectando sua corretora, contabilidade PJ, banco digital ou seguro no exato momento da decisão.
+                </p>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0 mb-2">3. Guia Editorial Patrocinado</h3>
+                <p className="text-xs text-slate-600 m-0 leading-relaxed">
+                  Artigo técnico completo na seção <code>/guias</code> com sinalização transparente de parceria e links contextuais para suas soluções.
+                </p>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider m-0 mb-2">4. Widgets &amp; Licenciamento B2B</h3>
+                <p className="text-xs text-slate-600 m-0 leading-relaxed">
+                  Integração de calculadoras e endpoints JSON 2026 documentados em <a href="/desenvolvedores" className="text-blue-600 underline font-semibold">/desenvolvedores</a> para portais e fintechs.
+                </p>
+              </div>
             </div>
-            <div className="bg-blue-50 border border-blue-150 rounded-2xl p-5 mt-2 flex flex-col gap-2">
-              <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Contato com a Área de Parcerias:</h3>
-              <p className="text-xs text-blue-800 m-0">
-                Para consultas editoriais e parcerias institucionais:<br />
-                E-mail: <strong>contato@brasilcalculadoras.com.br</strong> ou através do formulário oficial na página de <a href="/contato" className="underline font-bold">Contato</a>.
-              </p>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 mt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wider m-0">Propostas Comerciais &amp; Parcerias Diretas</h3>
+                <p className="text-xs text-blue-800 m-0">
+                  E-mail direto: <strong>contato@brasilcalculadoras.com.br</strong>
+                </p>
+              </div>
+              <a
+                href="/contato"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-colors no-underline shrink-0"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Solicitar Mídia Kit</span>
+              </a>
             </div>
           </section>
         </article>

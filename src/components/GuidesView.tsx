@@ -13,6 +13,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { GUIDES_ARTICLES, GuideArticle } from '../data/guidesArticles';
+import { AffiliateRecommendationCard } from './AffiliateRecommendationCard';
 
 interface GuidesViewProps {
   activeSlug?: string | null;
@@ -203,6 +204,12 @@ export const GuidesView: React.FC<GuidesViewProps> = ({
                 )}
               </section>
             ))}
+
+            <AffiliateRecommendationCard
+              category={activeArticle.categoryKey}
+              variant="horizontal"
+              placement="guide_article"
+            />
 
             <section className="pt-6 border-t border-slate-200">
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">

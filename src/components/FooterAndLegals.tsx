@@ -178,8 +178,11 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             <p className="text-[10px] text-slate-300 leading-normal mb-2">
               Os resultados emitidos por esta central têm caráter de projeção técnica provisória e educativa. Consulte profissionais regulados (contadores, nutricionistas ou advogados) antes de celebrar decisões definitivas comerciais.
             </p>
-            <p className="text-[9.5px] text-slate-400 leading-normal font-sans">
+            <p className="text-[9.5px] text-slate-400 leading-normal font-sans mb-2">
               Portal mantido 100% gratuito, sem cadastro e com processamento local no navegador.
+            </p>
+            <p className="text-[9.5px] text-slate-400 leading-normal font-sans">
+              Participamos dos programas de afiliados da Amazon, Shopee e Mercado Livre. Compras feitas pelos links recomendados ajudam a manter o portal gratuito.
             </p>
           </div>
         </div>
@@ -203,9 +206,9 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
               <Shield className="w-5 h-5" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="text-xs font-bold text-slate-800 leading-tight">Consentimento de Cookies e Anúncios</h3>
+              <h3 className="text-xs font-bold text-slate-800 leading-tight">Consentimento de Cookies e Transparência</h3>
               <p className="text-[10px] text-slate-600 leading-relaxed mt-1">
-                Nós usamos cookies e identificadores de dispositivos para personalizar anúncios do Google AdSense, fornecer recursos de mídias e analisar o fluxo de tráfego do site em conformidade com a LGPD.
+                Utilizamos cookies essenciais, medição agregada no Google Analytics 4 e links de afiliados parceiros (Amazon, Shopee e Mercado Livre) em conformidade com a LGPD para manter todas as calculadoras gratuitas.
               </p>
             </div>
           </div>
@@ -256,9 +259,9 @@ export const FooterAndLegals: React.FC<FooterAndLegalsProps> = ({ onCategoryClic
             <h4 className="text-xs font-bold text-slate-800">1. Coleta Automatizada e Cookies</h4>
             <p>O portal coleta de forma automatizada logs técnicos como endereços de IP, tipo de navegador, páginas de referência e tempo de permanência voluntária com o único intuito de aprimoramento da infraestrutura técnica e de segurança da informação.</p>
 
-            <h4 className="text-xs font-bold text-slate-800">2. Google AdSense e Cookies de Terceiros</h4>
-            <p>Nós utilizamos publicidade programática terceirizada do <strong>Google AdSense</strong>. O Google e parceiros terceirizados utilizam cookies persistentes (como o cookie DoubleClick DART) para veicular anúncios segmentados baseados nas visitas anteriores feitas a este e a outros portais na Internet.</p>
-            <p>Os usuários podem desativar a exibição de anúncios personalizados visitando as <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Configurações de Anúncios do Google</a>.</p>
+            <h4 className="text-xs font-bold text-slate-800">2. Parcerias de Afiliados, Patrocínios e Cookies de Terceiros</h4>
+            <p>Participamos de programas de afiliados oficiais (incluindo <strong>Amazon Associados</strong>, <strong>Shopee Afiliados</strong> e <strong>Mercado Livre Afiliados</strong>) e exibimos recomendações comerciais claramente sinalizadas. Ao clicar em um link externo patrocinado, a loja parceira pode registrar cookies próprios de atribuição de compra sem qualquer vínculo com os valores numéricos inseridos nas calculadoras.</p>
+            <p>Caso utilize publicidade programática no portal, o Google e parceiros podem empregar cookies configuráveis nas <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Configurações de Anúncios do Google</a>.</p>
 
             <h4 className="text-xs font-bold text-slate-800">3. Conformidade com a LGPD e GDPR</h4>
             <p>Nós respeitamos integralmente as diretrizes da Lei Geral de Proteção de Dados (LGPD) brasileira. Não vendemos, alugamos ou comercializamos dados cadastrais ou registros de navegação a empresas terceiras sob nenhuma circunstância.</p>

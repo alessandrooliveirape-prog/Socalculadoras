@@ -4,11 +4,16 @@ Este documento define os padrões arquiteturais, diretivas de monetização e fl
 
 ---
 
-## 🎯 1. Pureza Google AdSense & Monetização
+## 🎯 1. Estratégia Multi-Monetização, Afiliados & Higiene Técnica
 
-- **ads.txt Exclusivo:** O arquivo `public/ads.txt` deve conter estritamente o identificador do Google AdSense (`google.com, pub-8160658026927094, DIRECT, f08c47fec0942fa0`).
-- **Zero Scripts de Terceiros / Popups:** É terminantemente proibido reintroduzir scripts intrusivos de monetização como Monetag (`vignette.min.js`, `n6wxm.com`), pop-unders ou redirecionamentos automáticos.
-- **Isenção Total de Programas de Afiliados:** O portal é 100% focado no modelo Google AdSense e tráfego orgânico de alta relevância, com remoção total de cards, tags ou links de afiliados (ex: Amazon Associates tag `chacerto-20`).
+- **Ecossistema Multi-Rede Ativo:** O portal opera com monetização contextual limpa e integrada à utilidade de cada calculadora, combinando:
+  - **Amazon Associados** (`VITE_AMAZON_ASSOCIATE_TAG`, padrão `chacerto-20`)
+  - **Shopee Afiliados** (`VITE_SHOPEE_AFFILIATE_ID`, padrão `18399541048`, com `Sub_id 1=brasilcalculadoras` e `Sub_id 2=<categoria>`)
+  - **Mercado Livre Afiliados** (`VITE_ML_AFFILIATE_TAG`, padrão `alessandrooliveira727`, `matt_tool=32650250`)
+  - **Mídia Kit & Patrocínio Direto** (`/anunciantes`) para parceiros de finanças, contabilidade PJ, crédito, seguros e educação.
+- **Conformidade de Links & Transparência:** Todo link de afiliado deve utilizar `rel="noopener noreferrer nofollow sponsored"` e exibir aviso explícito de remuneração por compras qualificadas, sem espaços publicitários vazios.
+- **ads.txt Limpo em Standby:** O arquivo `public/ads.txt` mantém exclusivamente o identificador do Google AdSense (`google.com, pub-8160658026927094, DIRECT, f08c47fec0942fa0`) sem redes intrusivas.
+- **Zero Scripts Intrusivos / Popups:** É terminantemente proibido reintroduzir scripts intrusivos de monetização como Monetag (`vignette.min.js`, `n6wxm.com`), pop-unders ou redirecionamentos automáticos.
 - **Páginas Institucionais Obrigatórias:** As 7 páginas institucionais canônicas (`/sobre`, `/contato`, `/politica-de-privacidade`, `/termos-de-uso`, `/cookies`, `/transparencia-adsense`, `/anunciantes`) devem ser sempre pré-renderizadas via SSG em HTML puro com status 200 OK.
 
 ---

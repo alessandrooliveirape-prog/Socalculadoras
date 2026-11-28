@@ -29,6 +29,7 @@ import { useLocation } from 'wouter';
 // Custom imports
 import { CalculatorId, CalculatorCategory, CalculatorDef, HistoryEntry } from './types';
 import { AdSenseBanner } from './components/AdSenseBanner';
+import { AffiliateRecommendationCard } from './components/AffiliateRecommendationCard';
 import { SiteHeader } from './components/SiteHeader';
 import { FooterAndLegals } from './components/FooterAndLegals';
 import { HomepageView } from './components/HomepageView';
@@ -1594,6 +1595,13 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Recomendação Contextual Afiliada da Categoria */}
+                    <AffiliateRecommendationCard
+                      category={activeCategoryHub}
+                      variant="horizontal"
+                      placement="category_hub"
+                    />
+
                     {/* Guias Editoriais desta Categoria */}
                     {(() => {
                       const catGuides = GUIDES_ARTICLES.filter(g => g.categoryKey === activeCategoryHub);
@@ -1883,6 +1891,15 @@ export default function App() {
                             ))}
                           </div>
                         </div>
+                      )}
+
+                      {/* Recomendação Prática Contextual Pós-Cálculo */}
+                      {activeCalc && (
+                        <AffiliateRecommendationCard
+                          category={activeCalc.category}
+                          variant="horizontal"
+                          placement="post_calculator"
+                        />
                       )}
 
                       {/* Homepage Category Hub Portal Directory (Only shown on the root path) */}

@@ -117,13 +117,13 @@ async function runAgentSeoGsc(): Promise<SubagentReport> {
 }
 
 // ======================================================================
-// 2. SUBAGENTE: agent_monetization (15 pts — AdSense Exclusivo & LGPD)
+// 2. SUBAGENTE: agent_monetization (15 pts — Multi-Monetização, Afiliados & LGPD)
 // ======================================================================
 async function runAgentMonetization(): Promise<SubagentReport> {
   const report: SubagentReport = {
     id: 'agent_monetization',
-    name: 'Agente de Monetização (AdSense Exclusivo & LGPD)',
-    role: 'Auditor de ads.txt, 7 páginas obrigatórias e banimento de redes intrusivas',
+    name: 'Agente de Monetização (Afiliados, Mídia Kit & LGPD)',
+    role: 'Auditor de catálogo multi-rede, nofollow sponsored, 7 páginas e zero scripts intrusivos',
     status: 'HEALTHY',
     score: 15,
     maxScore: 15,
@@ -134,7 +134,27 @@ async function runAgentMonetization(): Promise<SubagentReport> {
     healingActions: []
   };
 
-  // 1. Checagem do ads.txt
+  // 1. Checagem de catálogo multi-rede e conformidade nofollow sponsored
+  const catalogPath = path.join(ROOT_DIR, 'src', 'config', 'monetizationCatalog.ts');
+  const cardPath = path.join(ROOT_DIR, 'src', 'components', 'AffiliateRecommendationCard.tsx');
+  if (fs.existsSync(catalogPath) && fs.existsSync(cardPath)) {
+    const catalogSrc = fs.readFileSync(catalogPath, 'utf-8');
+    const cardSrc = fs.readFileSync(cardPath, 'utf-8');
+    const hasAmazon = catalogSrc.includes('AMAZON_ASSOCIATE_TAG');
+    const hasShopee = catalogSrc.includes('SHOPEE_CATEGORY_LINKS');
+    const hasML = catalogSrc.includes('ML_CATEGORY_LINKS');
+    const hasSponsoredRel = cardSrc.includes('nofollow sponsored');
+    report.details.affiliateNetworks = { hasAmazon, hasShopee, hasML, hasSponsoredRel };
+    if (!hasAmazon || !hasShopee || !hasSponsoredRel) {
+      report.score -= 4;
+      report.issues.push('Configuração multi-afiliados ou atributo rel="nofollow sponsored" incompleto.');
+    }
+  } else {
+    report.score -= 5;
+    report.issues.push('Arquivos de monetização (monetizationCatalog.ts / AffiliateRecommendationCard.tsx) ausentes.');
+  }
+
+  // 2. Checagem do ads.txt limpo (sem redes intrusivas)
   const adsTxtPath = path.join(ROOT_DIR, 'public', 'ads.txt');
   if (fs.existsSync(adsTxtPath)) {
     const adsTxt = fs.readFileSync(adsTxtPath, 'utf-8');
@@ -142,20 +162,13 @@ async function runAgentMonetization(): Promise<SubagentReport> {
     const hasMonetag = /monetag|propeller|adcash/i.test(adsTxt);
     report.details.adsTxtValid = hasGoogle && !hasMonetag;
 
-    if (!hasGoogle) {
-      report.score -= 5;
-      report.issues.push('Publisher Google AdSense ausente no ads.txt.');
-    }
     if (hasMonetag) {
       report.score -= 5;
       report.issues.push('Redes intrusivas de terceiros detectadas no ads.txt.');
     }
-  } else {
-    report.score -= 7;
-    report.issues.push('public/ads.txt ausente.');
   }
 
-  // 2. 7 Páginas Institucionais Obrigatórias
+  // 3. 7 Páginas Institucionais Obrigatórias
   const requiredPages = [
     'sobre',
     'contato',
@@ -180,7 +193,7 @@ async function runAgentMonetization(): Promise<SubagentReport> {
     report.issues.push(`${missingPages} das 7 páginas institucionais não pré-renderizadas em dist/.`);
   }
 
-  // 3. Checagem de Monetag no index.html
+  // 4. Checagem de Monetag no index.html
   const indexPath = path.join(ROOT_DIR, 'index.html');
   if (fs.existsSync(indexPath)) {
     const html = fs.readFileSync(indexPath, 'utf-8');
@@ -191,7 +204,7 @@ async function runAgentMonetization(): Promise<SubagentReport> {
   }
 
   report.status = report.score >= 13 ? 'HEALTHY' : report.score >= 8 ? 'WARNING' : 'CRITICAL';
-  report.summary = `ads.txt estrito com AdSense. ${7 - missingPages}/7 páginas institucionais verificadas.`;
+  report.summary = `Monetização multi-rede (Amazon, Shopee, ML) + Mídia Kit. ${7 - missingPages}/7 páginas institucionais verificadas.`;
   return report;
 }
 
